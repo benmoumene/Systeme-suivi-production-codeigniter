@@ -1,0 +1,7 @@
+  @media print
+  {
+    #no_print {display:none; visibility:hidden;}
+    .table { width:600px !important;}
+ 
+  }
+ 
