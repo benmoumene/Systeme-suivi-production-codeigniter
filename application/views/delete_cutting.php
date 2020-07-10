@@ -85,12 +85,11 @@
                     </div>
                     <div class="widget-stats ">
                             <span class="item-number active_widget" style="font-size: 30px;" id="cl_qty">
-                                47
-
+                                0
                             </span>
                         <input type="hidden" name="cut_qty" id="cut_qty"/>
                         <span class="item-title active_widget" style="font-size: 18px;">Care Label Qty</span> </div>
-                    <div class="widget-stats"> <span class="item-number active_orangewidget" style="font-size: 30px;" id="bundle_range">347</span> <span class="item-title active_orangewidget" style="font-size: 18px;">Bundle Range</span> </div>
+                    <div class="widget-stats"> <span class="item-number active_orangewidget" style="font-size: 30px;" id="bundle_range">0</span> <span class="item-title active_orangewidget" style="font-size: 18px;">Bundle Range</span> </div>
                 </div>
             </div>
             <button id="submit_btn" class="btn btn-danger" style="display: none;">Delete</button>

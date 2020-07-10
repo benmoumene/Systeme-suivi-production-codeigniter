@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fdf3a7-84b8-4c03-909e-2a58cce5012a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/master.php" afterPath="$PROJECT_DIR$/application/views/master.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/delete_cutting.php" afterPath="$PROJECT_DIR$/application/views/delete_cutting.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,8 +20,8 @@
       <file leaf-file-name="access.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/access.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="4558" column="68" lean-forward="true" selection-start-line="4558" selection-start-column="68" selection-end-line="4558" selection-end-column="68" />
+            <state relative-caret-position="302">
+              <caret line="315" column="64" lean-forward="false" selection-start-line="315" selection-start-column="50" selection-end-line="315" selection-end-column="64" />
               <folding>
                 <marker date="1594354562240" expanded="true" signature="23229:23402" ph="..." />
                 <marker date="1594354562240" expanded="true" signature="49695:49708" ph="..." />
@@ -86,11 +86,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="master.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="delete_cutting.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/views/delete_cutting.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="84" column="26" lean-forward="true" selection-start-line="84" selection-start-column="26" selection-end-line="84" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="master.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/master.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="225" column="22" lean-forward="true" selection-start-line="225" selection-start-column="22" selection-end-line="225" selection-end-column="22" />
+            <state relative-caret-position="251">
+              <caret line="218" column="103" lean-forward="false" selection-start-line="218" selection-start-column="103" selection-end-line="218" selection-end-column="103" />
               <folding />
             </state>
           </provider>
@@ -809,7 +819,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>bundle_collar_cuff_data</find>
       <find>getProducitonSummaryReportForCCViewTable</find>
       <find>Ecofab</find>
       <find>smsFileUploadTest</find>
@@ -839,6 +848,7 @@
       <find>getManualUploadLastSoNo</find>
       <find>update</find>
       <find>updatet</find>
+      <find>delete_cutting</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -847,7 +857,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/views/reports/line_po_item_report.php" />
         <option value="$PROJECT_DIR$/application/views/cutting_sent_to_prod_data.php" />
         <option value="$PROJECT_DIR$/application/views/mid_care_label_line_prod_summary_report.php" />
         <option value="$PROJECT_DIR$/application/views/wash_going_data.php" />
@@ -898,6 +907,7 @@
         <option value="$PROJECT_DIR$/application/models/access_model.php" />
         <option value="$PROJECT_DIR$/application/controllers/access.php" />
         <option value="$PROJECT_DIR$/application/views/master.php" />
+        <option value="$PROJECT_DIR$/application/views/delete_cutting.php" />
       </list>
     </option>
   </component>
@@ -1958,12 +1968,12 @@
       <workItem from="1594091897609" duration="4003000" />
       <workItem from="1594183778351" duration="1733000" />
       <workItem from="1594276843226" duration="3713000" />
-      <workItem from="1594351391753" duration="4741000" />
+      <workItem from="1594351391753" duration="5727000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5404686000" />
+    <option name="totallyTimeSpent" value="5405672000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -2001,13 +2011,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/views/reprint_by_admin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="87" column="59" lean-forward="false" selection-start-line="87" selection-start-column="59" selection-end-line="87" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/reports/production_summary_report_mail_new_check.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -3409,10 +3412,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/master.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="218" column="103" lean-forward="false" selection-start-line="218" selection-start-column="103" selection-end-line="218" selection-end-column="103" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/access.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="4558" column="68" lean-forward="true" selection-start-line="4558" selection-start-column="68" selection-end-line="4558" selection-end-column="68" />
+        <state relative-caret-position="302">
+          <caret line="315" column="64" lean-forward="false" selection-start-line="315" selection-start-column="50" selection-end-line="315" selection-end-column="64" />
           <folding>
             <marker date="1594354562240" expanded="true" signature="23229:23402" ph="..." />
             <marker date="1594354562240" expanded="true" signature="49695:49708" ph="..." />
@@ -3476,10 +3487,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/master.php">
+    <entry file="file://$PROJECT_DIR$/application/views/delete_cutting.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="225" column="22" lean-forward="true" selection-start-line="225" selection-start-column="22" selection-end-line="225" selection-end-column="22" />
+        <state relative-caret-position="153">
+          <caret line="84" column="26" lean-forward="true" selection-start-line="84" selection-start-column="26" selection-end-line="84" selection-end-column="26" />
           <folding />
         </state>
       </provider>
