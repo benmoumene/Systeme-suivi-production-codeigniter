@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fdf3a7-84b8-4c03-909e-2a58cce5012a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/access.php" afterPath="$PROJECT_DIR$/application/controllers/access.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/access_model.php" afterPath="$PROJECT_DIR$/application/models/access_model.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/master.php" afterPath="$PROJECT_DIR$/application/views/master.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,11 +17,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="access.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="access.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/access.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="376">
-              <caret line="4571" column="81" lean-forward="true" selection-start-line="4571" selection-start-column="81" selection-end-line="4571" selection-end-column="81" />
+            <state relative-caret-position="155">
+              <caret line="4558" column="68" lean-forward="true" selection-start-line="4558" selection-start-column="68" selection-end-line="4558" selection-end-column="68" />
               <folding>
                 <marker date="1594354562240" expanded="true" signature="23229:23402" ph="..." />
                 <marker date="1594354562240" expanded="true" signature="49695:49708" ph="..." />
@@ -85,6 +82,16 @@
                 <marker date="1594354562240" expanded="true" signature="168147:168275" ph="..." />
                 <marker date="1594354562240" expanded="true" signature="168498:168614" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="master.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/views/master.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="217">
+              <caret line="225" column="22" lean-forward="true" selection-start-line="225" selection-start-column="22" selection-end-line="225" selection-end-column="22" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -881,7 +888,6 @@
         <option value="$PROJECT_DIR$/application/views/backup_db_test.php" />
         <option value="$PROJECT_DIR$/application/config/autoload.php" />
         <option value="$PROJECT_DIR$/application/views/cutting.php" />
-        <option value="$PROJECT_DIR$/application/views/master.php" />
         <option value="$PROJECT_DIR$/application/views/po_wise_size_cutting_report.php" />
         <option value="$PROJECT_DIR$/application/views/reports/po_wise_report_by_shipping_date.php" />
         <option value="R:/ismlqa/daily_finishing_qa.php" />
@@ -891,6 +897,7 @@
         <option value="$PROJECT_DIR$/application/views/qa_warehouse_data.php" />
         <option value="$PROJECT_DIR$/application/models/access_model.php" />
         <option value="$PROJECT_DIR$/application/controllers/access.php" />
+        <option value="$PROJECT_DIR$/application/views/master.php" />
       </list>
     </option>
   </component>
@@ -1951,12 +1958,12 @@
       <workItem from="1594091897609" duration="4003000" />
       <workItem from="1594183778351" duration="1733000" />
       <workItem from="1594276843226" duration="3713000" />
-      <workItem from="1594351391753" duration="3119000" />
+      <workItem from="1594351391753" duration="4741000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5403064000" />
+    <option name="totallyTimeSpent" value="5404686000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -2205,13 +2212,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/master.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="472">
-          <caret line="222" column="12" lean-forward="false" selection-start-line="222" selection-start-column="12" selection-end-line="222" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/po_wise_size_cutting_report.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2992">
@@ -2311,6 +2311,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="328">
           <caret line="38" column="79" lean-forward="true" selection-start-line="38" selection-start-column="79" selection-end-line="38" selection-end-column="79" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2318,6 +2319,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
           <caret line="261" column="50" lean-forward="false" selection-start-line="261" selection-start-column="50" selection-end-line="261" selection-end-column="50" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -3409,8 +3411,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/access.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="4571" column="81" lean-forward="true" selection-start-line="4571" selection-start-column="81" selection-end-line="4571" selection-end-column="81" />
+        <state relative-caret-position="155">
+          <caret line="4558" column="68" lean-forward="true" selection-start-line="4558" selection-start-column="68" selection-end-line="4558" selection-end-column="68" />
           <folding>
             <marker date="1594354562240" expanded="true" signature="23229:23402" ph="..." />
             <marker date="1594354562240" expanded="true" signature="49695:49708" ph="..." />
@@ -3471,6 +3473,14 @@
             <marker date="1594354562240" expanded="true" signature="168147:168275" ph="..." />
             <marker date="1594354562240" expanded="true" signature="168498:168614" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/master.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="217">
+          <caret line="225" column="22" lean-forward="true" selection-start-line="225" selection-start-column="22" selection-end-line="225" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>
