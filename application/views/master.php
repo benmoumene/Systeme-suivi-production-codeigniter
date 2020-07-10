@@ -216,8 +216,9 @@
                         <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/change_bundle_planned_line"><i class="fa fa-circle"></i> Bundle Change Line </a></li>
                     </ul>
                 </li>
-                <li> <a href="javascript:void(0);"> <i class="fa fa-times"></i> Close <span class="plus"><i class="fa fa-plus"></i></span></a>
+                <li> <a href="javascript:void(0);"> <i class="fa fa-list"></i> PO Management <span class="plus"><i class="fa fa-plus"></i></span></a>
                     <ul>
+                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/poSizeUpdate"><i class="fa fa-circle"></i> Size Update </a></li>
                         <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/po_manual_closing"><i class="fa fa-circle"></i> PO Manual Closing </a></li>
                     </ul>
                 </li>

@@ -9,6 +9,17 @@ class Access_model extends CI_Model {
         //return $this->db->insert_id();
     }
 
+    public function selectTableData($fields, $tbl, $condition_column, $condition_value)
+    {
+        $this->db->select($fields);
+        $this->db->from($tbl);
+        $this->db->where($condition_column, $condition_value);
+        $query=  $this->db->get();
+        $result=$query->result_array();
+        return $result;
+
+    }
+
     public function getSegments($time)
     {
         $sql = "SELECT *,
