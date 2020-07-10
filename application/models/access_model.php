@@ -3112,7 +3112,8 @@ class Access_model extends CI_Model {
 
     public function getManualUploadLastSoNo()
     {
-        $sql = "SELECT * FROM `tb_po_detail` WHERE is_manual_upload=1 ORDER BY ID DESC LIMIT 1";
+//        $sql = "SELECT * FROM `tb_po_detail` WHERE is_manual_upload=1 ORDER BY ID DESC LIMIT 1";
+        $sql = "SELECT * FROM `tb_last_so`";
 
         $query = $this->db->query($sql)->result_array();
         return $query;

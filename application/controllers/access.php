@@ -4545,8 +4545,8 @@ class Access extends CI_Controller {
                         $extended_so_no_final = ($substring_so_no * 1) + 1;
 
                         $data_1 = array(
-                            'po_no' => "M$extended_so_no_final",
-                            'so_no' => "M$extended_so_no_final",
+                            'po_no' => "E$extended_so_no_final",
+                            'so_no' => "E$extended_so_no_final",
                             'purchase_order' => "$purchase_order",
                             'item' => "$item",
                             'style_no' => "$style_no",
@@ -4565,9 +4565,12 @@ class Access extends CI_Controller {
 
                         $insert_info_2 = $this->access_model->insertingData('tb_po_detail', $data_1);
 
-//                        echo '<pre>';
-//                        print_r($data_1);
-//                        echo '</pre>';
+                        $data_2 = array(
+                            'so_no' => "E$extended_so_no_final",
+                            'update_date_time' => "$date_time"
+                        );
+                        $this->access_model->updateTbl('tb_last_so', 1, $data_2);
+
                     }
 
                 }
