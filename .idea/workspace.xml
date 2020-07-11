@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fdf3a7-84b8-4c03-909e-2a58cce5012a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/views/po_size_update.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/access.php" afterPath="$PROJECT_DIR$/application/controllers/access.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/access_model.php" afterPath="$PROJECT_DIR$/application/models/access_model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/master.php" afterPath="$PROJECT_DIR$/application/views/master.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/line_efficiency_reload.php" afterPath="$PROJECT_DIR$/application/views/line_efficiency_reload.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reports/line_hourly_report.php" afterPath="$PROJECT_DIR$/application/views/reports/line_hourly_report.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,114 +19,62 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="access.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/controllers/access.php">
+      <file leaf-file-name="dashboard.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/controllers/dashboard.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="251">
-              <caret line="1223" column="0" lean-forward="true" selection-start-line="1223" selection-start-column="0" selection-end-line="1223" selection-end-column="0" />
+            <state relative-caret-position="149">
+              <caret line="5423" column="54" lean-forward="false" selection-start-line="5423" selection-start-column="54" selection-end-line="5423" selection-end-column="54" />
               <folding>
-                <marker date="1594376177854" expanded="true" signature="23229:23402" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="51445:51458" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="51744:51757" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="52043:52056" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="52232:52245" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="52376:52387" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="52490:52501" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="52593:52604" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="53673:53686" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="53972:53985" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="54271:54284" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="54460:54473" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="54604:54615" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="54718:54729" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="54821:54832" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="55908:55921" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="56088:56101" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="56278:56291" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="56422:56433" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="56536:56547" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="56639:56650" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="57726:57739" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="57906:57919" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="58096:58109" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="58240:58251" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="58354:58365" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="58457:58468" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="59544:59557" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="59847:59860" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="60027:60040" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="60213:60226" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="60357:60368" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="60471:60482" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="60574:60585" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="61661:61674" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="61964:61977" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="62144:62157" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="62330:62343" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="62474:62485" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="62588:62599" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="62691:62702" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="162623:162954" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="163030:163166" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="163633:163964" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="164040:164176" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="164547:164675" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="165014:165142" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="165432:165560" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="165874:166002" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="166707:167038" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="167114:167250" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="167712:168039" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="168115:168251" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="168617:168745" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="169079:169207" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="169518:169646" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="169897:170025" ph="..." />
-                <marker date="1594376177854" expanded="true" signature="170248:170364" ph="..." />
+                <marker date="1594451831942" expanded="true" signature="38377:39241" ph="..." />
+                <marker date="1594451831942" expanded="true" signature="39907:40917" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="login.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/login.php">
+      <file leaf-file-name="line_performance_dashboard.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/line_performance_dashboard.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="30" column="2" lean-forward="true" selection-start-line="30" selection-start-column="2" selection-end-line="30" selection-end-column="2" />
+            <state relative-caret-position="521">
+              <caret line="282" column="18" lean-forward="true" selection-start-line="282" selection-start-column="18" selection-end-line="282" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="po_size_update.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/po_size_update.php">
+      <file leaf-file-name="line_hourly_report.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/reports/line_hourly_report.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="27" column="42" lean-forward="false" selection-start-line="27" selection-start-column="42" selection-end-line="27" selection-end-column="42" />
+            <state relative-caret-position="381">
+              <caret line="221" column="65" lean-forward="true" selection-start-line="221" selection-start-column="65" selection-end-line="221" selection-end-column="65" />
               <folding>
-                <element signature="n#style#0;n#span#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#th#8;n#tr#0;n#thead#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#tr#1;n#thead#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#6;n#tr#0;n#tbody#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#1;n#td#6;n#tr#0;n#tbody#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#2;n#td#6;n#tr#0;n#tbody#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#th#8;n#tr#0;n#tfoot#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#th#8;n#tr#1;n#tfoot#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="master.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/master.php">
+      <file leaf-file-name="line_efficiency_reload.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/views/line_efficiency_reload.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="220" column="106" lean-forward="false" selection-start-line="220" selection-start-column="106" selection-end-line="220" selection-end-column="106" />
-              <folding>
-                <element signature="n#style#0;n#a#0;n#li#1;n#ul#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="255">
+              <caret line="21" column="45" lean-forward="true" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="access_model.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="access_model.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/access_model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="166">
-              <caret line="6045" column="0" lean-forward="true" selection-start-line="6045" selection-start-column="0" selection-end-line="6045" selection-end-column="0" />
+            <state relative-caret-position="149">
+              <caret line="4208" column="5" lean-forward="true" selection-start-line="4208" selection-start-column="5" selection-end-line="4208" selection-end-column="5" />
               <folding>
                 <marker date="1594374281535" expanded="true" signature="597:904" ph="SELECT *, (T... tb_segment" />
                 <marker date="1594374281535" expanded="true" signature="1060:1128" ph="SELECT * FRO... tb_segment" />
@@ -816,406 +762,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dashboard_model.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/models/dashboard_model.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="2999" column="18" lean-forward="false" selection-start-line="2999" selection-start-column="17" selection-end-line="2999" selection-end-column="18" />
-              <folding>
-                <marker date="1594184634947" expanded="true" signature="508:530" ph="Select * Fro... tb_floor" />
-                <marker date="1594184634947" expanded="true" signature="673:704" ph="Select * Fro... tb_warehouse_type" />
-                <marker date="1594184634947" expanded="true" signature="846:886" ph="Select * Fro... tb_season" />
-                <marker date="1594184634947" expanded="true" signature="1091:1294" ph="Delete From " />
-                <marker date="1594184634947" expanded="true" signature="1780:2013" ph="SELECT COUNT... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="2173:2374" ph="SELECT COUNT... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="2525:2728" ph="SELECT SUM(c... tb_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="2869:3010" ph="SELECT SUM(c... tb_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="3179:3382" ph="SELECT t1.*,... *" />
-                <marker date="1594184634947" expanded="true" signature="3226:3292" ph="SELECT * FRO... tb_daily_line_summary" />
-                <marker date="1594184634947" expanded="true" signature="3545:3609" ph="SELECT * FRO... tb_daily_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="3774:3841" ph="SELECT * FRO... tb_daily_finish_summary" />
-                <marker date="1594184634947" expanded="true" signature="4001:4875" ph="SELECT A.lin... *" />
-                <marker date="1594184634947" expanded="true" signature="4117:4155" ph="SELECT * FRO... tb_line" />
-                <marker date="1594184634947" expanded="true" signature="4250:4428" ph="SELECT line_... tb_today_line_output_qty" />
-                <marker date="1594184634947" expanded="true" signature="4546:4767" ph="SELECT plann... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="5038:7590" ph="SELECT B.*, line_id" />
-                <marker date="1594184634947" expanded="true" signature="5225:5313" ph="SELECT line_... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="5363:5707" ph="SELECT line_... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="5810:6288" ph="SELECT line_... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="6394:6795" ph="SELECT line_... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="6901:7079" ph="SELECT line_... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="7185:7350" ph="SELECT line_... line_daily_target" />
-                <marker date="1594184634947" expanded="true" signature="7756:10400" ph="SELECT B.*, line_id" />
-                <marker date="1594184634947" expanded="true" signature="7943:8031" ph="SELECT line_... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="8081:8425" ph="SELECT line_... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="8528:9006" ph="SELECT line_... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="9112:9513" ph="SELECT line_... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="9619:9797" ph="SELECT line_... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="9903:10068" ph="SELECT line_... line_daily_target" />
-                <marker date="1594184634947" expanded="true" signature="10585:11282" ph="SELECT A.id,... *" />
-                <marker date="1594184634947" expanded="true" signature="10754:10803" ph="SELECT * FRO... tb_line" />
-                <marker date="1594184634947" expanded="true" signature="10891:10929" ph="SELECT * FRO... vt_curdate_mid_line_qc" />
-                <marker date="1594184634947" expanded="true" signature="11046:11073" ph="SELECT * FRO... vt_line_wip" />
-                <marker date="1594184634947" expanded="true" signature="11457:12558" ph="SELECT A.id,... *" />
-                <marker date="1594184634947" expanded="true" signature="11667:11716" ph="SELECT * FRO... tb_line" />
-                <marker date="1594184634947" expanded="true" signature="11791:11823" ph="SELECT * FRO... vt_curdate_input" />
-                <marker date="1594184634947" expanded="true" signature="11921:11959" ph="SELECT * FRO... vt_curdate_mid_line_qc" />
-                <marker date="1594184634947" expanded="true" signature="12060:12098" ph="SELECT * FRO... vt_curdate_end_line_qc" />
-                <marker date="1594184634947" expanded="true" signature="12199:12226" ph="SELECT * FRO... vt_line_wip" />
-                <marker date="1594184634947" expanded="true" signature="12327:12365" ph="SELECT * FRO... vt_curdate_line_target" />
-                <marker date="1594184634947" expanded="true" signature="12708:12793" ph="SELECT min(s... tb_hours" />
-                <marker date="1594184634947" expanded="true" signature="13456:14432" ph="Select t1.to... COUNT" />
-                <marker date="1594184634947" expanded="true" signature="13541:13817" ph="SELECT COUNT... vt_few_days_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="13871:14355" ph="SELECT COUNT... vt_few_days_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="14749:15879" ph="SELECT t1.*,... tb_line" />
-                <marker date="1594184634947" expanded="true" signature="14919:15151" ph="SELECT plann... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="15263:15486" ph="SELECT plann... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="15598:15775" ph="SELECT line_... tb_today_line_output_qty" />
-                <marker date="1594184634947" expanded="true" signature="16050:16821" ph="SELECT t1.* SUM" />
-                <marker date="1594184634947" expanded="true" signature="16116:16813" ph="SELECT SUM(C... tb_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="16984:17700" ph="SELECT t1.ta... *" />
-                <marker date="1594184634947" expanded="true" signature="17088:17131" ph="SELECT * FRO... tb_cut_table" />
-                <marker date="1594184634947" expanded="true" signature="17199:17638" ph="SELECT cut_t... tb_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="17861:19557" ph="Select A.*, *" />
-                <marker date="1594184634947" expanded="true" signature="17892:19326" ph="SELECT t1.*,... po_no" />
-                <marker date="1594184634947" expanded="true" signature="17978:19055" ph="SELECT po_no... tb_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="19394:19516" ph="SELECT po_no... tb_po_part_detail" />
-                <marker date="1594184634947" expanded="true" signature="19733:20861" ph="SELECT t1.*,... po_no" />
-                <marker date="1594184634947" expanded="true" signature="19819:20625" ph="SELECT po_no... tb_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="21025:21963" ph="SELECT t1.*,... po_no" />
-                <marker date="1594184634947" expanded="true" signature="21126:21665" ph="SELECT po_no... tb_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="22133:22832" ph="SELECT t1.*,... po_no" />
-                <marker date="1594184634947" expanded="true" signature="22219:22661" ph="SELECT po_no... tb_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="23007:23457" ph="SELECT po_no... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="23632:24082" ph="SELECT po_no... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="24244:24345" ph="SELECT * FRO... cutting_daily_target" />
-                <marker date="1594184634947" expanded="true" signature="25002:25387" ph="SELECT COUNT... vt_few_days_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="25559:27950" ph="SELECT t1.*,... *" />
-                <marker date="1594184634947" expanded="true" signature="25757:26014" ph="SELECT *, CO... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="26066:26275" ph="SELECT *, CO... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="26489:26637" ph="SELECT *, SU... tb_po_detail" />
-                <marker date="1594184634947" expanded="true" signature="26851:26998" ph="SELECT *, SU... tb_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="27212:27376" ph="SELECT *, CO... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="27590:27781" ph="SELECT *, CO... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="28120:30092" ph="SELECT t1.*,... *" />
-                <marker date="1594184634947" expanded="true" signature="28302:28564" ph="SELECT *, CO... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="28616:28822" ph="SELECT *, CO... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="29036:29184" ph="SELECT *, SU... tb_po_detail" />
-                <marker date="1594184634947" expanded="true" signature="29398:29545" ph="SELECT *, SU... tb_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="29759:29923" ph="SELECT *, CO... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="30268:36697" ph="SELECT F.*, po_no" />
-                <marker date="1594184634947" expanded="true" signature="30609:30943" ph="SELECT po_no... tb_po_detail" />
-                <marker date="1594184634947" expanded="true" signature="31010:31373" ph="SELECT COUNT... " />
-                <marker date="1594184634947" expanded="true" signature="31653:31933" ph="SELECT po_no... tb_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="32213:32542" ph="SELECT COUNT... " />
-                <marker date="1594184634947" expanded="true" signature="32822:33139" ph="SELECT COUNT... " />
-                <marker date="1594184634947" expanded="true" signature="33435:33703" ph="SELECT po_no... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="34006:34274" ph="SELECT po_no... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="34599:34872" ph="SELECT po_no... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="35197:35454" ph="SELECT po_no... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="35734:36372" ph="SELECT t1.po... po_no" />
-                <marker date="1594184634947" expanded="true" signature="35925:36154" ph="SELECT po_no... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="36205:36251" ph="SELECT id, l... tb_line" />
-                <marker date="1594184634947" expanded="true" signature="36854:36910" ph="SELECT * FRO... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="37075:37248" ph="SELECT t1.*,... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="54567:57556" ph="SELECT t1.*,... po_no" />
-                <marker date="1594184634947" expanded="true" signature="54700:55393" ph="SELECT po_no... so_no" />
-                <marker date="1594184634947" expanded="true" signature="54914:55303" ph="SELECT so_no... vt_few_days_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="55650:56003" ph="SELECT po_no... tb_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="56248:56595" ph="SELECT po_no... tb_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="56851:57369" ph="SELECT po_no... so_no" />
-                <marker date="1594184634947" expanded="true" signature="57040:57279" ph="SELECT so_no... vt_few_days_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="57574:58733" ph="SELECT t1.*,... po_no" />
-                <marker date="1594184634947" expanded="true" signature="57734:58176" ph="SELECT po_no... tb_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="58912:59542" ph="SELECT t1.*,... po_no" />
-                <marker date="1594184634947" expanded="true" signature="58989:59428" ph="SELECT po_no... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="59720:60158" ph="SELECT po_no... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="64124:65946" ph="SELECT A.lin... id" />
-                <marker date="1594184634947" expanded="true" signature="64324:64445" ph="SELECT id AS... tb_line" />
-                <marker date="1594184634947" expanded="true" signature="64512:64881" ph="SELECT line_... vt_few_days_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="64987:65473" ph="SELECT line_... vt_few_days_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="65579:65748" ph="SELECT line_... line_daily_target" />
-                <marker date="1594184634947" expanded="true" signature="66150:67824" ph="SELECT A.lin... id" />
-                <marker date="1594184634947" expanded="true" signature="66350:66471" ph="SELECT id AS... tb_line" />
-                <marker date="1594184634947" expanded="true" signature="66538:66832" ph="SELECT line_... vt_today_line_end_pass" />
-                <marker date="1594184634947" expanded="true" signature="66938:67351" ph="SELECT line_... vt_today_line_end_pass" />
-                <marker date="1594184634947" expanded="true" signature="67457:67626" ph="SELECT line_... line_daily_target" />
-                <marker date="1594184634947" expanded="true" signature="68006:69284" ph="SELECT A.lin... id" />
-                <marker date="1594184634947" expanded="true" signature="68286:68418" ph="SELECT id AS... tb_line" />
-                <marker date="1594184634947" expanded="true" signature="68494:68795" ph="SELECT line_... tb_today_line_output_qty" />
-                <marker date="1594184634947" expanded="true" signature="68917:69086" ph="SELECT line_... line_daily_target" />
-                <marker date="1594184634947" expanded="true" signature="69460:69723" ph="SELECT t1.* po_no" />
-                <marker date="1594184634947" expanded="true" signature="69494:69708" ph="SELECT po_no... tb_line_running_pos" />
-                <marker date="1594184634947" expanded="true" signature="69943:71705" ph="SELECT A.id *" />
-                <marker date="1594184634947" expanded="true" signature="70138:70193" ph="SELECT * FRO... tb_line" />
-                <marker date="1594184634947" expanded="true" signature="70260:70628" ph="SELECT line_... vt_few_days_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="70729:71242" ph="SELECT line_... vt_few_days_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="71343:71503" ph="SELECT line_... line_daily_target" />
-                <marker date="1594184634947" expanded="true" signature="71892:72311" ph="SELECT A.id *" />
-                <marker date="1594184634947" expanded="true" signature="72007:72062" ph="SELECT * FRO... tb_line" />
-                <marker date="1594184634947" expanded="true" signature="72129:72271" ph="SELECT * FRO... tb_daily_line_summary" />
-                <marker date="1594184634947" expanded="true" signature="72482:73845" ph="SELECT t1.*,... so_no" />
-                <marker date="1594184634947" expanded="true" signature="72581:73088" ph="SELECT so_no... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="73157:73382" ph="SELECT so_no... tb_po_detail" />
-                <marker date="1594184634947" expanded="true" signature="75855:77694" ph="SELECT A.fin... finishing_floor_id" />
-                <marker date="1594184634947" expanded="true" signature="76039:76164" ph="SELECT finis... vt_few_days_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="76231:76623" ph="SELECT finis... vt_few_days_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="76751:77172" ph="SELECT finis... vt_few_days_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="77300:77468" ph="SELECT floor... finishing_daily_target" />
-                <marker date="1594184634947" expanded="true" signature="77888:79614" ph="SELECT A.fin... id" />
-                <marker date="1594184634947" expanded="true" signature="78072:78162" ph="SELECT id as... tb_floor" />
-                <marker date="1594184634947" expanded="true" signature="78229:78621" ph="SELECT finis... vt_few_days_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="78749:79170" ph="SELECT finis... vt_few_days_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="79298:79466" ph="SELECT floor... finishing_daily_target" />
-                <marker date="1594184634947" expanded="true" signature="79839:81432" ph="SELECT A.id *" />
-                <marker date="1594184634947" expanded="true" signature="80019:80075" ph="SELECT * FRO... tb_floor" />
-                <marker date="1594184634947" expanded="true" signature="80142:80531" ph="SELECT finis... vt_few_days_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="80643:81062" ph="SELECT finis... vt_few_days_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="81174:81340" ph="SELECT floor... finishing_daily_target" />
-                <marker date="1594184634947" expanded="true" signature="81634:81702" ph="SELECT * FRO... tb_daily_finish_summary" />
-                <marker date="1594184634947" expanded="true" signature="81867:83218" ph="SELECT A.*, po_no" />
-                <marker date="1594184634947" expanded="true" signature="81942:82180" ph="SELECT po_no... tb_po_detail" />
-                <marker date="1594184634947" expanded="true" signature="82232:82492" ph="SELECT COUNT... " />
-                <marker date="1594184634947" expanded="true" signature="82734:82996" ph="SELECT COUNT... " />
-                <marker date="1594184634947" expanded="true" signature="83384:86187" ph="SELECT t1.*,... po_no" />
-                <marker date="1594184634947" expanded="true" signature="83544:83821" ph="SELECT po_no... tb_po_detail" />
-                <marker date="1594184634947" expanded="true" signature="83890:84099" ph="SELECT po_no... " />
-                <marker date="1594184634947" expanded="true" signature="84241:84463" ph="SELECT po_no... " />
-                <marker date="1594184634947" expanded="true" signature="84607:84826" ph="SELECT po_no... " />
-                <marker date="1594184634947" expanded="true" signature="84970:85193" ph="SELECT po_no... " />
-                <marker date="1594184634947" expanded="true" signature="85336:85557" ph="SELECT po_no... " />
-                <marker date="1594184634947" expanded="true" signature="85818:86050" ph="SELECT po_no... " />
-                <marker date="1594184634947" expanded="true" signature="91681:98110" ph="SELECT F.*, po_no" />
-                <marker date="1594184634947" expanded="true" signature="92022:92356" ph="SELECT po_no... tb_po_detail" />
-                <marker date="1594184634947" expanded="true" signature="92423:92786" ph="SELECT COUNT... " />
-                <marker date="1594184634947" expanded="true" signature="93066:93346" ph="SELECT po_no... tb_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="93626:93955" ph="SELECT COUNT... " />
-                <marker date="1594184634947" expanded="true" signature="94235:94552" ph="SELECT COUNT... " />
-                <marker date="1594184634947" expanded="true" signature="94848:95116" ph="SELECT po_no... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="95419:95687" ph="SELECT po_no... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="96012:96285" ph="SELECT po_no... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="96610:96867" ph="SELECT po_no... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="97147:97785" ph="SELECT t1.po... po_no" />
-                <marker date="1594184634947" expanded="true" signature="97338:97567" ph="SELECT po_no... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="97618:97664" ph="SELECT id, l... tb_line" />
-                <marker date="1594184634947" expanded="true" signature="98263:98411" ph="SELECT ex_fa... tb_po_detail" />
-                <marker date="1594184634947" expanded="true" signature="98553:98601" ph="SELECT * FRO... tb_line" />
-                <marker date="1594184634947" expanded="true" signature="98764:98796" ph="SELECT * FRO... tb_line" />
-                <marker date="1594184634947" expanded="true" signature="98958:98993" ph="SELECT * FRO... tb_segment" />
-                <marker date="1594184634947" expanded="true" signature="99158:102469" ph="SELECT A.*, COUNT" />
-                <marker date="1594184634947" expanded="true" signature="99407:99756" ph="SELECT COUNT... " />
-                <marker date="1594184634947" expanded="true" signature="99823:100037" ph="SELECT *, MI... tb_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="100297:100612" ph="SELECT COUNT... " />
-                <marker date="1594184634947" expanded="true" signature="100872:101175" ph="SELECT COUNT... " />
-                <marker date="1594184634947" expanded="true" signature="101452:101705" ph="SELECT po_no... tb_po_detail" />
-                <marker date="1594184634947" expanded="true" signature="101966:102212" ph="SELECT po_no... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="102635:109407" ph="Select t1.*,... po_no" />
-                <marker date="1594184634947" expanded="true" signature="103077:103344" ph="SELECT po_no... " />
-                <marker date="1594184634947" expanded="true" signature="103412:103722" ph="SELECT po_no... " />
-                <marker date="1594184634947" expanded="true" signature="103994:104201" ph="SELECT *, CO... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="104473:104724" ph="SELECT po_no... " />
-                <marker date="1594184634947" expanded="true" signature="104995:105304" ph="SELECT po_no... " />
-                <marker date="1594184634947" expanded="true" signature="105576:105901" ph="SELECT po_no... " />
-                <marker date="1594184634947" expanded="true" signature="106172:106477" ph="SELECT po_no... " />
-                <marker date="1594184634947" expanded="true" signature="106748:106989" ph="SELECT po_no... " />
-                <marker date="1594184634947" expanded="true" signature="107268:107535" ph="SELECT po_no... " />
-                <marker date="1594184634947" expanded="true" signature="107807:108061" ph="SELECT po_no... " />
-                <marker date="1594184634947" expanded="true" signature="108341:108512" ph="SELECT *, SU... tb_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="108792:109030" ph="SELECT po_no... " />
-                <marker date="1594184634947" expanded="true" signature="109582:110080" ph="Select t1.* po_no" />
-                <marker date="1594184634947" expanded="true" signature="109651:109914" ph="SELECT po_no... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="110243:110433" ph="SELECT t1.*,... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="110601:111166" ph="SELECT A.*, SUM" />
-                <marker date="1594184634947" expanded="true" signature="110639:110846" ph="SELECT SUM(t... tb_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="110896:111118" ph="SELECT COUNT... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="111655:111882" ph="SELECT A.* F... *" />
-                <marker date="1594184634947" expanded="true" signature="111655:112165" ph="SELECT A.* F... " />
-                <marker date="1594184634947" expanded="true" signature="111672:111876" ph="SELECT t1.*,... *" />
-                <marker date="1594184634947" expanded="true" signature="111720:111766" ph="SELECT * FRO... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="111939:112165" ph="SELECT B.* F... *" />
-                <marker date="1594184634947" expanded="true" signature="111955:112159" ph="SELECT t2.*,... *" />
-                <marker date="1594184634947" expanded="true" signature="112003:112049" ph="SELECT * FRO... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="112329:113886" ph="Select t1.*,... po_no" />
-                <marker date="1594184634947" expanded="true" signature="112404:112670" ph="SELECT po_no... " />
-                <marker date="1594184634947" expanded="true" signature="112739:112983" ph="SELECT po_no... " />
-                <marker date="1594184634947" expanded="true" signature="113233:113538" ph="SELECT po_no... " />
-                <marker date="1594184634947" expanded="true" signature="114294:116276" ph="SELECT A.*, po_no" />
-                <marker date="1594184634947" expanded="true" signature="114403:114646" ph="SELECT po_no... " />
-                <marker date="1594184634947" expanded="true" signature="114730:114996" ph="SELECT COUNT... " />
-                <marker date="1594184634947" expanded="true" signature="115271:115559" ph="SELECT COUNT... " />
-                <marker date="1594184634947" expanded="true" signature="115817:116037" ph="SELECT *, MI... tb_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="116443:119875" ph="SELECT A.*, po_no" />
-                <marker date="1594184634947" expanded="true" signature="116589:116847" ph="SELECT po_no... " />
-                <marker date="1594184634947" expanded="true" signature="116914:117134" ph="SELECT *, MI... tb_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="117412:117733" ph="SELECT COUNT... " />
-                <marker date="1594184634947" expanded="true" signature="118011:118304" ph="SELECT COUNT... " />
-                <marker date="1594184634947" expanded="true" signature="118582:118873" ph="SELECT COUNT... " />
-                <marker date="1594184634947" expanded="true" signature="119151:119445" ph="SELECT COUNT... " />
-                <marker date="1594184634947" expanded="true" signature="120029:124490" ph="SELECT A.lin... line_id" />
-                <marker date="1594184634947" expanded="true" signature="120346:120480" ph="SELECT line_... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="120531:120872" ph="SELECT line_... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="120962:121405" ph="SELECT line_... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="121495:121931" ph="SELECT line_... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="122021:122457" ph="SELECT line_... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="122547:122722" ph="SELECT line_... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="122812:123246" ph="SELECT line_... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="123336:123772" ph="SELECT line_... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="123862:124298" ph="SELECT line_... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="124698:124779" ph="SELECT * FRO... tb_production_summary" />
-                <marker date="1594184634947" expanded="true" signature="124931:126786" ph="SELECT t1.*,... po_no" />
-                <marker date="1594184634947" expanded="true" signature="125176:126143" ph="SELECT po_no... so_no" />
-                <marker date="1594184634947" expanded="true" signature="125520:126001" ph="SELECT so_no... vt_few_days_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="126211:126450" ph="SELECT so_no... vt_few_days_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="126949:130106" ph="SELECT t1.li... *" />
-                <marker date="1594184634947" expanded="true" signature="127354:127390" ph="Select * FRO... vt_po_summary" />
-                <marker date="1594184634947" expanded="true" signature="127458:129573" ph="SELECT po_no... so_no" />
-                <marker date="1594184634947" expanded="true" signature="128272:129481" ph="SELECT so_no... vt_few_days_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="129906:130006" ph="Select so_no... tb_aql_status_log" />
-                <marker date="1594184634947" expanded="true" signature="130276:131168" ph="SELECT t1.*,... *" />
-                <marker date="1594184634947" expanded="true" signature="130885:130937" ph="SELECT * FRO... tb_line" />
-                <marker date="1594184634947" expanded="true" signature="131079:131129" ph="SELECT * FRO... line_daily_target" />
-                <marker date="1594184634947" expanded="true" signature="131326:134006" ph="SELECT t0.br... brand" />
-                <marker date="1594184634947" expanded="true" signature="131546:131593" ph="SELECT brand... tb_po_detail" />
-                <marker date="1594184634947" expanded="true" signature="131637:131905" ph="SELECT A.bra... brand" />
-                <marker date="1594184634947" expanded="true" signature="131711:131869" ph="SELECT brand... tb_po_detail" />
-                <marker date="1594184634947" expanded="true" signature="131994:132300" ph="SELECT B.bra... brand" />
-                <marker date="1594184634947" expanded="true" signature="132072:132264" ph="SELECT brand... tb_po_detail" />
-                <marker date="1594184634947" expanded="true" signature="132389:132694" ph="SELECT C.bra... brand" />
-                <marker date="1594184634947" expanded="true" signature="132467:132659" ph="SELECT brand... tb_po_detail" />
-                <marker date="1594184634947" expanded="true" signature="132783:133090" ph="SELECT D.bra... brand" />
-                <marker date="1594184634947" expanded="true" signature="132859:133054" ph="SELECT brand... tb_po_detail" />
-                <marker date="1594184634947" expanded="true" signature="133179:133528" ph="SELECT E.bra... brand" />
-                <marker date="1594184634947" expanded="true" signature="133260:133492" ph="SELECT brand... tb_po_detail" />
-                <marker date="1594184634947" expanded="true" signature="133617:133966" ph="SELECT F.bra... brand" />
-                <marker date="1594184634947" expanded="true" signature="133698:133930" ph="SELECT brand... tb_po_detail" />
-                <marker date="1594184634947" expanded="true" signature="134175:134400" ph="SELECT t1.*,... *" />
-                <marker date="1594184634947" expanded="true" signature="134213:134249" ph="SELECT * FRO... tb_line" />
-                <marker date="1594184634947" expanded="true" signature="134305:134359" ph="SELECT * FRO... line_daily_target" />
-                <marker date="1594184634947" expanded="true" signature="134559:136837" ph="SELECT t1.*,... po_no" />
-                <marker date="1594184634947" expanded="true" signature="134719:136280" ph="SELECT po_no... tb_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="136989:138879" ph="SELECT t1.*,... po_no" />
-                <marker date="1594184634947" expanded="true" signature="137078:138649" ph="SELECT po_no... tb_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="139037:139147" ph="Select *,sum... tb_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="141355:144735" ph="SELECT t1.so... so_no" />
-                <marker date="1594184634947" expanded="true" signature="141713:141897" ph="SELECT so_no... tb_production_summary" />
-                <marker date="1594184634947" expanded="true" signature="141965:142326" ph="SELECT so_no... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="142556:142867" ph="SELECT so_no... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="143097:143404" ph="SELECT so_no... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="143634:143961" ph="SELECT so_no... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="144191:144566" ph="SELECT so_no... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="155077:159605" ph="SELECT t1.*,... so_no" />
-                <marker date="1594184634947" expanded="true" signature="155586:155874" ph="SELECT so_no... tb_po_detail" />
-                <marker date="1594184634947" expanded="true" signature="155942:157655" ph="SELECT so_no... so_no" />
-                <marker date="1594184634947" expanded="true" signature="156541:157607" ph="SELECT so_no... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="157760:158153" ph="SELECT t1.so... so_no" />
-                <marker date="1594184634947" expanded="true" signature="157861:157962" ph="SELECT so_no... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="158046:158092" ph="SELECT id, l... tb_line" />
-                <marker date="1594184634947" expanded="true" signature="158275:158445" ph="SELECT so_no... tb_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="158550:158716" ph="SELECT so_no... tb_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="158821:159245" ph="SELECT t1.so... so_no" />
-                <marker date="1594184634947" expanded="true" signature="158919:159062" ph="SELECT so_no... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="159130:159176" ph="SELECT id, l... tb_line" />
-                <marker date="1594184634947" expanded="true" signature="159350:159446" ph="SELECT so_no... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="159790:174260" ph="SELECT t1.*,... *" />
-                <marker date="1594184634947" expanded="true" signature="160690:160843" ph="SELECT * FRO... vt_po_summary" />
-                <marker date="1594184634947" expanded="true" signature="160894:161154" ph="SELECT po_no... tb_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="161388:161697" ph="SELECT po_no... vt_running_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="161931:162220" ph="SELECT po_no... vt_running_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="162457:162690" ph="SELECT po_no... vt_running_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="162924:163170" ph="SELECT po_no... tb_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="163404:163703" ph="SELECT po_no... vt_running_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="163937:164252" ph="SELECT po_no... vt_running_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="164486:164792" ph="SELECT po_no... vt_running_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="165026:165270" ph="SELECT po_no... vt_running_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="165511:165820" ph="SELECT po_no... vt_running_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="166061:166366" ph="SELECT po_no... vt_running_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="166607:166856" ph="SELECT po_no... vt_running_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="167097:167340" ph="SELECT po_no... vt_running_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="167581:167826" ph="SELECT po_no... vt_running_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="168067:168334" ph="SELECT po_no... vt_running_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="168575:168818" ph="SELECT po_no... vt_running_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="169059:169667" ph="SELECT t1.po... po_no" />
-                <marker date="1594184634947" expanded="true" signature="169237:169449" ph="SELECT po_no... vt_running_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="169500:169546" ph="SELECT id, l... tb_line" />
-                <marker date="1594184634947" expanded="true" signature="169925:170177" ph="SELECT po_no... tb_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="170435:170683" ph="SELECT po_no... tb_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="170941:171247" ph="SELECT po_no... vt_running_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="171505:172159" ph="SELECT t1.po... po_no" />
-                <marker date="1594184634947" expanded="true" signature="171680:171916" ph="SELECT po_no... vt_running_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="171984:172030" ph="SELECT id, l... tb_line" />
-                <marker date="1594184634947" expanded="true" signature="172417:172682" ph="SELECT po_no... vt_running_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="172940:173181" ph="SELECT po_no... vt_running_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="173439:173682" ph="SELECT po_no... vt_running_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="174423:175356" ph="SELECT t1.*,... ex_factory_date" />
-                <marker date="1594184634947" expanded="true" signature="174495:174810" ph="SELECT ex_fa... tb_po_detail" />
-                <marker date="1594184634947" expanded="true" signature="174879:175226" ph="SELECT ex_fa... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="175505:175892" ph="Select A.*, line_id" />
-                <marker date="1594184634947" expanded="true" signature="175549:175722" ph="SELECT line_... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="177675:180667" ph="SELECT A.*, line_id" />
-                <marker date="1594184634947" expanded="true" signature="177869:177961" ph="SELECT line_... tb_defects_tracking" />
-                <marker date="1594184634947" expanded="true" signature="178025:178509" ph="Select t1.*,... line_id" />
-                <marker date="1594184634947" expanded="true" signature="178107:178502" ph="SELECT line_... tb_defects_tracking" />
-                <marker date="1594184634947" expanded="true" signature="178615:179098" ph="Select t1.*,... line_id" />
-                <marker date="1594184634947" expanded="true" signature="178697:179091" ph="SELECT line_... tb_defects_tracking" />
-                <marker date="1594184634947" expanded="true" signature="179205:179778" ph="Select t1.*,... line_id" />
-                <marker date="1594184634947" expanded="true" signature="179297:179771" ph="SELECT line_... tb_defects_tracking" />
-                <marker date="1594184634947" expanded="true" signature="179885:180458" ph="Select t1.*,... line_id" />
-                <marker date="1594184634947" expanded="true" signature="179977:180451" ph="SELECT line_... tb_defects_tracking" />
-                <marker date="1594184634947" expanded="true" signature="180844:180906" ph="SELECT * FRO... tb_daily_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="181084:181312" ph="SELECT t1.*,... tb_daily_line_summary" />
-                <marker date="1594184634947" expanded="true" signature="181495:182085" ph="SELECT t1.*,... *" />
-                <marker date="1594184634947" expanded="true" signature="181591:181656" ph="SELECT * FRO... tb_daily_finish_summary" />
-                <marker date="1594184634947" expanded="true" signature="181805:182024" ph="SELECT COUNT... vt_few_days_po_pcs" />
-                <marker date="1594184634947" expanded="true" signature="182266:182493" ph="SELECT *,sum... tb_po_detail" />
-                <marker date="1594184634947" expanded="true" signature="182669:182896" ph="SELECT *,sum... tb_po_detail" />
-                <marker date="1594184634947" expanded="true" signature="183047:183101" ph="SELECT * FRO... tb_po_detail" />
-                <marker date="1594184634947" expanded="true" signature="183257:183360" ph="SELECT * FRO... tb_line" />
-                <marker date="1594184634947" expanded="true" signature="183509:183854" ph="Select A.*, *" />
-                <marker date="1594184634947" expanded="true" signature="183570:183669" ph="SELECT * FRO... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="184009:184483" ph="Select A.*, *" />
-                <marker date="1594184634947" expanded="true" signature="184070:184313" ph="SELECT * FRO... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="184641:185107" ph="Select A.*, *" />
-                <marker date="1594184634947" expanded="true" signature="184702:184937" ph="SELECT * FRO... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="185265:185731" ph="Select A.*, *" />
-                <marker date="1594184634947" expanded="true" signature="185326:185561" ph="SELECT * FRO... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="185886:186353" ph="Select A.*, *" />
-                <marker date="1594184634947" expanded="true" signature="185947:186183" ph="SELECT * FRO... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="186511:186978" ph="Select A.*, *" />
-                <marker date="1594184634947" expanded="true" signature="186572:186808" ph="SELECT * FRO... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="187136:187603" ph="Select A.*, *" />
-                <marker date="1594184634947" expanded="true" signature="187197:187433" ph="SELECT * FRO... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="187761:188208" ph="Select A.*, *" />
-                <marker date="1594184634947" expanded="true" signature="187822:188038" ph="SELECT * FRO... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="188361:188580" ph="SELECT po_no... tb_cut_summary" />
-                <marker date="1594184634947" expanded="true" signature="188858:189090" ph="SELECT ex_fa... tb_po_detail" />
-                <marker date="1594184634947" expanded="true" signature="189249:189399" ph="SELECT ex_fa... tb_po_detail" />
-                <marker date="1594184634947" expanded="true" signature="189560:191047" ph="SELECT A.*, po_no" />
-                <marker date="1594184634947" expanded="true" signature="189642:190740" ph="SELECT po_no... so_no" />
-                <marker date="1594184634947" expanded="true" signature="190007:190615" ph="SELECT so_no... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="191215:192709" ph="SELECT A.*, po_no" />
-                <marker date="1594184634947" expanded="true" signature="191297:192402" ph="SELECT po_no... so_no" />
-                <marker date="1594184634947" expanded="true" signature="191662:192278" ph="SELECT so_no... tb_care_labels" />
-                <marker date="1594184634947" expanded="true" signature="192879:193522" ph="SELECT t1.*,... line_id" />
-                <marker date="1594184634947" expanded="true" signature="192969:193242" ph="SELECT line_... tb_today_line_output_qty" />
-                <marker date="1594184634947" expanded="true" signature="193689:194332" ph="SELECT t1.*,... line_id" />
-                <marker date="1594184634947" expanded="true" signature="193779:194052" ph="SELECT line_... tb_today_line_output_qty" />
-                <marker date="1594184634947" expanded="true" signature="194753:194904" ph="UPDATE `tb_t... " />
-                <marker date="1594184634947" expanded="true" signature="195101:195287" ph="UPDATE `tb_t... " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sms_file_upload_test.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/sms_file_upload_test.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="18" column="31" lean-forward="false" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -1227,18 +773,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getProductionReport(</find>
-      <find>shipDateWiseReportMonth</find>
-      <find>getShipDateWiseReportMonth</find>
-      <find>dailyPerformanceReportNew</find>
-      <find>getDailyReportByDateToday</find>
-      <find>getCuttingTotalPackageReport</find>
-      <find>dailyFusingReport</find>
-      <find>getFusingReport</find>
-      <find>getDailyFusingReport</find>
-      <find>$result</find>
-      <find>shipDateWiseReportlive</find>
-      <find>getShipDateWiseReportLive</find>
       <find>getProductionReportLive</find>
       <find>mailAttachmentOlympFileDownload</find>
       <find>qa_warehouse_new</find>
@@ -1257,6 +791,18 @@
       <find>updatetb</find>
       <find>changeExfactory</find>
       <find>updating</find>
+      <find>lineHourlyReport</find>
+      <find>getLineHourlyReport</find>
+      <find>getLineInfo(</find>
+      <find>getTodayLineOutputReport</find>
+      <find>getEfficiencyReload</find>
+      <find>line_hourly_report</find>
+      <find>line_effici</find>
+      <find>linePerformanceDashboardNew</find>
+      <find>getMinMaxHours</find>
+      <find>getEfficiencyReload(</find>
+      <find>getHoursByTimeRange</find>
+      <find>Grand Total</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -1285,7 +831,6 @@
         <option value="$PROJECT_DIR$/application/views/reports/production_summary_report_mail_body_new.php" />
         <option value="$PROJECT_DIR$/application/views/reports/production_summary_report_mail_new_check.php" />
         <option value="$PROJECT_DIR$/application/views/reports/daily_sewing_performance_report_by_date.php" />
-        <option value="$PROJECT_DIR$/application/views/line_efficiency_reload.php" />
         <option value="$PROJECT_DIR$/application/views/reprint_by_admin.php" />
         <option value="$PROJECT_DIR$/application/views/po_info_report.php" />
         <option value="$PROJECT_DIR$/application/views/reports/po_wise_packing_report.php" />
@@ -1296,7 +841,6 @@
         <option value="$PROJECT_DIR$/application/views/care_label_print_list.php" />
         <option value="$PROJECT_DIR$/application/views/reports/line_performance_dashboard.php" />
         <option value="$PROJECT_DIR$/application/views/line_performance_dashboard.php" />
-        <option value="$PROJECT_DIR$/application/views/reports/line_hourly_report.php" />
         <option value="$PROJECT_DIR$/application/views/change_line.php" />
         <option value="$PROJECT_DIR$/application/views/finishing_hourly_output_reload.php" />
         <option value="$PROJECT_DIR$/application/views/line_hourly_output_reload.php" />
@@ -1309,13 +853,15 @@
         <option value="R:/ismlqa/daily_finishing_qa.php" />
         <option value="$PROJECT_DIR$/application/views/reports/po_wise_report_by_ship_date_live.php" />
         <option value="$PROJECT_DIR$/application/models/dashboard_model.php" />
-        <option value="$PROJECT_DIR$/application/controllers/dashboard.php" />
         <option value="$PROJECT_DIR$/application/views/qa_warehouse_data.php" />
         <option value="$PROJECT_DIR$/application/views/delete_cutting.php" />
         <option value="$PROJECT_DIR$/application/views/master.php" />
         <option value="$PROJECT_DIR$/application/models/access_model.php" />
         <option value="$PROJECT_DIR$/application/views/po_size_update.php" />
         <option value="$PROJECT_DIR$/application/controllers/access.php" />
+        <option value="$PROJECT_DIR$/application/views/reports/line_hourly_report.php" />
+        <option value="$PROJECT_DIR$/application/controllers/dashboard.php" />
+        <option value="$PROJECT_DIR$/application/views/line_efficiency_reload.php" />
       </list>
     </option>
   </component>
@@ -1348,7 +894,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -1407,6 +952,28 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="reports" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pts" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="models" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -1431,6 +998,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2376,12 +1944,13 @@
       <workItem from="1594091897609" duration="4003000" />
       <workItem from="1594183778351" duration="1733000" />
       <workItem from="1594276843226" duration="3713000" />
-      <workItem from="1594351391753" duration="11188000" />
+      <workItem from="1594351391753" duration="12112000" />
+      <workItem from="1594438125903" duration="8748000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5411133000" />
+    <option name="totallyTimeSpent" value="5420805000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -2419,13 +1988,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/views/po_info_report.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3196">
-          <caret line="188" column="66" lean-forward="true" selection-start-line="188" selection-start-column="66" selection-end-line="188" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/po_search_report.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2907">
@@ -2510,13 +2072,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/reports/line_hourly_report.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="248" column="0" lean-forward="false" selection-start-line="248" selection-start-column="0" selection-end-line="248" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/care_label_print_list.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -2578,13 +2133,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="54" column="49" lean-forward="false" selection-start-line="54" selection-start-column="49" selection-end-line="54" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/line_performance_dashboard.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4692">
-          <caret line="276" column="121" lean-forward="false" selection-start-line="276" selection-start-column="121" selection-end-line="276" selection-end-column="121" />
         </state>
       </provider>
     </entry>
@@ -2693,17 +2241,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/dashboard.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="54" column="5" lean-forward="true" selection-start-line="54" selection-start-column="5" selection-end-line="54" selection-end-column="5" />
-          <folding>
-            <marker date="1594277080563" expanded="true" signature="38377:39241" ph="..." />
-            <marker date="1594277080563" expanded="true" signature="39907:40917" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/qa_warehouse_data.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="328">
@@ -2724,6 +2261,97 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
           <caret line="28" column="29" lean-forward="true" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/login.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="30" column="2" lean-forward="false" selection-start-line="30" selection-start-column="2" selection-end-line="30" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/access.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20791">
+          <caret line="1223" column="0" lean-forward="false" selection-start-line="1223" selection-start-column="0" selection-end-line="1223" selection-end-column="0" />
+          <folding>
+            <marker date="1594376177854" expanded="true" signature="23229:23402" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="51445:51458" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="51744:51757" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="52043:52056" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="52232:52245" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="52376:52387" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="52490:52501" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="52593:52604" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="53673:53686" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="53972:53985" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="54271:54284" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="54460:54473" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="54604:54615" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="54718:54729" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="54821:54832" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="55908:55921" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="56088:56101" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="56278:56291" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="56422:56433" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="56536:56547" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="56639:56650" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="57726:57739" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="57906:57919" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="58096:58109" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="58240:58251" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="58354:58365" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="58457:58468" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="59544:59557" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="59847:59860" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="60027:60040" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="60213:60226" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="60357:60368" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="60471:60482" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="60574:60585" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="61661:61674" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="61964:61977" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="62144:62157" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="62330:62343" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="62474:62485" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="62588:62599" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="62691:62702" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="162623:162954" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="163030:163166" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="163633:163964" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="164040:164176" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="164547:164675" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="165014:165142" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="165432:165560" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="165874:166002" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="166707:167038" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="167114:167250" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="167712:168039" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="168115:168251" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="168617:168745" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="169079:169207" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="169518:169646" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="169897:170025" ph="..." />
+            <marker date="1594376177854" expanded="true" signature="170248:170364" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/po_size_update.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="42" lean-forward="false" selection-start-line="27" selection-start-column="42" selection-end-line="27" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/master.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3740">
+          <caret line="220" column="106" lean-forward="false" selection-start-line="220" selection-start-column="106" selection-end-line="220" selection-end-column="106" />
           <folding />
         </state>
       </provider>
@@ -3116,81 +2744,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/login.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="30" column="2" lean-forward="true" selection-start-line="30" selection-start-column="2" selection-end-line="30" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/access.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="1223" column="0" lean-forward="true" selection-start-line="1223" selection-start-column="0" selection-end-line="1223" selection-end-column="0" />
-          <folding>
-            <marker date="1594376177854" expanded="true" signature="23229:23402" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="51445:51458" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="51744:51757" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="52043:52056" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="52232:52245" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="52376:52387" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="52490:52501" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="52593:52604" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="53673:53686" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="53972:53985" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="54271:54284" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="54460:54473" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="54604:54615" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="54718:54729" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="54821:54832" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="55908:55921" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="56088:56101" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="56278:56291" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="56422:56433" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="56536:56547" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="56639:56650" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="57726:57739" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="57906:57919" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="58096:58109" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="58240:58251" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="58354:58365" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="58457:58468" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="59544:59557" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="59847:59860" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="60027:60040" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="60213:60226" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="60357:60368" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="60471:60482" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="60574:60585" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="61661:61674" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="61964:61977" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="62144:62157" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="62330:62343" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="62474:62485" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="62588:62599" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="62691:62702" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="162623:162954" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="163030:163166" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="163633:163964" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="164040:164176" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="164547:164675" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="165014:165142" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="165432:165560" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="165874:166002" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="166707:167038" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="167114:167250" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="167712:168039" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="168115:168251" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="168617:168745" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="169079:169207" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="169518:169646" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="169897:170025" ph="..." />
-            <marker date="1594376177854" expanded="true" signature="170248:170364" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/sms_file_upload_test.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -3199,30 +2752,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/po_size_update.php">
+    <entry file="file://$PROJECT_DIR$/application/controllers/dashboard.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="27" column="42" lean-forward="false" selection-start-line="27" selection-start-column="42" selection-end-line="27" selection-end-column="42" />
+        <state relative-caret-position="149">
+          <caret line="5423" column="54" lean-forward="false" selection-start-line="5423" selection-start-column="54" selection-end-line="5423" selection-end-column="54" />
           <folding>
-            <element signature="n#style#0;n#span#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#form#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/master.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="220" column="106" lean-forward="false" selection-start-line="220" selection-start-column="106" selection-end-line="220" selection-end-column="106" />
-          <folding>
-            <element signature="n#style#0;n#a#0;n#li#1;n#ul#0;n#li#2;n#ul#0;n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <marker date="1594451831942" expanded="true" signature="38377:39241" ph="..." />
+            <marker date="1594451831942" expanded="true" signature="39907:40917" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/access_model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="6045" column="0" lean-forward="true" selection-start-line="6045" selection-start-column="0" selection-end-line="6045" selection-end-column="0" />
+        <state relative-caret-position="149">
+          <caret line="4208" column="5" lean-forward="true" selection-start-line="4208" selection-start-column="5" selection-end-line="4208" selection-end-column="5" />
           <folding>
             <marker date="1594374281535" expanded="true" signature="597:904" ph="SELECT *, (T... tb_segment" />
             <marker date="1594374281535" expanded="true" signature="1060:1128" ph="SELECT * FRO... tb_segment" />
@@ -3906,6 +3450,38 @@
             <marker date="1594374281535" expanded="true" signature="290633:290671" ph="select * fro... tb_care_labels" />
             <marker date="1594374281535" expanded="true" signature="290823:291073" ph="SELECT po_no... tb_care_labels" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/line_performance_dashboard.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="521">
+          <caret line="282" column="18" lean-forward="true" selection-start-line="282" selection-start-column="18" selection-end-line="282" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/reports/line_hourly_report.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="221" column="65" lean-forward="true" selection-start-line="221" selection-start-column="65" selection-end-line="221" selection-end-column="65" />
+          <folding>
+            <element signature="n#style#0;n#th#8;n#tr#0;n#thead#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#tr#1;n#thead#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#6;n#tr#0;n#tbody#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#1;n#td#6;n#tr#0;n#tbody#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#2;n#td#6;n#tr#0;n#tbody#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#8;n#tr#0;n#tfoot#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#8;n#tr#1;n#tfoot#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/line_efficiency_reload.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="21" column="45" lean-forward="true" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
+          <folding />
         </state>
       </provider>
     </entry>

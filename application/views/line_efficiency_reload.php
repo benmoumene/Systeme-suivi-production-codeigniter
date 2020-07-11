@@ -7,7 +7,7 @@
     $work_minute=0;
 
     if ($segment_id == 1){
-        if($time > '14:00:00'){
+        if($time > '13:00:00'){
             $sec_to_minutes = (($work_time-3600) / 60);
 
             $minutes = round($sec_to_minutes, 2);
