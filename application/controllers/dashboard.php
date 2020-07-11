@@ -3680,8 +3680,10 @@ class Dashboard extends CI_Controller {
         
         $date_time=$datex->format('Y-m-d H:i:s');
         $time=$datex->format('H:i:s');
+        $min=$datex->format('i');
         $date=$datex->format('Y-m-d');
 
+        $data['min_to_hour']=round($min / 60, 2);
         $data['time']=$time;
 
         $segments = $this->access_model->getSegments($time);
