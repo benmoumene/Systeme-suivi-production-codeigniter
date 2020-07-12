@@ -216,7 +216,7 @@
 <!--                                <th class="hidden-phone center"><a target="_blank" href="--><?php //echo base_url();?><!--dashboard/poWiseCuttingReport" class="btn btn-danger">Cutting</a></th>-->
                                 <th class="hidden-phone center"><a target="" href="<?php echo base_url();?>dashboard/poWiseSizeReport" class="btn btn-success">PO Report</a></th>
                                 <th class="hidden-phone center" colspan="2"><a href="<?php echo base_url();?>dashboard/lineWisePoItemReport" class="btn btn-primary">LINE</a></th>
-<!--                                <th class="hidden-phone center" colspan="3"><a target="_blank" href="--><?php //echo base_url();?><!--dashboard/poWisePackingReport" class="btn btn-success">PO Report</a></th>-->
+                                <th class="hidden-phone center" colspan="2"><a href="<?php echo base_url();?>dashboard/finishingRunningPoReportByBrand" class="btn btn-warning">Finishing</a></th>
                             </tr>
                             </thead>
                             <tbody>

@@ -261,7 +261,7 @@
                 }
                 ?>
 
-                <th align="center" style="font-size: 20px; font-weight: 900;"></th>
+                <th align="center" title="<?php echo $working_hour;?>"><?php echo round($grand_total_output/$working_hour, 2);?></th>
                 <th align="center" style="font-size: 20px; font-weight: 900;"><?php echo $grand_total_output?></th>
                 <th align="center" style="font-size: 20px; font-weight: 900;"><?php echo $grand_total_output - $grand_total_target;?></th>
             </tr>
@@ -342,7 +342,7 @@
 
                 }
                 ?>
-                <th align="center" style="font-size: 20px; font-weight: 900;"></th>
+                <th align="center" title="<?php echo $working_hour;?>"><?php echo round($floor_grand_total_output/$working_hour, 2);?></th>
                 <th align="center" style="font-size: 20px; font-weight: 900;"><?php echo $floor_grand_total_output?></th>
                 <th align="center" style="font-size: 20px; font-weight: 900;"><?php echo $floor_grand_total_output - $floor_total_target;?></th>
             </tr>

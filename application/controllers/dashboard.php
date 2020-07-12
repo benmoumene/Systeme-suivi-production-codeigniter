@@ -412,6 +412,48 @@ class Dashboard extends CI_Controller {
         echo $data['maincontent'] = $this->load->view('reports/care_label_line_prod_summary_report', $data);
     }
 
+    public function finishingRunningPoReportByBrand(){
+        $data['title']='Finishing PO Report';
+
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $data['brands'] = $this->access_model->getAllBrands();
+
+        $data['maincontent'] = $this->load->view('reports/floor_wise_finishing_po_item_report', $data, true);
+        $this->load->view('reports/master', $data);
+    }
+
+    public function getFinishingRunningPoReportByBrand(){
+        $brands = $this->input->post('brands');
+        $data['brands_string'] = implode(", ", $brands);
+        $brands_string = $data['brands_string'];
+
+        $po_type = $this->input->post('po_type');
+
+        $po_from_date = $this->input->post('from_date');
+        $po_to_date = $this->input->post('to_date');
+
+        $where = '';
+
+        if($po_type != ''){
+            $where .= " AND po_type = $po_type";
+        }
+
+        if($brands_string != ''){
+            $where .= " AND brand in ($brands_string) AND count_end_line_qc_pass > 0 AND balance > 0";
+        }
+
+        if($po_from_date != '' && $po_from_date != 'undefined--undefined' && $po_to_date != '' && $po_to_date != 'undefined--undefined'){
+            $where .= " AND ex_factory_date Between '$po_from_date' AND '$po_to_date'";
+        }
+
+        $data['prod_summary'] = $this->dashboard_model->getProductionReport($where);
+
+        echo $maincontent = $this->load->view('reports/floor_wise_finishing_po_item_report_data', $data);
+    }
+
     public function aqlReport()
     {
         $data['title']='AQL Report';
@@ -984,7 +1026,7 @@ class Dashboard extends CI_Controller {
             $where .= " AND brand in ($brands_string)";
         }
 
-        if($po_from_date != '' && $po_from_date != '1970-01' && $po_to_date != '' && $po_to_date != '1970-01'){
+        if($po_from_date != '' && $po_from_date != '1970-01-01' && $po_to_date != '' && $po_to_date != '1970-01-01'){
             $where .= " AND ex_factory_date Between '$po_from_date' AND '$po_to_date'";
         }
 
