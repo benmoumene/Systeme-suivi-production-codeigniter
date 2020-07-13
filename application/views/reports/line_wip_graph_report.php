@@ -33,9 +33,9 @@
                 <th align="center"><span style="font-size: 25px;">LAY QTY</span></th>
                 <th align="center"><span style="font-size: 25px;">TODAY CUT</span></th>
                 <th align="center"><span style="font-size: 25px;">MARKER</span></th>
-                <th align="center"><span style="font-size: 25px;">GARMENTS</span></th>
-                <th align="center"><span style="font-size: 25px;">TODAY READY PACKAGE</span></th>
-                <th align="center"><span style="font-size: 25px;">TOTAL READY PACKAGE</span></th>
+                <th align="center"><span style="font-size: 25px;">GARMENTS/RATIO</span></th>
+                <th align="center" title="Today Ready Package"><span style="font-size: 25px;">TODAY STOCK</span></th>
+                <th align="center" title="Total Ready Package"><span style="font-size: 25px;">TOTAL STOCK</span></th>
             </tr>
         </thead>
         <tbody>

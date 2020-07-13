@@ -420,14 +420,15 @@ class Dashboard_model extends CI_Model {
                 (SELECT planned_line_id, COUNT(id) as ready_qty 
                 FROM `tb_care_labels` 
                 WHERE is_package_ready=1 AND line_id=0 
-                AND package_sent_to_production=0
+                AND package_sent_to_production=0 AND manually_closed=0
                 GROUP BY planned_line_id) AS t2
                 ON t1.id=t2.planned_line_id
                 
                 LEFT JOIN
                 (SELECT planned_line_id, COUNT(id) as cut_sew_ready_qty 
                 FROM `tb_care_labels` 
-                WHERE is_package_ready=1 AND line_id=0 AND package_sent_to_production=1
+                WHERE is_package_ready=1 AND line_id=0 
+                AND package_sent_to_production=1 AND manually_closed=0
                 GROUP BY planned_line_id) AS t3
                 ON t1.id=t3.planned_line_id
                 
@@ -617,7 +618,7 @@ class Dashboard_model extends CI_Model {
         $sql = "SELECT po_no, so_no, brand, purchase_order, item, quality, color, 
                 style_no, style_name, ex_factory_date, planned_line_id, COUNT(id) as ready_qty 
                 FROM `tb_care_labels` 
-                WHERE is_package_ready=1 AND line_id=0
+                WHERE is_package_ready=1 AND line_id=0 AND manually_closed=0
                 AND package_sent_to_production=0
                 AND planned_line_id='$plan_line_id'
                 GROUP BY so_no, po_no, purchase_order, item, quality, color, planned_line_id";
@@ -630,7 +631,7 @@ class Dashboard_model extends CI_Model {
         $sql = "SELECT po_no, so_no, brand, purchase_order, item, quality, color, 
                 style_no, style_name, ex_factory_date, planned_line_id, COUNT(id) as ready_qty 
                 FROM `tb_care_labels` 
-                WHERE is_package_ready=1 AND line_id=0
+                WHERE is_package_ready=1 AND line_id=0 AND manually_closed=0
                 AND package_sent_to_production=1
                 AND planned_line_id='$plan_line_id'
                 GROUP BY so_no, po_no, purchase_order, item, quality, color, planned_line_id";

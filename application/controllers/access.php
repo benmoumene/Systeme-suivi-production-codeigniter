@@ -5389,6 +5389,7 @@ class Access extends CI_Controller {
         $planned_cut_qty = $this->input->post('planned_cut_qty');
         $quality = $this->input->post('quality');
         $po_type = $this->input->post('po_type');
+        $style_type = $this->input->post('style_type');
 
         $size_field = "size";
         $qty_field = "qty";
@@ -5595,6 +5596,7 @@ class Access extends CI_Controller {
                         'pc_no_end' => $max_cl_no,
                         'u_id' => '',
                         'date_time' => $date_time,
+                        'style_type' => $style_type,
                         'po_type' => $po_type
                     );
 

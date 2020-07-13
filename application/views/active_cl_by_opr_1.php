@@ -83,8 +83,6 @@
                                     <th>Pc No</th>
                                     <th>Reason</th>
                                     <th>Requested By</th>
-
-
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -95,7 +93,6 @@
                                     <td><input type="text" name="reason[]" value="" required="required"></td>
                                     <td><input type="text" name="requested_by[]" value="" required="required"></td>
                                     <td><a class="btn btn-xs delete-record" data-id="1"><i class="glyphicon glyphicon-trash"></i></a></td>
-
 
                                 </tbody>
                             </table>
