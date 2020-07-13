@@ -91,9 +91,9 @@
                                 <tbody id="tbl_posts_body">
 
                                     <td><span class="sn">1</span>.</td>
-                                    <td><input type="text" name="pc_no[]" id="pc_no" value="" onblur="checkPcNoValidity(this);"></td>
-                                    <td><input type="text" name="reason[]" value="" required></td>
-                                    <td><input type="text" name="requested_by[]" value="" required></td>
+                                    <td><input type="text" name="pc_no[]" id="pc_no" value="" required="required" onblur="checkPcNoValidity(this);"></td>
+                                    <td><input type="text" name="reason[]" value="" required="required"></td>
+                                    <td><input type="text" name="requested_by[]" value="" required="required"></td>
                                     <td><a class="btn btn-xs delete-record" data-id="1"><i class="glyphicon glyphicon-trash"></i></a></td>
 
 
