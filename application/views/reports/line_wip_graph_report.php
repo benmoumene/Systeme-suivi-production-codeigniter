@@ -32,6 +32,8 @@
             <tr style="background-color: rgba(159,255,154,0.41)">
                 <th align="center"><span style="font-size: 25px;">LAY QTY</span></th>
                 <th align="center"><span style="font-size: 25px;">TODAY CUT</span></th>
+                <th align="center"><span style="font-size: 25px;">MARKER</span></th>
+                <th align="center"><span style="font-size: 25px;">GARMENTS</span></th>
                 <th align="center"><span style="font-size: 25px;">TODAY READY PACKAGE</span></th>
                 <th align="center"><span style="font-size: 25px;">TOTAL READY PACKAGE</span></th>
             </tr>
@@ -40,6 +42,9 @@
             <tr>
                 <th align="center"><span style="font-size: 22px;"><?php echo ($lay_qty[0]['total_lay_qty'] != '' ? $lay_qty[0]['total_lay_qty'] : 0);?></span></th>
                 <th align="center"><span style="font-size: 22px;"><?php echo ($today_cut[0]['today_cut_qty'] != '' ? $today_cut[0]['today_cut_qty'] : 0);?></span></th>
+                <th align="center"><span style="font-size: 22px;"><?php echo ($today_no_of_marker[0]['total_no_of_marker_qty'] != '' ? $today_no_of_marker[0]['total_no_of_marker_qty'] : 0);?></span></th>
+                <th align="center"><span style="font-size: 22px;">
+                        <?php echo ($today_no_of_garments[0]['total_no_of_garments'] != '' ? $today_no_of_garments[0]['total_no_of_garments'] : 0);?></span></th>
                 <th align="center"><span style="font-size: 22px;"><?php echo ($today_cut_ready_package[0]['today_package_ready_qty'] != '' ? $today_cut_ready_package[0]['today_package_ready_qty'] : 0);?></span></th>
                 <th align="center"><span style="font-size: 22px;"><?php echo ($cut_ready_package[0]['cut_ready_qty'] != '' ? $cut_ready_package[0]['cut_ready_qty'] : 0);?></span></th>
             </tr>

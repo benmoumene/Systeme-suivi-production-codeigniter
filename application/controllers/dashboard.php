@@ -3341,7 +3341,7 @@ class Dashboard extends CI_Controller {
         $data['title'] = 'Cut Package Report';
 
         $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
-        
+
         $date_time=$datex->format('Y-m-d H:i:s');
         $date=$datex->format('Y-m-d');
 //        $date='2017-12-24';
@@ -3352,6 +3352,8 @@ class Dashboard extends CI_Controller {
 
 //        $data['cut_wip_report'] = $this->dashboard_model->getCuttingReportForChart($date);
         $data['cut_ready_package'] = $this->dashboard_model->getCuttingReadyPackageQty();
+        $data['today_no_of_marker'] = $this->dashboard_model->getTodayNumberOfMarker($date);
+        $data['today_no_of_garments'] = $this->dashboard_model->getTodayNumberOfGarment($date);
         $data['today_cut_ready_package'] = $this->dashboard_model->getTodayPackageReadyQty($date);
         $data['today_cut'] = $this->dashboard_model->getTodayCutQty($date);
         $data['lay_qty'] = $this->dashboard_model->getLayQty();

@@ -80,6 +80,27 @@ class Dashboard_model extends CI_Model {
         return $query;
     }
 
+    public function getTodayNumberOfMarker($date){
+        $sql = "SELECT COUNT(t1.cut_tracking_no) AS total_no_of_marker_qty 
+                FROM (SELECT cut_tracking_no FROM `tb_cut_summary` 
+                WHERE DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d')='$date' 
+                GROUP BY cut_tracking_no) AS t1";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
+    public function getTodayNumberOfGarment($date){
+        $sql = "SELECT COUNT(t1.po_no) AS total_no_of_garments FROM 
+                (SELECT po_no
+                 FROM `tb_cut_summary` 
+                 WHERE DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d')='$date'
+                 GROUP BY po_no, cut_no, size, cut_layer) AS t1";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
     public function getTodayPackageReadyQty($date){
 
         $sql = "SELECT COUNT(id) as today_package_ready_qty
