@@ -157,8 +157,6 @@
         var from_date = res1[2]+'-'+res1[0]+'-'+res1[1];
         var to_date = res2[2]+'-'+res2[0]+'-'+res2[1];
 
-        console.log(from_dt);
-
         $("#report_content").empty();
         $("#size_tbl").empty();
 
@@ -184,15 +182,12 @@
     function getPoItemWiseRemainCL(po_no, so_no, purchase_order, item, quality, color) {
         $("#remain_cl_list").empty();
 
-        console.log(po_no+' - '+so_no+' - '+purchase_order+' - '+item+' - '+quality+' - '+color);
-
         $.ajax({
-            url: "<?php echo base_url();?>dashboard/getPoItemWiseRemainCL/",
+            url: "<?php echo base_url();?>dashboard/getPoItemWiseFinishingRemainCL/",
             type: "POST",
             data: {po_no: po_no, so_no: so_no, purchase_order: purchase_order, item: item, quality: quality, color: color},
             dataType: "html",
             success: function (data) {
-                console.log(data);
                 $("#remain_cl_list").append(data);
             }
         });

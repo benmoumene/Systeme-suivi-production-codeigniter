@@ -24,7 +24,13 @@
                 <tbody>
                 <?php
 
-                foreach ($prod_summary as $v){ ?>
+                $balance = 0;
+
+                foreach ($prod_summary as $v){
+
+                    $balance = $v['count_end_line_qc_pass'] - ($v['count_carton_pass'] + $v['total_wh_qa']);
+
+                ?>
                         <tr>
                             <td class="center"><?php echo $v['so_no']; ?></td>
                             <td class="center">
@@ -56,7 +62,7 @@
                             <td class="center"><?php echo $v['total_wh_qa']; ?></td>
                             <td class="">
                                 <span class="center btn btn-danger" data-target="#myModal2" data-toggle="modal" onclick="getPoItemWiseRemainCL('<?php echo $v['po_no']; ?>', '<?php echo $v['so_no']; ?>', '<?php echo $v['purchase_order'];?>','<?php echo $v['item'];?>', '<?php echo $v['quality']; ?>', '<?php echo $v['color']; ?>');">
-                                <?php echo $v['balance']; ?>
+                                <?php echo $balance; ?>
                                 </span>
                             </td>
                         </tr>

@@ -4617,6 +4617,44 @@ class Dashboard extends CI_Controller {
         echo $maincontent;
     }
 
+    public function getPoItemWiseFinishingRemainCL(){
+        $po_no = $this->input->post('po_no');
+        $so_no = $this->input->post('so_no');
+        $purchase_order = $this->input->post('purchase_order');
+        $item = $this->input->post('item');
+        $quality = $this->input->post('quality');
+        $color = $this->input->post('color');
+
+
+        $where = '';
+        if($po_no != ''){
+            $where .= " AND t1.po_no = '$po_no'";
+        }
+        if($so_no != ''){
+            $where .= " AND t1.so_no = '$so_no'";
+        }
+        if($purchase_order != ''){
+            $where .= " AND t1.purchase_order = '$purchase_order'";
+        }
+        if($item != ''){
+            $where .= " AND t1.item = '$item'";
+        }
+        if($quality != ''){
+            $where .= " AND t1.quality = '$quality'";
+        }
+        if($color != '') {
+            $where .= " AND t1.color = '$color'";
+        }
+
+        $where .= " AND t1.access_points=4 AND t1.access_points_status=4 AND t1.carton_status=0 AND t1.warehouse_qa_type=0";
+
+        $get_data['remain_pcs'] = $this->dashboard_model->getRemainingCLBySize($where);
+
+        $maincontent = $this->load->view('po_item_wise_carton_remain_pcs', $get_data, true);
+
+        echo $maincontent;
+    }
+
     public function getPoItemWiseLineRemainCL(){
         $so_no = $this->input->post('so_no');
         $line_id = $this->input->post('line_id');
