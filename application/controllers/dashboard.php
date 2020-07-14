@@ -3358,6 +3358,24 @@ class Dashboard extends CI_Controller {
         $data['today_cut'] = $this->dashboard_model->getTodayCutQty($date);
         $data['lay_qty'] = $this->dashboard_model->getLayQty();
 
+//        SOLID STYLE CUTTING REPORT
+        $data['today_no_of_marker_solid'] = $this->dashboard_model->getTodayNumberOfMarkerByStyleType($date, 1);
+        $data['today_no_of_garments_solid'] = $this->dashboard_model->getTodayNumberOfGarmentByStyleType($date, 1);
+        $data['today_cut_solid'] = $this->dashboard_model->getTodayCutQtyByStyleType($date, 1);
+        $data['lay_qty_solid'] = $this->dashboard_model->getLayQtyByStyleType(1);
+
+//        CHECK STYLE CUTTING REPORT
+        $data['today_no_of_marker_check'] = $this->dashboard_model->getTodayNumberOfMarkerByStyleType($date, 2);
+        $data['today_no_of_garments_check'] = $this->dashboard_model->getTodayNumberOfGarmentByStyleType($date, 2);
+        $data['today_cut_check'] = $this->dashboard_model->getTodayCutQtyByStyleType($date, 2);
+        $data['lay_qty_check'] = $this->dashboard_model->getLayQtyByStyleType(2);
+
+//        PRINT STYLE CUTTING REPORT
+        $data['today_no_of_marker_print'] = $this->dashboard_model->getTodayNumberOfMarkerByStyleType($date, 3);
+        $data['today_no_of_garments_print'] = $this->dashboard_model->getTodayNumberOfGarmentByStyleType($date, 3);
+        $data['today_cut_print'] = $this->dashboard_model->getTodayCutQtyByStyleType($date, 3);
+        $data['lay_qty_print'] = $this->dashboard_model->getLayQtyByStyleType(3);
+
         $data['table_report'] = $this->dashboard_model->cuttingTableWiseDailyReport($date);
 
         $this->load->view('reports/line_wip_graph_report', $data);

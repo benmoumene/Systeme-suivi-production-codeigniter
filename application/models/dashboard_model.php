@@ -90,11 +90,34 @@ class Dashboard_model extends CI_Model {
         return $query;
     }
 
+    public function getTodayNumberOfMarkerByStyleType($date, $style_type){
+        $sql = "SELECT COUNT(t1.cut_tracking_no) AS total_no_of_marker_qty 
+                FROM (SELECT cut_tracking_no FROM `tb_cut_summary` 
+                WHERE DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d')='$date' 
+                AND style_type=$style_type
+                GROUP BY cut_tracking_no) AS t1";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
     public function getTodayNumberOfGarment($date){
         $sql = "SELECT COUNT(t1.po_no) AS total_no_of_garments FROM 
                 (SELECT po_no
                  FROM `tb_cut_summary` 
                  WHERE DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d')='$date'
+                 GROUP BY po_no, cut_no, size, cut_layer) AS t1";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
+    public function getTodayNumberOfGarmentByStyleType($date, $style_type){
+        $sql = "SELECT COUNT(t1.po_no) AS total_no_of_garments FROM 
+                (SELECT po_no
+                 FROM `tb_cut_summary` 
+                 WHERE DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d')='$date'
+                 AND style_type=$style_type
                  GROUP BY po_no, cut_no, size, cut_layer) AS t1";
 
         $query = $this->db->query($sql)->result_array();
@@ -123,11 +146,34 @@ class Dashboard_model extends CI_Model {
         return $query;
     }
 
+    public function getTodayCutQtyByStyleType($date, $style_type){
+
+        $sql = "SELECT SUM(cut_qty) as today_cut_qty 
+                FROM `tb_cut_summary` 
+                WHERE is_cutting_complete=1 
+                AND DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d') = '$date'
+                AND style_type=$style_type";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
     public function getLayQty(){
 
         $sql = "SELECT SUM(cut_qty) as total_lay_qty
                 FROM `tb_cut_summary` 
                 WHERE is_lay_complete=1 AND is_cutting_complete=0";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
+    public function getLayQtyByStyleType($style_type){
+
+        $sql = "SELECT SUM(cut_qty) as total_lay_qty
+                FROM `tb_cut_summary` 
+                WHERE is_lay_complete=1 AND is_cutting_complete=0 
+                AND style_type=$style_type";
 
         $query = $this->db->query($sql)->result_array();
         return $query;

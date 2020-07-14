@@ -1,9 +1,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="refresh" content="180">
+    <meta charset="utf-8">
+    <meta http-equiv="refresh" content="300">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title><?php echo $title ?></title>
     <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/images/favicon.ico" type="image/x-icon" />
+
+    <!-- Bootstrap CSS -->
+    <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!--Canvas Chart Asset Start-->
     <script src="<?php echo base_url(); ?>assets/js/canvas_chart/jquery-1.11.1.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/canvas_chart/canvasjs.min.js"></script>
@@ -26,35 +31,171 @@
 </head>
 <!--<body class="light_theme  fixed_header left_nav_fixed">-->
 <body>
-<div>
-    <table border="1" width="100%">
-        <thead>
-            <tr style="background-color: rgba(159,255,154,0.41)">
-                <th align="center"><span style="font-size: 25px;">LAY QTY</span></th>
-                <th align="center"><span style="font-size: 25px;">TODAY CUT</span></th>
-                <th align="center"><span style="font-size: 25px;">MARKER</span></th>
-                <th align="center"><span style="font-size: 25px;">GARMENTS/RATIO</span></th>
-                <th align="center" title="Today Ready Package"><span style="font-size: 25px;">TODAY STOCK</span></th>
-                <th align="center" title="Total Ready Package"><span style="font-size: 25px;">TOTAL STOCK</span></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th align="center"><span style="font-size: 22px;"><?php echo ($lay_qty[0]['total_lay_qty'] != '' ? $lay_qty[0]['total_lay_qty'] : 0);?></span></th>
-                <th align="center"><span style="font-size: 22px;"><?php echo ($today_cut[0]['today_cut_qty'] != '' ? $today_cut[0]['today_cut_qty'] : 0);?></span></th>
-                <th align="center"><span style="font-size: 22px;"><?php echo ($today_no_of_marker[0]['total_no_of_marker_qty'] != '' ? $today_no_of_marker[0]['total_no_of_marker_qty'] : 0);?></span></th>
-                <th align="center"><span style="font-size: 22px;">
-                        <?php echo ($today_no_of_garments[0]['total_no_of_garments'] != '' ? $today_no_of_garments[0]['total_no_of_garments'] : 0);?></span></th>
-                <th align="center"><span style="font-size: 22px;"><?php echo ($today_cut_ready_package[0]['today_package_ready_qty'] != '' ? $today_cut_ready_package[0]['today_package_ready_qty'] : 0);?></span></th>
-                <th align="center"><span style="font-size: 22px;"><?php echo ($cut_ready_package[0]['cut_ready_qty'] != '' ? $cut_ready_package[0]['cut_ready_qty'] : 0);?></span></th>
-            </tr>
-        </tbody>
-    </table>
+<div class="row center">
+    <div class="col-md-12">
+<!--        <div class="col-md-1"></div>-->
+            <div class="col-md-12">
+                <table border="1" width="100%">
+                    <thead>
+                        <tr style="background-color: rgba(159,255,154,0.41)">
+                            <th class="text-center"><span style="font-size: 25px;">LAY QTY</span></th>
+                            <th class="text-center"><span style="font-size: 25px;">TODAY CUT</span></th>
+                            <th class="text-center"><span style="font-size: 25px;">MARKER</span></th>
+                            <th class="text-center"><span style="font-size: 25px;">GARMENTS/RATIO</span></th>
+                            <th class="text-center" title="Today Ready Package"><span style="font-size: 25px;">TODAY PACKAGE(STOCK)</span></th>
+                            <th class="text-center" title="Total Ready Package"><span style="font-size: 25px;">TOTAL PACKAGE(STOCK)</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th class="text-center"><span style="font-size: 22px;"><?php echo ($lay_qty[0]['total_lay_qty'] != '' ? $lay_qty[0]['total_lay_qty'] : 0);?></span></th>
+                            <th class="text-center"><span style="font-size: 22px;"><?php echo ($today_cut[0]['today_cut_qty'] != '' ? $today_cut[0]['today_cut_qty'] : 0);?></span></th>
+                            <th class="text-center"><span style="font-size: 22px;"><?php echo ($today_no_of_marker[0]['total_no_of_marker_qty'] != '' ? $today_no_of_marker[0]['total_no_of_marker_qty'] : 0);?></span></th>
+                            <th class="text-center"><span style="font-size: 22px;"><?php echo ($today_no_of_garments[0]['total_no_of_garments'] != '' ? $today_no_of_garments[0]['total_no_of_garments'] : 0);?></span></th>
+                            <th class="text-center"><span style="font-size: 22px;"><?php echo ($today_cut_ready_package[0]['today_package_ready_qty'] != '' ? $today_cut_ready_package[0]['today_package_ready_qty'] : 0);?></span></th>
+                            <th class="text-center"><span style="font-size: 22px;"><?php echo ($cut_ready_package[0]['cut_ready_qty'] != '' ? $cut_ready_package[0]['cut_ready_qty'] : 0);?></span></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+<!--        <div class="col-md-1"></div>-->
+    </div>
 </div>
 <br />
-<div id="chartContainer" style="height: 400px; width: 100%;"></div>
+<div class="row center">
+    <div class="col-md-12">
+        <div class="col-md-8">
+            <div id="chartContainer" style="height: 400px; width: 100%;"></div>
+        </div>
+        <div class="col-md-4">
+            <div id="chartContainer_1" style="height: 400px; width: 100%;">
+                <table>
+                    <thead>
+                    <tr style="background-color: rgba(179,238,255,0.88)">
+                        <th class="text-center" colspan="4"><span style="font-size: 28px;">STYLE TYPE WISE REPORT</span></th>
+                    </tr>
+                </table>
+                <table>
+                    <thead>
+                        <tr style="background-color: rgba(112,255,86,0.88)">
+                            <th class="text-center" colspan="4"><span style="font-size: 22px;">CHECK</span></th>
+                        </tr>
+                        <tr>
+                            <th class="text-center"><span style="font-size: 20px;">LAY</span></th>
+                            <th class="text-center"><span style="font-size: 20px;">CUT</span></th>
+                            <th class="text-center"><span style="font-size: 20px;">MARKER</span></th>
+                            <th class="text-center"><span style="font-size: 20px;">GARMENTS/RATIO</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center">
+                                <span style="font-size: 18px;">
+                                    <?php echo ($lay_qty_check[0]['total_lay_qty'] != '' ? $lay_qty_check[0]['total_lay_qty'] : 0);?>
+                                </span>
+                            </td>
+                            <td class="text-center">
+                                <span style="font-size: 18px;">
+                                    <?php echo ($today_cut_check[0]['today_cut_qty'] != '' ? $today_cut_check[0]['today_cut_qty'] : 0);?>
+                                </span>
+                            </td>
+                            <td class="text-center">
+                                <span style="font-size: 18px;">
+                                    <?php echo ($today_no_of_marker_check[0]['total_no_of_marker_qty'] != '' ? $today_no_of_marker_check[0]['total_no_of_marker_qty'] : 0);?>
+                                </span>
+                            </td>
+                            <td class="text-center">
+                                <span style="font-size: 18px;">
+                                    <?php echo ($today_no_of_garments_check[0]['total_no_of_garments'] != '' ? $today_no_of_garments_check[0]['total_no_of_garments'] : 0);?>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table>
+                    <thead>
+                        <tr style="background-color: rgba(112,255,86,0.88)">
+                            <th class="text-center" colspan="4"><span style="font-size: 22px;">SOLID</span></th>
+                        </tr>
+                        <tr>
+                            <th class="text-center"><span style="font-size: 20px;">LAY</span></th>
+                            <th class="text-center"><span style="font-size: 20px;">CUT</span></th>
+                            <th class="text-center"><span style="font-size: 20px;">MARKER</span></th>
+                            <th class="text-center"><span style="font-size: 20px;">GARMENTS/RATIO</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center">
+                                <span style="font-size: 18px;">
+                                    <?php echo ($lay_qty_solid[0]['total_lay_qty'] != '' ? $lay_qty_solid[0]['total_lay_qty'] : 0);?>
+                                </span>
+                            </td>
+                            <td class="text-center">
+                                <span style="font-size: 18px;">
+                                    <?php echo ($today_cut_solid[0]['today_cut_qty'] != '' ? $today_cut_solid[0]['today_cut_qty'] : 0);?>
+                                </span>
+                            </td>
+                            <td class="text-center">
+                                <span style="font-size: 18px;">
+                                    <?php echo ($today_no_of_marker_solid[0]['total_no_of_marker_qty'] != '' ? $today_no_of_marker_solid[0]['total_no_of_marker_qty'] : 0);?>
+                                </span>
+                            </td>
+                            <td class="text-center">
+                                <span style="font-size: 18px;">
+                                    <?php echo ($today_no_of_garments_solid[0]['total_no_of_garments'] != '' ? $today_no_of_garments_solid[0]['total_no_of_garments'] : 0);?>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table>
+                    <thead>
+                        <tr style="background-color: rgba(112,255,86,0.88)">
+                            <th class="text-center" colspan="4"><span style="font-size: 22px;">PRINT</span></th>
+                        </tr>
+                        <tr>
+                            <th class="text-center"><span style="font-size: 20px;">LAY</span></th>
+                            <th class="text-center"><span style="font-size: 20px;">CUT</span></th>
+                            <th class="text-center"><span style="font-size: 20px;">MARKER</span></th>
+                            <th class="text-center"><span style="font-size: 20px;">GARMENTS/RATIO</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center">
+                                <span style="font-size: 18px;">
+                                    <?php echo ($lay_qty_print[0]['total_lay_qty'] != '' ? $lay_qty_print[0]['total_lay_qty'] : 0);?>
+                                </span>
+                            </td>
+                            <td class="text-center">
+                                <span style="font-size: 18px;">
+                                    <?php echo ($today_cut_print[0]['today_cut_qty'] != '' ? $today_cut_print[0]['today_cut_qty'] : 0);?>
+                                </span>
+                            </td>
+                            <td class="text-center">
+                                <span style="font-size: 18px;">
+                                    <?php echo ($today_no_of_marker_print[0]['total_no_of_marker_qty'] != '' ? $today_no_of_marker_print[0]['total_no_of_marker_qty'] : 0);?>
+                                </span>
+                            </td>
+                            <td class="text-center">
+                                <span style="font-size: 18px;">
+                                    <?php echo ($today_no_of_garments_print[0]['total_no_of_garments'] != '' ? $today_no_of_garments_print[0]['total_no_of_garments'] : 0);?>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 <br />
 <!--<div id="chartContainer_1" style="height: 200px; width: 100%;"></div>-->
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
 </body>
 
 </html>
@@ -63,7 +204,7 @@
     $(document).ready(function(){
         setInterval(function() {
             window.location.reload();
-        }, 120000);
+        }, 300000);
     });
 
     window.onload = function () {
@@ -74,12 +215,13 @@
                 title: {
                     text: "CUT TABLE REPORT: <?php echo $date;?>"
                 },
-                dataPointWidth: 50,
+                dataPointWidth: 30,
                 axisX: {
-                    valueFormatString: ""
+                    valueFormatString: "",
+                    labelFontSize: 25
                 },
                 axisY: {
-                    prefix: ""
+                    prefix: "",
                 },
 //            toolTip: {
 //                shared: true
@@ -93,7 +235,7 @@
                         name: "LAY",
                         showInLegend: true,
                         color: "#d8cf27",
-                        indexLabelFontSize: 16,
+                        indexLabelFontSize: 25,
                         indexLabelOrientation: "vertical",
                         xValueFormatString: "LAY",
                         yValueFormatString: "#,##0",
@@ -114,7 +256,7 @@
                         name: "CUT",
                         showInLegend: true,
                         color: "#62a4d8",
-                        indexLabelFontSize: 16,
+                        indexLabelFontSize: 25,
                         indexLabelOrientation: "vertical",
                         xValueFormatString: "CUT",
                         yValueFormatString: "##0",
