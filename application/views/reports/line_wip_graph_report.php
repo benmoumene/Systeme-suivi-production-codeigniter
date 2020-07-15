@@ -38,7 +38,7 @@
                 <table border="1" width="100%">
                     <thead>
                         <tr style="background-color: rgba(159,255,154,0.41)">
-                            <th class="text-center"><span style="font-size: 25px;">LAY QTY</span></th>
+                            <th class="text-center"><span style="font-size: 25px;">LAY WIP</span></th>
                             <th class="text-center"><span style="font-size: 25px;">TODAY CUT</span></th>
                             <th class="text-center"><span style="font-size: 25px;">MARKER</span></th>
                             <th class="text-center"><span style="font-size: 25px;">GARMENTS/RATIO</span></th>
@@ -81,7 +81,7 @@
                             <th class="text-center" colspan="4"><span style="font-size: 22px;">CHECK</span></th>
                         </tr>
                         <tr>
-                            <th class="text-center"><span style="font-size: 20px;">LAY</span></th>
+                            <th class="text-center"><span style="font-size: 20px;">LAY WIP</span></th>
                             <th class="text-center"><span style="font-size: 20px;">CUT</span></th>
                             <th class="text-center"><span style="font-size: 20px;">MARKER</span></th>
                             <th class="text-center"><span style="font-size: 20px;">GARMENTS/RATIO</span></th>
@@ -118,7 +118,7 @@
                             <th class="text-center" colspan="4"><span style="font-size: 22px;">SOLID</span></th>
                         </tr>
                         <tr>
-                            <th class="text-center"><span style="font-size: 20px;">LAY</span></th>
+                            <th class="text-center"><span style="font-size: 20px;">LAY WIP</span></th>
                             <th class="text-center"><span style="font-size: 20px;">CUT</span></th>
                             <th class="text-center"><span style="font-size: 20px;">MARKER</span></th>
                             <th class="text-center"><span style="font-size: 20px;">GARMENTS/RATIO</span></th>
@@ -155,7 +155,7 @@
                             <th class="text-center" colspan="4"><span style="font-size: 22px;">PRINT</span></th>
                         </tr>
                         <tr>
-                            <th class="text-center"><span style="font-size: 20px;">LAY</span></th>
+                            <th class="text-center"><span style="font-size: 20px;">LAY WIP</span></th>
                             <th class="text-center"><span style="font-size: 20px;">CUT</span></th>
                             <th class="text-center"><span style="font-size: 20px;">MARKER</span></th>
                             <th class="text-center"><span style="font-size: 20px;">GARMENTS/RATIO</span></th>
@@ -232,12 +232,12 @@
                 data: [
                     {
                         type: "column",
-                        name: "LAY",
+                        name: "LAY WIP",
                         showInLegend: true,
                         color: "#d8cf27",
                         indexLabelFontSize: 25,
                         indexLabelOrientation: "vertical",
-                        xValueFormatString: "LAY",
+                        xValueFormatString: "LAY WIP",
                         yValueFormatString: "#,##0",
                         dataPoints: [
 
