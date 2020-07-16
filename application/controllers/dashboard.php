@@ -577,6 +577,7 @@ class Dashboard extends CI_Controller {
                 $idata['total_order_qty'] = ($v['total_order_qty'] != NULL ? $v['total_order_qty'] : 0);
                 $idata['total_cut_qty'] = ($v['total_cut_qty'] != NULL ? $v['total_cut_qty'] : 0);
                 $idata['total_cut_input_qty'] = ($v['total_cut_input_qty'] != NULL ? $v['total_cut_input_qty'] : 0);
+                $idata['count_cut_package_ready_qty'] = ($v['count_cut_package_ready_qty'] != NULL ? $v['count_cut_package_ready_qty'] : 0);
                 $idata['count_input_qty_line'] = ($v['count_input_qty_line'] != NULL ? $v['count_input_qty_line'] : 0);
                 $idata['collar_bndl_qty'] = ($v['collar_bndl_qty'] != NULL ? $v['collar_bndl_qty'] : 0);
                 $idata['cuff_bndl_qty'] = ($v['cuff_bndl_qty'] != NULL ? $v['cuff_bndl_qty'] : 0);
