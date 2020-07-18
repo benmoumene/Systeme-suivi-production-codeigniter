@@ -3313,6 +3313,7 @@ class Access extends CI_Controller {
         $last_access_points = $line_check[0]['access_points'];
         $last_access_points_status = $line_check[0]['access_points_status'];
         $manually_closed = $line_check[0]['manually_closed'];
+        $brand = $line_check[0]['brand'];
 
         if(sizeof($line_check) > 0) {
             if($manually_closed == 1){
@@ -3324,11 +3325,17 @@ class Access extends CI_Controller {
 
                         $this->access_model->updateTodayLineOutputQty($line, $date, $time);
 
+                        // Brand of Last Scanning Piece
+                        $this->access_model->updateTblNew('tb_today_line_output_qty', 'line_id', $line, array('brand' => $brand));
+
                         echo 'Successfully Passed!';
                     } elseif (($last_access_points == $access_points) && ($last_access_points_status == 2)) {
                         $this->access_model->updateDefectStatus($carelabel_tracking_no, $line, $access_points, $access_points_status, $date_time);
 
                         $this->access_model->updateTodayLineOutputQty($line, $date, $time);
+
+                        // Brand of Last Scanning Piece
+                        $this->access_model->updateTblNew('tb_today_line_output_qty', 'line_id', $line, array('brand' => $brand));
 
                         $this->access_model->endLineQC($carelabel_tracking_no, $access_points, $access_points_status, $date_time);
                         echo 'Successfully Passed!';
@@ -4266,7 +4273,6 @@ class Access extends CI_Controller {
                 if($is_wash_gmt == 1){
                     if(($washing_status == 1) && ($last_access_points == 4) && ($access_points_status == 4) && ($packing_status == 0) && ($finishing_qc_status != 2) && ($finishing_qc_status != 3)){
                         $this->access_model->packingShirt($carelabel_tracking_no, 1, $floor_id, $date_time);
-//                    $this->access_model->updateTodayLineOutputQty($floor_id, $date, $time);
                         $this->access_model->updateTodayFinishingOutputQty($floor_id, $date, $time);
 
 

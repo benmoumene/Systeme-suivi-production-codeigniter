@@ -447,12 +447,11 @@ $('#defect_code_tbl tbody').find('tr:last').remove();
 
         var rowCount = $('#defect_code_tbl tbody tr').length;
 
+
+        // Pcs Scanning Start ( Pcs Code should be 10 digit, including dot(.) )
         if((code_length == 10) && (carelabel_tracking_no != '')){
 
             var defect_codes_array = $("input[name='defect_codes[]']").map(function(){return $(this).val();}).get();
-
-            console.log("Defects");
-            console.log(defect_codes_array);
 
             $("#carelabel_tracking_no").attr('readonly', true);
             $("#loader").css("display", "block");
@@ -546,7 +545,9 @@ $('#defect_code_tbl tbody').find('tr:last').remove();
             }
 
         }
+        // Pcs Scanning End ( Pcs Code should be 10 digit, including dot(.) )
 
+        // Defect Code Scanning Start ( Defect Code should be 7 digit, including dot(.) )
         if((code_length == 7) && ((first_variable == 'DC') || (first_variable == 'Dc')) && (last_variable == '.')){
 
             var code_no = $("#carelabel_tracking_no").val();
@@ -566,6 +567,7 @@ $('#defect_code_tbl tbody').find('tr:last').remove();
             }
 
         }
+        // Defect Code Scanning End ( Defect Code should be 7 digit, including dot(.) )
     }
 
     function submitClQcDefectInfo(){

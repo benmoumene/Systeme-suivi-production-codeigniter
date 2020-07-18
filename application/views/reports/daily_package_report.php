@@ -21,13 +21,13 @@
 </style>
 <div class="pull-left breadcrumb_admin clear_both">
     <div class="pull-left page_title theme_color">
-        <h1>Fusing Report</h1>
-        <h2 class="">Fusing Report...</h2>
+        <h1>Package Report</h1>
+        <h2 class="">Package Report...</h2>
     </div>
     <div class="pull-right">
         <ol class="breadcrumb">
             <li><a href="<?php echo base_url();?>">Home</a></li>
-            <li class="active">Fusing Report</li>
+            <li class="active">Package Report</li>
         </ol>
     </div>
 </div>
@@ -50,7 +50,7 @@
                                 <span><b>* Select Date </b></span>
                             </div>
                             <div class="col-md-2">
-                                <button class="btn btn-primary" id="submit_btn" onclick="getFusingReport();">Search</button>
+                                <button class="btn btn-primary" id="submit_btn" onclick="getPackageDetailReport();">Search</button>
                             </div>
                             <div class="col-md-1" id="loader" style="display: none;"><div class="loader"></div></div>
                         </div>
@@ -97,7 +97,7 @@
         location.reload();
     }
 
-    function getFusingReport() {
+    function getPackageDetailReport() {
         var dt = $("#date").val();
 
         var res2 = dt.split("-");
@@ -109,7 +109,7 @@
         $("#loader").css("display", "block");
 
         $.ajax({
-            url: "<?php echo base_url();?>dashboard/getFusingReport/",
+            url: "<?php echo base_url();?>dashboard/getPackageDetailReport/",
             type: "POST",
             data: {date: date},
             dataType: "html",

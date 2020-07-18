@@ -1992,7 +1992,8 @@ class Access_model extends CI_Model {
     }
 
     public function updateTodayLineOutputQty($line_id, $date, $time){
-        $sql = "UPDATE tb_today_line_output_qty SET qty=(qty+1) 
+        $sql = "UPDATE tb_today_line_output_qty 
+                SET qty=(qty+1) 
                 WHERE line_id = $line_id AND `date`='$date' 
                 AND '$time' BETWEEN start_time AND end_time";
 
@@ -2122,11 +2123,11 @@ class Access_model extends CI_Model {
     }
 
     public function getLineDHUSummary($line_id){
-        $sql = "SELECT t1.line_id, t1.dhu_sum, t1.work_hour_1, 
-                t1.work_hour_2, t1.work_hour_3, t1.work_hour_4
+        $sql = "SELECT t1.line_id, t1.dhu_sum, t1.brand,
+                t1.work_hour_1, t1.work_hour_2, t1.work_hour_3, t1.work_hour_4
                 FROM
-                (SELECT line_id, SUM(dhu) AS dhu_sum, work_hour_1, 
-                work_hour_2, work_hour_3, work_hour_4
+                (SELECT line_id, SUM(dhu) AS dhu_sum, brand,
+                work_hour_1, work_hour_2, work_hour_3, work_hour_4
                 FROM `tb_today_line_output_qty` 
                 WHERE 1 AND line_id=$line_id) AS t1";
 

@@ -92,11 +92,12 @@
         <thead>
         <tr style="background-color: #f7ffb0;">
             <th align="center" rowspan="2" style="font-size: 20px; font-weight: 900; width: 40px;">LINE</th>
-            <th align="center" rowspan="2" style="font-size: 20px; font-weight: 900; width: 50px;">TARGET</th>
+            <th align="center" rowspan="2" style="font-size: 20px; font-weight: 900; width: 50px;">TAR.</th>
             <th align="center" rowspan="2" style="font-size: 20px; font-weight: 900; width: 60px;">Per/Hr</th>
             <th align="center" rowspan="2" style="font-size: 20px; font-weight: 900; width: 40px;">MP</th>
             <th align="center" rowspan="2" style="font-size: 20px; font-weight: 900; width: 40px;">Effi.</th>
             <th align="center" rowspan="2" style="font-size: 20px; font-weight: 900; width: 40px;">DHU</th>
+            <th align="center" rowspan="2" style="font-size: 18px; font-weight: 900; width: 40px;">BRND</th>
             <th align="center" colspan="10" style="font-size: 20px; font-weight: 900;">HOURS</th>
 <!--            <th align="center" rowspan="2" style="font-size: 20px; font-weight: 900; width: 40px;">AVG</th>-->
             <th align="center" rowspan="2" style="font-size: 20px; font-weight: 900; width: 40px;">AVG</th>
@@ -141,6 +142,8 @@
             $dhu_summary = $this->method_call->getLineDHUSummary($line_id);
 
             $dhu_sum = ($dhu_summary[0]['dhu_sum'] != '' ? $dhu_summary[0]['dhu_sum'] : 0);
+            $brand = $dhu_summary[0]['brand'];
+
             $work_hour_1 = ($dhu_summary[0]['work_hour_1'] != '' ? $dhu_summary[0]['work_hour_1'] : 0);
             $work_hour_2 = ($dhu_summary[0]['work_hour_2'] != '' ? $dhu_summary[0]['work_hour_2'] : 0);
             $work_hour_3 = ($dhu_summary[0]['work_hour_3'] != '' ? $dhu_summary[0]['work_hour_3'] : 0);
@@ -180,6 +183,9 @@
             <td align="center"><?php echo $line_rep[0]['efficiency'];?></td>
             <td align="center" id="myBtn" onclick="getDhuReport(<?php echo $line_id;?>);" style="cursor: pointer;">
                 <?php echo $average_dhu;?>
+            </td>
+            <td align="center" style="font-size: 11px;">
+                <?php echo $brand;?>
             </td>
             <?php
             $total_output = 0;
@@ -249,6 +255,7 @@
                 <th align="center" style="font-size: 20px; font-weight: 900;"><?php echo round($grand_total_line_target_per_hour);?></th>
                 <th align="center" style="font-size: 20px; font-weight: 900;"><?php echo $grand_total_line_mp?></th>
                 <th align="center" style="font-size: 20px; font-weight: 900;"><?php echo $grand_average_eff?></th>
+                <th align="center" style="font-size: 20px; font-weight: 900;"><?php echo ''?></th>
                 <th align="center" style="font-size: 20px; font-weight: 900;"><?php echo ''?></th>
                 <?php
                 foreach ($hours as $h_2){
@@ -322,6 +329,7 @@
                 <th align="center" style="font-size: 20px; font-weight: 900;"><?php echo round($floor_line_target_per_hour);?></th>
                 <th align="center" style="font-size: 20px; font-weight: 900;"><?php echo $floor_total_line_mp?></th>
                 <th align="center" style="font-size: 20px; font-weight: 900;"><?php echo $floor_average_efficiency?></th>
+                <th align="center" style="font-size: 20px; font-weight: 900;"><?php echo ''?></th>
                 <th align="center" style="font-size: 20px; font-weight: 900;"><?php echo ''?></th>
                 <?php
 

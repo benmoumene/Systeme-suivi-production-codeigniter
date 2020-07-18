@@ -108,9 +108,6 @@
                                 <span style="color: white; font-size: 15px;"><?php echo $package_info[0]['count_cutting_pocket_bundle_qty'];?></span>
                             </td>
 
-
-
-
                         </tr>
                         <?php
 //                    }

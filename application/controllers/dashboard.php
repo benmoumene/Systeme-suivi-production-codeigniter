@@ -2428,9 +2428,10 @@ class Dashboard extends CI_Controller {
         }
         if($color != ''){
             $where .= " AND color = '$color'";
-        }  if($ex_factory != ''){
-        $where .= " AND ex_factory_date = '$ex_factory'";
-    }
+        }
+        if($ex_factory != ''){
+            $where .= " AND ex_factory_date = '$ex_factory'";
+        }
         $get_data['package_info'] = $this->dashboard_model->getReadyPackageByPo($where);
 
         $maincontent = $this->load->view('get_ready_package_by_po', $get_data, true);
@@ -3685,28 +3686,34 @@ class Dashboard extends CI_Controller {
         echo $maincontent;
     }
 
-    public function dailyFusingReport()
+    public function dailyPackageReport()
     {
-        $data['title']='Daily Fusing Report';
+        $data['title']='Daily Package Report';
 
         $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
         $date_time=$datex->format('Y-m-d H:i:s');
         $date=$datex->format('Y-m-d');
         $data['date']=$date;
 
-//        $data['fusing_report'] = $this->dashboard_model->getDailyFusingReport($date);
-
-        $data['maincontent'] = $this->load->view('reports/daily_fusing_report', $data, true);
+        $data['maincontent'] = $this->load->view('reports/daily_package_report', $data, true);
         $this->load->view('reports/master', $data);
     }
 
-    public function getFusingReport(){
+    public function getPackageDetailReport(){
         $date = $this->input->post('date');
 
         $data['date'] = $date;
 
-        $data['fusing_report'] = $this->dashboard_model->getDailyFusingReport($date);
-        echo $data['maincontent'] = $this->load->view('reports/daily_fusing_summary_report', $data);
+        $where = '';
+
+        if($date != ''){
+            $where .= " AND DATE_FORMAT(package_ready_date_time, '%Y-%m-%d')='$date'";
+        }
+
+//        $data['fusing_report'] = $this->dashboard_model->getDailyFusingReport($date);
+        $data['fusing_report'] = $this->dashboard_model->getReadyPackageByPo($where);
+
+        echo $data['maincontent'] = $this->load->view('reports/daily_package_summary_report', $data);
 
     }
 

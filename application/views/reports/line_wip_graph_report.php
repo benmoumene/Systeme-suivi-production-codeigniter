@@ -41,7 +41,7 @@
                             <th class="text-center"><span style="font-size: 25px;">LAY WIP</span></th>
                             <th class="text-center"><span style="font-size: 25px;">TODAY CUT</span></th>
                             <th class="text-center"><span style="font-size: 25px;">MARKER</span></th>
-                            <th class="text-center"><span style="font-size: 25px;">GARMENTS/RATIO</span></th>
+                            <th class="text-center"><span style="font-size: 25px;">RATIO</span></th>
                             <th class="text-center" title="Today Ready Package"><span style="font-size: 25px;">TODAY PACKAGE(STOCK)</span></th>
                             <th class="text-center" title="Total Ready Package"><span style="font-size: 25px;">TOTAL PACKAGE(STOCK)</span></th>
                         </tr>
@@ -84,7 +84,7 @@
                             <th class="text-center"><span style="font-size: 20px;">LAY WIP</span></th>
                             <th class="text-center"><span style="font-size: 20px;">CUT</span></th>
                             <th class="text-center"><span style="font-size: 20px;">MARKER</span></th>
-                            <th class="text-center"><span style="font-size: 20px;">GARMENTS/RATIO</span></th>
+                            <th class="text-center"><span style="font-size: 20px;">RATIO</span></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -121,7 +121,7 @@
                             <th class="text-center"><span style="font-size: 20px;">LAY WIP</span></th>
                             <th class="text-center"><span style="font-size: 20px;">CUT</span></th>
                             <th class="text-center"><span style="font-size: 20px;">MARKER</span></th>
-                            <th class="text-center"><span style="font-size: 20px;">GARMENTS/RATIO</span></th>
+                            <th class="text-center"><span style="font-size: 20px;">RATIO</span></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -158,7 +158,7 @@
                             <th class="text-center"><span style="font-size: 20px;">LAY WIP</span></th>
                             <th class="text-center"><span style="font-size: 20px;">CUT</span></th>
                             <th class="text-center"><span style="font-size: 20px;">MARKER</span></th>
-                            <th class="text-center"><span style="font-size: 20px;">GARMENTS/RATIO</span></th>
+                            <th class="text-center"><span style="font-size: 20px;">RATIO</span></th>
                         </tr>
                     </thead>
                     <tbody>
