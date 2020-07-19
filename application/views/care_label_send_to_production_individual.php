@@ -46,7 +46,7 @@
           </div><!--/block-web--> 
         </div><!--/col-md-12-->
             <div class="row">
-                <div class="col-md-1">
+                <div class="col-md-2">
                     <select class="form-control" name="line_no" id="line_no" style="font-size: 18px;">
                         <option value="" id="blank">Line...</option>
                         <?php foreach ($lines as $lns){ ?>
@@ -92,7 +92,7 @@
                 <div class="col-md-1">
                     <button id="submit_btn" class="btn btn-lg btn-success" onclick="sendingToProduction();">Save</button>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="block-web scroll5">
                             <div class="porlets-content">
 
@@ -129,42 +129,42 @@
 <!--        </form>-->
 
           <div class="row">
-              <div class="col-md-7">
-                  <div class="block-web scroll2" id="reload_div">
+              <div class="col-md-12">
+                  <div class="block-web scroll6" id="reload_div">
 
 
 
                   </div><!--/porlets-content-->
               </div><!--/block-web-->
-              <div class="col-md-5 scroll4" style="margin-left: 40px;">
-                  <div class="block-web">
-
-                      <div class="porlets-content">
-
-                          <div class="table-responsive" id="size_tbl">
-                              <table class="display table table-bordered table-striped">
-                                  <thead>
-                                  <tr>
-                                      <th class="center">Size</th>
-                                      <th class="center">Order</th>
-                                      <th class="center">Cut</th>
-                                      <th class="center">Cut Pass</th>
-                                  </tr>
-                                  </thead>
-                                  <tbody>
-                                  <tr>
-                                      <td class="hidden-phone center"></td>
-                                      <td class="hidden-phone center"></td>
-                                      <td class="hidden-phone center"></td>
-                                      <td class="hidden-phone center"></td>
-                                  </tr>
-                                  </tbody>
-                              </table>
-                          </div><!--/table-responsive-->
-                      </div>
-
-                  </div><!--/porlets-content-->
-              </div>
+<!--              <div class="col-md-5 scroll4" style="margin-left: 40px;">-->
+<!--                  <div class="block-web">-->
+<!---->
+<!--                      <div class="porlets-content">-->
+<!---->
+<!--                          <div class="table-responsive" id="size_tbl">-->
+<!--                              <table class="display table table-bordered table-striped">-->
+<!--                                  <thead>-->
+<!--                                  <tr>-->
+<!--                                      <th class="center">Size</th>-->
+<!--                                      <th class="center">Order</th>-->
+<!--                                      <th class="center">Cut</th>-->
+<!--                                      <th class="center">Cut Pass</th>-->
+<!--                                  </tr>-->
+<!--                                  </thead>-->
+<!--                                  <tbody>-->
+<!--                                  <tr>-->
+<!--                                      <td class="hidden-phone center"></td>-->
+<!--                                      <td class="hidden-phone center"></td>-->
+<!--                                      <td class="hidden-phone center"></td>-->
+<!--                                      <td class="hidden-phone center"></td>-->
+<!--                                  </tr>-->
+<!--                                  </tbody>-->
+<!--                              </table>-->
+<!--                          </div>-->
+<!--                      </div>-->
+<!---->
+<!--                  </div>-->
+<!--              </div>-->
 <!--              <div class="col-md-4">-->
 <!--                  <div class="block-web">-->
 <!---->

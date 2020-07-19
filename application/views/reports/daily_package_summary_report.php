@@ -2,6 +2,7 @@
     <thead>
     <tr>
         <th class="hidden-phone center" colspan="19"><h3>Package Report On <?php echo $date;?></h3></th>
+        <th class="hidden-phone center" rowspan="2" style="vertical-align:bottom">Total Package</th>
     </tr>
     <tr>
         <th class="hidden-phone center">Group SO</th>
@@ -22,7 +23,7 @@
         <th class="hidden-phone center">Sleeve</th>
         <th class="hidden-phone center">Slv-Plkt</th>
         <th class="hidden-phone center">Pocket</th>
-        <th class="hidden-phone center">Package Ready</th>
+        <th class="hidden-phone center">Package</th>
     </tr>
     </thead>
     <tbody>
@@ -70,6 +71,13 @@
             <td class="center">
                 <?php echo $v['count_package_ready_qty'];?>
             </td>
+            <td class="center"
+                <?php if($v['total_cut_qty'] > $v['count_cut_package_ready_qty']){ ?>
+                style="background-color: red; color: white;"
+                <?php } ?>
+            >
+                <?php echo $v['count_cut_package_ready_qty'];?>
+            </td>
 
         </tr>
         <?php
@@ -81,6 +89,7 @@
         <tr>
             <td colspan="18" align="right"><h4><b>Total</b></h4></td>
             <td class="center"><h4><b><?php echo $total_pkg_rdy_qty;?></b></h4></td>
+            <td></td>
         </tr>
     </tfoot>
 </table>

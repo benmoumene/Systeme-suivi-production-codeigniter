@@ -1059,8 +1059,8 @@ class Access_model extends CI_Model {
 //                ORDER  BY t3.cutting_collar_bundle_ready_date_time";
 
 
-        $sql="SELECT t2.*, t3.total_order_qty, t3.total_cut_qty,
-              t1.count_cutting_ready_package_qty
+        $sql="SELECT t2.*, t3.total_order_qty, t3.total_cut_qty, t3.total_cut_input_qty,
+              t3.count_cut_package_ready_qty, t1.count_cutting_ready_package_qty
               
                 FROM 
                 (SELECT so_no, po_no, purchase_order, item, quality, color, style_no, style_name, brand,
@@ -1112,7 +1112,9 @@ class Access_model extends CI_Model {
                 
                 LEFT JOIN
                 tb_production_summary AS t3
-                ON t1.so_no=t3.so_no";
+                ON t1.so_no=t3.so_no
+                
+                WHERE t3.balance > 0";
 
         $query = $this->db->query($sql)->result_array();
         return $query;
@@ -2677,15 +2679,15 @@ class Access_model extends CI_Model {
 //                $where";
 
         $sql = "SELECT t1.po_no, t1.so_no, t1.purchase_order, t1.item, t1.quality, t1.color,
-                t1.brand, t1.style_no, t1.style_name, t1.ex_factory_date,
-                t1.total_order_qty, t1.total_cut_qty, t1.count_manual_close_qty,
-                t3.total_cut_input_qty, t3.cut_prod_date_time
+                t1.brand, t1.style_no, t1.style_name, t1.ex_factory_date, t1.total_order_qty,
+                t1.total_cut_qty, t1.total_cut_input_qty, t1.count_manual_close_qty,
+                t3.cut_input_qty, t3.cut_prod_date_time
 
                 FROM
 
                 (SELECT po_no,so_no,purchase_order,item,quality,color,
                  MAX(sent_to_production_date_time) as cut_prod_date_time,
-                 COUNT(sent_to_production) as total_cut_input_qty
+                 COUNT(sent_to_production) as cut_input_qty
                  FROM (SELECT so_no,po_no,item,quality,color,purchase_order,line_id,brand,
                  ex_factory_date,style_no,style_name,planned_line_id,sent_to_production_date_time,
                  CASE WHEN sent_to_production != 0 THEN sent_to_production END sent_to_production
@@ -2697,7 +2699,7 @@ class Access_model extends CI_Model {
                 `tb_production_summary` as t1
                 ON t1.po_no=t3.po_no AND t1.so_no=t3.so_no AND t1.purchase_order=t3.purchase_order
                 AND t1.item=t3.item AND t1.quality=t3.quality AND t1.color=t3.color
-                                
+          
                 $where";
 
         $query = $this->db->query($sql)->result_array();

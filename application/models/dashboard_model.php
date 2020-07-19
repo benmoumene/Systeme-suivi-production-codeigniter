@@ -2704,7 +2704,9 @@ class Dashboard_model extends CI_Model {
 
     public function getReadyPackageByPo($where)
     {
-        $sql="SELECT t1.*, t2.total_order_qty ,t3.total_cut_qty,t3.bundle_start,t3.bundle_end,t3.cutting_collar_bundle_ready_date_time
+        $sql="SELECT t1.*, t2.total_order_qty ,t3.total_cut_qty,t3.bundle_start,t3.bundle_end,t3.cutting_collar_bundle_ready_date_time,
+              t4.count_cut_package_ready_qty
+              
                 FROM (
                 SELECT po_no,so_no,item,quality,color,purchase_order,ex_factory_date,brand,style_no,style_name, planned_line_id,
                 SUM(CASE WHEN is_cutting_collar_bundle_ready=1
@@ -2741,14 +2743,27 @@ class Dashboard_model extends CI_Model {
                 
                 FROM tb_cut_summary WHERE 1 $where GROUP BY po_no,so_no,item,quality,color,purchase_order
                 )  as t1
+                
                 LEFT JOIN
                 vt_po_summary as t2
-                ON t1.so_no=t2.so_no AND t1.po_no=t2.po_no AND t1.purchase_order=t2.purchase_order AND t1.item=t2.item AND t1.quality=t2.quality AND t1.color=t2.color
+                ON t1.so_no=t2.so_no AND t1.po_no=t2.po_no AND t1.purchase_order=t2.purchase_order 
+                AND t1.item=t2.item AND t1.quality=t2.quality AND t1.color=t2.color
+                
                 LEFT JOIN
                 vt_cut as t3
                 ON t1.so_no=t3.so_no AND t1.po_no=t3.po_no AND t1.purchase_order=t3.purchase_order 
                 AND t1.item=t3.item AND t1.quality=t3.quality AND t1.color=t3.color
+                
+                LEFT JOIN
+                (SELECT po_no,so_no,item,quality,color,purchase_order, SUM(cut_qty) AS count_cut_package_ready_qty 
+                FROM tb_cut_summary
+                WHERE is_package_ready=1
+                GROUP BY po_no,so_no,item,quality,color,purchase_order) AS t4
+                ON t1.so_no=t4.so_no AND t1.po_no=t4.po_no AND t1.purchase_order=t4.purchase_order 
+                AND t1.item=t4.item AND t1.quality=t4.quality AND t1.color=t4.color
+                
                 ORDER  BY cutting_collar_bundle_ready_date_time";
+
         $query = $this->db->query($sql)->result_array();
         return $query;
     }

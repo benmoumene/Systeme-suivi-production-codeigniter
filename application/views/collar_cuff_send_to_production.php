@@ -46,7 +46,7 @@
           </div><!--/block-web--> 
         </div><!--/col-md-12-->
             <div class="row">
-                <div class="col-md-1">
+                <div class="col-md-2">
                     <select class="form-control" name="line_no" id="line_no" style="font-size: 18px;">
                         <option value="" id="blank">Line...</option>
                         <?php foreach ($lines as $lns){ ?>

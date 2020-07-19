@@ -215,7 +215,7 @@
 
                     $blnc = ($lr['target_hr'] - $lr['qty']);
                     $balance = round($blnc * (-1), 2);
-                    echo $lr['qty'].' ( '.$balance.' ) ';
+                    echo $lr['qty'].'('.$balance.')';
                     ?>
                 </td>
 
@@ -250,7 +250,7 @@
         </tbody>
             <tfoot>
             <tr>
-                <th align="center" style="font-size: 20px; font-weight: 900;">Grand Total</th>
+                <th align="center" style="font-size: 20px; font-weight: 900;">Total</th>
                 <th align="center" style="font-size: 20px; font-weight: 900;"><?php echo $grand_total_target?></th>
                 <th align="center" style="font-size: 20px; font-weight: 900;"><?php echo round($grand_total_line_target_per_hour);?></th>
                 <th align="center" style="font-size: 20px; font-weight: 900;"><?php echo $grand_total_line_mp?></th>

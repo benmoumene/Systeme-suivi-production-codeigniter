@@ -30,8 +30,6 @@
 
                 foreach($prod_summary as $k => $v) {
 
-//                    $cut_balance_qty = ($v['cut_balance_qty'] != '' ? $v['cut_balance_qty'] : 0);
-
                     if (($v['total_cut_qty'] - ($v['total_cut_input_qty'] + $v['count_manual_close_qty'])) > 0) {
 //                    if ($cut_balance_qty > 0) {
                         ?>
@@ -49,7 +47,7 @@
 <!--                            <td class="hidden-phone center">--><?php //echo $v['min_care_label'] . '-' . $v['max_care_label']; ?><!--</td>-->
                             <td class="hidden-phone center"><?php echo $v['total_cut_qty']; ?></td>
                             <td class="hidden-phone center" style="background-color: darkgreen;">
-                                <span style="color: white;"><?php echo $v['total_cut_input_qty']; ?></span>
+                                <span style="color: white;"><?php echo $v['cut_input_qty']; ?></span>
                             </td>
                             <td class="hidden-phone center">
                                 <span class="btn btn-primary" data-target="#myModal" data-toggle="modal" onclick="getCutBalancePcs('<?php echo $v['po_no']; ?>', '<?php echo $v['so_no']; ?>', '<?php echo $v['purchase_order']; ?>', '<?php echo $v['item']; ?>', '<?php echo $v['quality']; ?>', '<?php echo $v['color']; ?>');">
