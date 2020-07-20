@@ -2680,7 +2680,7 @@ class Access_model extends CI_Model {
 
         $sql = "SELECT t1.po_no, t1.so_no, t1.purchase_order, t1.item, t1.quality, t1.color,
                 t1.brand, t1.style_no, t1.style_name, t1.ex_factory_date, t1.total_order_qty,
-                t1.total_cut_qty, t1.total_cut_input_qty, t1.count_manual_close_qty,
+                t1.total_cut_qty, t1.total_cut_input_qty, t1.count_manual_close_qty, t1.planned_lines,
                 t3.cut_input_qty, t3.cut_prod_date_time
 
                 FROM
