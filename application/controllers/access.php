@@ -1184,7 +1184,7 @@ class Access extends CI_Controller {
 
     public function poSizeUpdate()
     {
-        $data['title'] = 'PO Size Update';
+        $data['title'] = 'PO Update';
         $data['user_name'] = $this->session->userdata('user_name');
         $data['user_description'] = $this->session->userdata('user_description');
         $data['access_points'] = $this->session->userdata('access_points');
@@ -1230,9 +1230,70 @@ class Access extends CI_Controller {
             $this->access_model->updateTbl('tb_po_detail', $id, $data);
         }
 
+        $data_1['purchase_order'] = $this->input->post('purchase_order');
+        $data_1['item'] = $this->input->post('item');
+        $data_1['quality'] = $this->input->post('quality');
+        $data_1['color'] = $this->input->post('color');
+        $data_1['style_no'] = $this->input->post('style_no');
+        $data_1['style_name'] = $this->input->post('style_name');
+        $ex_factory_dt_1 = $this->input->post('ex_fac_date');
+        $ex_factory_date_1 = explode('-', $ex_factory_dt_1);
+        $ex_year_1=$ex_factory_date_1[2];
+        $ex_month_1=$ex_factory_date_1[0];
+        $ex_day_1=$ex_factory_date_1[1];
+        $data_1['ex_factory_date']=$ex_year_1.'-'.$ex_month_1.'-'.$ex_day_1;
+
+        $crd_dt = $this->input->post('crd_date');
+        $crd_date = explode('-', $crd_dt);
+        $year=$crd_date[2];
+        $month=$crd_date[0];
+        $day=$crd_date[1];
+        $data_1['crd_date']=$year.'-'.$month.'-'.$day;
+        $this->access_model->updateTblNew('tb_po_detail', 'so_no', $so_no, $data_1);
+
+
+        $data_2['purchase_order'] = $this->input->post('purchase_order');
+        $data_2['item'] = $this->input->post('item');
+        $data_2['quality'] = $this->input->post('quality');
+        $data_2['color'] = $this->input->post('color');
+        $data_2['style_no'] = $this->input->post('style_no');
+        $data_2['style_name'] = $this->input->post('style_name');
+        $ex_factory_dt_2 = $this->input->post('ex_fac_date');
+        $ex_factory_date_2 = explode('-', $ex_factory_dt_2);
+        $ex_year_2=$ex_factory_date_2[2];
+        $ex_month_2=$ex_factory_date_2[0];
+        $ex_day_2=$ex_factory_date_2[1];
+        $data_2['ex_factory_date']=$ex_year_2.'-'.$ex_month_2.'-'.$ex_day_2;
+        $this->access_model->updateTblNew('tb_cut_summary', 'so_no', $so_no, $data_2);
+
+
+        $data_3['purchase_order'] = $this->input->post('purchase_order');
+        $data_3['item'] = $this->input->post('item');
+        $data_3['quality'] = $this->input->post('quality');
+        $data_3['color'] = $this->input->post('color');
+        $data_3['style_no'] = $this->input->post('style_no');
+        $data_3['style_name'] = $this->input->post('style_name');
+        $ex_factory_dt_3 = $this->input->post('ex_fac_date');
+        $ex_factory_date_3 = explode('-', $ex_factory_dt_3);
+        $ex_year_3=$ex_factory_date_3[2];
+        $ex_month_3=$ex_factory_date_3[0];
+        $ex_day_3=$ex_factory_date_3[1];
+        $data_3['ex_factory_date']=$ex_year_3.'-'.$ex_month_3.'-'.$ex_day_3;
+        $this->access_model->updateTblNew('tb_care_labels', 'so_no', $so_no, $data_3);
+
         $data['message'] = "$so_no Successfully Updated!";
         $this->session->set_userdata($data);
         redirect('access/poSizeUpdate');
+    }
+
+    public function deletePO(){
+        $so_no = $this->input->post('so_no');
+
+        $this->access_model->deleteTableData('tb_po_detail', 'so_no', $so_no);
+        $this->access_model->deleteTableData('tb_cut_summary', 'so_no', $so_no);
+        $this->access_model->deleteTableData('tb_care_labels', 'so_no', $so_no);
+
+        echo 'done';
     }
 
     public function care_label_end_line_new(){
@@ -2073,9 +2134,11 @@ class Access extends CI_Controller {
             $where .= " AND color = '$color'";
         }
 
-        $data['po_detail'] = $this->access_model->getPoDetail($where);
+        $po_info = $this->access_model->getPoDetail($where);
 
-        $maincontent = $this->load->view('po_item_detail', $data);
+//        $maincontent = $this->load->view('po_item_detail', $data);
+
+        echo json_encode($po_info);
     }
 
     public function washGmtStatus($sap_no, $so_no, $purchase_order, $item, $quality, $color, $status){

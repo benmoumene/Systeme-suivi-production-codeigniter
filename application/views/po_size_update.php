@@ -1,12 +1,12 @@
 <div class="pull-left breadcrumb_admin clear_both">
     <div class="pull-left page_title theme_color">
-        <h1>PO Size Update</h1>
-        <h2 class="">PO Size Update...</h2>
+        <h1>PO Update</h1>
+        <h2 class="">PO Update...</h2>
     </div>
     <div class="pull-right">
         <ol class="breadcrumb">
             <li><a href="<?php echo base_url();?>">Home</a></li>
-            <li class="active">PO Size Update</li>
+            <li class="active">PO Update</li>
         </ol>
     </div>
 </div>
@@ -16,7 +16,7 @@
         <div class="block-web">
             <div class="header">
                 <div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-                <h3 class="content-header">PO Size Update</h3>
+                <h3 class="content-header">PO Update</h3>
             </div>
         </div>
 
@@ -24,7 +24,7 @@
             <form action="<?php echo base_url();?>access/updatingPoSizeQty" method="post">
                 <div id="row">
                     <div class="col-md-12">
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <div class="form-group">
 
                                 <div style="padding-top:10px">
@@ -75,6 +75,9 @@
                                         <td class="center">
                                             <button class="btn btn-success">UPDATE</button>
                                         </td>
+                                        <td class="center">
+                                            <span class="btn btn-danger" onclick="deletePO()">DELETE</span>
+                                        </td>
                                     </tr>
 
                                     </tbody>
@@ -85,16 +88,64 @@
                 </div>
                 <div id="row">
                     <div class="col-md-12">
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <div class="form-group">
                                 <table class="display table table-bordered table-striped">
                                     <thead>
-                                    <tr>
-                                        <td class="center">Size</td>
-                                        <td class="center">
-                                            Quantity
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td class="center">PO</td>
+                                            <td class="center">
+                                                <input type="text" name="purchase_order" id="purchase_order">
+                                            </td>
+                                            <td class="center">Item</td>
+                                            <td class="center">
+                                                <input type="text" name="item" id="item">
+                                            </td>
+                                            <td class="center">Quality</td>
+                                            <td class="center">
+                                                <input type="text" name="quality" id="quality">
+                                            </td>
+                                            <td class="center">Color</td>
+                                            <td class="center">
+                                                <input type="text" name="color" id="color">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="center">Style No</td>
+                                            <td class="center">
+                                                <input type="text" name="style_no" id="style_no">
+                                            </td>
+                                            <td class="center">Style Name</td>
+                                            <td class="center">
+                                                <input type="text" name="style_name" id="style_name">
+                                            </td>
+                                            <td class="center">Ex-Fac Date</td>
+                                            <td class="center">
+                                                <input type="text" class="form-control-inline input-small default-date-picker" id="ex_fac_date" name="ex_fac_date" required autocomplete="off" />
+                                            </td>
+                                            <td class="center">CRD Date</td>
+                                            <td class="center">
+                                                <input type="text" class="form-control-inline input-small default-date-picker" id="crd_date" name="crd_date" required autocomplete="off" />
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="row">
+                    <div class="col-md-12">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <table class="display table table-bordered table-striped">
+                                    <thead>
+                                        <tr style="font-size: 16px; font-weight: 700;">
+                                            <td class="center">Size</td>
+                                            <td class="center">
+                                                Total Quantity=<span id="total_qty">0</span>
+                                            </td>
+                                        </tr>
                                     </thead>
                                     <tbody id="size_qty">
 
@@ -116,22 +167,98 @@
 
 
     function getPoSizeQty() {
+        $("#purchase_order").val('');
+        $("#item").val('');
+        $("#quality").val('');
+        $("#color").val('');
+        $("#style_no").val('');
+        $("#style_name").val('');
+        $("#ex_fac_date").val('');
+        $("#crd_date").val('');
 
         $("#size_qty").empty();
+        $("#total_qty").empty();
 
         var so_no = $("#so_no").val();
 
-            $.ajax({
-                url: "<?php echo base_url();?>access/getPoSizeQty/",
-                type: "POST",
-                data: {so_no: so_no},
-                dataType: "html",
-                success: function (data) {
-                    $("#size_qty").append(data);
-                }
-            });
+        $.ajax({
+            url: "<?php echo base_url();?>access/getPoSizeQty/",
+            type: "POST",
+            data: {so_no: so_no},
+            dataType: "html",
+            success: function (data) {
+                $("#size_qty").append(data);
+            }
+        });
 
+        $.ajax({
+            url: "<?php echo base_url();?>access/getPoItemDetail/",
+            type: "POST",
+            data: {so_no: so_no},
+            dataType: "json",
+            success: function (data) {
+                var purchase_order = data[0].purchase_order;
+                var item = data[0].item;
+                var quality = data[0].quality;
+                var color = data[0].color;
+                var style_no = data[0].style_no;
+                var style_name = data[0].style_name;
 
+                var ex_factory_dt = data[0].ex_factory_date;
+                var ex_factory_dt_split = ex_factory_dt.split("-");
+                var ex_year = ex_factory_dt_split[0];
+                var ex_month = ex_factory_dt_split[1];
+                var ex_date = ex_factory_dt_split[2];
+                var ex_factory_date = ex_month+"-"+ex_date+"-"+ex_year;
+
+                var crd_dt = data[0].crd_date;
+                var crd_dt_split = crd_dt.split("-");
+                var crd_year = crd_dt_split[0];
+                var crd_month = crd_dt_split[1];
+                var crd_date = crd_dt_split[2];
+                var crd_date = crd_month+"-"+crd_date+"-"+crd_year;
+                var total_order_qty = data[0].order_qty;
+
+                $("#purchase_order").val(purchase_order);
+                $("#item").val(item);
+                $("#quality").val(quality);
+                $("#color").val(color);
+                $("#style_no").val(style_no);
+                $("#style_name").val(style_name);
+                $("#ex_fac_date").val(ex_factory_date);
+                $("#crd_date").val(crd_date);
+
+                $("#total_qty").append(total_order_qty);
+            }
+        });
+
+    }
+
+    function deletePO() {
+        var so_no = $("#so_no").val();
+
+        if(so_no != ''){
+            var result = confirm("Are you sure to delete?");
+
+            if (result) {
+                $.ajax({
+                    url: "<?php echo base_url();?>access/deletePO/",
+                    type: "POST",
+                    data: {so_no: so_no},
+                    dataType: "html",
+                    success: function (data) {
+
+                        if(data == 'done'){
+                            location.reload();
+                        }
+
+                    }
+                });
+            }
+
+        }else{
+            alert("Please Select SO !");
+        }
 
     }
 

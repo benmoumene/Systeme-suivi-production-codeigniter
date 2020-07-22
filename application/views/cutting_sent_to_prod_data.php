@@ -37,7 +37,14 @@
                             <td class="hidden-phone center">
                                 <?php echo $v['purchase_order'] . '-' . $v['item']; ?>
                             </td>
-                            <td class="hidden-phone center"><?php echo $v['planned_lines']; ?></td>
+                            <td class="hidden-phone center">
+                                <?php
+                                $planned_lines = '';
+                                if($v['planned_lines'] != ''){
+                                    $planned_lines = '('.$v['planned_lines'].')';
+                                }
+                                echo $line_name.$planned_lines; ?>
+                            </td>
                             <td class="hidden-phone center"><?php echo $v['brand']; ?></td>
                             <td class="hidden-phone center"><?php echo $v['style_no'] . '-' . $v['style_name']; ?></td>
                             <td class="hidden-phone center"><?php echo $v['quality'] . '-' . $v['color']; ?></td>

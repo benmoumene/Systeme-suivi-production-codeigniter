@@ -68,12 +68,30 @@
                                             <tr>
                                                 <td class="center">SO No *</td>
                                                 <td class="center">
-                                                    <select required id="so_no" name="so_no" onchange="soNoSelectionCheck();">
+                                                    <select style="width: 600px;" required id="so_no" name="so_no" onchange="soNoSelectionCheck();">
                                                         <option value="">Select SO No</option>
-                                                            <?php foreach ($so_nos as $v_s){ ?>
-                                                                <option value="<?php echo $v_s['so_no'];?>"><?php echo $v_s['so_no'];?></option>
-                                                            <?php } ?>
+                                                        <?php
+                                                            $po_type = '';
+                                                            foreach ($so_nos as $v_s){
+                                                                if($v_s['po_type'] == 0){
+                                                                    $po_type='BULK';
+                                                                }
+                                                                if($v_s['po_type'] == 1){
+                                                                    $po_type='SIZE SET';
+                                                                }
+                                                                if($v_s['po_type'] == 2){
+                                                                    $po_type='SAMPLE';
+                                                                }
+                                                            ?>
+
+                                                            <option value="<?php echo $v_s['so_no'];?>"><?php echo $v_s['so_no'].'~'.$v_s['purchase_order'].'~'.$v_s['item'].'~'.$v_s['quality'].'~'.$v_s['color'].'~'.$v_s['style_no'].'~'.$v_s['style_name'].'~'.$v_s['ex_factory_date'].'~'.$po_type;?></option>
+
+                                                        <?php
+                                                            }
+                                                        ?>
                                                     </select>
+                                                    <br />
+                                                    <span id="" style="color: red;">SO~PO~ITEM~QUALITY~COLOR~StyleNo~StyleName~ExFacDate~TYPE</span>
                                                 </td>
                                             </tr>
 

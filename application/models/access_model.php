@@ -5,7 +5,7 @@ class Access_model extends CI_Model {
 
     public function insertingData($tbl, $data)
     {
-	$this->db->INSERT($tbl, $data);
+	    $this->db->INSERT($tbl, $data);
         //return $this->db->insert_id();
     }
 
@@ -17,7 +17,12 @@ class Access_model extends CI_Model {
         $query=  $this->db->get();
         $result=$query->result_array();
         return $result;
+    }
 
+    public function deleteTableData($tbl, $condition_column, $condition_value)
+    {
+        $this->db->where($condition_column, $condition_value);
+        $this->db->delete($tbl);
     }
 
     public function getSegments($time)
@@ -681,9 +686,9 @@ class Access_model extends CI_Model {
     }
 
     public function getSizesBySapNo($sap_no){
-        $sql = "SELECT t1.* FROM (SELECT *, SUM(quantity) as total_qty FROM `vt_po_detail_cutting_dept` 
+        $sql = "SELECT t1.* FROM (SELECT *, SUM(quantity) as total_qty FROM `vt_po_detail_cutting_dept`
                 WHERE po_no='$sap_no' GROUP by po_no, size) as t1
-                INNER JOIN
+                LEFT JOIN
                 `tb_size_serial` as t2
                 ON t1.size=t2.size
                 ORDER BY t2.serial";
@@ -4752,7 +4757,8 @@ class Access_model extends CI_Model {
     }
 
     public function getPoDetail($where){
-        $sql = "SELECT *, sum(quantity) as order_qty FROM `tb_po_detail` 
+        $sql = "SELECT *, sum(quantity) as order_qty 
+                FROM `tb_po_detail` 
                 where 1 $where 
                 GROUP BY so_no, po_no, purchase_order, item, quality, color";
 
