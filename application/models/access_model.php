@@ -2052,6 +2052,15 @@ class Access_model extends CI_Model {
         return $query;
     }
 
+    public function poManualReopen($where){
+        $sql = "UPDATE `tb_care_labels`
+                SET manually_closed=0
+                WHERE 1 $where";
+
+        $query = $this->db->query($sql);
+        return $query;
+    }
+
     public function getUpcomingPoList($where){
         $sql = "SELECT t1.*, t2.total_order_qty FROM 
                 (SELECT po_no, so_no, purchase_order, item, quality, color, style_no, style_name, 

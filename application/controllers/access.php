@@ -12385,6 +12385,25 @@ class Access extends CI_Controller {
 
 //  Manual Closing End
 
+    public function poManualReopen(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $so_no_array = $this->input->post('so_no');
+
+        $so_no = "'" . implode("', '", $so_no_array) . "'";
+
+        $where = '';
+        if($so_no != ''){
+            $where .= " AND so_no IN ($so_no) AND manually_closed=1";
+        }
+
+        $this->access_model->poManualReopen($where);
+
+        echo 'done';
+    }
+
     public function autoDbBackup()
     {
         $this->load->library('zip');

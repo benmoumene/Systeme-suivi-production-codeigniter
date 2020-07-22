@@ -59,11 +59,20 @@
                                     <span style="font-size: 11px;">* SO No.</span>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-1">
                                 <div class="form-group">
                                     <div class="porlets-content">
 
-                                            <button type="submit" id="save_btn" class="btn btn-success"onclick="getPOManualClose()">CLOSE</button>
+                                            <button type="submit" id="save_btn" class="btn btn-danger"onclick="getPOManualClose()">CLOSE</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <div class="porlets-content">
+
+                                        <button type="submit" id="save_btn" class="btn btn-success"onclick="getPOManualReopen()">RE-OPEN</button>
 
                                     </div>
                                 </div>
@@ -103,7 +112,32 @@
                 success: function (data) {
                     if(data == 'done'){
                         $("#loader").css("display", "none");
-                        alert("Manual CLosing Successful!");
+                        alert("Manual Closing Successful!");
+                        location.reload();
+                    }
+                }
+            });
+        }
+
+    }
+
+    function getPOManualReopen(){
+        var so_no = $("#so_no").val();
+
+        console.log(so_no);
+
+        if(so_no != ''){
+            $("#loader").css("display", "block");
+
+            $.ajax({
+                url: "<?php echo base_url();?>access/poManualReopen/",
+                type: "POST",
+                data: {so_no: so_no},
+                dataType: "html",
+                success: function (data) {
+                    if(data == 'done'){
+                        $("#loader").css("display", "none");
+                        alert("PO Re-Open Successful!");
                         location.reload();
                     }
                 }
