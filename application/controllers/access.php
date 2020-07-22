@@ -2136,9 +2136,45 @@ class Access extends CI_Controller {
 
         $po_info = $this->access_model->getPoDetail($where);
 
-//        $maincontent = $this->load->view('po_item_detail', $data);
-
         echo json_encode($po_info);
+    }
+
+    public function getPoDetail(){
+        $so_no = $this->input->post('so_no');
+        $po_no = $this->input->post('po_no');
+        $purchase_order = $this->input->post('purchase_order');
+        $item = $this->input->post('item');
+        $quality = $this->input->post('quality');
+        $color = $this->input->post('color');
+
+        $where = '';
+        if($so_no != ''){
+            $where .= " AND so_no = '$so_no'";
+        }
+
+        if($po_no != ''){
+            $where .= " AND po_no = '$po_no'";
+        }
+
+        if($purchase_order != ''){
+            $where .= " AND purchase_order = '$purchase_order'";
+        }
+
+        if($item != ''){
+            $where .= " AND item = '$item'";
+        }
+
+        if($quality != ''){
+            $where .= " AND quality = '$quality'";
+        }
+
+        if($color != ''){
+            $where .= " AND color = '$color'";
+        }
+
+        $data['po_detail'] = $this->access_model->getPoDetail($where);
+
+        $this->load->view('po_item_detail', $data);
     }
 
     public function washGmtStatus($sap_no, $so_no, $purchase_order, $item, $quality, $color, $status){

@@ -63,7 +63,7 @@
         var color = res[5];
 
         $.ajax({
-            url: "<?php echo base_url();?>access/getPoItemDetail/",
+            url: "<?php echo base_url();?>access/getPoDetail/",
             type: "POST",
             data: {so_no: so_no, po_no: po_no, purchase_order: purchase_order, item: item, quality: quality, color: color},
             dataType: "html",
