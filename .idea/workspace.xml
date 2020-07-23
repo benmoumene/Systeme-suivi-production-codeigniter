@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fdf3a7-84b8-4c03-909e-2a58cce5012a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/dashboard.php" afterPath="$PROJECT_DIR$/application/controllers/dashboard.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reports/po_wise_report_by_ship_date.php" afterPath="$PROJECT_DIR$/application/views/reports/po_wise_report_by_ship_date.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,15 +17,37 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="dashboard.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="dashboard.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/dashboard.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="4637" column="0" lean-forward="true" selection-start-line="4637" selection-start-column="0" selection-end-line="4637" selection-end-column="0" />
+            <state relative-caret-position="268">
+              <caret line="4360" column="82" lean-forward="false" selection-start-line="4360" selection-start-column="55" selection-end-line="4360" selection-end-column="82" />
               <folding>
                 <marker date="1595480906792" expanded="true" signature="40082:40946" ph="..." />
                 <marker date="1595480906792" expanded="true" signature="41612:42622" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="po_wise_report_by_ship_date.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/views/reports/po_wise_report_by_ship_date.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="192">
+              <caret line="121" column="12" lean-forward="true" selection-start-line="121" selection-start-column="12" selection-end-line="121" selection-end-column="12" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ship_date_wise_report.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/reports/ship_date_wise_report.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="431">
+              <caret line="225" column="61" lean-forward="true" selection-start-line="225" selection-start-column="61" selection-end-line="225" selection-end-column="61" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -466,8 +488,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getSizesBySapNo</find>
-      <find>getpo</find>
       <find>getpodetail</find>
       <find>getPoSizeQty</find>
       <find>updateTbl</find>
@@ -496,6 +516,8 @@
       <find>getProductionSummaryReport</find>
       <find>getPoItemWiseRemainCL</find>
       <find>getRemainingCLBySize</find>
+      <find>shipDateWiseReport</find>
+      <find>getShipDateWiseReport()</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -504,7 +526,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/views/reports/daily_sewing_performance_report_by_date.php" />
         <option value="$PROJECT_DIR$/application/views/reprint_by_admin.php" />
         <option value="$PROJECT_DIR$/application/views/po_info_report.php" />
         <option value="$PROJECT_DIR$/application/views/reports/po_wise_packing_report.php" />
@@ -555,6 +576,7 @@
         <option value="$PROJECT_DIR$/application/controllers/access.php" />
         <option value="$PROJECT_DIR$/application/views/po_size_update.php" />
         <option value="$PROJECT_DIR$/application/controllers/dashboard.php" />
+        <option value="$PROJECT_DIR$/application/views/reports/po_wise_report_by_ship_date.php" />
       </list>
     </option>
   </component>
@@ -1653,16 +1675,16 @@
       <workItem from="1595220976694" duration="9004000" />
       <workItem from="1595303834670" duration="1968000" />
       <workItem from="1595387473761" duration="18198000" />
-      <workItem from="1595473610675" duration="4568000" />
+      <workItem from="1595473610675" duration="5908000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5528722000" />
+    <option name="totallyTimeSpent" value="5530062000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17569546" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1696,20 +1718,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/views/delete_cutting.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="29" lean-forward="true" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/login.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="30" column="2" lean-forward="false" selection-start-line="30" selection-start-column="2" selection-end-line="30" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/sms_file_upload_test.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -3194,13 +3202,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/reports/ship_date_wise_report.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="431">
+          <caret line="225" column="61" lean-forward="true" selection-start-line="225" selection-start-column="61" selection-end-line="225" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/dashboard.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="4637" column="0" lean-forward="true" selection-start-line="4637" selection-start-column="0" selection-end-line="4637" selection-end-column="0" />
+        <state relative-caret-position="268">
+          <caret line="4360" column="82" lean-forward="false" selection-start-line="4360" selection-start-column="55" selection-end-line="4360" selection-end-column="82" />
           <folding>
             <marker date="1595480906792" expanded="true" signature="40082:40946" ph="..." />
             <marker date="1595480906792" expanded="true" signature="41612:42622" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/reports/po_wise_report_by_ship_date.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="121" column="12" lean-forward="true" selection-start-line="121" selection-start-column="12" selection-end-line="121" selection-end-column="12" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

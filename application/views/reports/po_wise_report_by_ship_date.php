@@ -2,7 +2,7 @@
 <table class="table table-bordered table-striped" id="" border="1">
     <thead>
     <tr>
-        <th class="hidden-phone center" colspan="21"><h3>Ship Date: <?php echo $ex_factory_date;?></h3></th>
+        <th class="hidden-phone center" colspan="22"><h3>Ship Date: <?php echo $ex_factory_date;?></h3></th>
     </tr>
     <tr>
         <th class="hidden-phone center">SO</th>
