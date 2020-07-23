@@ -234,7 +234,7 @@
                 <li> <a href="javascript:void(0);"> <i class="fa fa-archive"></i> Backup <span class="plus"><i class="fa fa-plus"></i></span></a>
                     <ul>
                         <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/backup_db"><i class="fa fa-circle"></i> Backup DB </a></li>
-                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/autoDbBackup"><i class="fa fa-circle"></i> Prod. Summary Backup </a></li>
+                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/autoDbBackup"><i class="fa fa-circle"></i> Prod. Summary </a></li>
                     </ul>
                 </li>
 

@@ -1217,6 +1217,75 @@ class Access extends CI_Controller {
         echo $tr;
     }
 
+    public function savePONewSizeQty(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $user_id = $this->session->userdata('id');
+
+        $so_no = $this->input->post('so_no');
+        $size = $this->input->post('size');
+        $quantity = $this->input->post('quantity');
+
+        $where = "";
+        if($so_no != ''){
+            $where .= " AND so_no = '$so_no'";
+        }
+
+        $po_detail = $this->access_model->getPoDetail($where);
+
+        $data = array(
+            'po_no' => $po_detail[0]['po_no'],
+            'so_no' => $po_detail[0]['so_no'],
+            'purchase_order' => $po_detail[0]['purchase_order'],
+            'brand' => $po_detail[0]['brand'],
+            'item' => $po_detail[0]['item'],
+            'style_no' => $po_detail[0]['style_no'],
+            'style_name' => $po_detail[0]['style_name'],
+            'quality' => $po_detail[0]['quality'],
+            'color' => $po_detail[0]['color'],
+            'smv' => $po_detail[0]['smv'],
+            'quantity' => $quantity,
+            'size' => $size,
+            'ex_factory_date' => $po_detail[0]['ex_factory_date'],
+            'crd_date' => $po_detail[0]['crd_date'],
+            'created_on' => $date,
+            'u_id' => $user_id,
+            'is_manual_upload' => $po_detail[0]['is_manual_upload'],
+            'upload_date' => $date,
+            'status' => $po_detail[0]['status'],
+            'po_type' => $po_detail[0]['po_type'],
+            'aql_plan_date' => $po_detail[0]['aql_plan_date'],
+            'aql_status' => $po_detail[0]['aql_status'],
+            'aql_action_date' => $po_detail[0]['aql_action_date'],
+            'aql_remarks' => $po_detail[0]['aql_remarks'],
+            'aql_action_by' => $po_detail[0]['aql_action_by']
+        );
+
+        $this->access_model->insertingData('tb_po_detail', $data);
+
+        echo 'done';
+    }
+
+    public function isPoSizeExists(){
+        $so_no = $this->input->post('so_no');
+        $size = $this->input->post('size');
+
+        $where = "";
+        if($so_no != '' && $size != ''){
+            $where .= " AND so_no='$so_no' AND size='$size'";
+        }
+
+        $res = $this->access_model->getPoDetail($where);
+
+        if(sizeof($res) > 0){
+            echo 'yes';
+        }else{
+            echo 'no';
+        }
+    }
+
     public function updatingPoSizeQty(){
         $so_no = $this->input->post('so_no');
         $ids = $this->input->post('id');

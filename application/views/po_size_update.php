@@ -143,7 +143,10 @@
                                         <tr style="font-size: 16px; font-weight: 700;">
                                             <td class="center">Size</td>
                                             <td class="center">
-                                                Total Quantity=<span id="total_qty">0</span>
+                                                Total Quantity = <span id="total_qty">0</span>
+                                                <span class="btn btn-primary" style="margin-left: 80px;" onclick="addNewSizeQTy()">
+                                                    <i class="fa fa-plus"></i> SIZE-QTY
+                                                </span>
                                             </td>
                                         </tr>
                                     </thead>
@@ -161,6 +164,43 @@
 
     </div><!--/col-md-12-->
 </div><!--/row-->
+
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel1">New Size-Qty</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="col-md-12">
+                    <div class="porlets-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-2">Size <span style="color: red;"></span></div>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" name="new_size" id="new_size" onblur="isSizeExists()">
+                                </div>
+
+                                <div class="col-md-2">Quantity <span style="color: red;"></span></div>
+                                <div class="col-md-4">
+                                    <input type="number" class="form-control" name="new_size_quantity" id="new_size_quantity">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <span class="btn btn-success" onclick="saveNewSizeQty()">SAVE</span>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 <script type="text/javascript">
     $('#so_no').select2();
@@ -258,6 +298,77 @@
 
         }else{
             alert("Please Select SO !");
+        }
+
+    }
+    
+    function addNewSizeQTy() {
+        var so_no = $("#so_no").val();
+        if(so_no != ''){
+            $('#myModal3').modal('show');
+        }else{
+            alert("Please Select SO");
+        }
+    }
+
+    function isSizeExists() {
+        var so_no = $("#so_no").val();
+        var new_size = $("#new_size").val();
+
+        if(so_no != '' && new_size != ''){
+            $.ajax({
+                url: "<?php echo base_url();?>access/isPoSizeExists/",
+                type: "POST",
+                data: {so_no: so_no, size: new_size},
+                dataType: "html",
+                success: function (data) {
+
+                    if(data == 'yes'){
+                        $("#new_size").css('border-color', 'red');
+                        $("#new_size").val('');
+                    }
+
+                }
+            });
+        }
+    }
+
+    function saveNewSizeQty() {
+        var so_no = $("#so_no").val();
+        var new_size = $("#new_size").val();
+
+        var new_size_quantity = $("#new_size_quantity").val();
+        new_size_quantity = (new_size_quantity != '' ? new_size_quantity : 0);
+
+        if(new_size != '' && new_size_quantity > 0){
+
+            $.ajax({
+                url: "<?php echo base_url();?>access/savePONewSizeQty/",
+                type: "POST",
+                data: {so_no: so_no, size: new_size, quantity: new_size_quantity},
+                dataType: "html",
+                success: function (data) {
+
+                    if(data == 'done'){
+                        getPoSizeQty();
+                        $("#new_size").val('');
+                        $("#new_size_quantity").val('');
+                        $("#new_size").css('border-color', '');
+                        $("#new_size_quantity").css('border-color', '');
+                        $('#myModal3').modal('hide');
+                    }
+
+                }
+            });
+
+        }else{
+            if(new_size == ''){
+                $("#new_size").css('border-color', 'red');
+            }
+
+            if(new_size_quantity == 0){
+                $("#new_size_quantity").css('border-color', 'red');
+            }
         }
 
     }
