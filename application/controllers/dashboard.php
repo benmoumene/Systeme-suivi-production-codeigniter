@@ -4634,7 +4634,7 @@ class Dashboard extends CI_Controller {
             $where .= " AND t1.color = '$color'";
         }
 
-        $where .= " AND t1.carton_status=0 AND t1.warehouse_qa_type=0";
+        $where .= " AND t1.carton_status=0 AND t1.warehouse_qa_type=0 AND t1.manually_closed=0";
 
         $get_data['remain_pcs'] = $this->dashboard_model->getRemainingCLBySize($where);
 
