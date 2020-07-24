@@ -3353,6 +3353,25 @@ class Dashboard extends CI_Controller {
         $where = '';
 
 //        $data['cut_wip_report'] = $this->dashboard_model->getCuttingReportForChart($date);
+
+        $this->load->view('reports/line_wip_graph_report', $data);
+    }
+
+    public function tableWiseLayCutReport(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $data['table_report'] = $this->dashboard_model->cuttingTableWiseDailyReport($date);
+
+        $this->load->view('reports/table_wise_lay_cut_report', $data);
+    }
+
+    public function layCutPackageReadySummaryReport(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
         $data['cut_ready_package'] = $this->dashboard_model->getCuttingReadyPackageQty();
         $data['today_no_of_marker'] = $this->dashboard_model->getTodayNumberOfMarker($date);
         $data['today_no_of_garments'] = $this->dashboard_model->getTodayNumberOfGarment($date);
@@ -3360,27 +3379,31 @@ class Dashboard extends CI_Controller {
         $data['today_cut'] = $this->dashboard_model->getTodayCutQty($date);
         $data['lay_qty'] = $this->dashboard_model->getLayQty();
 
-//        SOLID STYLE CUTTING REPORT
-        $data['today_no_of_marker_solid'] = $this->dashboard_model->getTodayNumberOfMarkerByStyleType($date, 1);
-        $data['today_no_of_garments_solid'] = $this->dashboard_model->getTodayNumberOfGarmentByStyleType($date, 1);
-        $data['today_cut_solid'] = $this->dashboard_model->getTodayCutQtyByStyleType($date, 1);
-        $data['lay_qty_solid'] = $this->dashboard_model->getLayQtyByStyleType(1);
+        $this->load->view('reports/lay_cut_package_summary_report', $data);
+    }
 
-//        CHECK STYLE CUTTING REPORT
-        $data['today_no_of_marker_check'] = $this->dashboard_model->getTodayNumberOfMarkerByStyleType($date, 2);
-        $data['today_no_of_garments_check'] = $this->dashboard_model->getTodayNumberOfGarmentByStyleType($date, 2);
-        $data['today_cut_check'] = $this->dashboard_model->getTodayCutQtyByStyleType($date, 2);
-        $data['lay_qty_check'] = $this->dashboard_model->getLayQtyByStyleType(2);
+    public function getStyleTypeWiseCuttingReport(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
 
-//        PRINT STYLE CUTTING REPORT
-        $data['today_no_of_marker_print'] = $this->dashboard_model->getTodayNumberOfMarkerByStyleType($date, 3);
-        $data['today_no_of_garments_print'] = $this->dashboard_model->getTodayNumberOfGarmentByStyleType($date, 3);
-        $data['today_cut_print'] = $this->dashboard_model->getTodayCutQtyByStyleType($date, 3);
-        $data['lay_qty_print'] = $this->dashboard_model->getLayQtyByStyleType(3);
+//        START MARKER REPORT STYLE TYPE WISE (SOLID=1, CHECK=2, PRINT=3)
+        $data['today_no_of_marker'] = $this->dashboard_model->getLayQtyByStyleType();
+//        END MARKER REPORT STYLE TYPE WISE (SOLID=1, CHECK=2, PRINT=3)
 
-        $data['table_report'] = $this->dashboard_model->cuttingTableWiseDailyReport($date);
+//        START GARMENTS/RATIO REPORT STYLE TYPE WISE (SOLID=1, CHECK=2, PRINT=3)
+        $data['today_no_of_garments'] = $this->dashboard_model->getTodayNumberOfGarmentByStyleType($date);
+//        END GARMENTS/RATIO REPORT STYLE TYPE WISE (SOLID=1, CHECK=2, PRINT=3)
 
-        $this->load->view('reports/line_wip_graph_report', $data);
+//        START CUT REPORT STYLE TYPE WISE (SOLID=1, CHECK=2, PRINT=3)
+        $data['today_cut'] = $this->dashboard_model->getTodayCutQtyByStyleType($date);
+//        END CUT REPORT STYLE TYPE WISE (SOLID=1, CHECK=2, PRINT=3)
+
+//        START LAY REPORT STYLE TYPE WISE (SOLID=1, CHECK=2, PRINT=3)
+        $data['lay_qty'] = $this->dashboard_model->getLayQtyByStyleType();
+//        END LAY REPORT STYLE TYPE WISE (SOLID=1, CHECK=2, PRINT=3)
+
+        $this->load->view('reports/style_type_wise_cutting_report', $data);
     }
 
     public function viewClDefects($pc_tracking_no, $line_id, $access_point){

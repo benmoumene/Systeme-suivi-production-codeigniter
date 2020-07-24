@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="refresh" content="300">
+<!--    <meta http-equiv="refresh" content="300">-->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title><?php echo $title ?></title>
     <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/images/favicon.ico" type="image/x-icon" />
@@ -27,6 +27,30 @@
         th, td {
             padding: 2px;
         }
+
+        /* Loader Style Start */
+
+        .loader {
+            border: 20px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 20px solid #3498db;
+            width: 35px;
+            height: 35px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Loader Style End */
     </style>
 </head>
 <!--<body class="light_theme  fixed_header left_nav_fixed">-->
@@ -34,30 +58,8 @@
 <div class="row center">
     <div class="col-md-12">
 <!--        <div class="col-md-1"></div>-->
-            <div class="col-md-12">
-                <table border="1" width="100%">
-                    <thead>
-                        <tr style="background-color: rgba(159,255,154,0.41)">
-                            <th class="text-center"><span style="font-size: 25px;">LAY WIP</span></th>
-                            <th class="text-center"><span style="font-size: 25px;">TODAY CUT</span></th>
-                            <th class="text-center"><span style="font-size: 25px;">MARKER</span></th>
-                            <th class="text-center"><span style="font-size: 25px;">RATIO</span></th>
-                            <th class="text-center" title="Today Ready Package"><span style="font-size: 25px;">TODAY PACKAGE(STOCK)</span></th>
-                            <th class="text-center" title="Total Ready Package"><span style="font-size: 25px;">TOTAL PACKAGE(STOCK)</span></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th class="text-center"><span style="font-size: 22px;"><?php echo ($lay_qty[0]['total_lay_qty'] != '' ? $lay_qty[0]['total_lay_qty'] : 0);?></span></th>
-                            <th class="text-center"><span style="font-size: 22px;"><?php echo ($today_cut[0]['today_cut_qty'] != '' ? $today_cut[0]['today_cut_qty'] : 0);?></span></th>
-                            <th class="text-center"><span style="font-size: 22px;"><?php echo ($today_no_of_marker[0]['total_no_of_marker_qty'] != '' ? $today_no_of_marker[0]['total_no_of_marker_qty'] : 0);?></span></th>
-                            <th class="text-center"><span style="font-size: 22px;"><?php echo ($today_no_of_garments[0]['total_no_of_garments'] != '' ? $today_no_of_garments[0]['total_no_of_garments'] : 0);?></span></th>
-                            <th class="text-center"><span style="font-size: 22px;"><?php echo ($today_cut_ready_package[0]['today_package_ready_qty'] != '' ? $today_cut_ready_package[0]['today_package_ready_qty'] : 0);?></span></th>
-                            <th class="text-center"><span style="font-size: 22px;"><?php echo ($cut_ready_package[0]['cut_ready_qty'] != '' ? $cut_ready_package[0]['cut_ready_qty'] : 0);?></span></th>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <div id="loader" style="display: none;"><div class="loader"></div></div>
+            <div class="col-md-12" id="chartContainer"></div>
 <!--        <div class="col-md-1"></div>-->
     </div>
 </div>
@@ -65,128 +67,12 @@
 <div class="row center">
     <div class="col-md-12">
         <div class="col-md-8">
-            <div id="chartContainer" style="height: 400px; width: 100%;"></div>
+            <div id="loader_1" style="display: none;"><div class="loader"></div></div>
+            <div id="chartContainer_1" style="height: 400px; width: 100%;"></div>
         </div>
         <div class="col-md-4">
-            <div id="chartContainer_1" style="height: 400px; width: 100%;">
-                <table>
-                    <thead>
-                    <tr style="background-color: rgba(179,238,255,0.88)">
-                        <th class="text-center" colspan="4"><span style="font-size: 28px;">STYLE TYPE WISE REPORT</span></th>
-                    </tr>
-                </table>
-                <table>
-                    <thead>
-                        <tr style="background-color: rgba(112,255,86,0.88)">
-                            <th class="text-center" colspan="4"><span style="font-size: 22px;">CHECK</span></th>
-                        </tr>
-                        <tr>
-                            <th class="text-center"><span style="font-size: 20px;">LAY WIP</span></th>
-                            <th class="text-center"><span style="font-size: 20px;">CUT</span></th>
-                            <th class="text-center"><span style="font-size: 20px;">MARKER</span></th>
-                            <th class="text-center"><span style="font-size: 20px;">RATIO</span></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-center">
-                                <span style="font-size: 18px;">
-                                    <?php echo ($lay_qty_check[0]['total_lay_qty'] != '' ? $lay_qty_check[0]['total_lay_qty'] : 0);?>
-                                </span>
-                            </td>
-                            <td class="text-center">
-                                <span style="font-size: 18px;">
-                                    <?php echo ($today_cut_check[0]['today_cut_qty'] != '' ? $today_cut_check[0]['today_cut_qty'] : 0);?>
-                                </span>
-                            </td>
-                            <td class="text-center">
-                                <span style="font-size: 18px;">
-                                    <?php echo ($today_no_of_marker_check[0]['total_no_of_marker_qty'] != '' ? $today_no_of_marker_check[0]['total_no_of_marker_qty'] : 0);?>
-                                </span>
-                            </td>
-                            <td class="text-center">
-                                <span style="font-size: 18px;">
-                                    <?php echo ($today_no_of_garments_check[0]['total_no_of_garments'] != '' ? $today_no_of_garments_check[0]['total_no_of_garments'] : 0);?>
-                                </span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table>
-                    <thead>
-                        <tr style="background-color: rgba(112,255,86,0.88)">
-                            <th class="text-center" colspan="4"><span style="font-size: 22px;">SOLID</span></th>
-                        </tr>
-                        <tr>
-                            <th class="text-center"><span style="font-size: 20px;">LAY WIP</span></th>
-                            <th class="text-center"><span style="font-size: 20px;">CUT</span></th>
-                            <th class="text-center"><span style="font-size: 20px;">MARKER</span></th>
-                            <th class="text-center"><span style="font-size: 20px;">RATIO</span></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-center">
-                                <span style="font-size: 18px;">
-                                    <?php echo ($lay_qty_solid[0]['total_lay_qty'] != '' ? $lay_qty_solid[0]['total_lay_qty'] : 0);?>
-                                </span>
-                            </td>
-                            <td class="text-center">
-                                <span style="font-size: 18px;">
-                                    <?php echo ($today_cut_solid[0]['today_cut_qty'] != '' ? $today_cut_solid[0]['today_cut_qty'] : 0);?>
-                                </span>
-                            </td>
-                            <td class="text-center">
-                                <span style="font-size: 18px;">
-                                    <?php echo ($today_no_of_marker_solid[0]['total_no_of_marker_qty'] != '' ? $today_no_of_marker_solid[0]['total_no_of_marker_qty'] : 0);?>
-                                </span>
-                            </td>
-                            <td class="text-center">
-                                <span style="font-size: 18px;">
-                                    <?php echo ($today_no_of_garments_solid[0]['total_no_of_garments'] != '' ? $today_no_of_garments_solid[0]['total_no_of_garments'] : 0);?>
-                                </span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table>
-                    <thead>
-                        <tr style="background-color: rgba(112,255,86,0.88)">
-                            <th class="text-center" colspan="4"><span style="font-size: 22px;">PRINT</span></th>
-                        </tr>
-                        <tr>
-                            <th class="text-center"><span style="font-size: 20px;">LAY WIP</span></th>
-                            <th class="text-center"><span style="font-size: 20px;">CUT</span></th>
-                            <th class="text-center"><span style="font-size: 20px;">MARKER</span></th>
-                            <th class="text-center"><span style="font-size: 20px;">RATIO</span></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-center">
-                                <span style="font-size: 18px;">
-                                    <?php echo ($lay_qty_print[0]['total_lay_qty'] != '' ? $lay_qty_print[0]['total_lay_qty'] : 0);?>
-                                </span>
-                            </td>
-                            <td class="text-center">
-                                <span style="font-size: 18px;">
-                                    <?php echo ($today_cut_print[0]['today_cut_qty'] != '' ? $today_cut_print[0]['today_cut_qty'] : 0);?>
-                                </span>
-                            </td>
-                            <td class="text-center">
-                                <span style="font-size: 18px;">
-                                    <?php echo ($today_no_of_marker_print[0]['total_no_of_marker_qty'] != '' ? $today_no_of_marker_print[0]['total_no_of_marker_qty'] : 0);?>
-                                </span>
-                            </td>
-                            <td class="text-center">
-                                <span style="font-size: 18px;">
-                                    <?php echo ($today_no_of_garments_print[0]['total_no_of_garments'] != '' ? $today_no_of_garments_print[0]['total_no_of_garments'] : 0);?>
-                                </span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <div id="loader_2" style="display: none;"><div class="loader"></div></div>
+            <div id="chartContainer_2" style="height: 400px; width: 100%;"></div>
         </div>
     </div>
 </div>
@@ -196,179 +82,138 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 </body>
 
 </html>
 
 <script type="text/javascript">
+
     $(document).ready(function(){
-        setInterval(function() {
-            window.location.reload();
+//        setInterval(function() {
+//            window.location.reload();
+//        }, 300000);
+
+        $("#loader").css("display", "block");
+        $("#loader_1").css("display", "block");
+        $("#loader_2").css("display", "block");
+
+        $.ajax({
+            url: "<?php echo base_url();?>dashboard/layCutPackageReadySummaryReport/",
+            type: "POST",
+            data: {},
+            dataType: "html",
+            success: function (data) {
+                $("#chartContainer").empty();
+                $("#chartContainer").append(data);
+                $("#loader").css("display", "none");
+            }
+        });
+
+        $("#chartContainer_1").load('<?php echo base_url();?>dashboard/tableWiseLayCutReport/');
+
+        setInterval(function(){
+            var isEmptywip = $("#chartContainer_1").html() === "";
+
+            if(isEmptywip == false){
+                $("#loader_1").css("display", "none");
+            }
+        }, 1000);
+
+        $.ajax({
+            url: "<?php echo base_url();?>dashboard/getStyleTypeWiseCuttingReport/",
+            type: "POST",
+            data: {},
+            dataType: "html",
+            success: function (data) {
+                $("#chartContainer_2").empty();
+                $("#chartContainer_2").append(data);
+                $("#loader_2").css("display", "none");
+            }
+        });
+
+        setInterval(function(){
+            $("#chartContainer").load('<?php echo base_url();?>dashboard/layCutPackageReadySummaryReport');
+            $("#loader").css("display", "none");
+            $("#chartContainer_1").load('<?php echo base_url();?>dashboard/tableWiseLayCutReport');
+            $("#loader_1").css("display", "none");
+            $("#chartContainer_2").load('<?php echo base_url();?>dashboard/getStyleTypeWiseCuttingReport');
+            $("#loader_2").css("display", "none");
+
         }, 300000);
+
     });
 
-    window.onload = function () {
-
-        var chart = new CanvasJS.Chart("chartContainer",
-            {
-                animationEnabled: true,
-                title: {
-                    text: "CUT TABLE REPORT: <?php echo $date;?>"
-                },
-                dataPointWidth: 30,
-                axisX: {
-                    valueFormatString: "",
-                    labelFontSize: 25
-                },
-                axisY: {
-                    prefix: "",
-                },
-//            toolTip: {
-//                shared: true
-//            },
-                legend: {
-                    cursor: "pointer"
-                },
-                data: [
-                    {
-                        type: "column",
-                        name: "LAY WIP",
-                        showInLegend: true,
-                        color: "#d8cf27",
-                        indexLabelFontSize: 25,
-                        indexLabelOrientation: "vertical",
-                        xValueFormatString: "LAY WIP",
-                        yValueFormatString: "#,##0",
-                        dataPoints: [
-
-                            <?php foreach ($table_report as $k_1 => $v_1){
-
-                            $balance_to_cut_qty = ($v_1['balance_to_cut_qty'] != '' ? $v_1['balance_to_cut_qty'] : 0);
-
-                            ?>
-                            { label: "<?php echo $v_1['table_name'];?>", y: <?php echo $balance_to_cut_qty;?>, indexLabel: "<?php echo $balance_to_cut_qty;?>" },
-                            <?php } ?>
-
-                        ]
-                    },
-                    {
-                        type: "column",
-                        name: "CUT",
-                        showInLegend: true,
-                        color: "#62a4d8",
-                        indexLabelFontSize: 25,
-                        indexLabelOrientation: "vertical",
-                        xValueFormatString: "CUT",
-                        yValueFormatString: "##0",
-                        dataPoints: [
-
-                            <?php foreach ($table_report as $k_1 => $v_1){
-
-                            $cut_complete_qty = ($v_1['cut_complete_qty'] != '' ? $v_1['cut_complete_qty'] : 0);
-
-                            ?>
-                            { label: "<?php echo $v_1['table_name'];?>", y: <?php echo $cut_complete_qty;?>, indexLabel: "<?php echo $v_1['cut_complete_qty'];?>" },
-                            <?php } ?>
-
-                        ]
-                    }
-
-                ]
-            });
-
-        chart.render();
-
-//        Line WIP Report Start
-//        var chart_1 = new CanvasJS.Chart("chartContainer_1",
+//    window.onload = function () {
+//
+//        var chart = new CanvasJS.Chart("chartContainer_1",
 //            {
 //                animationEnabled: true,
-//                title:{
-//                    text: "LINE WIP REPORT"
+//                title: {
+//                    text: "CUT TABLE REPORT: <?php //echo $date;?>//"
 //                },
-//                axisY:{
-//                    title: "QTY",
-//                    tickLength: 0,
-//                    lineThickness:0,
-//                    margin:0,
-//                    valueFormatString:" " //comment this to show numeric values
+//                dataPointWidth: 30,
+//                axisX: {
+//                    valueFormatString: "",
+//                    labelFontSize: 25
 //                },
-//                axisX:{
-//                    title: "Line",
-//                    interval:1,
-//                    labelMaxWidth: 100,
-//                    labelAngle: 0,
-//                    labelFontSize: 16,
-//                    labelFontWeight: "bold"
+//                axisY: {
+//                    prefix: "",
 //                },
-//
-//                toolTip: {
-//                    shared: true
-//                },
-//
+////            toolTip: {
+////                shared: true
+////            },
 //                legend: {
-//                    cursor:"pointer"
+//                    cursor: "pointer"
 //                },
-//
-//                dataPointWidth: 20,
-//
 //                data: [
-//
 //                    {
 //                        type: "column",
+//                        name: "LAY WIP",
 //                        showInLegend: true,
-////                        color: "#ff1000",
-//                        color: "#ffbf00",
-//                        name: "Line WIP",
-//                        indexLabel: "{y}",
+//                        color: "#d8cf27",
+//                        indexLabelFontSize: 25,
+//                        indexLabelOrientation: "vertical",
+//                        xValueFormatString: "LAY WIP",
+//                        yValueFormatString: "#,##0",
 //                        dataPoints: [
-//                            <?php
 //
-//                            foreach ($cut_wip_report as $v_w)
-//                            {
-//                                $line_id = $v_w['line_id'];
-//                                $line_name = $v_w['line_code'];
+//                            <?php //foreach ($table_report as $k_1 => $v_1){
 //
+//                            $balance_to_cut_qty = ($v_1['balance_to_cut_qty'] != '' ? $v_1['balance_to_cut_qty'] : 0);
 //
-//                                $count_qty_line = ($v_w['wip'] != '' ? $v_w['wip'] : 0);
-//
-//
-////                                $line_input_date = $v['line_input_date'];
-//
-//                                echo "{label: '$line_name', y: $count_qty_line },";
-//                            }
 //                            ?>
+//                            { label: "<?php //echo $v_1['table_name'];?>//", y: <?php //echo $balance_to_cut_qty;?>//, indexLabel: "<?php //echo $balance_to_cut_qty;?>//" },
+//                            <?php //} ?>
+//
 //                        ]
 //                    },
 //                    {
 //                        type: "column",
+//                        name: "CUT",
 //                        showInLegend: true,
-////                        color: "#ff1000",
-//                        color: "#4dbcfa",
-//                        name: "Line Super Market",
-//                        indexLabel: "{y}",
+//                        color: "#62a4d8",
+//                        indexLabelFontSize: 25,
+//                        indexLabelOrientation: "vertical",
+//                        xValueFormatString: "CUT",
+//                        yValueFormatString: "##0",
 //                        dataPoints: [
-//                            <?php
-//                            foreach ($cut_wip_report as $v)
-//                            {
-//                                $line_id = $v['line_id'];
-//                                $line_name = $v['line_code'];
 //
-//                                $count_super_market = ($v['cut_sew_ready_qty'] != '' ? $v['cut_sew_ready_qty'] : 0);
+//                            <?php //foreach ($table_report as $k_1 => $v_1){
 //
-////                                $line_input_date = $v['line_input_date'];
+//                            $cut_complete_qty = ($v_1['cut_complete_qty'] != '' ? $v_1['cut_complete_qty'] : 0);
 //
-//                                echo "{label: '$line_name', y: $count_super_market, },";
-//                            }
 //                            ?>
+//                            { label: "<?php //echo $v_1['table_name'];?>//", y: <?php //echo $cut_complete_qty;?>//, indexLabel: "<?php //echo $v_1['cut_complete_qty'];?>//" },
+//                            <?php //} ?>
+//
 //                        ]
 //                    }
 //
 //                ]
-//
 //            });
 //
-//        chart_1.render();
-
-//        Line WIP Report End
-    }
+//        chart.render();
+//
+//    }
 </script>

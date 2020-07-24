@@ -91,11 +91,27 @@ class Dashboard_model extends CI_Model {
     }
 
     public function getTodayNumberOfMarkerByStyleType($date, $style_type){
-        $sql = "SELECT COUNT(t1.cut_tracking_no) AS total_no_of_marker_qty 
-                FROM (SELECT cut_tracking_no FROM `tb_cut_summary` 
+//        $sql = "SELECT COUNT(t1.cut_tracking_no) AS total_no_of_marker_qty
+//                FROM (SELECT cut_tracking_no FROM `tb_cut_summary`
+//                WHERE DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d')='$date'
+//                AND style_type=$style_type
+//                GROUP BY cut_tracking_no) AS t1";
+
+        $sql = "SELECT 
+                (SELECT COUNT(cut_tracking_no) FROM `tb_cut_summary` 
                 WHERE DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d')='$date' 
-                AND style_type=$style_type
-                GROUP BY cut_tracking_no) AS t1";
+                AND style_type=1
+                GROUP BY cut_tracking_no) AS total_no_of_marker_solid_qty,
+                
+                (SELECT COUNT(cut_tracking_no) FROM `tb_cut_summary` 
+                WHERE DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d')='$date' 
+                AND style_type=2
+                GROUP BY cut_tracking_no) AS total_no_of_marker_check_qty,
+                
+                (SELECT COUNT(cut_tracking_no) FROM `tb_cut_summary` 
+                WHERE DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d')='$date' 
+                AND style_type=3
+                GROUP BY cut_tracking_no) AS total_no_of_marker_print_qty";
 
         $query = $this->db->query($sql)->result_array();
         return $query;
@@ -113,12 +129,31 @@ class Dashboard_model extends CI_Model {
     }
 
     public function getTodayNumberOfGarmentByStyleType($date, $style_type){
-        $sql = "SELECT COUNT(t1.po_no) AS total_no_of_garments FROM 
-                (SELECT po_no
-                 FROM `tb_cut_summary` 
-                 WHERE DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d')='$date'
-                 AND style_type=$style_type
-                 GROUP BY po_no, cut_no, size, cut_layer) AS t1";
+//        $sql = "SELECT COUNT(t1.po_no) AS total_no_of_garments FROM
+//                (SELECT po_no
+//                 FROM `tb_cut_summary`
+//                 WHERE DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d')='$date'
+//                 AND style_type=$style_type
+//                 GROUP BY po_no, cut_no, size, cut_layer) AS t1";
+
+        $sql = "SELECT 
+                (SELECT COUNT(po_no)
+                FROM `tb_cut_summary` 
+                WHERE DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d')='$date'
+                AND style_type=1
+                GROUP BY po_no, cut_no, size, cut_layer) AS total_no_of_garments_solid,
+                
+                (SELECT COUNT(po_no)
+                FROM `tb_cut_summary` 
+                WHERE DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d')='$date'
+                AND style_type=2
+                GROUP BY po_no, cut_no, size, cut_layer) AS total_no_of_garments_check,
+                
+                (SELECT COUNT(po_no)
+                FROM `tb_cut_summary` 
+                WHERE DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d')='$date'
+                AND style_type=3
+                GROUP BY po_no, cut_no, size, cut_layer) AS total_no_of_garments_print";
 
         $query = $this->db->query($sql)->result_array();
         return $query;
@@ -148,11 +183,30 @@ class Dashboard_model extends CI_Model {
 
     public function getTodayCutQtyByStyleType($date, $style_type){
 
-        $sql = "SELECT SUM(cut_qty) as today_cut_qty 
+//        $sql = "SELECT SUM(cut_qty) as today_cut_qty
+//                FROM `tb_cut_summary`
+//                WHERE is_cutting_complete=1
+//                AND DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d') = '$date'
+//                AND style_type=$style_type";
+
+        $sql = "SELECT 
+                (SELECT SUM(cut_qty)
                 FROM `tb_cut_summary` 
                 WHERE is_cutting_complete=1 
                 AND DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d') = '$date'
-                AND style_type=$style_type";
+                AND style_type=1) AS today_cut_solid_qty,
+                
+                (SELECT SUM(cut_qty)
+                FROM `tb_cut_summary` 
+                WHERE is_cutting_complete=1 
+                AND DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d') = '$date'
+                AND style_type=2) AS today_cut_check_qty,
+                
+                (SELECT SUM(cut_qty)
+                FROM `tb_cut_summary` 
+                WHERE is_cutting_complete=1 
+                AND DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d') = '$date'
+                AND style_type=3) AS today_cut_print_qty";
 
         $query = $this->db->query($sql)->result_array();
         return $query;
@@ -170,10 +224,15 @@ class Dashboard_model extends CI_Model {
 
     public function getLayQtyByStyleType($style_type){
 
-        $sql = "SELECT SUM(cut_qty) as total_lay_qty
-                FROM `tb_cut_summary` 
-                WHERE is_lay_complete=1 AND is_cutting_complete=0 
-                AND style_type=$style_type";
+//        $sql = "SELECT SUM(cut_qty) as total_lay_qty
+//                FROM `tb_cut_summary`
+//                WHERE is_lay_complete=1 AND is_cutting_complete=0
+//                AND style_type=$style_type";
+
+        $sql = "SELECT 
+                (SELECT SUM(cut_qty) FROM `tb_cut_summary` WHERE is_lay_complete=1 AND is_cutting_complete=0 AND style_type=1) AS  total_lay_qty_solid,
+                (SELECT SUM(cut_qty) FROM `tb_cut_summary` WHERE is_lay_complete=1 AND is_cutting_complete=0 AND style_type=2) AS  total_lay_qty_check,
+                (SELECT SUM(cut_qty) FROM `tb_cut_summary` WHERE is_lay_complete=1 AND is_cutting_complete=0 AND style_type=3) AS  total_lay_qty_print";
 
         $query = $this->db->query($sql)->result_array();
         return $query;
