@@ -3340,7 +3340,7 @@ class Dashboard extends CI_Controller {
     }
 
     public function cutPackageReportChart(){
-        $data['title'] = 'Cut Package Report';
+        $data['title'] = 'Cutting Dashboard';
 
         $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
 
@@ -3362,9 +3362,21 @@ class Dashboard extends CI_Controller {
         $date_time=$datex->format('Y-m-d H:i:s');
         $date=$datex->format('Y-m-d');
 
+        $data['date'] = $date;
         $data['table_report'] = $this->dashboard_model->cuttingTableWiseDailyReport($date);
 
         $this->load->view('reports/table_wise_lay_cut_report', $data);
+    }
+
+    public function getCuttingTargetVsAchievementReport(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $data['date'] = $date;
+        $data['cut_target_actual'] = $this->dashboard_model->getCuttingTargetVsAchievementReport($date);
+
+        $this->load->view('reports/cutting_target_vs_actual_report', $data);
     }
 
     public function layCutPackageReadySummaryReport(){
@@ -3372,12 +3384,14 @@ class Dashboard extends CI_Controller {
         $date_time=$datex->format('Y-m-d H:i:s');
         $date=$datex->format('Y-m-d');
 
-        $data['cut_ready_package'] = $this->dashboard_model->getCuttingReadyPackageQty();
-        $data['today_no_of_marker'] = $this->dashboard_model->getTodayNumberOfMarker($date);
-        $data['today_no_of_garments'] = $this->dashboard_model->getTodayNumberOfGarment($date);
-        $data['today_cut_ready_package'] = $this->dashboard_model->getTodayPackageReadyQty($date);
-        $data['today_cut'] = $this->dashboard_model->getTodayCutQty($date);
-        $data['lay_qty'] = $this->dashboard_model->getLayQty();
+//        $data['cut_ready_package'] = $this->dashboard_model->getCuttingReadyPackageQty();
+//        $data['today_no_of_marker'] = $this->dashboard_model->getTodayNumberOfMarker($date);
+//        $data['today_no_of_garments'] = $this->dashboard_model->getTodayNumberOfGarment($date);
+//        $data['today_cut_ready_package'] = $this->dashboard_model->getTodayPackageReadyQty($date);
+//        $data['today_cut'] = $this->dashboard_model->getTodayCutQty($date);
+//        $data['lay_qty'] = $this->dashboard_model->getLayQty();
+
+        $data['cut_dashboard_report'] = $this->dashboard_model->getCuttingDashboardReport($date);
 
         $this->load->view('reports/lay_cut_package_summary_report', $data);
     }
@@ -3388,7 +3402,7 @@ class Dashboard extends CI_Controller {
         $date=$datex->format('Y-m-d');
 
 //        START MARKER REPORT STYLE TYPE WISE (SOLID=1, CHECK=2, PRINT=3)
-        $data['today_no_of_marker'] = $this->dashboard_model->getLayQtyByStyleType();
+        $data['today_no_of_marker'] = $this->dashboard_model->getTodayNumberOfMarkerByStyleType($date);
 //        END MARKER REPORT STYLE TYPE WISE (SOLID=1, CHECK=2, PRINT=3)
 
 //        START GARMENTS/RATIO REPORT STYLE TYPE WISE (SOLID=1, CHECK=2, PRINT=3)
@@ -3404,6 +3418,27 @@ class Dashboard extends CI_Controller {
 //        END LAY REPORT STYLE TYPE WISE (SOLID=1, CHECK=2, PRINT=3)
 
         $this->load->view('reports/style_type_wise_cutting_report', $data);
+    }
+
+    public function getBuyerWiseCuttingReport(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $data['date'] = $date;
+        $data['cutting_buyers'] = $this->dashboard_model->getCuttingReportBuyers($date);
+
+//        $data['buyer_cut_dashboard_report'] = $this->dashboard_model->getBuyerWiseCuttingDashboardReport($date);
+
+        $this->load->view('reports/buyer_wise_cutting_report', $data);
+    }
+
+    public function getBuyerWiseCuttingDashboardReport($brand){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        return $this->dashboard_model->getBuyerWiseCuttingDashboardReport($date, $brand);
     }
 
     public function viewClDefects($pc_tracking_no, $line_id, $access_point){
@@ -3791,6 +3826,16 @@ class Dashboard extends CI_Controller {
         $data['hours'] = $this->access_model->getHours();
         $data['lines'] = $this->access_model->getLines();
         $data['floors'] = $this->access_model->getFloors();
+
+        $where = '';
+        if($time != ''){
+            $where .= " AND '$time' between start_time AND end_time";
+        }
+
+        $present_hour_to_second = round($min / 60, 2);
+
+        $present_hour = $this->access_model->getHours($where);
+        $data['working_hour'] = ($present_hour[0]['hour'] - 1) + $present_hour_to_second;
 
         $data['maincontent'] = $this->load->view('reports/line_hourly_report', $data);
 //        $this->load->view('reports/master', $data);

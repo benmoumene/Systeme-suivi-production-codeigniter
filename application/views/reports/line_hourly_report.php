@@ -224,7 +224,7 @@
             }
             $total_output_balance = $total_output - $line_info[0]['target'];
 
-            $working_hour = ($total_wh-1)+$min_to_hour; // Getting Exact Current Production Hour-Minute
+//            $working_hour = ($total_wh-1)+$min_to_hour; // Getting Exact Current Production Hour-Minute
             ?>
 <!--            <td align="center">--><?php //echo round($total_output/$total_wm_to_wh, 2);?><!--</td>-->
             <td align="center" title="<?php echo $working_hour;?>"><?php echo round($total_output/$working_hour, 2);?></td>

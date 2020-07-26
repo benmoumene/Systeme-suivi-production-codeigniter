@@ -55,6 +55,7 @@
 </head>
 <!--<body class="light_theme  fixed_header left_nav_fixed">-->
 <body>
+<br />
 <div class="row center">
     <div class="col-md-12">
 <!--        <div class="col-md-1"></div>-->
@@ -68,16 +69,27 @@
     <div class="col-md-12">
         <div class="col-md-8">
             <div id="loader_1" style="display: none;"><div class="loader"></div></div>
-            <div id="chartContainer_1" style="height: 400px; width: 100%;"></div>
+            <div id="chartContainer_1" style="height: 350px; width: 100%;"></div>
         </div>
         <div class="col-md-4">
-            <div id="loader_2" style="display: none;"><div class="loader"></div></div>
-            <div id="chartContainer_2" style="height: 400px; width: 100%;"></div>
+            <div id="loader_4" style="display: none;"><div class="loader"></div></div>
+            <div id="chartContainer_4" style="height: 350px; width: 100%;"></div>
         </div>
     </div>
 </div>
 <br />
-<!--<div id="chartContainer_1" style="height: 200px; width: 100%;"></div>-->
+<div class="row center">
+    <div class="col-md-12">
+        <div class="col-md-8">
+            <div id="loader_3" style="display: none;"><div class="loader"></div></div>
+            <div id="chartContainer_3"></div>
+        </div>
+        <div class="col-md-4">
+            <div id="loader_2" style="display: none;"><div class="loader"></div></div>
+            <div id="chartContainer_2"></div>
+        </div>
+    </div>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -97,6 +109,7 @@
         $("#loader").css("display", "block");
         $("#loader_1").css("display", "block");
         $("#loader_2").css("display", "block");
+        $("#loader_3").css("display", "block");
 
         $.ajax({
             url: "<?php echo base_url();?>dashboard/layCutPackageReadySummaryReport/",
@@ -132,6 +145,30 @@
             }
         });
 
+        $.ajax({
+            url: "<?php echo base_url();?>dashboard/getBuyerWiseCuttingReport/",
+            type: "POST",
+            data: {},
+            dataType: "html",
+            success: function (data) {
+                $("#chartContainer_3").empty();
+                $("#chartContainer_3").append(data);
+                $("#loader_3").css("display", "none");
+            }
+        });
+
+        $.ajax({
+            url: "<?php echo base_url();?>dashboard/getCuttingTargetVsAchievementReport/",
+            type: "POST",
+            data: {},
+            dataType: "html",
+            success: function (data) {
+                $("#chartContainer_4").empty();
+                $("#chartContainer_4").append(data);
+                $("#loader_4").css("display", "none");
+            }
+        });
+
         setInterval(function(){
             $("#chartContainer").load('<?php echo base_url();?>dashboard/layCutPackageReadySummaryReport');
             $("#loader").css("display", "none");
@@ -139,8 +176,11 @@
             $("#loader_1").css("display", "none");
             $("#chartContainer_2").load('<?php echo base_url();?>dashboard/getStyleTypeWiseCuttingReport');
             $("#loader_2").css("display", "none");
-
-        }, 300000);
+            $("#chartContainer_3").load('<?php echo base_url();?>dashboard/getBuyerWiseCuttingReport');
+            $("#loader_3").css("display", "none");
+            $("#chartContainer_4").load('<?php echo base_url();?>dashboard/getCuttingTargetVsAchievementReport');
+            $("#loader_4").css("display", "none");
+        }, 600000);
 
     });
 

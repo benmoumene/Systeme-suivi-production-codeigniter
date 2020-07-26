@@ -80,6 +80,90 @@ class Dashboard_model extends CI_Model {
         return $query;
     }
 
+    public function getCuttingDashboardReport($date){
+        $sql = "SELECT 
+                (SELECT COUNT(id)
+                FROM `tb_care_labels`
+                WHERE is_package_ready=1 AND line_id=0 AND planned_line_id != 0 
+                AND package_sent_to_production=0) AS cut_ready_qty,
+                
+                (SELECT COUNT(t1.cut_tracking_no) 
+                FROM (SELECT cut_tracking_no FROM `tb_cut_summary` 
+                WHERE DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d')='$date' 
+                GROUP BY cut_tracking_no) AS t1) AS total_no_of_marker_qty,
+                
+                (SELECT COUNT(t2.po_no)
+                 FROM (SELECT po_no FROM `tb_cut_summary` 
+                 WHERE DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d')='$date'
+                 GROUP BY po_no, cut_no, size, cut_layer) AS t2) AS total_no_of_garments,
+                 
+                (SELECT SUM(cut_qty)
+                FROM `tb_cut_summary`
+                WHERE DATE_FORMAT(package_ready_date_time, '%Y-%m-%d') = '$date'
+                AND is_package_ready=1) AS today_package_ready_qty,
+                
+                (SELECT SUM(cut_qty) 
+                FROM `tb_cut_summary` 
+                WHERE is_cutting_complete=1 
+                AND DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d') = '$date') AS today_cut_qty,
+                
+                (SELECT SUM(cut_qty)
+                FROM `tb_cut_summary` 
+                WHERE is_lay_complete=1 AND is_cutting_complete=0) AS total_lay_wip_qty,
+                
+                (SELECT SUM(cut_qty)
+                FROM `tb_cut_summary`
+                WHERE is_lay_complete=1
+                AND DATE_FORMAT(lay_complete_date_time, '%Y-%m-%d') = '$date') AS today_lay_qty,
+                
+                (SELECT SUM(cut_qty)
+                FROM `tb_cut_summary`
+                WHERE package_sent_to_production=1
+                AND DATE_FORMAT(package_sent_to_production_date_time, '%Y-%m-%d') = '$date') AS today_input_to_line_qty";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
+    public function getCuttingReportBuyers($date){
+        $sql = "SELECT brand FROM `tb_cut_summary` 
+                WHERE DATE_FORMAT(lay_complete_date_time, '%Y-%m-%d')='$date'
+                OR DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d')='$date'
+                GROUP BY brand";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
+    public function getBuyerWiseCuttingDashboardReport($date, $brand){
+        $sql = "SELECT 
+                (SELECT COUNT(t1.cut_tracking_no) FROM 
+                (SELECT cut_tracking_no FROM `tb_cut_summary` 
+                WHERE DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d')='$date' 
+                AND brand='$brand'
+                GROUP BY cut_tracking_no) as t1) AS total_no_of_marker_qty,
+                
+                (SELECT COUNT(t2.po_no) FROM (SELECT po_no
+                 FROM `tb_cut_summary` 
+                 WHERE DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d')='$date'
+                 AND brand='$brand'
+                 GROUP BY po_no, cut_no, size, cut_layer) AS t2) AS total_no_of_garments,
+                                 
+                (SELECT SUM(cut_qty) 
+                FROM `tb_cut_summary` 
+                WHERE is_cutting_complete=1 
+                AND DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d') = '$date'
+                AND brand='$brand') AS today_cut_qty,
+                                                
+                (SELECT SUM(cut_qty)
+                FROM `tb_cut_summary` 
+                WHERE is_lay_complete=1 AND DATE_FORMAT(lay_complete_date_time, '%Y-%m-%d') = '$date'
+                AND brand='$brand') AS total_lay_qty";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
     public function getTodayNumberOfMarker($date){
         $sql = "SELECT COUNT(t1.cut_tracking_no) AS total_no_of_marker_qty 
                 FROM (SELECT cut_tracking_no FROM `tb_cut_summary` 
@@ -98,20 +182,23 @@ class Dashboard_model extends CI_Model {
 //                GROUP BY cut_tracking_no) AS t1";
 
         $sql = "SELECT 
-                (SELECT COUNT(cut_tracking_no) FROM `tb_cut_summary` 
+                (SELECT COUNT(t1.cut_tracking_no) 
+                FROM (SELECT cut_tracking_no FROM `tb_cut_summary` 
                 WHERE DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d')='$date' 
                 AND style_type=1
-                GROUP BY cut_tracking_no) AS total_no_of_marker_solid_qty,
+                GROUP BY cut_tracking_no) AS t1) AS total_no_of_marker_solid_qty,
                 
-                (SELECT COUNT(cut_tracking_no) FROM `tb_cut_summary` 
+                (SELECT COUNT(t2.cut_tracking_no)
+                FROM (SELECT cut_tracking_no FROM `tb_cut_summary` 
                 WHERE DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d')='$date' 
                 AND style_type=2
-                GROUP BY cut_tracking_no) AS total_no_of_marker_check_qty,
+                GROUP BY cut_tracking_no) AS t2) AS total_no_of_marker_check_qty,
                 
-                (SELECT COUNT(cut_tracking_no) FROM `tb_cut_summary` 
+                (SELECT COUNT(t3.cut_tracking_no) 
+                FROM (SELECT cut_tracking_no FROM `tb_cut_summary` 
                 WHERE DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d')='$date' 
                 AND style_type=3
-                GROUP BY cut_tracking_no) AS total_no_of_marker_print_qty";
+                GROUP BY cut_tracking_no) AS t3) AS total_no_of_marker_print_qty";
 
         $query = $this->db->query($sql)->result_array();
         return $query;
@@ -137,23 +224,23 @@ class Dashboard_model extends CI_Model {
 //                 GROUP BY po_no, cut_no, size, cut_layer) AS t1";
 
         $sql = "SELECT 
-                (SELECT COUNT(po_no)
-                FROM `tb_cut_summary` 
+                (SELECT COUNT(t1.po_no) 
+                FROM (SELECT po_no FROM `tb_cut_summary` 
                 WHERE DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d')='$date'
                 AND style_type=1
-                GROUP BY po_no, cut_no, size, cut_layer) AS total_no_of_garments_solid,
+                GROUP BY po_no, cut_no, size, cut_layer) AS t1) AS total_no_of_garments_solid,
                 
-                (SELECT COUNT(po_no)
-                FROM `tb_cut_summary` 
+                (SELECT COUNT(t2.po_no) 
+                FROM (SELECT po_no FROM `tb_cut_summary` 
                 WHERE DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d')='$date'
                 AND style_type=2
-                GROUP BY po_no, cut_no, size, cut_layer) AS total_no_of_garments_check,
+                GROUP BY po_no, cut_no, size, cut_layer) AS t2) AS total_no_of_garments_check,
                 
-                (SELECT COUNT(po_no)
-                FROM `tb_cut_summary` 
+                (SELECT COUNT(t3.po_no) 
+                FROM (SELECT po_no FROM `tb_cut_summary` 
                 WHERE DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d')='$date'
                 AND style_type=3
-                GROUP BY po_no, cut_no, size, cut_layer) AS total_no_of_garments_print";
+                GROUP BY po_no, cut_no, size, cut_layer) AS t3) AS total_no_of_garments_print";
 
         $query = $this->db->query($sql)->result_array();
         return $query;
@@ -1327,6 +1414,21 @@ class Dashboard_model extends CI_Model {
                 LEFT JOIN
                 tb_production_summary AS t2
                 ON t1.so_no=t2.so_no";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
+    public function getCuttingTargetVsAchievementReport($date){
+        $sql = "SELECT t1.*, t2.target 
+                FROM (SELECT DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d') AS cutting_date, SUM(cut_qty) AS total_cut_qty 
+                FROM `tb_cut_summary` 
+                WHERE is_cutting_complete=1 
+                AND DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d')='$date') AS t1
+                
+                LEFT JOIN
+                cutting_daily_target AS t2
+                ON t1.cutting_date=t2.date";
 
         $query = $this->db->query($sql)->result_array();
         return $query;
