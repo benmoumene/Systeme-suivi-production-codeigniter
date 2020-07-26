@@ -1,9 +1,9 @@
-<table>
-    <thead>
-    <tr style="background-color: rgba(159,255,154,0.41)">
-        <th class="text-center" colspan="4"><span style="font-size: 28px;">STYLE TYPE WISE REPORT</span></th>
-    </tr>
-</table>
+<!--<table>-->
+<!--    <thead>-->
+<!--    <tr style="background-color: rgba(159,255,154,0.41)">-->
+<!--        <th class="text-center" colspan="4"><span style="font-size: 28px;">STYLE TYPE WISE REPORT</span></th>-->
+<!--    </tr>-->
+<!--</table>-->
 <table>
     <thead>
     <tr style="background-color: rgba(179,238,255,0.88)">

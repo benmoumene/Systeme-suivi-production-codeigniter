@@ -43,7 +43,7 @@ $dataPoints = array(
 //                yValueFormatString: "#,##0.00\"%\"",
                 indexLabelPlacement: "inside",
                 indexLabelFontColor: "#FFFFFF",
-                indexLabelFontSize: 35,
+                indexLabelFontSize: 25,
                 indexLabelFontWeight: "bolder",
                 showInLegend: true,
                 legendText: "{label}",

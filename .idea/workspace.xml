@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fdf3a7-84b8-4c03-909e-2a58cce5012a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/views/reports/buyer_wise_cutting_report.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/views/reports/cutting_target_vs_actual_report.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/dashboard.php" afterPath="$PROJECT_DIR$/application/controllers/dashboard.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/dashboard_model.php" afterPath="$PROJECT_DIR$/application/models/dashboard_model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reports/lay_cut_package_summary_report.php" afterPath="$PROJECT_DIR$/application/views/reports/lay_cut_package_summary_report.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reports/line_hourly_report.php" afterPath="$PROJECT_DIR$/application/views/reports/line_hourly_report.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reports/line_wip_graph_report.php" afterPath="$PROJECT_DIR$/application/views/reports/line_wip_graph_report.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reports/cutting_target_vs_actual_report.php" afterPath="$PROJECT_DIR$/application/views/reports/cutting_target_vs_actual_report.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reports/style_type_wise_cutting_report.php" afterPath="$PROJECT_DIR$/application/views/reports/style_type_wise_cutting_report.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,8 +22,8 @@
       <file leaf-file-name="dashboard.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/dashboard.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="3376" column="28" lean-forward="true" selection-start-line="3376" selection-start-column="28" selection-end-line="3376" selection-end-column="28" />
+            <state relative-caret-position="353">
+              <caret line="3432" column="60" lean-forward="false" selection-start-line="3432" selection-start-column="35" selection-end-line="3432" selection-end-column="60" />
               <folding>
                 <marker date="1595763775060" expanded="true" signature="40082:40946" ph="..." />
                 <marker date="1595763775060" expanded="true" signature="41612:42622" ph="..." />
@@ -38,12 +32,62 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="buyer_wise_cutting_report.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/reports/buyer_wise_cutting_report.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" column="12" lean-forward="true" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="cutting_target_vs_actual_report.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/reports/cutting_target_vs_actual_report.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="731">
-              <caret line="43" column="30" lean-forward="false" selection-start-line="43" selection-start-column="30" selection-end-line="43" selection-end-column="30" />
+            <state relative-caret-position="765">
+              <caret line="45" column="39" lean-forward="true" selection-start-line="45" selection-start-column="39" selection-end-line="45" selection-end-column="39" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="style_type_wise_cutting_report.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/reports/style_type_wise_cutting_report.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="362">
+              <caret line="110" column="43" lean-forward="true" selection-start-line="110" selection-start-column="43" selection-end-line="110" selection-end-column="43" />
+              <folding>
+                <element signature="n#style#0;n#span#0;n#th#0;n#tr#0;n#thead#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#th#0;n#tr#1;n#thead#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#th#1;n#tr#1;n#thead#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#th#2;n#tr#1;n#thead#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#th#3;n#tr#1;n#thead#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#td#2;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#th#0;n#tr#0;n#thead#0;n#table#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#th#0;n#tr#1;n#thead#0;n#table#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#th#1;n#tr#1;n#thead#0;n#table#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#th#2;n#tr#1;n#thead#0;n#table#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#th#3;n#tr#1;n#thead#0;n#table#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#td#0;n#tr#0;n#tbody#0;n#table#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#td#1;n#tr#0;n#tbody#0;n#table#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#td#2;n#tr#0;n#tbody#0;n#table#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#td#3;n#tr#0;n#tbody#0;n#table#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#th#0;n#tr#0;n#thead#0;n#table#2;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#th#0;n#tr#1;n#thead#0;n#table#2;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#th#1;n#tr#1;n#thead#0;n#table#2;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#th#2;n#tr#1;n#thead#0;n#table#2;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#th#3;n#tr#1;n#thead#0;n#table#2;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#td#0;n#tr#0;n#tbody#0;n#table#2;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#td#1;n#tr#0;n#tbody#0;n#table#2;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#td#2;n#tr#0;n#tbody#0;n#table#2;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#td#3;n#tr#0;n#tbody#0;n#table#2;n#!!top" expanded="true" />
+                <marker date="1595766533736" expanded="false" signature="53:93" ph="..." />
+                <marker date="1595766533736" expanded="false" signature="160:176" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -51,8 +95,8 @@
       <file leaf-file-name="line_wip_graph_report.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/reports/line_wip_graph_report.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="88" column="45" lean-forward="true" selection-start-line="88" selection-start-column="45" selection-end-line="88" selection-end-column="45" />
+            <state relative-caret-position="408">
+              <caret line="84" column="38" lean-forward="false" selection-start-line="84" selection-start-column="38" selection-end-line="84" selection-end-column="38" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -552,7 +596,6 @@
       <find>getStyleTypeWiseCuttingReport</find>
       <find>getTodayNumberOfGarmentByStyleType</find>
       <find>buyer</find>
-      <find>getBuyerWiseCuttingReport</find>
       <find>getCuttingReportBuyers</find>
       <find>getBuyerWiseCuttingDashboardReport</find>
       <find>layCutPackageReadySummaryReport</find>
@@ -566,6 +609,7 @@
       <find>finishingFloorOutputReport</find>
       <find>getFinishingOutputSummaryReload</find>
       <find>getCuttingTargetVsAchievementReport</find>
+      <find>getBuyerWiseCuttingReport</find>
       <find>chartContainer_2</find>
     </findStrings>
   </component>
@@ -619,12 +663,12 @@
         <option value="$PROJECT_DIR$/application/views/reports/po_wise_report_by_ship_date.php" />
         <option value="$PROJECT_DIR$/application/views/reports/table_wise_lay_cut_report.php" />
         <option value="$PROJECT_DIR$/application/views/reports/line_hourly_report.php" />
-        <option value="$PROJECT_DIR$/application/views/reports/style_type_wise_cutting_report.php" />
         <option value="$PROJECT_DIR$/application/views/reports/buyer_wise_cutting_report.php" />
         <option value="$PROJECT_DIR$/application/views/reports/lay_cut_package_summary_report.php" />
         <option value="$PROJECT_DIR$/application/models/dashboard_model.php" />
         <option value="$PROJECT_DIR$/application/controllers/dashboard.php" />
         <option value="$PROJECT_DIR$/application/views/reports/cutting_target_vs_actual_report.php" />
+        <option value="$PROJECT_DIR$/application/views/reports/style_type_wise_cutting_report.php" />
         <option value="$PROJECT_DIR$/application/views/reports/line_wip_graph_report.php" />
       </list>
     </option>
@@ -1729,12 +1773,12 @@
       <workItem from="1595558722449" duration="9205000" />
       <workItem from="1595646189562" duration="6223000" />
       <workItem from="1595731223161" duration="18864000" />
-      <workItem from="1595763372035" duration="1588000" />
+      <workItem from="1595763372035" duration="2558000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5566155000" />
+    <option name="totallyTimeSpent" value="5567125000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -2040,6 +2084,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1972">
           <caret line="116" column="122" lean-forward="false" selection-start-line="116" selection-start-column="122" selection-end-line="116" selection-end-column="122" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2825,22 +2870,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/reports/style_type_wise_cutting_report.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1819">
-          <caret line="107" column="19" lean-forward="false" selection-start-line="107" selection-start-column="19" selection-end-line="107" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/reports/buyer_wise_cutting_report.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="9" column="84" lean-forward="true" selection-start-line="9" selection-start-column="84" selection-end-line="9" selection-end-column="84" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/finishing_output_summary_reload.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -2854,17 +2883,6 @@
         <state relative-caret-position="323">
           <caret line="136" column="82" lean-forward="false" selection-start-line="136" selection-start-column="82" selection-end-line="136" selection-end-column="82" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/dashboard.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="3376" column="28" lean-forward="true" selection-start-line="3376" selection-start-column="28" selection-end-line="3376" selection-end-column="28" />
-          <folding>
-            <marker date="1595763775060" expanded="true" signature="40082:40946" ph="..." />
-            <marker date="1595763775060" expanded="true" signature="41612:42622" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3327,18 +3345,75 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/dashboard.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="353">
+          <caret line="3432" column="60" lean-forward="false" selection-start-line="3432" selection-start-column="35" selection-end-line="3432" selection-end-column="60" />
+          <folding>
+            <marker date="1595763775060" expanded="true" signature="40082:40946" ph="..." />
+            <marker date="1595763775060" expanded="true" signature="41612:42622" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/reports/buyer_wise_cutting_report.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="12" lean-forward="true" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/reports/style_type_wise_cutting_report.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="362">
+          <caret line="110" column="43" lean-forward="true" selection-start-line="110" selection-start-column="43" selection-end-line="110" selection-end-column="43" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#th#0;n#tr#0;n#thead#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#th#0;n#tr#1;n#thead#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#th#1;n#tr#1;n#thead#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#th#2;n#tr#1;n#thead#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#th#3;n#tr#1;n#thead#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#td#2;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#th#0;n#tr#0;n#thead#0;n#table#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#th#0;n#tr#1;n#thead#0;n#table#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#th#1;n#tr#1;n#thead#0;n#table#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#th#2;n#tr#1;n#thead#0;n#table#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#th#3;n#tr#1;n#thead#0;n#table#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#td#0;n#tr#0;n#tbody#0;n#table#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#td#1;n#tr#0;n#tbody#0;n#table#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#td#2;n#tr#0;n#tbody#0;n#table#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#td#3;n#tr#0;n#tbody#0;n#table#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#th#0;n#tr#0;n#thead#0;n#table#2;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#th#0;n#tr#1;n#thead#0;n#table#2;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#th#1;n#tr#1;n#thead#0;n#table#2;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#th#2;n#tr#1;n#thead#0;n#table#2;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#th#3;n#tr#1;n#thead#0;n#table#2;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#td#0;n#tr#0;n#tbody#0;n#table#2;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#td#1;n#tr#0;n#tbody#0;n#table#2;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#td#2;n#tr#0;n#tbody#0;n#table#2;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#td#3;n#tr#0;n#tbody#0;n#table#2;n#!!top" expanded="true" />
+            <marker date="1595766533736" expanded="false" signature="53:93" ph="..." />
+            <marker date="1595766533736" expanded="false" signature="160:176" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/reports/cutting_target_vs_actual_report.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="43" column="30" lean-forward="false" selection-start-line="43" selection-start-column="30" selection-end-line="43" selection-end-column="30" />
+        <state relative-caret-position="765">
+          <caret line="45" column="39" lean-forward="true" selection-start-line="45" selection-start-column="39" selection-end-line="45" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/reports/line_wip_graph_report.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="88" column="45" lean-forward="true" selection-start-line="88" selection-start-column="45" selection-end-line="88" selection-end-column="45" />
+        <state relative-caret-position="408">
+          <caret line="84" column="38" lean-forward="false" selection-start-line="84" selection-start-column="38" selection-end-line="84" selection-end-column="38" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
