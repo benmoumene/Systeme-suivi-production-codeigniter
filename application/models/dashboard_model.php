@@ -1421,13 +1421,16 @@ class Dashboard_model extends CI_Model {
 
     public function getCuttingTargetVsAchievementReport($date){
         $sql = "SELECT t1.*, t2.target 
-                FROM (SELECT DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d') AS cutting_date, SUM(cut_qty) AS total_cut_qty 
+                FROM 
+                (Select * FROM `cutting_daily_target`
+                WHERE date='$date') AS t2
+                
+                LEFT JOIN
+                (SELECT DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d') AS cutting_date, SUM(cut_qty) AS total_cut_qty 
                 FROM `tb_cut_summary` 
                 WHERE is_cutting_complete=1 
                 AND DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d')='$date') AS t1
                 
-                LEFT JOIN
-                cutting_daily_target AS t2
                 ON t1.cutting_date=t2.date";
 
         $query = $this->db->query($sql)->result_array();

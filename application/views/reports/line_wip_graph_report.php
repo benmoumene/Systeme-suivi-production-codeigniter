@@ -110,6 +110,7 @@
         $("#loader_1").css("display", "block");
         $("#loader_2").css("display", "block");
         $("#loader_3").css("display", "block");
+        $("#loader_4").css("display", "block");
 
         $.ajax({
             url: "<?php echo base_url();?>dashboard/layCutPackageReadySummaryReport/",
