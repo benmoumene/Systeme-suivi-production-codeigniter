@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a6fdf3a7-84b8-4c03-909e-2a58cce5012a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/dashboard_model.php" afterPath="$PROJECT_DIR$/application/models/dashboard_model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reports/line_wip_graph_report.php" afterPath="$PROJECT_DIR$/application/views/reports/line_wip_graph_report.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,7 +20,7 @@
       <file leaf-file-name="dashboard.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/dashboard.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
+            <state relative-caret-position="57052">
               <caret line="3356" column="56" lean-forward="false" selection-start-line="3356" selection-start-column="35" selection-end-line="3356" selection-end-column="56" />
               <folding>
                 <marker date="1595763775060" expanded="true" signature="40082:40946" ph="..." />
@@ -32,7 +30,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="buyer_wise_cutting_report.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="buyer_wise_cutting_report.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/reports/buyer_wise_cutting_report.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
@@ -68,18 +66,18 @@
       <file leaf-file-name="line_wip_graph_report.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/reports/line_wip_graph_report.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
+            <state relative-caret-position="3077">
               <caret line="181" column="82" lean-forward="false" selection-start-line="181" selection-start-column="82" selection-end-line="181" selection-end-column="82" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dashboard_model.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="dashboard_model.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/dashboard_model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="1425" column="41" lean-forward="true" selection-start-line="1425" selection-start-column="41" selection-end-line="1425" selection-end-column="41" />
+            <state relative-caret-position="829">
+              <caret line="1414" column="43" lean-forward="true" selection-start-line="1414" selection-start-column="43" selection-end-line="1414" selection-end-column="43" />
               <folding>
                 <marker date="1596003715508" expanded="true" signature="508:530" ph="Select * Fro... tb_floor" />
                 <marker date="1596003715508" expanded="true" signature="673:704" ph="Select * Fro... tb_warehouse_type" />
@@ -1744,11 +1742,12 @@
       <workItem from="1595763372035" duration="3155000" />
       <workItem from="1595904295555" duration="2082000" />
       <workItem from="1595992387996" duration="1874000" />
+      <workItem from="1596077378981" duration="1401000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5571678000" />
+    <option name="totallyTimeSpent" value="5573079000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -2847,14 +2846,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/reports/buyer_wise_cutting_report.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="12" lean-forward="false" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/reports/style_type_wise_cutting_report.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1870">
@@ -2876,7 +2867,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/reports/line_wip_graph_report.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
+        <state relative-caret-position="3077">
           <caret line="181" column="82" lean-forward="false" selection-start-line="181" selection-start-column="82" selection-end-line="181" selection-end-column="82" />
           <folding />
         </state>
@@ -2884,7 +2875,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/dashboard.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
+        <state relative-caret-position="57052">
           <caret line="3356" column="56" lean-forward="false" selection-start-line="3356" selection-start-column="35" selection-end-line="3356" selection-end-column="56" />
           <folding>
             <marker date="1595763775060" expanded="true" signature="40082:40946" ph="..." />
@@ -2895,8 +2886,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/dashboard_model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="1425" column="41" lean-forward="true" selection-start-line="1425" selection-start-column="41" selection-end-line="1425" selection-end-column="41" />
+        <state relative-caret-position="829">
+          <caret line="1414" column="43" lean-forward="true" selection-start-line="1414" selection-start-column="43" selection-end-line="1414" selection-end-column="43" />
           <folding>
             <marker date="1596003715508" expanded="true" signature="508:530" ph="Select * Fro... tb_floor" />
             <marker date="1596003715508" expanded="true" signature="673:704" ph="Select * Fro... tb_warehouse_type" />
@@ -3351,6 +3342,14 @@
             <marker date="1596003715508" expanded="true" signature="206223:206374" ph="UPDATE `tb_t... " />
             <marker date="1596003715508" expanded="true" signature="206571:206757" ph="UPDATE `tb_t... " />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/reports/buyer_wise_cutting_report.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="12" lean-forward="false" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
+          <folding />
         </state>
       </provider>
     </entry>
