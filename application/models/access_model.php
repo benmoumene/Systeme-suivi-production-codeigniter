@@ -6114,6 +6114,18 @@ class Access_model extends CI_Model {
         return $query;
     }
 
+    public function getCutSizeWiseGroups($so_no, $cut_no, $size){
+        $sql="SELECT so_no, cut_no, `size`, cut_layer
+              FROM `tb_cut_summary` 
+              WHERE `so_no` = '$so_no' 
+              AND cut_no='$cut_no'
+              AND `size`='$size'
+              GROUP BY so_no, cut_no, `size`, cut_layer";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
     public function changingLinePlan($line_no_to, $where){
         $sql="UPDATE `tb_care_labels` 
               SET line_id='$line_no_to'

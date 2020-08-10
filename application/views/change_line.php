@@ -84,14 +84,14 @@
                                                                 }
                                                             ?>
 
-                                                            <option value="<?php echo $v_s['so_no'];?>"><?php echo $v_s['so_no'].'~'.$v_s['purchase_order'].'~'.$v_s['item'].'~'.$v_s['quality'].'~'.$v_s['color'].'~'.$v_s['style_no'].'~'.$v_s['style_name'].'~'.$v_s['ex_factory_date'].'~'.$po_type;?></option>
+                                                            <option value="<?php echo $v_s['so_no'];?>"><?php echo $v_s['so_no'].'-'.$v_s['purchase_order'].'-'.$v_s['item'].'-'.$v_s['quality'].'-'.$v_s['color'].'-'.$v_s['style_no'].'-'.$v_s['style_name'].'-'.$v_s['ex_factory_date'].'-'.$po_type;?></option>
 
                                                         <?php
                                                             }
                                                         ?>
                                                     </select>
                                                     <br />
-                                                    <span id="" style="color: red;">SO~PO~ITEM~QUALITY~COLOR~StyleNo~StyleName~ExFacDate~TYPE</span>
+                                                    <span id="" style="color: red;">SO-PO-ITEM-QUALITY-COLOR-StyleNo-StyleName-ExFacDate-TYPE</span>
                                                 </td>
                                             </tr>
 
@@ -110,8 +110,17 @@
                                             <tr>
                                                 <td class="center">Size </td>
                                                 <td class="center">
-                                                    <select id="size" name="size"  onchange="lineSelectionCheck();">
+                                                    <select id="size" name="size"  onchange="getCutSizeWiseGroups();">
                                                         <option value="">Select Size</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class="center">Group </td>
+                                                <td class="center">
+                                                    <select id="group" name="group"  onchange="lineSelectionCheck();">
+                                                        <option value="">Select Group</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -223,6 +232,34 @@
             location.reload();
         }
     }
+
+    function getCutSizeWiseGroups() {
+        document.getElementById("line_no_to").value = "";
+        document.getElementById("line_no_from").value = "";
+        $("#scanned_qty").val('');
+
+        $("#group").empty();
+
+        var so_no = $("#so_no").val();
+        var cut_no = $("#cut_no").val();
+        var size = $("#size").val();
+
+        if(cut_no != '' && so_no != ''){
+            $.ajax({
+                url: "<?php echo base_url();?>access/getCutSizeWiseGroups/",
+                type: "POST",
+                data: {so_no: so_no, cut_no: cut_no, size: size},
+                dataType: "html",
+                success: function (data) {
+                    $("#group").append(data);
+                }
+            });
+        }else{
+            location.reload();
+        }
+    }
+
+
 
     function getTotalScannedQty(){
         $("#so_msg").empty();

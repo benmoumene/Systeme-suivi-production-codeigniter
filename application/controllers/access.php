@@ -2956,6 +2956,22 @@ class Access extends CI_Controller {
         echo $option;
     }
 
+    public function getCutSizeWiseGroups(){
+        $so_no = $this->input->post('so_no');
+        $cut_no = $this->input->post('cut_no');
+        $size = $this->input->post('size');
+
+        $res = $this->access_model->getCutSizeWiseGroups($so_no, $cut_no, $size);
+
+        $option = '';
+        $option .= '<option value="">Select Group</option>';
+        foreach ($res as $v){
+            $option .= '<option value="'.$v['cut_layer'].'">'.$v['cut_layer'].'</option>';
+        }
+
+        echo $option;
+    }
+
     public function getTotalScannedQty(){
 
         $so_no = $this->input->post('so_no');
@@ -2990,6 +3006,7 @@ class Access extends CI_Controller {
         $line_no_from = $this->input->post('line_no_from');
         $line_no_to = $this->input->post('line_no_to');
         $size = $this->input->post('size');
+        $group = $this->input->post('group');
 
         $where = '';
 
@@ -3001,6 +3018,9 @@ class Access extends CI_Controller {
         }
         if($size != ''){
             $where .= " AND size = '$size'";
+        }
+        if($group != ''){
+            $where .= " AND layer_group = '$group'";
         }
         if($line_no_from != ''){
             $where .= " AND line_id = '$line_no_from' AND access_points != 4 AND access_points_status != 4";
