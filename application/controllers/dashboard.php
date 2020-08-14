@@ -2198,8 +2198,34 @@ class Dashboard extends CI_Controller {
 //        $previous_date = "2019-10-08";
         $data['previous_date'] = $previous_date;
         $data['line_report']=$this->dashboard_model->getLineReport($previous_date, '');
-        $data['cutting_prod']=$this->dashboard_model->getCuttingReport($previous_date);
-        $data['finishing_report']=$this->dashboard_model->getFinishingReport($previous_date);
+
+        $cutting_prod=$this->dashboard_model->getCuttingReport($previous_date);
+
+        if(sizeof($cutting_prod) > 0){
+            $data['cutting_prod'] = $cutting_prod;
+        }else{
+
+            $this->lastDayCuttingReportBackup($previous_date);
+
+            $cutting_prod = $this->dashboard_model->getCuttingReport($previous_date);
+
+            $data['cutting_prod'] = $cutting_prod;
+
+        }
+
+        $finishing_prod = $this->dashboard_model->getFinishingReport($previous_date);
+
+        if(sizeof($finishing_prod)){
+            $data['finishing_report'] = $finishing_prod;
+        }else{
+            $this->lastDayFinishingReportBackup($previous_date);
+
+            $finishing_prod = $this->dashboard_model->getFinishingReport($previous_date);
+
+            $data['finishing_report'] = $finishing_prod;
+        }
+
+
 
         /* Total Efficiency Calculation Start */
         $floor_eff_sum=0;
@@ -2261,6 +2287,7 @@ class Dashboard extends CI_Controller {
         /* Total Efficiency Calculation End */
 
         $mail_content = $this->load->view('reports/production_summary_report_mail_new_check', $data, true);
+
 
 //        echo '<pre>';
 //        print_r($mail_content);
@@ -2329,9 +2356,33 @@ class Dashboard extends CI_Controller {
         $condition2 .= " AND floor_id in (2)";
 
 
-        $data['cutting_prod'] = $this->dashboard_model->getCuttingReport($previous_date);
+        $cutting_prod = $this->dashboard_model->getCuttingReport($previous_date);
+
+        if(sizeof($cutting_prod) > 0){
+            $data['cutting_prod'] = $cutting_prod;
+        }else{
+
+            $this->lastDayCuttingReportBackup($previous_date);
+
+            $cutting_prod = $this->dashboard_model->getCuttingReport($previous_date);
+
+            $data['cutting_prod'] = $cutting_prod;
+
+        }
+
         $data['line_prod'] = $this->dashboard_model->getSecondFloorLineProductionSummary($previous_date, $condition);
-        $data['finishing_prod'] = $this->dashboard_model->getSecondFloorFinishingProductionSummary($previous_date,  $condition2);
+
+        $finishing_prod = $this->dashboard_model->getSecondFloorFinishingProductionSummary($previous_date,  $condition2);
+
+        if(sizeof($finishing_prod)){
+            $data['finishing_prod'] = $finishing_prod;
+        }else{
+            $this->lastDayFinishingReportBackup($previous_date);
+
+            $finishing_prod = $this->dashboard_model->getSecondFloorFinishingProductionSummary($previous_date,  $condition2);
+
+            $data['finishing_prod'] = $finishing_prod;
+        }
 
         $mail_content = $this->load->view('reports/second_floor_production_summary_report_mail_body', $data, true);
 
@@ -2385,6 +2436,53 @@ class Dashboard extends CI_Controller {
             echo 'No Output Found!';
         }
 
+    }
+
+    public function lastDayCuttingReportBackup($previous_date){
+        $cutting_target = $this->dashboard_model->getCuttingTarget($previous_date);
+        $cutting_prod = $this->dashboard_model->getCuttingTotalPackageReport($previous_date);
+
+        $data_c = array(
+            'cut_target' => ($cutting_target[0]['target'] != '' ? $cutting_target[0]['target'] : 0),
+            'cut_output' => ($cutting_prod[0]['cut_complete_qty'] != '' ? $cutting_prod[0]['cut_complete_qty'] : 0),
+            'cut_package_ready' => ($cutting_prod[0]['package_ready_qty'] != '' ? $cutting_prod[0]['package_ready_qty'] : 0),
+            'date' => $previous_date
+        );
+
+        return $this->insertTblData('tb_daily_cut_summary', $data_c);
+    }
+
+    public function lastDayFinishingReportBackup($previous_date){
+        $time_range = $this->dashboard_model->getWorkingTimeRange();
+
+        $starting_time = $time_range[0]['starting_time'];
+        $ending_time = $time_range[0]['ending_time'];
+
+        $where_seg = "";
+        if($starting_time != '' && $ending_time != ''){
+            $where_seg .= "  ORDER BY id DESC LIMIT 1";
+        }
+
+        $finishing_prod = $this->dashboard_model->getFinishingProductionSummaryReport($previous_date, $starting_time, $ending_time);
+
+        foreach ($finishing_prod as $f) {
+
+            $over_time_finish_qty = $f['total_finishing_output'] - $f['finishing_normal_hours_output'];
+
+            $data_f = array(
+
+                'floor_id' => ($f['finishing_floor_id'] != '' ? $f['finishing_floor_id'] : 0),
+                'target' => ($f['target'] != '' ? $f['target'] : 0),
+                'normal_output' => ($f['finishing_normal_hours_output'] != 0 ? $f['finishing_normal_hours_output'] : 0),
+                'eot_output' => ($over_time_finish_qty != '' ? $over_time_finish_qty : 0),
+                'output' => ($f['total_finishing_output'] != '' ? $f['total_finishing_output'] : 0),
+                'date' => $previous_date
+
+            );
+            $this->insertTblData('tb_daily_finish_summary', $data_f);
+        }
+
+        return 1;
     }
 
     public function packageReadyByPO()
