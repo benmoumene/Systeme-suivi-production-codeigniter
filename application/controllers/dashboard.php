@@ -5248,7 +5248,12 @@ class Dashboard extends CI_Controller {
     public function allLinePerformanceDashboard(){
         $data['title'] = 'EcoFab Line Performance';
 
-        $date = date('Y-m-d');
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+        $time=$datex->format('H:i:s');
+
+        $data['res_hour'] = $this->access_model->getHoursByTimeRange($time);
 
         $data['line_report'] = $this->dashboard_model->getAllLinePerformanceSummaryReport($date);
 
@@ -6013,6 +6018,10 @@ class Dashboard extends CI_Controller {
         $date=$datex->format('Y-m-d');
 
         $this->dashboard_model->lineQualityDefectSave($line_id, $dhu, $time);
+
+        $hour = $this->access_model->getHoursByTimeRange($time);
+
+        return $hour;
     }
 
     public function getSapDataNew(){

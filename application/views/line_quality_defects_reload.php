@@ -4,7 +4,7 @@
     <?php if(!empty($qa_major_defects)){ ?>
     <table class="table table-bordered table-responsive">
         <tr class="row center">
-            <td style="font-size: 25px;"><b>DHU(%)</b></td>
+            <td style="font-size: 25px;"><b>AVG DHU(%)</b></td>
             <td style="font-size: 25px;">
                 <?php
                     $dhu = 0;
@@ -21,7 +21,7 @@
                         $dhu=0;
                     }
 
-                    $this->method_call->lineQualityDefectSave($line_id, $dhu);
+                    $res_hour = $this->method_call->lineQualityDefectSave($line_id, $dhu);
                 ?>
                 <b>
                     <?php
@@ -32,7 +32,10 @@
                     $work_hour_4 = ($dhu_summary[0]['work_hour_4'] != '' ? $dhu_summary[0]['work_hour_4'] : 0);
 
                     $total_wh = $work_hour_1+$work_hour_2+$work_hour_3+$work_hour_4;
-                    $average_dhu = round($dhu_sum/$total_wh, 2);
+
+                    $hour = $res_hour[0]['hour'];
+
+                    $average_dhu = round($dhu_sum/$hour, 2);
 
                     echo $average_dhu;
                     ?>

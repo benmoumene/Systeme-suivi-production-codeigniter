@@ -174,7 +174,10 @@
                         $work_hour_4 = ($v_1['work_hour_4'] != '' ? $v_1['work_hour_4'] : 0);
 
                         $total_wh = $work_hour_1+$work_hour_2+$work_hour_3+$work_hour_4;
-                        $average_dhu = round($dhu_sum/$total_wh, 2);
+
+                        $hour = $res_hour[0]['hour'];
+
+                        $average_dhu = round($dhu_sum/$hour, 2);
                         ?>
                         { label: "<?php echo $v_1['line_code'];?>", y: <?php echo $average_dhu * 10 ;?>, indexLabel: "<?php echo $average_dhu;?>" },
                         <?php } ?>

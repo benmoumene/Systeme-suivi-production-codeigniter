@@ -4226,7 +4226,7 @@ class Access_model extends CI_Model {
     }
 
     public function getHoursByTimeRange($time){
-        $sql = "SELECT end_time, TIME_TO_SEC(end_time) AS max_time_to_sec 
+        $sql = "SELECT `hour`, end_time, TIME_TO_SEC(end_time) AS max_time_to_sec 
                 FROM `tb_hours` 
                 WHERE '$time' BETWEEN start_time AND end_time";
 
