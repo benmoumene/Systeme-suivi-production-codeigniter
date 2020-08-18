@@ -33,8 +33,6 @@
 
                     $total_wh = $work_hour_1+$work_hour_2+$work_hour_3+$work_hour_4;
 
-                    $hour = $res_hour[0]['hour'];
-
                     $average_dhu = round($dhu_sum/$hour, 2);
 
                     echo $average_dhu;

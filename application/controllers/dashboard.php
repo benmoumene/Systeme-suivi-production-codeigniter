@@ -5979,11 +5979,15 @@ class Dashboard extends CI_Controller {
         $where_1 = '';
         $where_2 = '';
 
-        $this_hour = $this->access_model->getHours($where_1);
+        $where_3 = " AND '$time'  BETWEEN start_time AND end_time";
+
+        $this_hour = $this->access_model->getHours($where_3);
         $start_time = $this_hour[0]['start_time'];
         $data['start_time'] = $start_time;
         $end_time = $this_hour[0]['end_time'];
         $data['end_time'] = $end_time;
+
+        $data['hour'] = $this_hour[0]['hour'];
 
         if($line_id != ''){
             $where .= " AND DATE_FORMAT(defect_date_time, '%Y-%m-%d')='$date' AND line_id=$line_id";
@@ -6018,6 +6022,14 @@ class Dashboard extends CI_Controller {
         $date=$datex->format('Y-m-d');
 
         $this->dashboard_model->lineQualityDefectSave($line_id, $dhu, $time);
+    }
+
+    public function getHoursByTimeRange(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $time=$datex->format('H:i:s');
+        $date=$datex->format('Y-m-d');
 
         $hour = $this->access_model->getHoursByTimeRange($time);
 

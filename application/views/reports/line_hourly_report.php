@@ -133,6 +133,9 @@
 
         $count_line = 0;
 
+        $res_hour = $this->method_call->getHoursByTimeRange();
+        $hour = $res_hour[0]['hour'];
+
         foreach ($lines AS $k => $line){
 
             $line_id = $line['id'];
@@ -151,7 +154,7 @@
 
             $total_wh = $work_hour_1+$work_hour_2+$work_hour_3+$work_hour_4;
 
-            $average_dhu = round($dhu_sum/$total_wh, 2);
+            $average_dhu = round($dhu_sum/$hour, 2);
 
             $line_target_hour = $line_info[0]['target_hour'];
             $line_target_per_hour = round($line_info[0]['target']/$line_target_hour);
