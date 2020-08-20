@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a6fdf3a7-84b8-4c03-909e-2a58cce5012a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reports/line_hourly_report.php" afterPath="$PROJECT_DIR$/application/views/reports/line_hourly_report.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/dashboard.php" afterPath="$PROJECT_DIR$/application/controllers/dashboard.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -87,16 +87,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dashboard.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="dashboard.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/controllers/dashboard.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="251">
-              <caret line="3937" column="76" lean-forward="false" selection-start-line="3937" selection-start-column="58" selection-end-line="3937" selection-end-column="76" />
+            <state relative-caret-position="98">
+              <caret line="2322" column="68" lean-forward="true" selection-start-line="2322" selection-start-column="68" selection-end-line="2322" selection-end-column="68" />
               <folding>
-                <marker date="1597737694375" expanded="true" signature="40082:40946" ph="..." />
-                <marker date="1597737694375" expanded="true" signature="41612:42622" ph="..." />
-                <marker date="1597737694375" expanded="true" signature="250243:250322" ph="..." />
-                <marker date="1597737694375" expanded="true" signature="252089:252170" ph="..." />
+                <marker date="1597898408183" expanded="true" signature="40082:40946" ph="..." />
+                <marker date="1597898408183" expanded="true" signature="41612:42622" ph="..." />
+                <marker date="1597898408183" expanded="true" signature="250275:250354" ph="..." />
+                <marker date="1597898408183" expanded="true" signature="252121:252202" ph="..." />
               </folding>
             </state>
           </provider>
@@ -808,11 +808,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="line_hourly_report.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="line_hourly_report.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/reports/line_hourly_report.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="4" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+            <state relative-caret-position="289">
+              <caret line="17" column="24" lean-forward="true" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -829,10 +829,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>hour</find>
-      <find>tb_hour</find>
-      <find>time</find>
-      <find>$time</find>
       <find>lineQualityDefectSave</find>
       <find>tb_hours</find>
       <find>getHoursByTimeRange</find>
@@ -859,6 +855,10 @@
       <find>lineQualityDefectSave(</find>
       <find>careLabelEndDefectSave</find>
       <find>lineHourlyReport</find>
+      <find>bandara</find>
+      <find>PTS Summary Report</find>
+      <find>mahesh.hewage@interfabshirt.com</find>
+      <find>production_summary_report_mail</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -916,8 +916,8 @@
         <option value="$PROJECT_DIR$/application/models/access_model.php" />
         <option value="$PROJECT_DIR$/application/views/all_line_performance_dashboard.php" />
         <option value="$PROJECT_DIR$/application/views/line_quality_defects_reload.php" />
-        <option value="$PROJECT_DIR$/application/controllers/dashboard.php" />
         <option value="$PROJECT_DIR$/application/views/reports/line_hourly_report.php" />
+        <option value="$PROJECT_DIR$/application/controllers/dashboard.php" />
       </list>
     </option>
   </component>
@@ -931,7 +931,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1378" />
+    <option name="width" value="1382" />
     <option name="height" value="744" />
   </component>
   <component name="ProjectView">
@@ -949,7 +949,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -1054,7 +1054,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2036,18 +2036,19 @@
       <workItem from="1597639654128" duration="7808000" />
       <workItem from="1597734095690" duration="5546000" />
       <workItem from="1597806433482" duration="1642000" />
-      <workItem from="1597833552379" duration="157000" />
+      <workItem from="1597833552379" duration="946000" />
+      <workItem from="1597890660761" duration="3275000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5606056000" />
+    <option name="totallyTimeSpent" value="5610120000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1378" height="744" extended-state="0" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18355359" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18228404" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2922,19 +2923,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/dashboard.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="3937" column="76" lean-forward="false" selection-start-line="3937" selection-start-column="58" selection-end-line="3937" selection-end-column="76" />
-          <folding>
-            <marker date="1597737694375" expanded="true" signature="40082:40946" ph="..." />
-            <marker date="1597737694375" expanded="true" signature="41612:42622" ph="..." />
-            <marker date="1597737694375" expanded="true" signature="250243:250322" ph="..." />
-            <marker date="1597737694375" expanded="true" signature="252089:252170" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/line_quality_defects_reload.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="561">
@@ -3639,9 +3627,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/reports/line_hourly_report.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="4" lean-forward="false" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+        <state relative-caret-position="289">
+          <caret line="17" column="24" lean-forward="true" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/dashboard.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="98">
+          <caret line="2322" column="68" lean-forward="true" selection-start-line="2322" selection-start-column="68" selection-end-line="2322" selection-end-column="68" />
+          <folding>
+            <marker date="1597898408183" expanded="true" signature="40082:40946" ph="..." />
+            <marker date="1597898408183" expanded="true" signature="41612:42622" ph="..." />
+            <marker date="1597898408183" expanded="true" signature="250275:250354" ph="..." />
+            <marker date="1597898408183" expanded="true" signature="252121:252202" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
