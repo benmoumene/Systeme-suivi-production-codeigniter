@@ -16,7 +16,10 @@ class Api extends CI_Controller {
 
     public function allLinePerformanceDashboard(){
 
-        $date = $this->input->post('date');
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
 
         $line_report = $this->dashboard_model->getAllLinePerformanceSummaryReport($date);
 
