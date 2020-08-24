@@ -960,7 +960,7 @@ class Dashboard extends CI_Controller {
                 'smtp_host' => 'ssl://smtp.gmail.com',
                 'smtp_port' => 465,
                 'smtp_user' => 'ecofab.pts@gmail.com', // change it to yours
-                'smtp_pass' => 'ecofab.pts@123', // change it to yours
+                'smtp_pass' => 'productiontrackingsystem@123', // change it to yours
                 'mailtype' => 'html',
                 'charset' => 'utf-8',
                 'wordwrap' => TRUE
@@ -1374,7 +1374,7 @@ class Dashboard extends CI_Controller {
 //                'smtp_host' => 'ssl://smtp.gmail.com',
 //                'smtp_port' => 465,
 //                'smtp_user' => 'ecofab.pts@gmail.com', // change it to yours
-//                'smtp_pass' => 'ecofab.pts@123', // change it to yours
+//                'smtp_pass' => 'productiontrackingsystem@123', // change it to yours
 //                'mailtype' => 'html',
 //                'charset' => 'utf-8',
 //                'wordwrap' => TRUE
@@ -1943,7 +1943,7 @@ class Dashboard extends CI_Controller {
                 'smtp_host' => 'ssl://smtp.gmail.com',
                 'smtp_port' => 465,
                 'smtp_user' => 'ecofab.pts@gmail.com', // change it to yours
-                'smtp_pass' => 'ecofab.pts@123', // change it to yours
+                'smtp_pass' => 'productiontrackingsystem@123', // change it to yours
                 'mailtype' => 'html',
                 'charset' => 'utf-8',
                 'wordwrap' => TRUE
@@ -2407,7 +2407,7 @@ class Dashboard extends CI_Controller {
                 'smtp_host' => 'ssl://smtp.gmail.com',
                 'smtp_port' => 465,
                 'smtp_user' => 'ecofab.pts@gmail.com', // change it to yours
-                'smtp_pass' => 'ecofab.pts@123', // change it to yours
+                'smtp_pass' => 'productiontrackingsystem@123', // change it to yours
                 'mailtype' => 'html',
                 'charset' => 'utf-8',
                 'wordwrap' => TRUE
@@ -4072,7 +4072,6 @@ class Dashboard extends CI_Controller {
         $date_time=$datex->format('Y-m-d H:i:s');
         $date=$datex->format('Y-m-d');
         $data['hours'] = $this->access_model->getHours();
-
 
         $where = '';
         $where1 = '';
