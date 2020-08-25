@@ -1,5 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 session_start();
+
 class Api extends CI_Controller {
 
     public function __construct()
@@ -24,7 +25,6 @@ class Api extends CI_Controller {
         $line_report = $this->dashboard_model->getAllLinePerformanceSummaryReport($date);
 
         echo json_encode($line_report);
-
     }
 
     public function LineWisePerformanceDashboard(){

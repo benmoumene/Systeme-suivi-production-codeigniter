@@ -5662,8 +5662,8 @@ class Dashboard extends CI_Controller {
         $date=$datex->format('Y-m-d');
 //        $date='2019-07-04';
 
-
         $time=$datex->format('H:i:s');
+
 //        $time="19:05:00";
         $data['time'] = $time;
 
@@ -5701,8 +5701,11 @@ class Dashboard extends CI_Controller {
             $min_time_to_sec = $minhours[0]['min_time_to_sec'];
 
 //            $data['work_time'] = $this->access_model->getSegments($time);
-            $maxhours = $this->access_model->getHoursByTimeRange($time);
-            $max_time_to_sec = $maxhours[0]['max_time_to_sec'];
+//            $maxhours = $this->access_model->getHoursByTimeRange($time);
+//            $max_time_to_sec = $maxhours[0]['max_time_to_sec'];
+
+            list($hours, $minutes) = explode(':', $time, 2);
+            $max_time_to_sec = $minutes * 60 + $hours * 3600;
 
             $data['work_time'] = ($max_time_to_sec - $min_time_to_sec);
 
