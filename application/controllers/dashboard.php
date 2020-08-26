@@ -5695,6 +5695,9 @@ class Dashboard extends CI_Controller {
 
         $data['segment_id'] = $segment_id;
 
+        list($hours, $minutes) = explode(':', $time, 2);
+        $max_time_to_sec = $minutes * 60 + $hours * 3600;
+
         if($segment_id == 1)
         {
             $minhours = $this->access_model->getMinMaxHours();
@@ -5703,9 +5706,6 @@ class Dashboard extends CI_Controller {
 //            $data['work_time'] = $this->access_model->getSegments($time);
 //            $maxhours = $this->access_model->getHoursByTimeRange($time);
 //            $max_time_to_sec = $maxhours[0]['max_time_to_sec'];
-
-            list($hours, $minutes) = explode(':', $time, 2);
-            $max_time_to_sec = $minutes * 60 + $hours * 3600;
 
             $data['work_time'] = ($max_time_to_sec - $min_time_to_sec);
 
@@ -5726,7 +5726,10 @@ class Dashboard extends CI_Controller {
         if($segment_id == 2)
         {
             $work_time = $this->access_model->getSegments($time);
-            $data['work_time'] = $work_time[0]['working_time_diff_to_sec'];
+//            $data['work_time'] = $work_time[0]['working_time_diff_to_sec'];
+            $min_time_to_sec = $work_time[0]['min_time_to_sec'];
+
+            $data['work_time'] = ($max_time_to_sec - $min_time_to_sec);
 
             $select_fields .= "  id, line_id, target, man_power_2, date, remarks ";
 
@@ -5745,7 +5748,10 @@ class Dashboard extends CI_Controller {
         if($segment_id == 3)
         {
             $work_time = $this->access_model->getSegments($time);
-            $data['work_time'] = $work_time[0]['working_time_diff_to_sec'];
+//            $data['work_time'] = $work_time[0]['working_time_diff_to_sec'];
+            $min_time_to_sec = $work_time[0]['min_time_to_sec'];
+
+            $data['work_time'] = ($max_time_to_sec - $min_time_to_sec);
 
             $select_fields .= "  id, line_id, target, man_power_3, date, remarks ";
 
@@ -5767,9 +5773,12 @@ class Dashboard extends CI_Controller {
 //            $data['work_time'] = $work_time[0]['working_time_diff_to_sec'];
 
             $work_time = $this->access_model->getSegments($time);
-            $segment_start_time = $work_time[0]['start_time'];
-            $parsed1 = date_parse($segment_start_time);
-            $segment_start_time_seconds = $parsed1['hour'] * 3600 + $parsed1['minute'] * 60 + $parsed1['second'];
+//            $segment_start_time = $work_time[0]['start_time'];
+            $min_time_to_sec = $work_time[0]['min_time_to_sec'];
+
+
+//            $parsed1 = date_parse($segment_start_time);
+//            $segment_start_time_seconds = $parsed1['hour'] * 3600 + $parsed1['minute'] * 60 + $parsed1['second'];
 
             $select_fields .= "  id, line_id, target, man_power_4, date, remarks ";
 
@@ -5778,10 +5787,12 @@ class Dashboard extends CI_Controller {
             $line_target = $line_trgt[0]['target'];
             $last_segment_time = $line_trgt[0]['last_segment_time'];
 
-            $parsed2 = date_parse($last_segment_time);
-            $last_segment_time_seconds = $parsed2['hour'] * 3600 + $parsed2['minute'] * 60 + $parsed2['second'];
+//            $parsed2 = date_parse($last_segment_time);
+//            $last_segment_time_seconds = $parsed2['hour'] * 3600 + $parsed2['minute'] * 60 + $parsed2['second'];
 
-            $data['work_time'] = $last_segment_time_seconds - $segment_start_time_seconds;
+//            $data['work_time'] = $last_segment_time_seconds - $segment_start_time_seconds;
+
+            $data['work_time'] = ($max_time_to_sec - $min_time_to_sec);
 
             $man_power = $line_trgt[0]['man_power_4'];
             $data['man_power'] = $man_power;

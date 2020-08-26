@@ -29,7 +29,8 @@ class Access_model extends CI_Model {
     {
         $sql = "SELECT *,
                 (TIME_TO_SEC(end_time) - TIME_TO_SEC(start_time)) as working_time_diff_to_sec, 
-                SEC_TO_TIME((TIME_TO_SEC(end_time) - TIME_TO_SEC(start_time))) as working_hours_min_sec 
+                SEC_TO_TIME((TIME_TO_SEC(end_time) - TIME_TO_SEC(start_time))) as working_hours_min_sec,
+                TIME_TO_SEC(start_time) AS min_time_to_sec
                 FROM `tb_segment` 
                 WHERE '$time' BETWEEN start_time AND end_time";
 
