@@ -5676,6 +5676,14 @@ class Dashboard extends CI_Controller {
 
         $data['get_smv_list'] = $this->access_model->getSegmentWiseSMVs($line_id, $date, $min_start_time, $max_end_time);
 
+        $condition = '';
+
+        if($line_id != ''){
+            $condition .= " AND id=$line_id";
+        }
+
+        $line_info = $this->dashboard_model->getAllLinesByCondition($condition);
+        $data['floor'] = $line_info[0]['floor'];
 
 //        $line_trgt = $this->access_model->getLineTargetViewTable($line_id,$date);
 

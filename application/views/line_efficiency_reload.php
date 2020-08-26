@@ -22,12 +22,21 @@
         $minutes = round($sec_to_minutes, 2);
     }
 
+
+    // For the Time Being - 30 Min being deducted for Floor-2 Start
+    if($floor == 2){
+        $minutes = $minutes - 30;
+    }
+    // For the Time Being - 30 Min being deducted for Floor-2 End
+
     if($man_power > 0){
         $hour = (round($minutes/60, 2) > 0 ? round($minutes/60, 2) : 0);
         $work_minute = (($minutes * $man_power) > 0 ? ($minutes * $man_power) : 0);
     }
 
-
+//                                        echo '<pre>';
+//                                        print_r($minutes);
+//                                        echo '</pre>';
 //                                        echo '<pre>';
 //                                        print_r($work_time);
 //                                        echo '</pre>';
