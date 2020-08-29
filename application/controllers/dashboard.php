@@ -2324,9 +2324,7 @@ class Dashboard extends CI_Controller {
             $this->email->message("$new_row_tbl");
             if($this->email->send())
             {
-                echo  "<script type='text/javascript'>";
-                echo "window.open('', '_self', ''); window.close();";
-                echo "</script>";
+                echo "Mail Sent";
             }
             else
             {
@@ -2335,6 +2333,10 @@ class Dashboard extends CI_Controller {
         }else{
             echo 'No Output Found!';
         }
+
+        echo  "<script type='text/javascript'>";
+        echo "window.open('', '_self', ''); window.close();";
+        echo "</script>";
     }
 
     public function second_floor_production_summary_report_mail_new()
@@ -2424,9 +2426,7 @@ class Dashboard extends CI_Controller {
             $this->email->message("$new_row_tbl");
             if($this->email->send())
             {
-                echo  "<script type='text/javascript'>";
-                echo "window.open('', '_self', ''); window.close();";
-                echo "</script>";
+                echo "Mail Sent";
             }
             else
             {
@@ -2435,6 +2435,10 @@ class Dashboard extends CI_Controller {
         }else{
             echo 'No Output Found!';
         }
+
+        echo  "<script type='text/javascript'>";
+        echo "window.open('', '_self', ''); window.close();";
+        echo "</script>";
 
     }
 
