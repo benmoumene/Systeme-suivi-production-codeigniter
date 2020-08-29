@@ -3939,6 +3939,95 @@ class Dashboard extends CI_Controller {
 //        $this->load->view('reports/master', $data);
     }
 
+    public function lineHourlyReportAutoMail(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $time=$datex->format('H:i:s');
+        $hour=$datex->format('H');
+        $min=$datex->format('i');
+        $date=$datex->format('Y-m-d');
+
+        $last_hour = ($hour-1).':00:00';
+
+        $where = '';
+        $select_fields = " date, start_time, end_time, SUM(qty) as total_hour_output_qty ";
+
+        if($last_hour != ''){
+            $where .= " AND '$last_hour' BETWEEN start_time AND end_time";
+        }
+
+        if($date != ''){
+            $where .= " AND `date`='$date'";
+        }
+
+        $res = $this->access_model->getLineOutputHourlyReport($select_fields, $where);
+
+        $total_hour_output_qty = $res[0]['total_hour_output_qty'];
+
+        if($total_hour_output_qty > 0){
+            $data['min_to_hour']=round($min / 60, 2);
+            $data['time']=$time;
+
+            $segments = $this->access_model->getSegments($time);
+
+            $segment_id=$segments[0]['id'];
+            $data['segment_id']=$segment_id;
+
+            $data['title'] = 'Today Line Hourly Report';
+            $data['user_name'] = $this->session->userdata('user_name');
+            $data['access_points'] = $this->session->userdata('access_points');
+
+            $data['hours'] = $this->access_model->getHours();
+            $data['lines'] = $this->access_model->getLines();
+            $data['floors'] = $this->access_model->getFloors();
+
+            $where = '';
+            if($time != ''){
+                $where .= " AND '$time' between start_time AND end_time";
+            }
+
+            $present_hour_to_second = round($min / 60, 2);
+
+            $present_hour = $this->access_model->getHours($where);
+            $data['working_hour'] = ($present_hour[0]['hour'] - 1) + $present_hour_to_second;
+
+            $mail_content = $this->load->view('reports/line_hourly_report_auto_mail', $data, true);
+
+
+            $config = Array(
+                'protocol' => 'smtp',
+                'smtp_host' => 'webmail.viyellatexgroup.com',
+                'smtp_port' => 25,
+                'smtp_user' => '', // change it to yours
+                'smtp_pass' => '', // change it to yours
+                'mailtype' => 'html',
+                'charset' => 'utf-8',
+                'wordwrap' => TRUE
+            );
+
+            $this->load->library('email', $config);
+            $this->email->set_newline("\r\n");
+            $this->email->from('pts@interfabshirt.com'); // change it to yours
+            $this->email->to('abdullah.khan@viyellatexgroup.com, moazzem.huq@interfabshirt.com, nesar.ahmed@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com'); // change it to yours
+//            $this->email->cc('nipun.sarker@interfabshirt.com');// change it to yours
+//            $this->email->to('nipun.sarker@interfabshirt.com'); // change it to yours
+            $this->email->subject('ECOFAB Hourly Production Report');
+            $this->email->message("$mail_content");
+            if ($this->email->send()) {
+
+                echo  "Mail Sent!";
+
+            } else {
+                show_error($this->email->print_debugger());
+            }
+
+        }
+
+        echo  "<script type='text/javascript'>";
+        echo "window.open('', '_self', ''); window.close();";
+        echo "</script>";
+    }
+
     public function getDetailsAqlreportToday($brand)
     {
         $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
