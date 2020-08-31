@@ -904,6 +904,15 @@ class Dashboard_model extends CI_Model {
         return $query;
     }
 
+    public function getDefectCount($line_id, $defect_code, $date){
+        $sql = "SELECT COUNT(id) AS count_defect FROM `tb_defects_tracking` 
+                WHERE DATE_FORMAT(defect_date_time, '%Y-%m-%d')='$date' 
+                AND line_id=$line_id AND defect_code='$defect_code'";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
     public function getDateWiseWashSendReport($po_from_date){
 
         $sql = "SELECT t1.*, t2.total_count_wash_send_qty, t3.total_order_qty, t3.ex_factory_date, 

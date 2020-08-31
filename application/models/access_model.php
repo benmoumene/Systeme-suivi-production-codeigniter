@@ -5456,6 +5456,23 @@ class Access_model extends CI_Model {
          return $query;
     }
 
+	public function getLineDhuSummaryReport($date)
+    {
+        $sql = "SELECT t1.*, t2.id, t2.line_code FROM 
+                (SELECT line_id, SUM(dhu) AS sum_of_dhu 
+                FROM `tb_today_line_output_qty` 
+                WHERE date='$date' 
+                GROUP BY line_id) AS t1
+                
+                LEFT JOIN
+                tb_line AS t2
+                ON t1.line_id=t2.id
+                ORDER BY (t2.line_code * 1)";
+
+         $query = $this->db->query($sql)->result_array();
+         return $query;
+    }
+
     public function getAllTbl($tbl)
     {
         $this->db->select('*');

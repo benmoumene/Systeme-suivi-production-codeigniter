@@ -6095,6 +6095,8 @@ class Dashboard extends CI_Controller {
 
         $where_3 = " AND '$time'  BETWEEN start_time AND end_time";
 
+        $where_4 = '';
+
         $this_hour = $this->access_model->getHours($where_3);
         $start_time = $this_hour[0]['start_time'];
         $data['start_time'] = $start_time;
@@ -6104,16 +6106,41 @@ class Dashboard extends CI_Controller {
         $data['hour'] = $this_hour[0]['hour'];
 
         if($line_id != ''){
-            $where .= " AND DATE_FORMAT(defect_date_time, '%Y-%m-%d')='$date' AND line_id=$line_id";
+            $where .= " AND DATE_FORMAT(defect_date_time, '%Y-%m-%d')='$date' AND line_id=$line_id AND DATE_FORMAT(defect_date_time, '%H:%i:%s') BETWEEN '$start_time' AND '$end_time'";
             $where_1 .= " AND line_id=$line_id AND DATE_FORMAT(defect_date_time, '%Y-%m-%d')='$date' AND DATE_FORMAT(defect_date_time, '%H:%i:%s') BETWEEN '$start_time' AND '$end_time'";
             $where_2 .= " AND line_id=$line_id AND '$time' BETWEEN start_time AND end_time";
+            $where_4 .= " AND DATE_FORMAT(defect_date_time, '%Y-%m-%d')='$date' AND line_id=$line_id";
         }
 
-        $data['qa_major_defects'] = $this->access_model->getQualityDefectsReport($where);
+        $data['qa_major_defects'] = $this->access_model->getQualityDefectsReport($where_4);
         $data['dhu_report'] = $this->access_model->getDHUReport($where, $where_2, $where_1);
         $data['dhu_summary'] = $this->access_model->getLineDHUSummary($line_id);
 
         echo $data['maincontent'] = $this->load->view('line_quality_defects_reload', $data, true);
+    }
+
+    public function lineQualityReport(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $time=$datex->format('H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $data['date'] = $date;
+        $data['title'] = 'Line Quality Report';
+
+        $where = " AND '$time'  BETWEEN start_time AND end_time";
+
+        $this_hour = $this->access_model->getHours($where);
+        $data['hour'] = $this_hour[0]['hour'];
+
+        $data['defect_types'] = $this->access_model->getAllTbl('tb_defect_types');
+        $data['lines'] = $this->access_model->getLineDhuSummaryReport($date);
+
+        $data['maincontent'] = $this->load->view('reports/line_quality_report', $data);
+    }
+
+    public function getDefectCount($line_id, $defect_code, $date){
+        return $this->dashboard_model->getDefectCount($line_id, $defect_code, $date);
     }
 
     public function getLineDHUSummary($line_id){

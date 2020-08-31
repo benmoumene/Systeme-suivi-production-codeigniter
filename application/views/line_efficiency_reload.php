@@ -16,18 +16,17 @@
 
             $minutes = round($sec_to_minutes, 2);
         }
+
+        // For the Time Being - 30 Min being deducted for ALL Start
+
+        $minutes = $minutes - 30;
+
+        // For the Time Being - 30 Min being deducted for ALL End
     }else{
         $sec_to_minutes = ($work_time / 60);
 
         $minutes = round($sec_to_minutes, 2);
     }
-
-
-    // For the Time Being - 30 Min being deducted for Floor-2 Start
-    if($floor == 2){
-        $minutes = $minutes - 30;
-    }
-    // For the Time Being - 30 Min being deducted for Floor-2 End
 
     if($man_power > 0){
         $hour = (round($minutes/60, 2) > 0 ? round($minutes/60, 2) : 0);
