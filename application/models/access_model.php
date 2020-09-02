@@ -2772,6 +2772,25 @@ class Access_model extends CI_Model {
         return $query;
     }
 
+    public function getLineWiseRunningPOs($where){
+        $sql = "SELECT t1.*, t2.so_no, t2.order_quantity, t2.smv, t2.po_type, t2.brand, t3.is_allowed_to_output 
+                FROM 
+                (SELECT * FROM `tb_line_running_pos` WHERE 1 $where) AS t1
+                LEFT JOIN
+                (SELECT so_no, SUM(quantity) AS order_quantity, smv, po_type, brand 
+                FROM `tb_po_detail` GROUP BY so_no) AS t2
+                ON t1.so_no=t2.so_no
+                LEFT JOIN
+                (SELECT so_no, line_id, is_allowed_to_output 
+                FROM `tb_care_labels` 
+                WHERE 1 $where 
+                GROUP BY so_no, line_id) AS t3
+                ON t1.so_no=t3.so_no";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
     public function checkPackageReady($where)
     {
         $sql = "SELECT * FROM `tb_cut_summary` WHERE is_package_ready=1 AND package_sent_to_production=0 $where";
@@ -2788,6 +2807,16 @@ class Access_model extends CI_Model {
                 WHERE `po_no` = '$po_no' AND cut_no='$cut_no'
                 AND is_package_ready=1
                 AND package_sent_to_production=0";
+
+        $query = $this->db->query($sql);
+        return $query;
+    }
+
+    public function allowDenyLinePoOutput($so_no, $line_id, $status)
+    {
+        $sql = "UPDATE `tb_care_labels` 
+                SET is_allowed_to_output=$status 
+                WHERE so_no='$so_no' AND line_id='$line_id'";
 
         $query = $this->db->query($sql);
         return $query;

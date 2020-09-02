@@ -3920,6 +3920,55 @@ class Access extends CI_Controller {
         echo 'done';
     }
 
+    public function outputControl(){
+        $data['title'] = 'Line Output Control';
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['lines'] = $this->access_model->getLines();
+
+            $data['maincontent'] = $this->load->view('line_output_control', $data, true);
+            $this->load->view('master', $data);
+
+        }else{
+            echo $this->load->view('404');
+        }
+
+    }
+
+    public function getLineWiseRunningPOs(){
+        $line_id = $this->input->post('line_no');
+
+        $where = '';
+
+        if($line_id != ''){
+            $where .= " AND line_id=$line_id";
+        }
+
+        $data['line_running_pos'] = $this->access_model->getLineWiseRunningPOs($where);
+
+        echo $maincontent = $this->load->view('line_running_po_list', $data);
+    }
+
+    public function allowDenyLinePoOutput(){
+        $status = $this->input->post('status');
+        $so_nos = $this->input->post('so_nos');
+        $line_id = $this->input->post('line_no');
+
+        foreach ($so_nos as $so_no){
+            $this->access_model->allowDenyLinePoOutput($so_no, $line_id, $status);
+        }
+
+        echo 'done';
+
+    }
+
     public function getReprintRequest()
     {
         $data['title'] = 'Approved Reprint Label';

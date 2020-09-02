@@ -433,6 +433,7 @@
                 // access_point = 2 = begining_of_line
                 ?>
                 <!--            <li> <a href="--><?php //echo base_url();?><!--access/care_label_end_line"><i class="fa fa-circle"></i> End-Line QC</a></li>-->
+                <li> <a href="<?php echo base_url();?>access/outputControl"><i class="fa fa-circle"></i> Line Output Control </a></li>
                 <li> <a href="<?php echo base_url();?>access/smv_form"><i class="fa fa-circle"></i> Set SMV </a></li>
                 <li> <a href="<?php echo base_url();?>access/change_line"><i class="fa fa-exchange"></i> Change Line </a></li>
 <!--                <li> <a href="--><?php //echo base_url();?><!--access/manage_bundle_line"><i class="fa fa-circle"></i> Bundle-Line </a></li>-->
