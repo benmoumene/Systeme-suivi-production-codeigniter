@@ -1499,6 +1499,10 @@ class Access extends CI_Controller {
         }
     }
 
+    public function poOutputControl(){
+
+    }
+
     public function getBackupLineLastDayProduction($line_id, $previous_date){
 
         $line_output = 0;
@@ -1636,8 +1640,16 @@ class Access extends CI_Controller {
         $data['msg'] = '';
         $data['session_out'] = $this->session_out;
 
-        $data['maincontent'] = $this->load->view('line_finishing_alter', $data, true);
-        $this->load->view('master', $data);
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['maincontent'] = $this->load->view('line_finishing_alter', $data, true);
+            $this->load->view('master', $data);
+        }else{
+            echo $this->load->view('404');
+        }
     }
 
     public function lineFinishingAlterDone(){
