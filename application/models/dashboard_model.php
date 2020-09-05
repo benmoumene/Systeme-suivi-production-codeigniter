@@ -2679,9 +2679,9 @@ class Dashboard_model extends CI_Model {
     }
 
     public function getLineWiseRunningPOs(){
-        $sql = "SELECT t1.*, 
-                (IFNULL(t1.count_input_qty_line, 0)-(IFNULL(t1.count_end_line_qc_pass, 0)+IFNULL(t1.count_manual_close, 0))) AS line_po_balance, 
-                t2.min_line_input_date_time 
+        $sql = "SELECT t1.*,
+                (IFNULL(t1.count_input_qty_line, 0)-IFNULL(t1.count_end_line_qc_pass, 0)) AS line_po_balance, 
+                t2.min_line_input_date_time, IFNULL(t3.manually_closed, 0) AS is_manually_closed
 
                 FROM 
                 (SELECT po_no,so_no,item,quality,color,purchase_order,line_id,brand,ex_factory_date,style_no,style_name,
@@ -2707,7 +2707,13 @@ class Dashboard_model extends CI_Model {
                 ON t1.so_no=t2.so_no AND t1.po_no=t2.po_no AND t1.item=t2.item AND t1.quality=t2.quality 
                 AND t1.color=t2.color AND t1.purchase_order=t2.purchase_order AND t1.line_id=t2.line_id
                 
-                WHERE (IFNULL(t1.count_input_qty_line, 0) - IFNULL(t1.count_end_line_qc_pass, 0)) > 0";
+                LEFT JOIN
+                (SELECT so_no, manually_closed FROM `vt_few_days_po_pcs` 
+                WHERE manually_closed=1 
+                GROUP BY so_no, manually_closed) AS t3
+                ON t1.so_no=t3.so_no
+                
+                WHERE (IFNULL(t1.count_input_qty_line, 0)-IFNULL(t1.count_end_line_qc_pass, 0)) > 0 AND IFNULL(t3.manually_closed, 0)=0";
 
         $query = $this->db->query($sql)->result_array();
         return $query;

@@ -1500,7 +1500,33 @@ class Access extends CI_Controller {
     }
 
     public function poOutputControl(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
 
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $s_data['session_last_action_date_time'] = $date_time;
+        $this->session->set_userdata($s_data);
+
+        $data['title'] = 'PO Output Control';
+
+        $line_id = $this->session->userdata('line_id');
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+        $data['msg'] = '';
+        $data['session_out'] = $this->session_out;
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['maincontent'] = $this->load->view('po_output_control', $data, true);
+            $this->load->view('master', $data);
+        }else{
+            echo $this->load->view('404');
+        }
     }
 
     public function getBackupLineLastDayProduction($line_id, $previous_date){
@@ -1649,6 +1675,56 @@ class Access extends CI_Controller {
             $this->load->view('master', $data);
         }else{
             echo $this->load->view('404');
+        }
+    }
+
+    public function checkResponsiblePersonValidity(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $responsible_person = $this->input->post('responsible_person');
+
+        $s_data['session_last_action_date_time'] = $date_time;
+        $this->session->set_userdata($s_data);
+
+        $res = $this->access_model->selectTableData('*', 'tb_output_control_cards', 'code', $responsible_person);
+
+        if(sizeof($res) > 0){
+            echo 'found';
+        }else{
+            echo 'not found';
+        }
+    }
+
+    public function allowPoLineOutput(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $line_id = $this->session->userdata('line_id');
+        $pc_no = $this->input->post('pc_no');
+        $responsible_person = $this->input->post('responsible_person');
+
+        $s_data['session_last_action_date_time'] = $date_time;
+        $this->session->set_userdata($s_data);
+
+        $where = " AND pc_tracking_no='$pc_no'";
+
+        $is_pc_available = $this->access_model->selectTableDataRowQuery('pc_tracking_no, so_no, line_id', 'tb_care_labels', $where);
+
+        if(sizeof($is_pc_available) > 0){
+            if($line_id == $is_pc_available[0]['line_id']){
+                $so_no = $is_pc_available[0]['so_no'];
+
+                $this->access_model->allowDenyLinePoOutput($so_no, $line_id, 1, $responsible_person);
+
+                echo 'done';
+            }else{
+                echo 'line mismatch';
+            }
+        }else{
+            echo 'invalid';
         }
     }
 
@@ -3969,12 +4045,16 @@ class Access extends CI_Controller {
     }
 
     public function allowDenyLinePoOutput(){
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+
         $status = $this->input->post('status');
         $so_nos = $this->input->post('so_nos');
         $line_id = $this->input->post('line_no');
 
         foreach ($so_nos as $so_no){
-            $this->access_model->allowDenyLinePoOutput($so_no, $line_id, $status);
+            $this->access_model->allowDenyLinePoOutput($so_no, $line_id, $status, $data['user_name']);
         }
 
         echo 'done';

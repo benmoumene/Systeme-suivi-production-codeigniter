@@ -23,7 +23,7 @@
         <div class="pull-left page_title theme_color">
           <h1>End Line QC</h1>
           <a class="btn btn-warning" href="<?php echo base_url()?>access/lineFinishingAlter">Finishing Alter</a>
-          <a class="btn btn-warning" href="<?php echo base_url()?>access/poOutputControl">Output Control</a>
+          <a class="btn btn-success" href="<?php echo base_url()?>access/poOutputControl">Output Control</a>
         </div>
         <div class="pull-right">
           <ol class="breadcrumb">
@@ -389,7 +389,7 @@
         }
 
         if((txt != '') && (first_variable != 'DC') && (first_variable != 'Dc') && (first_variable != 'DP') && (first_variable != 'Dp') && (last_variable == '.')){
-$('#defect_code_tbl tbody').find('tr:last').remove();
+            $('#defect_code_tbl tbody').find('tr:last').remove();
             $('#carelabel_tracking_no_defect').val(txt).keyup();
         }
     }

@@ -2812,10 +2812,10 @@ class Access_model extends CI_Model {
         return $query;
     }
 
-    public function allowDenyLinePoOutput($so_no, $line_id, $status)
+    public function allowDenyLinePoOutput($so_no, $line_id, $status, $responsible_person)
     {
         $sql = "UPDATE `tb_care_labels` 
-                SET is_allowed_to_output=$status 
+                SET is_allowed_to_output=$status, is_allowed_to_output_remarks='$responsible_person'
                 WHERE so_no='$so_no' AND line_id='$line_id'";
 
         $query = $this->db->query($sql);
@@ -6226,6 +6226,12 @@ class Access_model extends CI_Model {
     {
         $sql="select * from tb_care_labels WHERE  so_no='$so_no' GROUP BY so_no, is_wash_gmt";
         $query = $this->db->query($sql)->result();
+        return $query;
+    }
+
+    public function selectTableDataRowQuery($fields, $table_name, $where){
+        $sql="SELECT $fields FROM $table_name WHERE 1 $where";
+        $query = $this->db->query($sql)->result_array();
         return $query;
     }
 
