@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fdf3a7-84b8-4c03-909e-2a58cce5012a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/views/po_output_control.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/access.php" afterPath="$PROJECT_DIR$/application/controllers/access.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/access_model.php" afterPath="$PROJECT_DIR$/application/models/access_model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/dashboard_model.php" afterPath="$PROJECT_DIR$/application/models/dashboard_model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/care_label_end_line_new.php" afterPath="$PROJECT_DIR$/application/views/care_label_end_line_new.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/line_finishing_alter.php" afterPath="$PROJECT_DIR$/application/views/line_finishing_alter.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reports/line_quality_report.php" afterPath="$PROJECT_DIR$/application/views/reports/line_quality_report.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,90 +18,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="access.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/controllers/access.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="12643" column="89" lean-forward="false" selection-start-line="12643" selection-start-column="23" selection-end-line="12643" selection-end-column="89" />
-              <folding>
-                <marker date="1599119026927" expanded="true" signature="23229:23402" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="67188:67201" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="67487:67500" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="67786:67799" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="67975:67988" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="68119:68130" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="68233:68244" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="68336:68347" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="69416:69429" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="69715:69728" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="70014:70027" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="70203:70216" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="70347:70358" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="70461:70472" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="70564:70575" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="71651:71664" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="71831:71844" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="72021:72034" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="72165:72176" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="72279:72290" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="72382:72393" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="73469:73482" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="73649:73662" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="73839:73852" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="73983:73994" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="74097:74108" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="74200:74211" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="75287:75300" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="75590:75603" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="75770:75783" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="75956:75969" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="76100:76111" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="76214:76225" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="76317:76328" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="77404:77417" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="77707:77720" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="77887:77900" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="78073:78086" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="78217:78228" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="78331:78342" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="78434:78445" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="182019:182350" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="182426:182562" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="183029:183360" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="183436:183572" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="183943:184071" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="184410:184538" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="184828:184956" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="185270:185398" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="186103:186434" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="186510:186646" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="187108:187435" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="187511:187647" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="188013:188141" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="188475:188603" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="188914:189042" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="189293:189421" ph="..." />
-                <marker date="1599119026927" expanded="true" signature="189644:189760" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="po_manual_closing.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/po_manual_closing.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1819">
-              <caret line="107" column="58" lean-forward="false" selection-start-line="107" selection-start-column="58" selection-end-line="107" selection-end-column="58" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="dashboard.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/dashboard.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="4093" column="54" lean-forward="true" selection-start-line="4093" selection-start-column="54" selection-end-line="4093" selection-end-column="54" />
+            <state relative-caret-position="302">
+              <caret line="4545" column="85" lean-forward="false" selection-start-line="4545" selection-start-column="58" selection-end-line="4545" selection-end-column="85" />
               <folding>
                 <marker date="1599104249763" expanded="true" signature="40082:40946" ph="..." />
                 <marker date="1599104249763" expanded="true" signature="41612:42622" ph="..." />
@@ -117,10 +33,20 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="line_quality_report.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/views/reports/line_quality_report.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="113" column="10" lean-forward="true" selection-start-line="113" selection-start-column="10" selection-end-line="113" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="access_model.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/access_model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
+            <state relative-caret-position="47889">
               <caret line="2817" column="100" lean-forward="false" selection-start-line="2817" selection-start-column="100" selection-end-line="2817" selection-end-column="100" />
               <folding>
                 <marker date="1599118346238" expanded="true" signature="788:1154" ph="SELECT *, (T... tb_segment" />
@@ -832,11 +758,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dashboard_model.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="dashboard_model.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/dashboard_model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="104">
-              <caret line="2680" column="0" lean-forward="false" selection-start-line="2680" selection-start-column="0" selection-end-line="2680" selection-end-column="0" />
+            <state relative-caret-position="87">
+              <caret line="2679" column="0" lean-forward="true" selection-start-line="2679" selection-start-column="0" selection-end-line="2679" selection-end-column="0" />
               <folding>
                 <marker date="1599282378733" expanded="true" signature="508:530" ph="Select * Fro... tb_floor" />
                 <marker date="1599282378733" expanded="true" signature="673:704" ph="Select * Fro... tb_warehouse_type" />
@@ -1308,8 +1234,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>allowDenyLinePoOutput()</find>
-      <find>update</find>
       <find>ECOFAB Hourly Production Report</find>
       <find>care_label_end_line_new</find>
       <find>lineFinishingAlter</find>
@@ -1338,6 +1262,8 @@
       <find>allowDenyLinePoOutput</find>
       <find>poManualClose</find>
       <find>getLineWiseRunningPOs</find>
+      <find>lineQualityReport</find>
+      <find>shipDateWiseReportMonth</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -1386,7 +1312,6 @@
         <option value="$PROJECT_DIR$/application/views/reports/line_hourly_report_auto_mail.php" />
         <option value="$PROJECT_DIR$/application/views/line_efficiency_reload.php" />
         <option value="$PROJECT_DIR$/application/views/reports/master.php" />
-        <option value="$PROJECT_DIR$/application/views/reports/line_quality_report.php" />
         <option value="$PROJECT_DIR$/application/views/master.php" />
         <option value="$PROJECT_DIR$/application/views/line_running_po_list.php" />
         <option value="$PROJECT_DIR$/application/views/line_output_control.php" />
@@ -1397,6 +1322,7 @@
         <option value="$PROJECT_DIR$/application/views/po_output_control.php" />
         <option value="$PROJECT_DIR$/application/controllers/access.php" />
         <option value="$PROJECT_DIR$/application/models/dashboard_model.php" />
+        <option value="$PROJECT_DIR$/application/views/reports/line_quality_report.php" />
       </list>
     </option>
   </component>
@@ -1428,6 +1354,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -1486,6 +1414,28 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="reports" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pts" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="models" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -1510,8 +1460,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2506,18 +2454,19 @@
       <workItem from="1599021344047" duration="15322000" />
       <workItem from="1599044385696" duration="33000" />
       <workItem from="1599103465765" duration="18458000" />
-      <workItem from="1599275987930" duration="5380000" />
+      <workItem from="1599275987930" duration="5979000" />
+      <workItem from="1599370936291" duration="1452000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5705245000" />
+    <option name="totallyTimeSpent" value="5707296000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18740849" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20058565" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2788,13 +2737,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/reports/line_quality_report.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="102" column="0" lean-forward="true" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/reports/line_po_item_report.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -2858,14 +2800,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/po_manual_closing.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1819">
-          <caret line="107" column="58" lean-forward="false" selection-start-line="107" selection-start-column="58" selection-end-line="107" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/get_ready_package_by_po.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
@@ -2882,7 +2816,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/access_model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
+        <state relative-caret-position="47889">
           <caret line="2817" column="100" lean-forward="false" selection-start-line="2817" selection-start-column="100" selection-end-line="2817" selection-end-column="100" />
           <folding>
             <marker date="1599118346238" expanded="true" signature="788:1154" ph="SELECT *, (T... tb_segment" />
@@ -3595,7 +3529,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/access.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
+        <state relative-caret-position="214931">
           <caret line="12643" column="89" lean-forward="false" selection-start-line="12643" selection-start-column="23" selection-end-line="12643" selection-end-column="89" />
           <folding>
             <marker date="1599119026927" expanded="true" signature="23229:23402" ph="..." />
@@ -3660,23 +3594,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/dashboard.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="4093" column="54" lean-forward="true" selection-start-line="4093" selection-start-column="54" selection-end-line="4093" selection-end-column="54" />
-          <folding>
-            <marker date="1599104249763" expanded="true" signature="40082:40946" ph="..." />
-            <marker date="1599104249763" expanded="true" signature="41612:42622" ph="..." />
-            <marker date="1599104249763" expanded="true" signature="255930:256009" ph="..." />
-            <marker date="1599104249763" expanded="true" signature="257776:257857" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/models/dashboard_model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="2680" column="0" lean-forward="false" selection-start-line="2680" selection-start-column="0" selection-end-line="2680" selection-end-column="0" />
+        <state relative-caret-position="87">
+          <caret line="2679" column="0" lean-forward="true" selection-start-line="2679" selection-start-column="0" selection-end-line="2679" selection-end-column="0" />
           <folding>
             <marker date="1599282378733" expanded="true" signature="508:530" ph="Select * Fro... tb_floor" />
             <marker date="1599282378733" expanded="true" signature="673:704" ph="Select * Fro... tb_warehouse_type" />
@@ -4133,6 +4054,35 @@
             <marker date="1599282378733" expanded="true" signature="206898:207049" ph="UPDATE `tb_t... " />
             <marker date="1599282378733" expanded="true" signature="207246:207432" ph="UPDATE `tb_t... " />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/po_manual_closing.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="107" column="58" lean-forward="false" selection-start-line="107" selection-start-column="58" selection-end-line="107" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/dashboard.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="4545" column="85" lean-forward="false" selection-start-line="4545" selection-start-column="58" selection-end-line="4545" selection-end-column="85" />
+          <folding>
+            <marker date="1599104249763" expanded="true" signature="40082:40946" ph="..." />
+            <marker date="1599104249763" expanded="true" signature="41612:42622" ph="..." />
+            <marker date="1599104249763" expanded="true" signature="255930:256009" ph="..." />
+            <marker date="1599104249763" expanded="true" signature="257776:257857" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/reports/line_quality_report.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="113" column="10" lean-forward="true" selection-start-line="113" selection-start-column="10" selection-end-line="113" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>

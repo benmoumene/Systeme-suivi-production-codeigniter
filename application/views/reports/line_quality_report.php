@@ -91,7 +91,7 @@
 <table id="" border="1" width="100%" style="border: 1px solid black;">
         <thead>
             <tr style="background-color: #f7ffb0;">
-                <th align="center" style="font-size: 25px; font-weight: 900;" colspan="14">Line Defect Report: <?php echo $date;?></th>
+                <th align="center" style="font-size: 25px; font-weight: 900;" colspan="15">Line Defect Report: <?php echo $date;?></th>
             </tr>
             <tr style="background-color: #f7ffb0;">
                 <th align="center" style="font-size: 18px; font-weight: 900;">LINE</th>
@@ -100,12 +100,14 @@
             <?php foreach ($defect_types AS $d){ ?>
                 <th align="center" style="font-size: 18px; font-weight: 900;"><?php echo $d['defect_name']?></th>
             <?php } ?>
-
+                <th align="center" style="font-size: 18px; font-weight: 900;">Total Defects</th>
             </tr>
         </thead>
         <tbody>
 
         <?php
+
+        $total_defects = 0;
 
         foreach ($lines AS $k => $line){
 
@@ -121,9 +123,16 @@
 
                     $defect_count_res = $this->method_call->getDefectCount($line['id'], $d['defect_code'], $date);
 
+                    $count_defect = ($defect_count_res[0]['count_defect'] != '' ? $defect_count_res[0]['count_defect'] : 0);
+
+                    $total_defects += $count_defect;
+
             ?>
-                <td align="center"><?php echo $defect_count_res[0]['count_defect'];?></td>
+                <td align="center"><?php echo $count_defect;?></td>
             <?php } ?>
+            <td align="center">
+                <?php echo $total_defects; ?>
+            </td>
 
         </tr>
 
