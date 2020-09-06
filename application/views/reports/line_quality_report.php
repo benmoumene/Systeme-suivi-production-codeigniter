@@ -91,26 +91,27 @@
 <table id="" border="1" width="100%" style="border: 1px solid black;">
         <thead>
             <tr style="background-color: #f7ffb0;">
-                <th align="center" style="font-size: 25px; font-weight: 900;" colspan="15">Line Defect Report: <?php echo $date;?></th>
+                <th align="center" style="font-size: 22px; font-weight: 900;" colspan="15">Line Defect Report: <?php echo $date;?></th>
             </tr>
             <tr style="background-color: #f7ffb0;">
-                <th align="center" style="font-size: 18px; font-weight: 900;">LINE</th>
-                <th align="center" style="font-size: 18px; font-weight: 900;">AVG.DHU</th>
+                <th align="center" style="font-size: 16px; font-weight: 900;">LINE</th>
+                <th align="center" style="font-size: 16px; font-weight: 900;">AVG.DHU</th>
 
             <?php foreach ($defect_types AS $d){ ?>
-                <th align="center" style="font-size: 18px; font-weight: 900;"><?php echo $d['defect_name']?></th>
+                <th align="center" style="font-size: 16px; font-weight: 900;"><?php echo $d['defect_name']?></th>
             <?php } ?>
-                <th align="center" style="font-size: 18px; font-weight: 900;">Total Defects</th>
+                <th align="center" style="font-size: 16px; font-weight: 900;">Total</th>
             </tr>
         </thead>
         <tbody>
 
         <?php
 
-        $total_defects = 0;
+
 
         foreach ($lines AS $k => $line){
 
+            $total_defects = 0;
         ?>
         <tr>
             <td align="center"><?php echo $line['line_code']; ?></td>
