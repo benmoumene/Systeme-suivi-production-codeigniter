@@ -110,7 +110,7 @@ foreach ($dates as $dt){
     $total_balance_qty = 0;
 
     foreach ($po_close_report as $v){
-        $sew_balance_qty = $v['count_end_line_qc_pass'] - $v['count_input_qty_line'];
+        $sew_balance_qty = $v['count_end_line_qc_pass'] - $v['total_order_qty'];
         $balance_qty = ($v['count_carton_pass'] + $v['total_wh_qa']) - $v['total_cut_qty'];
         $washing_balance_qty = $v['count_washing_pass'] - $v['count_washing_qty'];
         $packing_balance_qty = $v['count_packing_pass'] - $v['total_order_qty'];
@@ -122,7 +122,7 @@ foreach ($dates as $dt){
         $total_cut_pass_qty += $v['total_cut_input_qty'];
         $total_line_input_qty += $v['count_input_qty_line'];
         $total_line_output_qty += $v['count_end_line_qc_pass'];
-        $total_line_output_balance_qty += ($v['count_end_line_qc_pass'] - $v['count_input_qty_line']);
+        $total_line_output_balance_qty += $sew_balance_qty;
         $total_wash_send_qty += $v['count_washing_qty'];
         $total_washed_qty += $v['count_washing_pass'];
         $total_wash_balance_qty += $washing_balance_qty;
