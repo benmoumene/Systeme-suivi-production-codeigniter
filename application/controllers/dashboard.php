@@ -4191,8 +4191,8 @@ class Dashboard extends CI_Controller {
         }
 
 //        $data['maincontent'] = $this->load->view('finishing_floor_performance_dashboard', $data, true);
-        $data['maincontent'] = $this->load->view('finishing_floor_performance_dashboard_new', $data, true);
-        $this->load->view('master_line', $data);
+        $data['maincontent'] = $this->load->view('finishing_floor_performance_dashboard_new', $data);
+//        $this->load->view('master_line', $data);
     }
 
     public function warehouseReport(){
