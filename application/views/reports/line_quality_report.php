@@ -107,8 +107,6 @@
 
         <?php
 
-
-
         foreach ($lines AS $k => $line){
 
             $total_defects = 0;

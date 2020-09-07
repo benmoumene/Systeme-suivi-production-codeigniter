@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fdf3a7-84b8-4c03-909e-2a58cce5012a" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reports/line_quality_report.php" afterPath="$PROJECT_DIR$/application/views/reports/line_quality_report.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,8 +21,8 @@
       <file leaf-file-name="access.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/access.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="12641" column="20" lean-forward="true" selection-start-line="12641" selection-start-column="20" selection-end-line="12641" selection-end-column="20" />
+            <state relative-caret-position="17">
+              <caret line="12641" column="20" lean-forward="false" selection-start-line="12641" selection-start-column="20" selection-end-line="12641" selection-end-column="20" />
               <folding>
                 <marker date="1599119026927" expanded="true" signature="23229:23402" ph="..." />
                 <marker date="1599119026927" expanded="true" signature="67188:67201" ph="..." />
@@ -89,7 +90,7 @@
       <file leaf-file-name="dashboard.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/dashboard.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
+            <state relative-caret-position="17">
               <caret line="6140" column="77" lean-forward="false" selection-start-line="6140" selection-start-column="58" selection-end-line="6140" selection-end-column="77" />
               <folding>
                 <marker date="1599104249763" expanded="true" signature="40082:40946" ph="..." />
@@ -104,14 +105,9 @@
       <file leaf-file-name="line_quality_report.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/reports/line_quality_report.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="87">
-              <caret line="93" column="55" lean-forward="false" selection-start-line="93" selection-start-column="55" selection-end-line="93" selection-end-column="55" />
-              <folding>
-                <element signature="n#style#0;n#th#0;n#tr#1;n#thead#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#th#1;n#tr#1;n#thead#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#th#2;n#tr#1;n#thead#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#th#3;n#tr#1;n#thead#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="393">
+              <caret line="106" column="0" lean-forward="true" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -247,8 +243,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -353,11 +347,13 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="Z:/htdocs/HRSP" />
+    <property name="last_opened_file_path" value="Q:/arms" />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
@@ -1348,15 +1344,16 @@
       <workItem from="1599044385696" duration="33000" />
       <workItem from="1599103465765" duration="18458000" />
       <workItem from="1599275987930" duration="5979000" />
-      <workItem from="1599370936291" duration="8705000" />
+      <workItem from="1599370936291" duration="10086000" />
+      <workItem from="1599448141282" duration="56000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5714549000" />
+    <option name="totallyTimeSpent" value="5715986000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1830161" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1662,7 +1659,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="107" column="58" lean-forward="false" selection-start-line="107" selection-start-column="58" selection-end-line="107" selection-end-column="58" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2846,7 +2842,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="159">
           <caret line="213" column="49" lean-forward="true" selection-start-line="213" selection-start-column="49" selection-end-line="213" selection-end-column="49" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2854,7 +2849,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="61" column="50" lean-forward="true" selection-start-line="61" selection-start-column="50" selection-end-line="61" selection-end-column="50" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2862,7 +2856,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="227">
           <caret line="225" column="65" lean-forward="false" selection-start-line="225" selection-start-column="65" selection-end-line="225" selection-end-column="65" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2870,9 +2863,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="328">
           <caret line="193" column="65" lean-forward="true" selection-start-line="193" selection-start-column="65" selection-end-line="193" selection-end-column="65" />
-          <folding>
-            <element signature="n#style#0;n#td#21;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#!!top" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2880,7 +2870,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="227">
           <caret line="237" column="65" lean-forward="true" selection-start-line="237" selection-start-column="65" selection-end-line="237" selection-end-column="65" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2888,7 +2877,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2896,14 +2884,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="261">
           <caret line="226" column="67" lean-forward="false" selection-start-line="226" selection-start-column="67" selection-end-line="226" selection-end-column="67" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/access.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="12641" column="20" lean-forward="true" selection-start-line="12641" selection-start-column="20" selection-end-line="12641" selection-end-column="20" />
+        <state relative-caret-position="17">
+          <caret line="12641" column="20" lean-forward="false" selection-start-line="12641" selection-start-column="20" selection-end-line="12641" selection-end-column="20" />
           <folding>
             <marker date="1599119026927" expanded="true" signature="23229:23402" ph="..." />
             <marker date="1599119026927" expanded="true" signature="67188:67201" ph="..." />
@@ -2969,7 +2956,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/dashboard.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
+        <state relative-caret-position="17">
           <caret line="6140" column="77" lean-forward="false" selection-start-line="6140" selection-start-column="58" selection-end-line="6140" selection-end-column="77" />
           <folding>
             <marker date="1599104249763" expanded="true" signature="40082:40946" ph="..." />
@@ -2982,14 +2969,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/reports/line_quality_report.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="87">
-          <caret line="93" column="55" lean-forward="false" selection-start-line="93" selection-start-column="55" selection-end-line="93" selection-end-column="55" />
-          <folding>
-            <element signature="n#style#0;n#th#0;n#tr#1;n#thead#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#th#1;n#tr#1;n#thead#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#th#2;n#tr#1;n#thead#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#th#3;n#tr#1;n#thead#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="393">
+          <caret line="106" column="0" lean-forward="true" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
