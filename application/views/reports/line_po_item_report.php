@@ -17,7 +17,7 @@
             <table class="table" border="1">
                 <thead>
                     <tr>
-                        <th class="center" colspan="16"><span style="font-size: 20px;"><?php echo $line_po_items[0]['line_name']?></span></th>
+                        <th class="center" colspan="17"><span style="font-size: 20px;"><?php echo $line_po_items[0]['line_name']?></span></th>
                     </tr>
                     <tr>
                         <th class="center">PO-Item</th>
@@ -33,6 +33,7 @@
 <!--                        <th class="center"><span data-toggle="tooltip" title="Cut Pass QTY">Cut Pass</span></th>-->
 <!--                        <th class="center"><span data-toggle="tooltip" title="Other Line Input">Other Line</span></th>-->
                         <th class="center">Input Date</th>
+                        <th class="center">Output Start</th>
                         <th class="center">Input</th>
 <!--                        <th class="center">Input Date</th>-->
                         <th class="center"><span data-toggle="tooltip" title="Collar Qty">Collar</span></th>
@@ -91,6 +92,7 @@
 //                                ?>
 <!--                            </td>-->
                             <td class="center"><?php echo $v['min_line_input_date_time']; ?></td>
+                            <td class="center"><?php echo $v['min_line_output_date']; ?></td>
                             <td class="center"><?php echo $v['count_input_qty_line']; ?></td>
 <!--                            <td class="center">--><?php //echo $v['min_line_input_date_time']; ?><!--</td>-->
                             <td class="center"><?php echo $v['collar_bndl_qty']; ?></td>
@@ -110,7 +112,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td align="right" colspan="15">Total</td>
+                        <td align="right" colspan="16">Total</td>
                         <td class="center"><?php echo $total_balance;?></td>
                     </tr>
                 </tfoot>
@@ -124,7 +126,7 @@
             <table class="table" border="1" style="font-size: 20px; font-weight: 700;">
                 <tbody>
                     <tr>
-                        <td align="right" colspan="15">Total WIP</td>
+                        <td align="right" colspan="16">Total WIP</td>
                         <td class="center"><?php echo $total_wip_qty;?></td>
                     </tr>
                 </tbody>

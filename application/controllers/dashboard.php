@@ -4111,6 +4111,7 @@ class Dashboard extends CI_Controller {
                 $idata['min_line_input_date_time'] = $v['min_line_input_date_time'];
                 $idata['count_input_qty_line'] = $v['count_input_qty_line'];
                 $idata['count_end_line_qc_pass'] = $v['count_end_line_qc_pass'];
+                $idata['min_line_output_date'] = $v['min_line_output_date'];
                 $idata['line_po_balance'] = $v['line_po_balance'];
 
                 if($res_status == 1){

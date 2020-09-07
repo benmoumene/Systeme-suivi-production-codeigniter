@@ -2681,7 +2681,8 @@ class Dashboard_model extends CI_Model {
     public function getLineWiseRunningPOs(){
         $sql = "SELECT t1.*,
                 (IFNULL(t1.count_input_qty_line, 0)-IFNULL(t1.count_end_line_qc_pass, 0)) AS line_po_balance, 
-                t2.min_line_input_date_time, IFNULL(t3.manually_closed, 0) AS is_manually_closed
+                t2.min_line_input_date_time, IFNULL(t3.manually_closed, 0) AS is_manually_closed,
+                t4.min_line_output_date
 
                 FROM 
                 (SELECT po_no,so_no,item,quality,color,purchase_order,line_id,brand,ex_factory_date,style_no,style_name,
@@ -2713,6 +2714,13 @@ class Dashboard_model extends CI_Model {
                 GROUP BY so_no, manually_closed) AS t3
                 ON t1.so_no=t3.so_no
                 
+                LEFT JOIN
+                (SELECT so_no, line_id, MIN(DATE_FORMAT(end_line_qc_date_time, '%Y-%m-%d')) AS min_line_output_date
+                FROM `vt_few_days_po_pcs` 
+                WHERE line_id != 0 AND end_line_qc_date_time!='0000-00-00 00:00:00'
+                GROUP BY so_no, line_id) AS t4
+                ON t1.so_no=t4.so_no AND t1.line_id=t4.line_id
+                                
                 WHERE (IFNULL(t1.count_input_qty_line, 0)-IFNULL(t1.count_end_line_qc_pass, 0)) > 0 AND IFNULL(t3.manually_closed, 0)=0";
 
         $query = $this->db->query($sql)->result_array();
