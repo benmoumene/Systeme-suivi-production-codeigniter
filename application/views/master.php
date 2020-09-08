@@ -295,7 +295,7 @@
                   <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/print_bundle_summary_page"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b> Bundle Summary </b> </a> </li>
                   <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/cutting_summary"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b> Cutting Summary </b> </a> </li>
                   <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/print_input_ticket"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b> Get Input Ticket </b> </a> </li>
-                  <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>dashboard/cutPackageReportChart"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b> Package Ready Chart </b> </a> </li>
+                  <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>dashboard/cutPackageReportChart"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b> Cutting Dashboard </b> </a> </li>
               </ul>
             </li>
             <li> <a href="javascript:void(0);"> <i class="fa fa-bar-chart-o"></i> PO Info <span class="plus"><i class="fa fa-plus"></i></span></a>
