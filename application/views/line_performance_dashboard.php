@@ -1,5 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <!--    <meta http-equiv="refresh" content="300">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title><?php echo $title ?></title>
+    <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/images/favicon.ico" type="image/x-icon" />
+
+    <!-- Bootstrap CSS -->
+    <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!--Canvas Chart Asset Start-->
+    <script src="<?php echo base_url(); ?>assets/js/canvas_chart/jquery-1.11.1.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/canvas_chart/canvasjs.min.js"></script>
+    <!--Canvas Chart Asset End-->
+
+    <style>
+        table, td, th {
+            border: 1px solid #ddd;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 2px;
+        }
+
+        /* Loader Style Start */
+
+        .loader {
+            border: 20px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 20px solid #3498db;
+            width: 35px;
+            height: 35px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Loader Style End */
+    </style>
+</head>
+<!--<body class="light_theme  fixed_header left_nav_fixed">-->
+<body>
+
 <?php
-$line_name = '';
 $line_id = $line_info[0]['id'];
 
 if($line_info[0]['line_name'] != ''){
@@ -19,236 +76,240 @@ $dataPoints = array(
 )
 
 ?>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel-body" style="background-color: #34b077; color: white;">
 
-<div class="pull-left breadcrumb_admin clear_both">
-        <div class="pull-left page_title theme_color">
-<!--          <h1>Dashboard</h1>-->
-<!--          <h2 class="">Dashboard...</h2>-->
+            <center>
+                <div style="font-weight: 900; font-size: 50px;">
+                    <?php
+                    echo $line_name;
+                    ?>
+                </div>
+            </center>
+
         </div>
-        <div class="pull-right">
-          <ol class="breadcrumb">
-              <li><a href="javascript:void(0);" onclick="window.location.reload(1);"> <i class="fa fa-repeat"></i> </a></li>
-              <li><a href="<?php echo base_url();?>">Home</a></li>
-              <li class="active">Dashboard</li>
-          </ol>
-        </div>
-</div>
-<div class="container clear_both padding_fix">
-    <!--\\\\\\\ container  start \\\\\\-->
-    <div class="header">
-<!--        <div class="actions"> <button class="btn btn-primary" style="color: #FFF;" id="btnExport"><b>Export Excel</b></button> </div>-->
     </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-4">
+</div>
+    <!--\\\\\\\ container  start \\\\\\-->
 
-                    <section class="panel default">
-                        <div class="panel-body">
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-4">
 
-                            <div class="center">
+            <section class="panel default">
+                <div class="panel-body">
+
+                    <div class="center">
 
 <!--                                <span style="height: 420px; width: 100%; font-size: 50px;"><b>Hourly</b></span>-->
-                                <div id="chartContainer_1" style="<?php if($line_id == 7){ ?>height: 520px; <?php }else{ ?> height: 430px; <?php } ?> width: 100%;"></div>
-                            </div>
-
-
-                        </div>
-                    </section>
-                </div>
-                <div class="col-md-4">
-
-                    <section class="panel default">
-                        <div class="panel-body">
-
-                            <div id="chartContainer" style="<?php if($line_id == 7){ ?>height: 520px; <?php }else{ ?> height: 430px; <?php } ?> width: 100%;"></div>
-
-                        </div>
-                    </section>
-                </div>
-                <div class="col-md-4">
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <section class="panel default" id="wip" style="background-color: #ff0e16; color: #ffffff;">
-                                <div class="row  center"><b><span style="font-size: 20px;">WIP</span></b></div>
-                                <div class="panel-body">
-
-                                    <?php
-
-                                    $count_wip_qty_line = $line_status[0]['count_wip_qty_line'];
-
-                                    ?>
-
-                                    <div class="row center" style="font-size: 25px;"><b><?php echo (($count_wip_qty_line != '' && $count_wip_qty_line > 0) ? $count_wip_qty_line : 0);?></b></div>
-
-                                </div>
-                            </section>
-                        </div>
-                        <!--                        <div class="col-sm-4">-->
-                        <!---->
-                        <!--                            <section class="panel default" style="background-color: #286110; color: #ffffff;">-->
-                        <!--                                <div class="row center"><b><span style="font-size: 15px;">Collar-Cuff</span></b></div>-->
-                        <!--                                <div class="panel-body">-->
-                        <!---->
-                        <!--                                    <div class="row center" style="font-size: 25px;"><b>250</b></div>-->
-                        <!---->
-                        <!--                                </div>-->
-                        <!--                            </section>-->
-                        <!--                        </div>-->
-                        <div class="col-sm-6">
-                            <section class="panel default" id="mid_qc_pass" style="background-color: #ffcb0c; color: #000000;">
-                                <div class="row center"><b><span style="font-size: 20px;">MID PASS</span></b></div>
-                                <div class="panel-body">
-
-                                    <?php
-
-                                    $count_mid_pass_qty = $line_status[0]['count_mid_pass_qty'];
-
-                                    ?>
-
-                                    <div class="row center" style="font-size: 25px;"><b><?php echo (($count_mid_pass_qty != '' && $count_mid_pass_qty > 0) ? $count_mid_pass_qty : 0);?></b></div>
-
-                                </div>
-                            </section>
-                        </div>
+                        <div id="chartContainer_1" style="<?php if($line_id == 7){ ?>height: 350px; <?php }else{ ?> height: 400px; <?php } ?> width: 100%;"></div>
                     </div>
 
-                    <div class="row">
 
-                            <div class="col-md-12">
-                                <section class="panel default" id="quality">
-                                    <div class="center" style="<?php if($line_id == 7){ ?>height: 430px; <?php }else{ ?> height: 335px; <?php } ?> width: 100%; font-size: 40px;"><b>Quality</b></div>
-                                </section>
-                            </div>
-
-                    </div>
                 </div>
-
-            </div>
+            </section>
         </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-4">
+        <div class="col-md-4">
 
-                <section class="panel default">
-                    <div class="panel-body" id="upcoming_pos">
+            <section class="panel default">
+                <div class="panel-body">
 
-                        <div class="left" style="width: 100%; font-size: 25px;"><b>Upcoming POs</b></div>
-                        <br />
-                        <marquee behavior="scroll" Scrolldelay="200" direction="up" scrollamount="1" onmouseover="this.stop();"
-                                 onmouseout="this.start();" style="font-size: 18px; height: 75px;">
+                    <div id="chartContainer" style="<?php if($line_id == 7){ ?>height: 350px; <?php }else{ ?> height: 400px; <?php } ?> width: 100%;"></div>
+
+                </div>
+            </section>
+        </div>
+        <div class="col-md-4">
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <center id="wip" style="background-color: #ff0e16; color: #ffffff;">
+                        <div class="row center"><b><span style="font-size: 25px;">WIP</span></b></div>
+                        <div class="panel-body">
 
                             <?php
 
-                            foreach ($upcoming_po as $v_3){ ?>
+                            $count_wip_qty_line = $line_status[0]['count_wip_qty_line'];
 
-                                <table border="1" style="margin-left: 25px;">
-                                    <thead>
-                                    <tr style="background-color: #f7ffb0;">
-                                        <th class="center">PO_ITEM</th>
-                                        <th class="center">Brand</th>
-                                        <th class="center">QLTY_CLR</th>
-                                        <th class="center">STYLE</th>
-                                        <th class="center">QTY</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
+                            ?>
 
-                                    <tr>
-                                        <td class="center"><?php echo $v_3['purchase_order'].'_'.$v_3['item'];?></td>
-                                        <td class="center"><?php echo $v_3['brand'];?></td>
-                                        <td class="center"><?php echo $v_3['quality'].'_'.$v_3['color'];?></td>
-                                        <td class="center"><?php echo $v_3['style_name'];?></td>
-                                        <td class="center"><?php echo $v_3['total_order_qty'];?></td>
-                                    </tr>
+                            <div class="row center" style="font-size: 25px;"><b><?php echo (($count_wip_qty_line != '' && $count_wip_qty_line > 0) ? $count_wip_qty_line : 0);?></b></div>
 
-                                    </tbody>
-                                </table>
-                                <br />
-                            <?php } ?>
-
-                        </marquee>
-
-                    </div>
-                </section>
-
-            </div>
-            <div class="col-md-2">
-                <div class="information red_info">
-                    <div class="information_inner">
-                        <span style="font-size: 25px;">Finishing Alter</span>
-                        <h1 class="bolded" id="finishing_alter"><?php echo '';?></h1>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="information red_info">
-                    <div class="information_inner" id="running_pos">
-                        <span style="font-size: 25px;">RUNNING POs</span>
-                        <h1 class="bolded"><?php echo '';?></h1>
-                    </div>
-                </div>
-            </div>
-                <div class="col-md-2">
-                    <div class="information green_info">
-                        <div class="information_inner" id="man_power">
-                            <span style="font-size: 25px;">MAN POWER</span>
-                            <h1 class="bolded"><?php echo $man_power;?></h1>
                         </div>
-                    </div>
+                    </center>
                 </div>
-                <div class="col-md-2">
+                <!--                        <div class="col-sm-4">-->
+                <!---->
+                <!--                            <section class="panel default" style="background-color: #286110; color: #ffffff;">-->
+                <!--                                <div class="row center"><b><span style="font-size: 15px;">Collar-Cuff</span></b></div>-->
+                <!--                                <div class="panel-body">-->
+                <!---->
+                <!--                                    <div class="row center" style="font-size: 25px;"><b>250</b></div>-->
+                <!---->
+                <!--                                </div>-->
+                <!--                            </section>-->
+                <!--                        </div>-->
+                <div class="col-sm-6">
+                    <center id="mid_qc_pass" style="background-color: #ffcb0c; color: #000000;">
+                        <div class="row center"><b><span style="font-size: 25px;">MID PASS</span></b></div>
+                        <div class="panel-body">
 
-                        <div class="information red_info">
-                            <div class="information_inner" id="efficiency">
+                            <?php
+
+                            $count_mid_pass_qty = $line_status[0]['count_mid_pass_qty'];
+
+                            ?>
+
+                            <div class="row center" style="font-size: 25px;"><b><?php echo (($count_mid_pass_qty != '' && $count_mid_pass_qty > 0) ? $count_mid_pass_qty : 0);?></b></div>
+
+                        </div>
+                    </center>
+                </div>
+            </div>
+
+            <div class="row">
+
+                    <div class="col-md-12">
+                        <center id="quality">
+                            <div class="center" style="<?php if($line_id == 7){ ?>height: 350px; <?php }else{ ?> height: 300px; <?php } ?> width: 100%; font-size: 40px;"><b>Quality</b></div>
+                        </center>
+                    </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-4">
+
+            <center>
+                <div id="upcoming_pos">
+
+                    <div class="left" style="width: 100%; font-size: 25px;"><b>Upcoming POs</b></div>
+                    <br />
+                    <marquee behavior="scroll" Scrolldelay="200" direction="up" scrollamount="1" onmouseover="this.stop();"
+                             onmouseout="this.start();" style="font-size: 18px; height: 75px;">
+
+                        <?php
+
+                        foreach ($upcoming_po as $v_3){ ?>
+
+                            <table border="1" style="margin-left: 25px;">
+                                <thead>
+                                <tr style="background-color: #f7ffb0;">
+                                    <th class="center">PO_ITEM</th>
+                                    <th class="center">Brand</th>
+                                    <th class="center">QLTY_CLR</th>
+                                    <th class="center">STYLE</th>
+                                    <th class="center">QTY</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr>
+                                    <td class="center"><?php echo $v_3['purchase_order'].'_'.$v_3['item'];?></td>
+                                    <td class="center"><?php echo $v_3['brand'];?></td>
+                                    <td class="center"><?php echo $v_3['quality'].'_'.$v_3['color'];?></td>
+                                    <td class="center"><?php echo $v_3['style_name'];?></td>
+                                    <td class="center"><?php echo $v_3['total_order_qty'];?></td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                            <br />
+                        <?php } ?>
+
+                    </marquee>
+
+                </div>
+            </center>
+
+        </div>
+        <div class="col-md-2">
+            <center style="color: red">
+                <div class="information_inner">
+                    <span style="font-size: 25px;"><b>Finishing Alter</b></span>
+                    <h1 class="bolded" id="finishing_alter"><?php echo '';?></h1>
+                </div>
+            </center>
+        </div>
+        <div class="col-md-2">
+            <center style="color: orangered">
+                <div id="running_pos">
+                    <span style="font-size: 25px;"><b>RUNNING POs</b></span>
+                    <h1 class="bolded"><?php echo '';?></h1>
+                </div>
+            </center>
+        </div>
+            <div class="col-md-2">
+                <center style="color: blue">
+                    <div id="man_power">
+                        <span style="font-size: 25px;"><b>MAN POWER</b></span>
+                        <h1 class="bolded"><?php echo $man_power;?></h1>
+                    </div>
+                </center>
+            </div>
+            <div class="col-md-2">
+
+                    <center>
+                        <div class="information_inner" id="efficiency" style="color: green">
 <!--                                <div class="info red_symbols"><img width="85" height="85" src="--><?php //echo base_url();?><!--assets/images/efficiency_logo.png"></div>-->
-                                <span style="font-size: 25px;">EFFICIENCY</span>
-                                <h1 class="bolded">
-                                    <?php
-                                    $minutes = ($work_time[0]['working_time_diff_to_sec'] / 60);
-                                    $work_minute = $minutes * $man_power;
+                            <span style="font-size: 25px;"><b>EFFICIENCY</b></span>
+                            <h1 class="bolded">
+                                <?php
+                                $minutes = ($work_time[0]['working_time_diff_to_sec'] / 60);
+                                $work_minute = $minutes * $man_power;
 
-                                    //                                    echo '<pre>';
-                                    //                                    print_r($minutes.' '.$man_power);
-                                    //                                    echo '</pre>';
+                                //                                    echo '<pre>';
+                                //                                    print_r($minutes.' '.$man_power);
+                                //                                    echo '</pre>';
 
-                                    //                                    echo '<pre>';
-                                    //                                    print_r('Work Min: '.$work_minute);
-                                    //                                    echo '</pre>';
+                                //                                    echo '<pre>';
+                                //                                    print_r('Work Min: '.$work_minute);
+                                //                                    echo '</pre>';
 
-                                    $produce_minute = 0;
-                                    $average_produce_min = 0;
-                                    foreach ($get_smv_list as $s){
-                                        $smv = $s['smv'];
-                                        $total_line_output = $s['total_line_output'];
+                                $produce_minute = 0;
+                                $average_produce_min = 0;
+                                foreach ($get_smv_list as $s){
+                                    $smv = $s['smv'];
+                                    $total_line_output = $s['total_line_output'];
 
-                                        $produce_minute += ($total_line_output * $smv);
+                                    $produce_minute += ($total_line_output * $smv);
 
 //                                            echo '<pre>';
 //                                            print_r($smv.' '.$total_line_output);
 //                                            echo '</pre>';
-                                    }
+                                }
 
-                                    //                                    echo '<pre>';
-                                    //                                    print_r('Prod Min: '.$produce_minute);
-                                    //                                    echo '</pre>';
+                                //                                    echo '<pre>';
+                                //                                    print_r('Prod Min: '.$produce_minute);
+                                //                                    echo '</pre>';
 
-                                    $eff = ($produce_minute/$work_minute) * 100;
+                                $eff = ($produce_minute/$work_minute) * 100;
 
-                                    echo $line_efficiency = sprintf('%0.2f', $eff);
-                                    ?>
-                                </h1>
-                            </div>
+                                echo $line_efficiency = sprintf('%0.2f', $eff);
+                                ?>
+                            </h1>
                         </div>
+                    </center>
 
-                </div>
-
-        </div>
-
+            </div>
 
     </div>
 
+
 </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</body>
+
+</html>
 
 <script type="text/javascript">
     $(document).ready(function(){

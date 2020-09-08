@@ -5332,8 +5332,8 @@ class Dashboard extends CI_Controller {
 
         }
 
-        $data['maincontent'] = $this->load->view('line_performance_dashboard', $data, true);
-        $this->load->view('master_line', $data);
+        $data['maincontent'] = $this->load->view('line_performance_dashboard', $data);
+//        $this->load->view('master_line', $data);
     }
 
     public function updatePerHourTarget($line_id, $start_time, $end_time, $per_hour_actual_target){
