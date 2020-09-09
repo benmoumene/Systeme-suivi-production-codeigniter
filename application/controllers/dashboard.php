@@ -6119,6 +6119,8 @@ class Dashboard extends CI_Controller {
         $data['dhu_report'] = $this->access_model->getDHUReport($where, $where_2, $where_1);
         $data['dhu_summary'] = $this->access_model->getLineDHUSummary($line_id);
 
+        $data['dhu_count'] = $this->getDefectCount($line_id, '', $date);
+
         echo $data['maincontent'] = $this->load->view('line_quality_defects_reload', $data, true);
     }
 

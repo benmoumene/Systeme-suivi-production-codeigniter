@@ -905,9 +905,15 @@ class Dashboard_model extends CI_Model {
     }
 
     public function getDefectCount($line_id, $defect_code, $date){
+
+        $where= '';
+        if($defect_code != ''){
+            $where .= " AND defect_code='$defect_code'";
+        }
+
         $sql = "SELECT COUNT(id) AS count_defect FROM `tb_defects_tracking` 
                 WHERE DATE_FORMAT(defect_date_time, '%Y-%m-%d')='$date' 
-                AND line_id=$line_id AND defect_code='$defect_code'";
+                AND line_id=$line_id $where";
 
         $query = $this->db->query($sql)->result_array();
         return $query;

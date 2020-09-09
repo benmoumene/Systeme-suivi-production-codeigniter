@@ -4,24 +4,23 @@
     <?php if(!empty($qa_major_defects)){ ?>
     <table class="table table-bordered table-responsive">
         <tr class="row center">
-            <td style="font-size: 25px;"><b>AVG DHU(%)</b></td>
             <td style="font-size: 25px;">
                 <?php
-                    $dhu = 0;
+                $dhu = 0;
 
-                    $total_passed_qty = ($dhu_report[0]['qty'] != '' ? $dhu_report[0]['qty'] : 0);
-                    $defect_checking_count = ($dhu_report[0]['defect_checking_count'] != '' ? $dhu_report[0]['defect_checking_count'] : 0);
-                    $total_defect_count = ($dhu_report[0]['total_defect_count'] != '' ? $dhu_report[0]['total_defect_count'] : 0);
+                $total_passed_qty = ($dhu_report[0]['qty'] != '' ? $dhu_report[0]['qty'] : 0);
+                $defect_checking_count = ($dhu_report[0]['defect_checking_count'] != '' ? $dhu_report[0]['defect_checking_count'] : 0);
+                $total_defect_count = ($dhu_report[0]['total_defect_count'] != '' ? $dhu_report[0]['total_defect_count'] : 0);
 
-                    if($total_defect_count > 0){
-                        $total_pc_check_qty = $total_passed_qty+$defect_checking_count;
+                if($total_defect_count > 0){
+                    $total_pc_check_qty = $total_passed_qty+$defect_checking_count;
 
-                        $dhu = round((($total_defect_count/$total_pc_check_qty)*100), 2);
-                    }else{
-                        $dhu=0;
-                    }
+                    $dhu = round((($total_defect_count/$total_pc_check_qty)*100), 2);
+                }else{
+                    $dhu=0;
+                }
 
-                    $res_hour = $this->method_call->lineQualityDefectSave($line_id, $dhu);
+                $res_hour = $this->method_call->lineQualityDefectSave($line_id, $dhu);
                 ?>
                 <b>
                     <?php
@@ -34,10 +33,12 @@
                     $total_wh = $work_hour_1+$work_hour_2+$work_hour_3+$work_hour_4;
 
                     $average_dhu = round($dhu_sum/$hour, 2);
-
-                    echo $average_dhu;
                     ?>
                 </b>
+                <b>AVG DHU(%): </b> <?php echo $average_dhu;?>
+            </td>
+            <td style="font-size: 25px;">
+                <b>Defect Count: </b> <?php echo ($dhu_count[0]['count_defect'] != '' ? $dhu_count[0]['count_defect'] : 0);?>
             </td>
         </tr>
     <?php
