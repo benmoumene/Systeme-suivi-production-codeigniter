@@ -90,10 +90,10 @@
                     <select class="form-control" name="warehouse_type" id="warehouse_type" onchange="appendRemarksOption();">
                         <option value="">Select Warehouse Type</option>
                         <?php foreach ($wh_types as $v_1){
-                            if(($v_1['id'] != 5) && ($v_1['id'] != 6)){
+                            if($v_1['id'] != 5){
                             ?>
                             <option value="<?php echo $v_1['id']?>"><?php echo $v_1['warehouse_type']?></option>
-                            <?php
+                        <?php
                             }
                         }
                         ?>
