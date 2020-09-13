@@ -7,7 +7,7 @@
 
     foreach ($upcoming_po as $v_3){ ?>
 
-        <table border="1" style="margin-left: 25px;">
+        <table border="1" style="margin-left: 5px;">
             <thead>
             <tr style="background-color: #f7ffb0;">
                 <th class="center">PO_ITEM</th>
