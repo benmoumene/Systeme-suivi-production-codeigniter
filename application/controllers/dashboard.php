@@ -5907,6 +5907,16 @@ class Dashboard extends CI_Controller {
 
     }
 
+    public function clockTimer(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $time=$datex->format('H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        echo $clock_time=$datex->format('h:i:s A');
+    }
+
     public function updateTodayEfficiency($line_id, $line_efficiency, $segment_id, $produce_minute, $work_minute, $hour){
         $line_report = $this->access_model->getTodayLineOutputReport($line_id);
 

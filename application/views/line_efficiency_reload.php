@@ -19,8 +19,9 @@
 
         // For the Time Being - 30 Min being deducted for ALL Start
 
-        $minutes = $minutes - 30;
-
+        if($floor == 2){
+            $minutes = $minutes - 30;
+        }
         // For the Time Being - 30 Min being deducted for ALL End
     }else{
         $sec_to_minutes = ($work_time / 60);

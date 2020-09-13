@@ -52,6 +52,7 @@
 
         /* Loader Style End */
     </style>
+
 </head>
 <!--<body class="light_theme  fixed_header left_nav_fixed">-->
 <body>
@@ -76,19 +77,18 @@ $dataPoints = array(
 )
 
 ?>
-<div class="row">
-    <div class="col-md-12">
-        <div class="panel-body" style="background-color: #34b077; color: white;">
+<div class="row" style="background-color: #34b077; color: white;">
+    <div class="col-md-10">
 
-            <center>
-                <div style="font-weight: 900; font-size: 50px;">
-                    <?php
-                    echo $line_name;
-                    ?>
-                </div>
-            </center>
-
+        <div style="font-weight: 900; font-size: 50px; text-align: center; margin-left: 230px">
+            <?php
+                echo $line_name;
+            ?>
         </div>
+
+    </div>
+    <div class="col-md-2">
+        <center style="font-weight: 900; font-size: 35px;" id="ct"></center>
     </div>
 </div>
     <!--\\\\\\\ container  start \\\\\\-->
@@ -313,9 +313,9 @@ $dataPoints = array(
 
 <script type="text/javascript">
     $(document).ready(function(){
-//        setInterval(function(){
-//            $("#reload_div").load('<?php //echo base_url();?>//access/getProductionSummaryReportByUID');
-//        }, 10000);
+        setInterval(function(){
+            $("#ct").load('<?php echo base_url();?>dashboard/clockTimer/');
+        }, 1000);
 
         $("#chartContainer_1").load('<?php echo base_url();?>dashboard/getLineHourlyOutputReload/<?php echo $line_id;?>');
         $("#chartContainer").load('<?php echo base_url();?>dashboard/getLineOutputSummaryReload/<?php echo $line_id;?>');
