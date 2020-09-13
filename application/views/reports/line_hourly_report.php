@@ -291,6 +291,8 @@
                 $floor_lines_target = $this->method_call->getFloorWiseTargets($floor_id);
                 $floor_eff = $this->method_call->getFloorSummaryReport($floor_id);
 
+                $work_hour = round(($floor_eff[0]['work_hour'] != '' ? $floor_eff[0]['work_hour'] : 0), 2);
+
                 $count_lines = 0;
 
                 foreach ($floor_eff as $fe){
@@ -353,7 +355,7 @@
 
                 }
                 ?>
-                <th align="center" title="<?php echo $working_hour;?>"><?php echo round($floor_grand_total_output/$working_hour, 2);?></th>
+                <th align="center" title="<?php echo $work_hour;?>"><?php echo round($floor_grand_total_output/$work_hour, 2);?></th>
                 <th align="center" style="font-size: 20px; font-weight: 900;"><?php echo $floor_grand_total_output?></th>
                 <th align="center" style="font-size: 20px; font-weight: 900;"><?php echo $floor_grand_total_output - $floor_total_target;?></th>
             </tr>
