@@ -2735,7 +2735,7 @@ class Dashboard_model extends CI_Model {
 
     public function getProductionReportLive($where)
     {
-        $sql="SELECT t1.line_id,t1.packing_date_time,  t1.total_cut_input_qty, 
+        $sql="SELECT t1.line_id,t1.packing_date_time, t1.total_cut_qty, t1.total_cut_input_qty, 
               t1.count_input_line_qc_pass, t1.count_mid_line_qc_pass, t1.count_end_line_qc_pass, t1.count_wash_send, 
               t1.count_washing_pass, t1.count_finishing_alter_qty, t1.count_packing_pass, t1.count_carton_pass, t1.total_wh_qa, 
               t2.*, t3.responsible_line, t4.so_fail_count
@@ -2745,6 +2745,7 @@ class Dashboard_model extends CI_Model {
               LEFT JOIN
               (SELECT po_no,so_no,item,quality,color,style_name,style_no,
               purchase_order,brand,ex_factory_date,packing_date_time,line_id,
+              COUNT(pc_tracking_no) as total_cut_qty,
               COUNT(sent_to_production_date_time) as total_cut_input_qty,
               COUNT(line_input_date_time) as count_input_line_qc_pass,
               COUNT(mid_line_qc_date_time) as count_mid_line_qc_pass,
@@ -2759,6 +2760,7 @@ class Dashboard_model extends CI_Model {
               SELECT
                 so_no,po_no,item,quality,color,purchase_order,brand,ex_factory_date,packing_date_time,style_name,style_no,line_id,
                 CASE WHEN  access_points=4 AND access_points_status=4 THEN end_line_qc_date_time END end_line_qc_date_time,    
+                CASE WHEN pc_tracking_no!='' THEN pc_tracking_no END pc_tracking_no,
                 CASE WHEN sent_to_production=1 THEN sent_to_production_date_time END sent_to_production_date_time,
                 CASE WHEN access_points>=3 AND access_points_status in (1, 4) THEN mid_line_qc_date_time END mid_line_qc_date_time,
                 CASE WHEN access_points>=2 AND access_points_status in (1, 4) THEN line_input_date_time END line_input_date_time,

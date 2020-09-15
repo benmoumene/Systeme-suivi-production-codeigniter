@@ -2,7 +2,7 @@
     <table class="table table-bordered table-striped" id="" border="1">
         <thead>
         <tr>
-            <th class="hidden-phone center" colspan="26"><h3>Ship Date: <?php echo $ex_factory_date;?></h3></th>
+            <th class="hidden-phone center" colspan="27"><h3>Ship Date: <?php echo $ex_factory_date;?></h3></th>
         </tr>
         <tr>
             <th class="hidden-phone center">SO</th>
@@ -33,6 +33,7 @@
             <th class="hidden-phone center">Carton</th>
             <th class="hidden-phone center" title="Balance">Carton BLNC</th>
             <th class="hidden-phone center" title="Warehouse">WH</th>
+            <th class="hidden-phone center" title="Balance">BLNC</th>
             <!--        <th class="hidden-phone center">Other</th>-->
 
             <!--        <th class="hidden-phone center">Ex-Fac Date</th>-->
@@ -48,6 +49,7 @@
         $sew_balance_qty = 0;
         $carton_balance_qty = 0;
         $packing_balance_qty = 0;
+        $balance_qty = 0;
 
         $total_order_qty = 0;
         $total_cut_qty = 0;
@@ -66,12 +68,14 @@
         $total_wh_qty = 0;
         $total_other_qty = 0;
         $total_carton_balance_qty = 0;
+        $total_balance_qty = 0;
 
         foreach ($po_close_report as $v){
-            $sew_balance_qty = $v['total_cut_input_qty'] - $v['count_end_line_qc_pass'];
-            $carton_balance_qty = $v['total_cut_input_qty'] - ($v['count_carton_pass'] + $v['total_wh_qa']);
+            $sew_balance_qty = $v['count_end_line_qc_pass'] - $v['total_order_qty'];
+            $carton_balance_qty = $v['count_carton_pass'] - $v['total_order_qty'];
             $washing_balance_qty = $v['count_wash_send'] - $v['count_washing_pass'];
-            $packing_balance_qty = $v['total_cut_input_qty'] - $v['count_packing_pass'];
+            $packing_balance_qty = $v['count_packing_pass'] - $v['total_order_qty'];
+            $balance_qty = ($v['count_carton_pass'] + $v['total_wh_qa']) - $v['total_cut_qty'];
 
             $total_order_qty += $v['total_order_qty'];
 //            $total_cut_qty += $v['total_cut_qty'];
@@ -79,7 +83,7 @@
             $total_line_input_qty += $v['count_input_line_qc_pass'];
             $total_line_mid_qty += $v['count_mid_line_qc_pass'];
             $total_line_output_qty += $v['count_end_line_qc_pass'];
-            $total_line_output_balance_qty += ($v['total_cut_input_qty'] - $v['count_end_line_qc_pass']);
+            $total_line_output_balance_qty += $sew_balance_qty;
             $total_wash_send_qty += $v['count_wash_send'];
             $total_washed_qty += $v['count_washing_pass'];
             $total_washing_balance_qty += $washing_balance_qty;
@@ -89,6 +93,7 @@
             $total_carton_qty += $v['count_carton_pass'];
             $total_wh_qty += ($v['total_wh_qa'] != NULL ? $v['total_wh_qa'] : 0);
             $total_carton_balance_qty += $carton_balance_qty;
+            $total_balance_qty += $balance_qty;
 
             ?>
             <tr>
@@ -113,15 +118,21 @@
                         <?php echo $v['count_end_line_qc_pass'];?>
                     </a>
                 </td>
-                <td class="center" <?php if($sew_balance_qty > 0){ ?>style="background-color: #ffbcbf" <?php } ?>><?php echo $sew_balance_qty;?></td>
+                <td class="center" <?php if($sew_balance_qty < 0){ ?>style="background-color: #ffbcbf" <?php } ?>>
+                    <?php echo $sew_balance_qty;?>
+                </td>
                 <td class="center"><?php echo $v['count_wash_send'];?></td>
                 <td class="center"><?php echo $v['count_washing_pass'];?></td>
-                <td class="center"><?php echo $washing_balance_qty;?></td>
+                <td class="center" <?php if($washing_balance_qty < 0){ ?>style="background-color: #ffbcbf" <?php } ?>>
+                    <?php echo $washing_balance_qty;?>
+                </td>
                 <td class="center"><?php echo $v['count_finishing_alter_qty'];?></td>
                 <td class="center"><?php echo $v['count_packing_pass'];?></td>
-                <td class="center" <?php if($packing_balance_qty > 0){ ?>style="background-color: #ffbcbf" <?php } ?>><?php echo $packing_balance_qty;?></td>
+                <td class="center" <?php if($packing_balance_qty < 0){ ?>style="background-color: #ffbcbf" <?php } ?>>
+                    <?php echo $packing_balance_qty;?>
+                </td>
                 <td class="center"><?php echo $v['count_carton_pass'];?></td>
-                <td class="center" <?php if($carton_balance_qty > 0){ ?>style="background-color: #ffbcbf" <?php } ?>>
+                <td class="center" <?php if($carton_balance_qty < 0){ ?>style="background-color: #ffbcbf" <?php } ?>>
                     <?php echo (($carton_balance_qty >= 0) ? $carton_balance_qty : 0 );?>
                 </td>
                 <td class="center" onclick="getWarehousePcs('<?php echo $v['po_no']; ?>', '<?php echo $v['so_no']; ?>', '<?php echo $v['purchase_order'];?>','<?php echo $v['item'];?>', '<?php echo $v['quality']; ?>', '<?php echo $v['color']; ?>');" data-target="#myModal3" data-toggle="modal" ><span class="btn btn-primary"><?php echo $v['total_wh_qa'];?></span></td>
@@ -135,6 +146,9 @@
 //                    }
 //                    ?>
 <!--                </td>-->
+                <td class="center" <?php if($balance_qty < 0){ ?>style="background-color: #ffbcbf" <?php } ?>>
+                    <?php echo (($balance_qty != '') ? $balance_qty : 0 );?>
+                </td>
                 <td class="center">
                     <?php
                     if($v['status'] == 'CLOSE') {
@@ -194,7 +208,7 @@
                 <td class="center"><h4><b><?php echo $total_carton_qty;?></b></h4></td>
                 <td class="center"><h4><b><?php echo $total_carton_balance_qty;?></b></h4></td>
                 <td class="center"><h4><b><?php echo $total_wh_qty;?></b></h4></td>
-                <!--        <td class="center"><h4><b>--><?php //echo $total_other_qty;?><!--</b></h4></td>-->
+                <td class="center"><h4><b><?php echo $total_balance_qty;?></b></h4></td>
                 <td class="center" colspan="3"></td>
             </tr>
         </tfoot>
