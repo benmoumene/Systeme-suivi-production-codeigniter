@@ -3,7 +3,11 @@ $total_size_qty = 0;
 $total_cut_qty = 0;
 $total_sew_size_qty = 0;
 $total_pack_size_qty = 0;
+$total_pack_balance_from_order = 0;
+$total_pack_balance_from_cut = 0;
 $total_carton_size_qty = 0;
+$total_carton_balance_from_order = 0;
+$total_carton_balance_from_cut = 0;
 $total_manually_closed_qty = 0;
 $total_wh_size_qty = 0;
 
@@ -117,19 +121,43 @@ $count_unscanned_pc = $cut_qty - ($count_total_carton_qty + $total_wh_qty);
                     <thead>
                     <tr>
                         <th class="center">Size</th>
-                        <th class="center">Ordered Qty</th>
-                        <th class="center">Cut Qty</th>
-                        <th class="center">Cut Pass Qty</th>
-                        <th class="center">Sew Qty</th>
-                        <th class="center">Packed Qty</th>
-                        <th class="center">Carton Qty</th>
+                        <th class="center">Ordered</th>
+                        <th class="center">Cut</th>
+                        <th class="center">Cut Pass</th>
+                        <th class="center">Sew</th>
+                        <th class="center">Packed</th>
+                        <th class="center">Pack Blnc(Order)</th>
+                        <th class="center">Pack Blnc(Cut)</th>
+                        <th class="center">Carton</th>
+                        <th class="center">Carton Blnc(Order)</th>
+                        <th class="center">Carton Blnc(Cut)</th>
                         <th class="center">Manual Close</th>
 <!--                        <th class="center">Warehouse Qty</th>-->
                     </tr>
                     </thead>
                     <tbody>
 <!--                    --><?php //foreach ($cut_order as $v_1){ ?>
-                    <?php foreach ($order_info as $v_1){ ?>
+                    <?php
+
+                    $pack_balance_from_order = 0;
+                    $pack_balance_from_cut = 0;
+                    $carton_balance_from_order = 0;
+                    $carton_balance_from_cut = 0;
+
+                    foreach ($order_info as $v_1){
+
+                        $pack_balance_from_order = $v_1['total_packing_qty'] - $v_1['order_qty'];
+                        $pack_balance_from_cut = $v_1['total_packing_qty'] - $v_1['cut_qty'];
+
+                        $total_pack_balance_from_order += $pack_balance_from_order;
+                        $total_pack_balance_from_cut += $pack_balance_from_cut;
+
+                        $carton_balance_from_order = $v_1['total_carton_qty'] - $v_1['order_qty'];
+                        $carton_balance_from_cut = $v_1['total_carton_qty'] - $v_1['cut_qty'];
+
+                        $total_carton_balance_from_order += $carton_balance_from_order;
+                        $total_carton_balance_from_cut += $carton_balance_from_cut;
+                    ?>
                         <tr style="background-color: #aeff82;<?php  ?>">
 <!--                        <tr>-->
                             <td class="center"><?php echo $v_1['size'];?></td>
@@ -155,9 +183,30 @@ $count_unscanned_pc = $cut_qty - ($count_total_carton_qty + $total_wh_qty);
                                 <?php echo $v_1['total_packing_qty']; ?>
                             </td>
 
+                            <td class="center" <?php if($pack_balance_from_order < 0)
+                            { ?> style="background-color: #ff8080;" <?php } ?>>
+                                <?php echo $pack_balance_from_order; ?>
+                            </td>
+
+                            <td class="center" <?php if($pack_balance_from_cut < 0)
+                            { ?> style="background-color: #ff8080;" <?php } ?>>
+                                <?php echo $pack_balance_from_cut; ?>
+                            </td>
+
                             <td class="center" <?php if($v_1['order_qty'] > $v_1['total_carton_qty'])
                             { ?> style="background-color: #ff8080;" <?php } ?>>
                                 <?php echo $v_1['total_carton_qty']; ?>
+                            </td>
+
+
+                            <td class="center" <?php if($carton_balance_from_order < 0)
+                            { ?> style="background-color: #ff8080;" <?php } ?>>
+                                <?php echo $carton_balance_from_order; ?>
+                            </td>
+
+                            <td class="center" <?php if($carton_balance_from_cut < 0)
+                            { ?> style="background-color: #ff8080;" <?php } ?>>
+                                <?php echo $carton_balance_from_cut; ?>
                             </td>
 
                             <td class="center" <?php if($v_1['order_qty'] > $v_1['total_carton_qty'])
@@ -185,7 +234,11 @@ $count_unscanned_pc = $cut_qty - ($count_total_carton_qty + $total_wh_qty);
                         <td class="center"><?php echo $total_cut_pass_qty;?></td>
                         <td class="center"><?php echo $total_sew_size_qty;?></td>
                         <td class="center"><?php echo $total_pack_size_qty;?></td>
+                        <td class="center"><?php echo $total_pack_balance_from_order;?></td>
+                        <td class="center"><?php echo $total_pack_balance_from_cut;?></td>
                         <td class="center"><?php echo $total_carton_size_qty;?></td>
+                        <td class="center"><?php echo $total_carton_balance_from_order;?></td>
+                        <td class="center"><?php echo $total_carton_balance_from_cut;?></td>
                         <td class="center"><?php echo $total_manually_closed_qty;?></td>
 <!--                        <td class="center">--><?php //echo $total_wh_size_qty;?><!--</td>-->
                     </tr>

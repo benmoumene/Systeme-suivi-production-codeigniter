@@ -8,32 +8,40 @@
         </tr>
         <tr>
             <th class="center" colspan="2">Size</th>
-            <th class="center" colspan="2">INR No.</th>
-            <th class="center">Remarks</th>
+            <th class="center" colspan="2">Pcs No.</th>
+            <th class="center">Last Scan</th>
         </tr>
     </thead>
     <tbody>
     <?php
 
         foreach ($remain_pcs as $v){
-            $po_type = $v['po_type'];
 
-            if($po_type == 1){
-                $remarks = 'Size Set';
+            $last_scanning_point = "";
+
+            if($v['carton_status'] == 1){
+                $last_scanning_point = "Carton";
+            } elseif($v['packing_status'] == 1){
+                $last_scanning_point = "Packing";
+            } elseif($v['washing_status'] == 1){
+                $last_scanning_point = "Wash Return";
+            } elseif($v['is_going_wash'] == 1){
+                $last_scanning_point = "Wash Send";
+            } elseif($v['access_points'] == 4){
+                $last_scanning_point = "End Line";
+            } elseif($v['access_points'] == 3){
+                $last_scanning_point = "Mid Line";
+            } elseif($v['access_points'] == 2){
+                $last_scanning_point = "Input Line";
+            } elseif($v['sent_to_production'] == 1){
+                $last_scanning_point = "Cutting";
             }
 
-            if($po_type == 2){
-                $remarks = 'Sample';
-            }
-
-            if($po_type == 0){
-                $remarks = '';
-            }
             ?>
         <tr>
             <td class="center" colspan="2"><?php echo $v['size'];?></td>
             <td class="center" colspan="2"><?php echo $v['pc_tracking_no'];?></td>
-            <td class="center" colspan="2"><?php echo $remarks;?></td>
+            <td class="center" colspan="2"><?php echo $last_scanning_point;?></td>
         </tr>
     <?php } ?>
     </tbody>
