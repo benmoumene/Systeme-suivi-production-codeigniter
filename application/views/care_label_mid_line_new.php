@@ -38,8 +38,8 @@
         <div class="col-md-12">
                 <div class="panel-body">
                     <div class="porlets-content">
-                        <h4><span id="p_er_msg" style="color: red;"></span></h4>
-                        <h4><span id="p_s_msg" style="color: green;"></span></h4>
+                        <h4><span id="p_er_msg" style="color: red; font-size: 30px; font-weight: 900;"></span></h4>
+                        <h4><span id="p_s_msg" style="color: green; font-size: 30px; font-weight: 900;"></span></h4>
                         <div class="col-md-1">
 <!--                            <div class="panel-heading" style="color: green;"> Pass<span class="semi-bold"></span> </div>-->
 
@@ -53,8 +53,8 @@
 
 <!--                                <div class="panel-heading" style="color: red;"> Defects<span class="semi-bold"></span> </div>-->
 <!--                                <div class="panel-body">-->
-                            <h4><span id="er_msg" style="color: red;"></span></h4>
-                            <h4><span id="s_msg" style="color: green;"></span></h4>
+                            <h4><span id="er_msg" style="color: red; font-size: 30px; font-weight: 900;"></span></h4>
+                            <h4><span id="s_msg" style="color: green; font-size: 30px; font-weight: 900;"></span></h4>
                                     <div class="col-md-6">
                                         <input type="text" placeholder="Defect" class="form-control" name="carelabel_tracking_no_defect" required id="carelabel_tracking_no_defect" onkeyup="submitClQcDefectInfo();" />
                                         <span style=""> Defect</span>

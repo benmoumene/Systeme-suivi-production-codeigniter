@@ -73,7 +73,7 @@
         <div class="row">
         <div class="col-md-12">
               <div style="padding-top:10px">
-                  <h4 style="color:red">
+                  <h4 style="color:red; font-size: 30px; font-weight: 900;">
                       <?php
                       $exc = $this->session->userdata('exception');
                       if (isset($exc)) {
@@ -82,7 +82,7 @@
                       } ?>
                   </h4>
 
-                  <h4 style="color:green">
+                  <h4 style="color:green; font-size: 30px; font-weight: 900;">
                       <?php
                       $msg = $this->session->userdata('message');
                       if (isset($msg)) {

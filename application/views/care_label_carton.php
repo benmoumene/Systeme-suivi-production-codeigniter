@@ -36,8 +36,8 @@
 <!--        <form action="--><?php //echo base_url();?><!--access/cartonSave" method="post">-->
         <div class="row">
         <div class="col-md-12">
-              <div style="color: darkgreen; font-size: 25px;" id="s_message"></div>
-              <div style="color: red; font-size: 25px;" id="e_message"></div>
+              <div style="color: darkgreen; font-size: 30px; font-weight: 900;" id="s_message"></div>
+              <div style="color: red; font-size: 30px; font-weight: 900;" id="e_message"></div>
 
 
 <!--              <div class="col-md-3">-->
