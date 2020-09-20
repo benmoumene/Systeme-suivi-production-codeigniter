@@ -6089,12 +6089,13 @@ class Access_model extends CI_Model {
         return $query;
     }
 
-    public function updateSmv($sales_order, $smv)
+    public function updateSmv($sales_order, $smv, $smv_set_date_time)
     {
         $sql = "Update `tb_po_detail` 
                 SET 
-                smv = '$smv'
-                where so_no LIKE '%$sales_order%'";
+                smv = '$smv',
+                smv_set_date_time= '$smv_set_date_time'
+                where so_no = '$sales_order'";
 
         $query = $this->db->query($sql);
         return $query;

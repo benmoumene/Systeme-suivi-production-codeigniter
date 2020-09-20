@@ -545,12 +545,16 @@ class Access extends CI_Controller {
     }
 
     public function save_smv(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
         $sales_order = $this->input->post('sales_order');
         $smv = $this->input->post('smv');
 
         $data_type = gettype($smv + 0);
 
-        $data['so_list'] = $this->access_model->updateSmv($sales_order, $smv);
+        $data['so_list'] = $this->access_model->updateSmv($sales_order, $smv, $date_time);
 
         $data['message'] = "SO: $sales_order - SMV: $smv";
         $this->session->set_userdata($data);
