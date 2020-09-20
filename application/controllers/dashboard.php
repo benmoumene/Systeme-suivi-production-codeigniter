@@ -137,9 +137,9 @@ class Dashboard extends CI_Controller {
                 $cuff_balance_qty = $v['total_cut_qty'] - $v['cuff_bndl_qty'];
                 $mid_balance_qty = $v['total_cut_qty'] - $v['count_mid_line_qc_pass'];
                 $end_balance_qty = $v['total_cut_qty'] - $v['count_end_line_qc_pass'];
-                $pack_balance_qty = $v['total_cut_qty'] - $v['count_packing_pass'];
+                $pack_balance_qty = $v['total_order_qty'] - $v['count_packing_pass'];
 
-                $total_po_item_balance = $v['total_cut_qty'] - $total_finishing_wh_qa;
+                $total_po_item_balance = $v['total_order_qty'] - $total_finishing_wh_qa;
 
 
                 $object->getActiveSheet()->setCellValueByColumnAndRow(0, $excel_row, $v["purchase_order"]);
