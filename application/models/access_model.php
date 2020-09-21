@@ -6101,6 +6101,34 @@ class Access_model extends CI_Model {
         return $query;
     }
 
+    public function getSizesbyShipDate($where){
+        $sql = "SELECT * FROM `tb_po_detail` 
+                WHERE 1 $where 
+                GROUP BY `size`";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
+    public function getPOsbyShipDate($where){
+        $sql = "SELECT * FROM `tb_po_detail` 
+                WHERE 1 $where 
+                GROUP BY so_no";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
+    public function getPoSizeWiseCartonReport($where){
+        $sql = "SELECT so_no, size, count(id) AS count_size_carton_qty 
+                FROM `tb_care_labels` 
+                WHERE carton_status=1 $where 
+                GROUP BY so_no";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
 	public function update_password($employee_code, $confirm_new_password){
 		$emp_master_db = $this->load->database('emp_master', TRUE);
 		

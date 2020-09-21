@@ -422,6 +422,100 @@ class Access extends CI_Controller {
         $this->load->view('master', $data);
     }
 
+    public function packingList(){
+        $data['title']='Packing List';
+        $user_id = $this->session->userdata('id');
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['brands'] = $this->access_model->getAllBrands();
+
+            $data['maincontent'] = $this->load->view('packing_list', $data, true);
+            $this->load->view('master', $data);
+
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
+    public function getShipDateLists(){
+        $brands = $this->input->post('brands');
+        $po_type = $this->input->post('po_type');
+
+        $data['brands_string'] = implode(", ", $brands);
+        $brands_string = $data['brands_string'];
+
+        $where = '';
+
+        if($brands_string != ''){
+            $where .= " AND brand in ($brands_string)";
+        }
+
+        if($po_type != ''){
+            $where .= " AND po_type='$po_type'";
+        }
+
+        $ship_dates = $this->dashboard_model->getBrandWiseShipDates($where);
+
+        $options = '';
+        $options .= '<option value="">Select Ship Date...</option>';
+
+        foreach ($ship_dates as $v_d){
+            $options .= '<option value="'.$v_d['ex_factory_date'].'">'.$v_d['ex_factory_date'].'</option>';
+        }
+
+        echo $options;
+
+    }
+
+    public function generatePackingList(){
+        $brands = $this->input->post('brands');
+        $po_type = $this->input->post('po_type');
+        $ship_date = $this->input->post('ship_date');
+
+        $data['brands_string'] = implode(", ", $brands);
+        $brands_string = $data['brands_string'];
+
+        $where = '';
+
+        if($brands_string != ''){
+            $where .= " AND brand in ($brands_string)";
+        }
+
+        if($po_type != ''){
+            $where .= " AND po_type='$po_type'";
+        }
+
+        if($ship_date != ''){
+            $where .= " AND ex_factory_date='$ship_date'";
+        }
+
+        $data['sizes'] = $this->access_model->getSizesbyShipDate($where);
+        $data['po_list'] = $this->access_model->getPOsbyShipDate($where);
+
+        echo $maincontent = $this->load->view('generate_packing_list', $data);
+    }
+
+    public function getPoSizeWiseCartonReport($so_no, $size){
+        $where = '';
+
+        if($so_no !=''){
+            $where .= " AND so_no='$so_no'";
+        }
+
+        if($size !=''){
+            $where .= " AND `size`='$size'";
+        }
+
+        return $this->access_model->getPoSizeWiseCartonReport($where);
+    }
+
     public function qa_warehouse_new(){
         $data['title']='QA Warehouse';
         $user_id = $this->session->userdata('id');

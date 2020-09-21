@@ -457,6 +457,7 @@
                 <li> <a href="<?php echo base_url();?>access/qa_warehouse_new"><i class="fa fa-circle"></i> QA Warehouse </a></li>
                 <li> <a href="<?php echo base_url();?>access/other_purpose"><i class="fa fa-circle"></i> Other Purpose </a></li>
                 <li> <a href="<?php echo base_url();?>access/aqlList"><i class="fa fa-circle"></i> AQL </a></li>
+                <li> <a href="<?php echo base_url();?>access/packingList"><i class="fa fa-circle"></i> Packing List </a></li>
             <?php }
 
             if($access_points == 500){
