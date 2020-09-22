@@ -75,6 +75,9 @@
               <div class="col-md-1">
                   <button class="btn btn-primary" style="color: #FFF;" id="btnExport123" onclick="ExportToExcel('table_id')"><b>Export Excel</b></button>
               </div>
+<!--              <div class="col-md-1">-->
+<!--                  <button type="button" onclick="printDiv('packing_list')" class="print_cl_btn" style="border-style: none; width: 80px; height: 30px; background-color: green; color: white; border-radius: 5px;">Print</button>-->
+<!--              </div>-->
           </div>
           <br />
             <div class="row">
@@ -83,7 +86,7 @@
 
                         <div class="porlets-content">
 
-                            <div class="table-responsive" id="packing_list">
+                            <div id="packing_list">
 
                             </div><!--/table-responsive-->
                         </div>
@@ -216,6 +219,19 @@
 
         return false;
         //return (sa);
+    }
+
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+
+        window.print();
+
+        document.body.innerHTML = originalContents;
+
+        location.reload();
     }
 
 </script>

@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fdf3a7-84b8-4c03-909e-2a58cce5012a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/views/manual_carton_piece_by_piece.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/views/remove_from_carton_piece_by_piece.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/access.php" afterPath="$PROJECT_DIR$/application/controllers/access.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/generate_packing_list.php" afterPath="$PROJECT_DIR$/application/views/generate_packing_list.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/packing_list.php" afterPath="$PROJECT_DIR$/application/views/packing_list.php" />
     </list>
@@ -91,7 +88,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="access_model.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="access_model.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/access_model.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="268">
@@ -796,28 +793,22 @@
       <file leaf-file-name="generate_packing_list.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/generate_packing_list.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="850">
-              <caret line="50" column="48" lean-forward="true" selection-start-line="50" selection-start-column="48" selection-end-line="50" selection-end-column="48" />
-              <folding />
+            <state relative-caret-position="1343">
+              <caret line="79" column="13" lean-forward="true" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="13" />
+              <folding>
+                <element signature="n#style#0;n#tr#0;n#thead#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#tr#11;n#thead#0;n#table#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#8;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="manual_closing.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/manual_closing.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1050">
-              <caret line="263" column="22" lean-forward="false" selection-start-line="263" selection-start-column="12" selection-end-line="263" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="packing_list.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="packing_list.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/packing_list.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="141" column="64" lean-forward="true" selection-start-line="141" selection-start-column="64" selection-end-line="141" selection-end-column="64" />
+            <state relative-caret-position="351">
+              <caret line="78" column="50" lean-forward="false" selection-start-line="78" selection-start-column="50" selection-end-line="78" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -834,9 +825,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>packingSave</find>
-      <find>care_label_carton</find>
-      <find>smv_form</find>
       <find>save_smv</find>
       <find>updateSmv</find>
       <find>packing</find>
@@ -859,11 +847,14 @@
       <find>selectDataDynamically</find>
       <find>selectTableDataRowQuery</find>
       <find>field</find>
-      <find>db-&gt;update</find>
       <find>removeFromCarton</find>
       <find>lost_point</find>
       <find>lost_point[]</find>
+      <find>print</find>
+      <find>printDiv</find>
       <find>addToCarton</find>
+      <find>db-&gt;update</find>
+      <find>size</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -917,12 +908,12 @@
         <option value="$PROJECT_DIR$/application/views/care_label_carton.php" />
         <option value="$PROJECT_DIR$/application/views/master.php" />
         <option value="$PROJECT_DIR$/application/controllers/dashboard.php" />
-        <option value="$PROJECT_DIR$/application/views/generate_packing_list.php" />
-        <option value="$PROJECT_DIR$/application/views/packing_list.php" />
         <option value="$PROJECT_DIR$/application/views/remove_from_carton_piece_by_piece.php" />
         <option value="$PROJECT_DIR$/application/models/access_model.php" />
         <option value="$PROJECT_DIR$/application/controllers/access.php" />
         <option value="$PROJECT_DIR$/application/views/manual_carton_piece_by_piece.php" />
+        <option value="$PROJECT_DIR$/application/views/generate_packing_list.php" />
+        <option value="$PROJECT_DIR$/application/views/packing_list.php" />
       </list>
     </option>
   </component>
@@ -996,6 +987,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pts" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="reports" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -2047,18 +2060,18 @@
       <workItem from="1600485244588" duration="2929000" />
       <workItem from="1600582690837" duration="7545000" />
       <workItem from="1600660693120" duration="15221000" />
-      <workItem from="1600744212811" duration="9775000" />
+      <workItem from="1600744212811" duration="15083000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5808370000" />
+    <option name="totallyTimeSpent" value="5813678000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13762811" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21156661" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2349,14 +2362,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4760">
           <caret line="280" column="12" lean-forward="false" selection-start-line="280" selection-start-column="12" selection-end-line="280" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/reports/ship_date_wise_report.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="8" lean-forward="true" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
           <folding />
         </state>
       </provider>
@@ -2837,34 +2842,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/packing_list.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="141" column="64" lean-forward="true" selection-start-line="141" selection-start-column="64" selection-end-line="141" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/po_item_wise_size_remain_cl_list.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="22" column="13" lean-forward="true" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/manual_closing.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1050">
-          <caret line="263" column="22" lean-forward="false" selection-start-line="263" selection-start-column="12" selection-end-line="263" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/generate_packing_list.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="850">
-          <caret line="50" column="48" lean-forward="true" selection-start-line="50" selection-start-column="48" selection-end-line="50" selection-end-column="48" />
           <folding />
         </state>
       </provider>
@@ -2883,6 +2864,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22">
           <caret line="139" column="0" lean-forward="true" selection-start-line="139" selection-start-column="0" selection-end-line="139" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/master.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="232" column="83" lean-forward="false" selection-start-line="232" selection-start-column="83" selection-end-line="232" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/manual_closing.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="184" column="82" lean-forward="false" selection-start-line="184" selection-start-column="82" selection-end-line="184" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/reports/ship_date_wise_report.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="240" column="0" lean-forward="true" selection-start-line="240" selection-start-column="0" selection-end-line="240" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -2951,14 +2956,6 @@
             <marker date="1600756368699" expanded="true" signature="196512:196640" ph="..." />
             <marker date="1600756368699" expanded="true" signature="196863:196979" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/master.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="232" column="83" lean-forward="false" selection-start-line="232" selection-start-column="83" selection-end-line="232" selection-end-column="83" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3659,6 +3656,26 @@
             <marker date="1600754485835" expanded="true" signature="294651:294689" ph="select * fro... tb_care_labels" />
             <marker date="1600754485835" expanded="true" signature="294841:295091" ph="SELECT po_no... tb_care_labels" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/generate_packing_list.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1343">
+          <caret line="79" column="13" lean-forward="true" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="13" />
+          <folding>
+            <element signature="n#style#0;n#tr#0;n#thead#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#tr#11;n#thead#0;n#table#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#8;n#tr#0;n#tbody#0;n#table#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/packing_list.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="78" column="50" lean-forward="false" selection-start-line="78" selection-start-column="50" selection-end-line="78" selection-end-column="50" />
+          <folding />
         </state>
       </provider>
     </entry>
