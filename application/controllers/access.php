@@ -516,6 +516,124 @@ class Access extends CI_Controller {
         return $this->access_model->getPoSizeWiseCartonReport($where);
     }
 
+    public function manualCartonPieceByPiece($so_no, $size){
+        $data['title']='Manual Carton';
+        $user_id = $this->session->userdata('id');
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+
+        $where = '';
+
+        if($so_no != ''){
+            $where .= " AND so_no='$so_no' AND carton_status=0";
+        }
+
+        if($size != ''){
+            $where .= " AND `size`='$size'";
+        }
+
+        $data['so_no'] = $so_no;
+        $data['size'] = $size;
+        $data['balance_pcs'] = $this->access_model->selectTableDataRowQuery('*', 'tb_care_labels', $where);
+
+        $data['maincontent'] = $this->load->view('manual_carton_piece_by_piece', $data, true);
+        $this->load->view('master', $data);
+    }
+
+    public function cartonCompleteListBySoSize($so_no, $size){
+        $data['title']='Remove from Carton';
+        $user_id = $this->session->userdata('id');
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+
+        $where = '';
+
+        if($so_no != ''){
+            $where .= " AND so_no='$so_no' AND carton_status=1";
+        }
+
+        if($size != ''){
+            $where .= " AND `size`='$size'";
+        }
+
+        $data['so_no'] = $so_no;
+        $data['size'] = $size;
+        $data['balance_pcs'] = $this->access_model->selectTableDataRowQuery('*', 'tb_care_labels', $where);
+
+        $data['maincontent'] = $this->load->view('remove_from_carton_piece_by_piece', $data, true);
+        $this->load->view('master', $data);
+    }
+
+    public function removeFromCarton(){
+        $pcs_nos = $this->input->post('pcs_nos');
+
+        foreach ($pcs_nos AS $pcs_no){
+
+            $data = array(
+                'carton_status' => 0
+            );
+
+            $this->access_model->updateTblNew('tb_care_labels', 'pc_tracking_no', $pcs_no, $data);
+        }
+
+        echo 'done';
+    }
+
+    public function addToCarton(){
+        $pcs_nos = $this->input->post('pcs_nos');
+        $last_scan_points = $this->input->post('last_scan_points');
+
+        $data = array();
+
+        foreach ($pcs_nos AS $k => $pcs_no){
+
+            $last_scan_points[$k];
+
+            if($last_scan_points[$k] == "Carton"){
+                $data['carton_status'] = 1;
+            } elseif($last_scan_points[$k] == "Packing"){
+                $data['carton_status'] = 1;
+            } elseif($last_scan_points[$k] == "Wash Return"){
+                $data['packing_status'] = 1;
+                $data['carton_status'] = 1;
+            } elseif($last_scan_points[$k] == "Wash Send"){
+                $data['washing_status'] = 1;
+                $data['packing_status'] = 1;
+                $data['carton_status'] = 1;
+            } elseif($last_scan_points[$k] == "End Line"){
+                $data['packing_status'] = 1;
+                $data['carton_status'] = 1;
+            } elseif($last_scan_points[$k] == "Mid Line"){
+                $data['access_points'] = 4;
+                $data['access_points_status'] = 4;
+                $data['packing_status'] = 1;
+                $data['carton_status'] = 1;
+            } elseif($last_scan_points[$k] == 2){
+                $data['access_points'] = 4;
+                $data['access_points_status'] = 4;
+                $data['packing_status'] = 1;
+                $data['carton_status'] = 1;
+            } elseif($last_scan_points[$k] == "Cutting"){
+                $data['access_points'] = 4;
+                $data['access_points_status'] = 4;
+                $data['packing_status'] = 1;
+                $data['carton_status'] = 1;
+            } elseif($last_scan_points[$k] == "Cutting not Sent"){
+                $data['sent_to_production'] = 1;
+                $data['access_points'] = 4;
+                $data['access_points_status'] = 4;
+                $data['packing_status'] = 1;
+                $data['carton_status'] = 1;
+            }
+
+            $this->access_model->updateTblNew('tb_care_labels', 'pc_tracking_no', $pcs_no, $data);
+        }
+
+        echo 'done';
+    }
+
     public function qa_warehouse_new(){
         $data['title']='QA Warehouse';
         $user_id = $this->session->userdata('id');

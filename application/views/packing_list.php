@@ -98,7 +98,6 @@
 
     $('select').select2();
 
-
     function getShipDateLists() {
         var brands = $("#brands").val();
         var po_type = $("#po_type").val();

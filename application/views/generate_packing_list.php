@@ -48,7 +48,11 @@ $sizes_count = sizeof($sizes);
                     $count_size_carton_qty = ($size_qty[0]['count_size_carton_qty'] != '' ? $size_qty[0]['count_size_carton_qty'] : 0);
                 ?>
 
-                    <td class="hidden-phone center"><?php echo $count_size_carton_qty;?></td>
+                <td class="hidden-phone center">
+                    <a target="_blank" href="<?php echo base_url();?>access/manualCartonPieceByPiece/<?php echo $p['so_no']?>/<?php echo $p['size']?>">
+                        <?php echo $count_size_carton_qty;?>
+                    </a>
+                </td>
 
                 <?php
                     $po_total_carton_qty += $count_size_carton_qty;
