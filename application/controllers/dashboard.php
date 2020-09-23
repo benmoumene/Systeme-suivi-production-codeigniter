@@ -162,7 +162,7 @@ class Dashboard extends CI_Controller {
                 $object->getActiveSheet()->setCellValueByColumnAndRow(16, $excel_row, $v["count_end_line_qc_pass"]);
                 $object->getActiveSheet()->setCellValueByColumnAndRow(17, $excel_row, $end_balance_qty);
                 $object->getActiveSheet()->setCellValueByColumnAndRow(18, $excel_row, $v["count_packing_pass"]);
-                $object->getActiveSheet()->setCellValueByColumnAndRow(19, $excel_row, $pack_balance_qty);
+                $object->getActiveSheet()->setCellValueByColumnAndRow(19, $excel_row, ($pack_balance_qty > 0 ? $pack_balance_qty : 0));
                 $object->getActiveSheet()->setCellValueByColumnAndRow(20, $excel_row, $v["count_carton_pass"]);
                 $object->getActiveSheet()->setCellValueByColumnAndRow(21, $excel_row, ($carton_balance_qty > 0 ? $carton_balance_qty : 0));
                 $object->getActiveSheet()->setCellValueByColumnAndRow(22, $excel_row, $total_others);
