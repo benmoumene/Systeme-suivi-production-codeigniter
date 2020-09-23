@@ -217,7 +217,7 @@ $cl_ending = $packing_order_size[0]['cl_ending'];
 
                 if($bundle_tracking_no != ''){
                     $bundle_tracking_no_file = $bundle_tracking_no.'.png';
-                    $code = '<center><img src="'. base_url().'uploads/qr_image/'.$bundle_tracking_no_file.'" width="70" height="70" title="QR Code Image!"></center>';
+                    $code = '<center><img src="'. base_url().'uploads/qr_image/'.$bundle_tracking_no_file.'" width="85" height="85" title="QR Code Image!"></center>';
                     echo $code;
                 }
 

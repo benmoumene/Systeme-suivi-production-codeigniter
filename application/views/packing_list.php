@@ -160,6 +160,10 @@
     }
 
     function ExportToExcel(tableid) {
+
+        $(".minus_sign").css('display', 'none');
+        $("a.qty").contents().unwrap();
+
         var tab_text = "<table border='2px'><tr>";
         var textRange; var j = 0;
         tab = document.getElementById(tableid);//.getElementsByTagName('table'); // id of table

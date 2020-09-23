@@ -591,9 +591,9 @@ class Access_model extends CI_Model {
 
     public function getCutInfoByPoItem($sap_no, $po_no, $item_no){
         $sql = "SELECT t1.*, t2.purchase_order, t2.cut_no, t2.bundle, t2.planned_cut_qty, t2.bundle_range_start, t2.bundle_range_end
-                FROM (SELECT *  FROM `tb_po_detail` WHERE `po_no` LIKE '%$sap_no%' AND `purchase_order` LIKE '%$po_no%' AND `item` LIKE '%$item_no%' GROUP BY po_no, purchase_order, item LIMIT 1) as t1
+                FROM (SELECT *  FROM `tb_po_detail` WHERE `po_no` = '$sap_no' AND `purchase_order` LIKE '%$po_no%' AND `item` LIKE '%$item_no%' GROUP BY po_no, purchase_order, item LIMIT 1) as t1
                 INNER JOIN
-                (SELECT * FROM `tb_cut_summary`  WHERE `po_no` LIKE '%$sap_no%' AND `purchase_order` LIKE '%$po_no%' AND `item` LIKE '%$item_no%' ORDER BY id DESC LIMIT 1) as t2
+                (SELECT * FROM `tb_cut_summary`  WHERE `po_no` = '$sap_no' AND `purchase_order` LIKE '%$po_no%' AND `item` LIKE '%$item_no%' ORDER BY id DESC LIMIT 1) as t2
                 ON t1.po_no=t2.po_no AND t1.purchase_order=t2.purchase_order AND t1.item=t2.item";
 
 

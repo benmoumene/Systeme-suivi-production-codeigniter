@@ -6239,7 +6239,7 @@ class Access extends CI_Controller {
 //                     $cut_tracking_no = $sap_no_last_five.'_'.$cut_no.'_'.$po_no_last_four.'_'.$item; //Previous Cutting Number Code
 
 
-                    $bundle_tracking_no = $so_no.'_'.$cut_no.'_'.$size.'-'.$lay.'_'.$b_count; //New Bundle Card Code
+                    $bundle_tracking_no = $so_no.'_'.$cut_no.'_'.$b_count; //New Bundle Card Code
                     $cut_tracking_no = $sap_no.'_'.$cut_no; //New Cutting Number Code
 
 //                    echo '<pre>';

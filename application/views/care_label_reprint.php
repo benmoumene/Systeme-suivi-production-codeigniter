@@ -71,7 +71,7 @@ $sl++;
         <div style="float: left; margin-bottom: -5px; margin-left: 1px;">
             <?php
             $cl_no_file = $pc_tracking_no.'.png';
-            $code = '<center><img src="'. base_url().'uploads/qr_image/'.$cl_no_file.'" width="60" height="60" title="QR Code Image!"></center>';
+            $code = '<center><img src="'. base_url().'uploads/qr_image/'.$cl_no_file.'" width="80" height="80" title="QR Code Image!"></center>';
             echo $code;
             ?>
         </div><br />
@@ -102,7 +102,7 @@ $sl++;
         <div style="float: left; margin-left: 1px;">
             <?php
             $cl_no_file = $pc_tracking_no.'.png';
-            $code = '<center><img src="'. base_url().'uploads/qr_image/'.$cl_no_file.'" width="60" height="60" title="QR Code Image!"></center>';
+            $code = '<center><img src="'. base_url().'uploads/qr_image/'.$cl_no_file.'" width="80" height="80" title="QR Code Image!"></center>';
             echo $code;
             ?>
         </div>
