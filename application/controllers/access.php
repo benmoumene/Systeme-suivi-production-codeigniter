@@ -496,6 +496,7 @@ class Access extends CI_Controller {
             $where .= " AND ex_factory_date='$ship_date'";
         }
 
+        $data['ship_date'] = $ship_date;
         $data['sizes'] = $this->access_model->getSizesbyShipDate($where);
         $data['po_list'] = $this->access_model->getPOsbyShipDate($where);
 

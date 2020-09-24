@@ -9,7 +9,7 @@ $sizes_count = sizeof($sizes);
         <tr style="font-size: 15px; font-weight: 900;">
             <th style="text-align:left" colspan="7">Final Consignee / Customer:</th>
             <th style="text-align:left" colspan="<?php echo $sizes_count?>">Supplier / factory:</th>
-            <th style="text-align:left" colspan="6">Detail Packing List of ETD : <?php echo date('Y-m-d');?></th>
+            <th style="text-align:left" colspan="6">Detail Packing List of ETD : <?php echo $ship_date;?></th>
         </tr>
         <tr>
             <th style="text-align:left" colspan="7">
@@ -82,7 +82,7 @@ $sizes_count = sizeof($sizes);
             <th class="hidden-phone center" rowspan="2">Gross Weight</th>
             <th class="hidden-phone center" rowspan="2">CBM</th>
         </tr>
-        <tr>
+        <tr style="font-size: 15px;">
             <?php foreach ($sizes AS $s){ ?>
 
             <th class="hidden-phone center"><?php echo $s['size']?></th>
@@ -99,7 +99,7 @@ $sizes_count = sizeof($sizes);
 
             $po_total_carton_qty=0;
         ?>
-            <tr>
+            <tr style="font-size: 15px;">
                 <td class="hidden-phone center">
                     <span class="sl_no"><?php echo $sl; $sl++;?></span>
                     <span class="btn btn-danger" class="minus_sign" onclick="removeThisRow(this)"><i class="fa fa-minus"></i></span>
