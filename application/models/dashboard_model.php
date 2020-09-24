@@ -1750,7 +1750,11 @@ class Dashboard_model extends CI_Model {
                 AND t1.item=t2.item AND t1.quality=t2.quality AND t1.color=t2.color
                 
                 LEFT JOIN 
-                tb_production_summary as t3
+                (SELECT so_no, po_no, brand, purchase_order, style_no, style_name, item, quality, color, ex_factory_date, 
+                COUNT(id) as count_end_line_qc_pass
+                FROM `tb_care_labels` 
+                WHERE access_points=4 AND access_points_status=4 AND manually_closed=0
+                GROUP BY so_no, po_no, purchase_order, item, quality, color) as t3
                 ON t1.so_no=t3.so_no AND t1.po_no=t3.po_no AND t1.purchase_order=t3.purchase_order 
                 AND t1.item=t3.item AND t1.quality=t3.quality AND t1.color=t3.color";
 

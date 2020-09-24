@@ -2929,6 +2929,8 @@ class Dashboard extends CI_Controller {
     }
 
     public function getDailyPerformanceDetail($line_name, $line_id, $search_date){
+        $data['title']='Production Report Detail';
+
         $data['line_name'] = $line_name;
         $data['search_date'] = $search_date;
 
