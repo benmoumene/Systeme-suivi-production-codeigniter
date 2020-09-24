@@ -116,9 +116,14 @@ $sizes_count = sizeof($sizes);
                     $size_qty = $this->method_call->getPoSizeWiseCartonReport($p['so_no'], $s['size']);
 
                     $count_size_carton_qty = ($size_qty[0]['count_size_carton_qty'] != '' ? $size_qty[0]['count_size_carton_qty'] : 0);
+                    $size_order_qty = ($size_qty[0]['size_order_qty'] != '' ? $size_qty[0]['size_order_qty'] : 0);
                 ?>
 
-                <td class="hidden-phone center" style="width: 50px;">
+                <td class="hidden-phone center size_carton_quantity"
+                    <?php if($count_size_carton_qty < $size_order_qty){ ?> style="background-color: red; color: white;" <?php } ?>
+                    <?php if($count_size_carton_qty == $size_order_qty){ ?> style="background-color: green; color: white;" <?php } ?>
+                    <?php if($count_size_carton_qty > $size_order_qty){ ?> style="background-color: yellow; color: white;" <?php } ?>
+                >
                     <a class="qty" target="_blank" href="<?php echo base_url();?>access/manualCartonPieceByPiece/<?php echo $p['so_no']?>/<?php echo $s['size']?>">
                         <?php echo $count_size_carton_qty;?>
                     </a>

@@ -66,7 +66,7 @@
                     <span><b>* Select Ship Date </b></span>
                 </div>
                 <div class="col-md-1">
-                    <button class="btn btn-success" onclick="generatePackingList();">Generate</button>
+                    <button class="btn btn-success" id="generate_btn" onclick="generatePackingList();">Generate</button>
                 </div>
                 <div class="col-md-1" id="loader" style="display: none;"><div class="loader"></div></div>
             </div>
@@ -161,6 +161,9 @@
 
     function ExportToExcel(tableid) {
 
+        $(".size_carton_quantity").css('background-color', '#ffffff');
+        $(".size_carton_quantity").css('color', '#000000');
+
         $(".minus_sign").css('display', 'none');
         $("a.qty").contents().unwrap();
 
@@ -220,6 +223,7 @@
             } catch (e) {
             }
 
+        document.getElementById('generate_btn').click();
 
         return false;
         //return (sa);

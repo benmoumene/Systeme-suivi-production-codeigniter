@@ -6120,10 +6120,19 @@ class Access_model extends CI_Model {
     }
 
     public function getPoSizeWiseCartonReport($where){
-        $sql = "SELECT so_no, size, count(id) AS count_size_carton_qty 
+        $sql = "SELECT t1.*, t2.quantity AS size_order_qty
+                FROM (SELECT so_no, size, count(id) AS count_size_carton_qty 
                 FROM `tb_care_labels` 
                 WHERE carton_status=1 $where 
-                GROUP BY so_no";
+                GROUP BY so_no) AS  t1
+                
+                LEFT JOIN
+                (SELECT so_no, size, quantity 
+                FROM `tb_po_detail` 
+                WHERE 1 $where 
+                GROUP BY so_no) AS t2
+                
+                ON t1.so_no=t2.so_no AND t1.size=t2.size";
 
         $query = $this->db->query($sql)->result_array();
         return $query;
