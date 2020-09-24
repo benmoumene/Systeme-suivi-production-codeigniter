@@ -164,6 +164,9 @@
         $(".size_carton_quantity").css('background-color', '#ffffff');
         $(".size_carton_quantity").css('color', '#000000');
 
+        $(".carton").css('display', 'none');
+        $(".carton_span").css('display', 'block');
+
         $(".minus_sign").css('display', 'none');
         $("a.qty").contents().unwrap();
 
