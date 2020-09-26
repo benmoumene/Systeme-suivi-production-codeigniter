@@ -167,6 +167,9 @@
         $(".carton").css('display', 'none');
         $(".carton_span").css('display', 'block');
 
+        $(".net_weight_single_carton").css('display', 'none');
+        $(".gross_weight_single_carton").css('display', 'none');
+
         $(".minus_sign").css('display', 'none');
         $("a.qty").contents().unwrap();
 

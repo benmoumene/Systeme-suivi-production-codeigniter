@@ -137,12 +137,20 @@ $sizes_count = sizeof($sizes);
                     <span class="carton_qty"><?php echo $po_total_carton_qty;?></span>
                 </td>
                 <td class="hidden-phone center">
-                    <input type="text" class="carton" name="carton" id="carton_<?php echo $k?>" onblur="cartonCalculations(<?php echo $k;?>);" style="width: 50px" />
+                    <input type="number" class="carton" name="carton" id="carton_<?php echo $k?>" onblur="cartonCalculations(<?php echo $k;?>);" style="width: 60px" />
                     <span class="carton_span" id="carton_span_<?php echo $k?>" style="display: none;"></span>
                 </td>
-                <td class="hidden-phone center"></td>
-                <td class="hidden-phone center"></td>
-                <td class="hidden-phone center"></td>
+                <td class="hidden-phone center">
+                    <input type="text" class="net_weight_single_carton" name="net_weight_single_carton" id="net_weight_single_carton_<?php echo $k?>" onblur="netWeightCalculation(<?php echo $k;?>);" style="width: 60px" />
+                    <span class="net_weight" id="net_weight_<?php echo $k?>">0</span>
+                </td>
+                <td class="hidden-phone center">
+                    <input type="text" class="gross_weight_single_carton" name="gross_weight_single_carton" id="gross_weight_single_carton_<?php echo $k?>" onblur="grossWeightCalculation(<?php echo $k;?>);" style="width: 60px" />
+                    <span class="gross_weight" id="gross_weight_<?php echo $k?>">0</span>
+                </td>
+                <td class="hidden-phone center">
+                    <span class="cbm" id="cbm_<?php echo $k?>">0</span>
+                </td>
             </tr>
         <?php
         }
@@ -157,9 +165,15 @@ $sizes_count = sizeof($sizes);
             <th class="hidden-phone center">
                 <span id="total_carton">0</span>
             </th>
-            <th class="hidden-phone center"></th>
-            <th class="hidden-phone center"></th>
-            <th class="hidden-phone center"></th>
+            <th class="hidden-phone center">
+                <span id="total_net_weight">0</span>
+            </th>
+            <th class="hidden-phone center">
+                <span id="total_gross_weight">0</span>
+            </th>
+            <th class="hidden-phone center">
+                <span id="total_cbm">0</span>
+            </th>
         </tr>
     </tfoot>
 </table>
@@ -202,5 +216,55 @@ $sizes_count = sizeof($sizes);
         var carton = $("#carton_"+i).val();
         $("#carton_span_"+i).text(carton);
 
+        var cbm = (0.52*0.38*0.29*carton).toFixed(2);
+        $("#cbm_"+i).text(cbm);
+
+        totalCBM();
+    }
+
+    function netWeightCalculation(i) {
+        var carton = $("#carton_"+i).val();
+        carton = (carton != '' ? carton : 0);
+
+        var net_weight_single_carton = $("#net_weight_single_carton_"+i).val();
+        net_weight_single_carton = (net_weight_single_carton != '' ? net_weight_single_carton : 0);
+
+        var net_weight = (carton * net_weight_single_carton).toFixed(2);
+        $("#net_weight_"+i).text(net_weight);
+
+        var sum = 0;
+        $(".net_weight").each(function(){
+            sum += +$(this).text();
+        });
+        $("#total_net_weight").text(sum.toFixed(2));
+
+        totalCBM();
+    }
+
+    function grossWeightCalculation(i) {
+        var carton = $("#carton_"+i).val();
+        carton = (carton != '' ? carton : 0);
+
+        var gross_weight_single_carton = $("#gross_weight_single_carton_"+i).val();
+        gross_weight_single_carton = (gross_weight_single_carton != '' ? gross_weight_single_carton : 0);
+
+        var gross_weight = (carton * gross_weight_single_carton).toFixed(2);
+        $("#gross_weight_"+i).text(gross_weight);
+
+        var sum = 0;
+        $(".gross_weight").each(function(){
+            sum += +$(this).text();
+        });
+        $("#total_gross_weight").text(sum.toFixed(2));
+
+        totalCBM();
+    }
+    
+    function totalCBM() {
+        var sum_cbm = 0;
+        $(".cbm").each(function(){
+            sum_cbm += +$(this).text();
+        });
+        $("#total_cbm").text(sum_cbm.toFixed(2));
     }
 </script>
