@@ -73,7 +73,7 @@ $sizes_count = sizeof($sizes);
             <th class="hidden-phone center" rowspan="2">AL</th>
             <th class="hidden-phone center" rowspan="2">COL</th>
             <th class="hidden-phone center" colspan="<?php echo $sizes_count?>">SIZE</th>
-            <th class="hidden-phone center" rowspan="2">ASSORTED PACKED</th>
+            <th class="hidden-phone center" rowspan="2" style="width: 60px;">ASSORTED PACKED</th>
             <th class="hidden-phone center" rowspan="2">TOTAL</th>
             <th class="hidden-phone center" rowspan="2">Total Ctns</th>
             <th class="hidden-phone center" rowspan="2">Net Weight</th>
