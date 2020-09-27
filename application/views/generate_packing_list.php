@@ -120,7 +120,7 @@ $sizes_count = sizeof($sizes);
                     <?php if($count_size_carton_qty == $size_order_qty){ ?> style="background-color: green; color: white;" <?php } ?>
                     <?php if($count_size_carton_qty > $size_order_qty){ ?> style="background-color: yellow; color: white;" <?php } ?>
                 >
-                    <a class="qty" target="_blank" href="<?php echo base_url();?>access/manualCartonPieceByPiece/<?php echo $p['so_no']?>/<?php echo $s['size']?>">
+                    <a class="qty" target="_blank" href="<?php echo base_url();?>access/manualCartonPieceByPiece/<?php echo $p['so_no']?>/<?php echo $s['size']?>" style="background-color: #ffffff;">
                         <?php echo $count_size_carton_qty;?>
                     </a>
                 </td>
