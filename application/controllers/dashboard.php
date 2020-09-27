@@ -506,7 +506,7 @@ class Dashboard extends CI_Controller {
         }
 
         if($ship_date != '' && $ship_date != '1970-01-01'){
-            $where .= " AND ex_factory_date='$ship_date'";
+            $where .= " AND approved_ex_factory_date='$ship_date'";
         }
 
 //        $data['po_close_report'] = $this->dashboard_model->getPoShippingDateWiseReport($where, $where_1);
@@ -571,6 +571,7 @@ class Dashboard extends CI_Controller {
                 $idata['style_name'] = ($v['style_name'] != NULL ? $v['style_name'] : '');
                 $idata['brand'] = ($v['brand'] != NULL ? $v['brand'] : '');
                 $idata['ex_factory_date'] = ($v['ex_factory_date'] != NULL ? $v['ex_factory_date'] : '0000-00-00');
+                $idata['approved_ex_factory_date'] = ($v['approved_ex_factory_date'] != NULL ? $v['approved_ex_factory_date'] : '0000-00-00');
                 $idata['crd_date'] = ($v['crd_date'] != NULL ? $v['crd_date'] : '0000-00-00');
                 $idata['status'] = ($v['status'] != NULL ? $v['status'] : '');
                 $idata['planned_lines'] = ($v['planned_lines'] != NULL ? $v['planned_lines'] : '');
@@ -1029,7 +1030,7 @@ class Dashboard extends CI_Controller {
         }
 
         if($po_from_date != '' && $po_from_date != '1970-01-01' && $po_to_date != '' && $po_to_date != '1970-01-01'){
-            $where .= " AND ex_factory_date Between '$po_from_date' AND '$po_to_date'";
+            $where .= " AND approved_ex_factory_date Between '$po_from_date' AND '$po_to_date'";
         }
 
         $data['dates'] = $this->dashboard_model->getSearchedDates($where);
@@ -4533,7 +4534,7 @@ class Dashboard extends CI_Controller {
         $options .= '<option value="">Select Ship Date...</option>';
 
         foreach ($ship_dates as $v_d){
-            $options .= '<option value="'.$v_d['ex_factory_date'].'">'.$v_d['ex_factory_date'].'</option>';
+            $options .= '<option value="'.$v_d['approved_ex_factory_date'].'">'.$v_d['approved_ex_factory_date'].'</option>';
         }
 
         echo $options;
@@ -4570,7 +4571,7 @@ class Dashboard extends CI_Controller {
         }
 
         if($month_year != '' && $month_year != '1970-01'){
-            $where .= " AND DATE_FORMAT(ex_factory_date, '%Y-%m') = '$month_year'";
+            $where .= " AND DATE_FORMAT(approved_ex_factory_date, '%Y-%m') = '$month_year'";
         }
 
         $data['dates'] = $this->dashboard_model->getSearchedDates($where);
@@ -4616,7 +4617,7 @@ class Dashboard extends CI_Controller {
         }
 
         if($ship_date != '' && $ship_date != '1970-01-01'){
-            $where .= " AND ex_factory_date='$ship_date'";
+            $where .= " AND approved_ex_factory_date='$ship_date'";
         }
 
 //        $data['po_close_report'] = $this->dashboard_model->getPoShippingDateWiseReport($where, $where_1);
@@ -4639,7 +4640,7 @@ class Dashboard extends CI_Controller {
         }
 
         if($ship_date != '' && $ship_date != '1970-01-01' && $ship_date != '' && $ship_date != '1970-01-01'){
-            $where .= " AND ex_factory_date='$ship_date'";
+            $where .= " AND approved_ex_factory_date='$ship_date'";
         }
 
 //        return $po_close_report = $this->dashboard_model->getPoShippingDateWiseReport($where, $where_1);

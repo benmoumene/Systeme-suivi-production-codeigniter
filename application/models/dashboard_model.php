@@ -2190,11 +2190,11 @@ class Dashboard_model extends CI_Model {
     }
 
     public function getSearchedDates($where){
-        $sql = "SELECT ex_factory_date 
+        $sql = "SELECT ex_factory_date, approved_ex_factory_date
                 FROM `tb_po_detail` 
                 WHERE 1
                 $where
-                GROUP BY ex_factory_date";
+                GROUP BY approved_ex_factory_date";
 
         $query = $this->db->query($sql)->result_array();
         return $query;
@@ -2682,7 +2682,7 @@ class Dashboard_model extends CI_Model {
     }
 
     public function getProductionReport($where){
-        $sql = "SELECT * FROM `tb_production_summary` WHERE 1 $where ORDER BY ex_factory_date ASC";
+        $sql = "SELECT * FROM `tb_production_summary` WHERE 1 $where ORDER BY approved_ex_factory_date ASC";
 
         $query = $this->db->query($sql)->result_array();
         return $query;
@@ -3280,7 +3280,7 @@ class Dashboard_model extends CI_Model {
                 
                 FROM 
                 (SELECT so_no, po_no, brand, purchase_order, item, quality, color, style_no, style_name, 
-                ex_factory_date, crd_date, SUM(quantity) AS total_order_qty, wash_gmt, po_type, status
+                ex_factory_date, approved_ex_factory_date, crd_date, SUM(quantity) AS total_order_qty, wash_gmt, po_type, status
                 FROM tb_po_detail 
                 WHERE 1 $where
                 GROUP BY so_no) AS t1
@@ -3899,11 +3899,11 @@ class Dashboard_model extends CI_Model {
 //                FROM `tb_po_detail`
 //                GROUP BY ex_factory_date";
 
-         $sql = "SELECT ex_factory_date 
+         $sql = "SELECT ex_factory_date, approved_ex_factory_date 
                  FROM `tb_po_detail` 
-                 WHERE ex_factory_date 
+                 WHERE approved_ex_factory_date 
                  BETWEEN (CURDATE() - INTERVAL 60 day) AND (CURDATE() + INTERVAL 60 day)
-                 GROUP BY ex_factory_date";
+                 GROUP BY approved_ex_factory_date";
 
 
         $query = $this->db->query($sql)->result_array();
@@ -3911,7 +3911,7 @@ class Dashboard_model extends CI_Model {
     }
 
     public function getBrandWiseShipDates($where){
-        $sql = "SELECT ex_factory_date
+        $sql = "SELECT ex_factory_date, approved_ex_factory_date
                  FROM `tb_po_detail`
                  WHERE 1
                  $where

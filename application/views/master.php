@@ -441,6 +441,7 @@
                 <li> <a href="<?php echo base_url();?>access/aqlPlan"><i class="fa fa-circle"></i> AQL Plan </a></li>
                 <li> <a href="<?php echo base_url();?>access/unApproveRequest"><i class="fa fa-circle"></i> Request Reprint </a></li>
                 <li> <a href="<?php echo base_url();?>access/wash"><i class="fa fa-circle"></i> Wash Control </a></li>
+                <li> <a href="<?php echo base_url();?>access/changeApprovedExfactory"><i class="fa fa-calendar" aria-hidden="true"></i> Approved Ship Date </a></li>
                 <li> <a href="javascript:void(0);"> <i class="fa fa-plus"></i> Target Assign <span class="plus"><i class="fa fa-plus"></i></span></a>
                     <ul>
                         <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/cuttingTarget"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Cutting Target</b> </a> </li>

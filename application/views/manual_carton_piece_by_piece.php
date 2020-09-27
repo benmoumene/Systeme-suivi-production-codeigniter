@@ -35,7 +35,24 @@
         <!--\\\\\\\ container  start \\\\\\-->
         <div class="row">
             <div class="col-md-12">
-              <div class="col-md-10"></div>
+              <div class="col-md-3">
+                  <select class="form-control" name="warehouse_type" id="warehouse_type">
+                      <option value="">Select Warehouse Type</option>
+                      <?php foreach ($wh_types as $v_1){
+                          if($v_1['id'] != 5){
+                              ?>
+                              <option value="<?php echo $v_1['id']?>"><?php echo $v_1['warehouse_type']?></option>
+                              <?php
+                          }
+                      }
+                      ?>
+                  </select>
+                  <span><b>* Select Warehouse Type</b></span>
+              </div>
+              <div class="col-md-3">
+                  <span class="btn btn-primary" onclick="saveToWarehouse()">SAVE</span>
+              </div>
+              <div class="col-md-4"></div>
                 <div class="col-md-2">
                     <a class="btn btn-warning" href="<?php echo base_url();?>access/cartonCompleteListBySoSize/<?php echo $so_no;?>/<?php echo $size;?>">CARTON COMPLETE LIST</a>
                 </div>
@@ -83,7 +100,21 @@
 
                                     $last_scanning_point = "";
 
-                                    if($b['carton_status'] == 1){
+                                    if($b['warehouse_qa_type'] == 1){
+                                        $last_scanning_point = "Buyer Warehouse";
+                                    } elseif($b['warehouse_qa_type'] == 2){
+                                        $last_scanning_point = "Factory Warehouse";
+                                    } elseif($b['warehouse_qa_type'] == 3){
+                                        $last_scanning_point = "Trash";
+                                    } elseif($b['warehouse_qa_type'] == 4){
+                                        $last_scanning_point = "Production Sample Warehouse";
+                                    } elseif($b['warehouse_qa_type'] == 5){
+                                        $last_scanning_point = "Other Purpose";
+                                    } elseif($b['warehouse_qa_type'] == 6){
+                                        $last_scanning_point = "Lost";
+                                    } elseif($b['warehouse_qa_type'] == 7){
+                                        $last_scanning_point = "Size Set";
+                                    } elseif($b['carton_status'] == 1){
                                         $last_scanning_point = "Carton";
                                     } elseif($b['packing_status'] == 1){
                                         $last_scanning_point = "Packing";
@@ -178,6 +209,49 @@
         }else{
             alert('Sorry, No Pieces are Selected !');
         }
+    }
+
+    function saveToWarehouse() {
+        var pcs_nos = [];
+        var last_scan_points = [];
+
+        $('input.checkItem:checkbox:checked').each(function () {
+            var sThisVal = $(this).val();
+
+            pcs_nos.push(sThisVal);
+
+        });
+
+        $('input.last_scan').each(function () {
+            var sThisVal = $(this).val();
+
+            last_scan_points.push(sThisVal);
+
+        });
+
+        var warehouse_type = $("#warehouse_type").val();
+
+        if(warehouse_type != ''){
+            if(pcs_nos.length > 0){
+                $.ajax({
+                    url:"<?php echo base_url('access/saveToWarehouse')?>",
+                    type:"post",
+                    dataType:"html",
+                    data:{ pcs_nos: pcs_nos, last_scan_points: last_scan_points, warehouse_type: warehouse_type },
+                    success:function (data) {
+                        if(data='done'){
+                            alert('Process Successful!');
+                            location.reload();
+                        }
+                    }
+                });
+            }else{
+                alert('Sorry, No Pieces are Selected !');
+            }
+        }else{
+            alert('Please Select Warehouse Type !');
+        }
+
     }
 
 </script>

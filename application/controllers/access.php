@@ -467,7 +467,7 @@ class Access extends CI_Controller {
         $options .= '<option value="">Select Ship Date...</option>';
 
         foreach ($ship_dates as $v_d){
-            $options .= '<option value="'.$v_d['ex_factory_date'].'">'.$v_d['ex_factory_date'].'</option>';
+            $options .= '<option value="'.$v_d['approved_ex_factory_date'].'">'.$v_d['approved_ex_factory_date'].'</option>';
         }
 
         echo $options;
@@ -493,7 +493,7 @@ class Access extends CI_Controller {
         }
 
         if($ship_date != ''){
-            $where .= " AND ex_factory_date='$ship_date'";
+            $where .= " AND approved_ex_factory_date='$ship_date'";
         }
 
         $data['ship_date'] = $ship_date;
@@ -536,6 +536,8 @@ class Access extends CI_Controller {
 
         $data['so_no'] = $so_no;
         $data['size'] = $size;
+        $data['wh_types'] = $this->dashboard_model->getWarehouseTypes();
+        $data['seasons'] = $this->dashboard_model->getSeasons();
         $data['balance_pcs'] = $this->access_model->selectTableDataRowQuery('*', 'tb_care_labels', $where);
 
         $data['maincontent'] = $this->load->view('manual_carton_piece_by_piece', $data, true);
@@ -582,7 +584,8 @@ class Access extends CI_Controller {
         echo 'done';
     }
 
-    public function addToCarton(){
+    public function saveToWarehouse(){
+        $warehouse_type = $this->input->post('warehouse_type');
         $pcs_nos = $this->input->post('pcs_nos');
         $last_scan_points = $this->input->post('last_scan_points');
 
@@ -593,6 +596,89 @@ class Access extends CI_Controller {
             $last_scan_points[$k];
 
             if($last_scan_points[$k] == "Carton"){
+                $data['carton_status'] = 0;
+                $data['warehouse_qa_type'] = $warehouse_type;
+            } elseif($last_scan_points[$k] == "Packing"){
+                $data['carton_status'] = 0;
+                $data['warehouse_qa_type'] = $warehouse_type;
+            } elseif($last_scan_points[$k] == "Wash Return"){
+                $data['packing_status'] = 1;
+                $data['carton_status'] = 0;
+                $data['warehouse_qa_type'] = $warehouse_type;
+            } elseif($last_scan_points[$k] == "Wash Send"){
+                $data['washing_status'] = 1;
+                $data['packing_status'] = 1;
+                $data['carton_status'] = 0;
+                $data['warehouse_qa_type'] = $warehouse_type;
+            } elseif($last_scan_points[$k] == "End Line"){
+                $data['packing_status'] = 1;
+                $data['carton_status'] = 0;
+                $data['warehouse_qa_type'] = $warehouse_type;
+            } elseif($last_scan_points[$k] == "Mid Line"){
+                $data['access_points'] = 4;
+                $data['access_points_status'] = 4;
+                $data['packing_status'] = 1;
+                $data['carton_status'] = 0;
+                $data['warehouse_qa_type'] = $warehouse_type;
+            } elseif($last_scan_points[$k] == "Input Line"){
+                $data['access_points'] = 4;
+                $data['access_points_status'] = 4;
+                $data['packing_status'] = 1;
+                $data['carton_status'] = 0;
+                $data['warehouse_qa_type'] = $warehouse_type;
+            } elseif($last_scan_points[$k] == "Cutting"){
+                $data['access_points'] = 4;
+                $data['access_points_status'] = 4;
+                $data['packing_status'] = 1;
+                $data['carton_status'] = 0;
+                $data['warehouse_qa_type'] = $warehouse_type;
+            } elseif($last_scan_points[$k] == "Cutting not Sent"){
+                $data['sent_to_production'] = 1;
+                $data['access_points'] = 4;
+                $data['access_points_status'] = 4;
+                $data['packing_status'] = 1;
+                $data['carton_status'] = 0;
+                $data['warehouse_qa_type'] = $warehouse_type;
+            }
+
+            $this->access_model->updateTblNew('tb_care_labels', 'pc_tracking_no', $pcs_no, $data);
+        }
+
+        echo 'done';
+    }
+
+    public function addToCarton(){
+        $pcs_nos = $this->input->post('pcs_nos');
+        $last_scan_points = $this->input->post('last_scan_points');
+
+        $data = array();
+
+        foreach ($pcs_nos AS $k => $pcs_no){
+
+            $last_scan_points[$k];
+
+            if($last_scan_points[$k] == "Buyer Warehouse"){
+                $data['carton_status'] = 1;
+                $data['warehouse_qa_type'] = 0;
+            } elseif($last_scan_points[$k] == "Factory Warehouse"){
+                $data['carton_status'] = 1;
+                $data['warehouse_qa_type'] = 0;
+            } elseif($last_scan_points[$k] == "Trash"){
+                $data['carton_status'] = 1;
+                $data['warehouse_qa_type'] = 0;
+            } elseif($last_scan_points[$k] == "Production Sample Warehouse"){
+                $data['carton_status'] = 1;
+                $data['warehouse_qa_type'] = 0;
+            } elseif($last_scan_points[$k] == "Other Purpose"){
+                $data['carton_status'] = 1;
+                $data['warehouse_qa_type'] = 0;
+            } elseif($last_scan_points[$k] == "Lost"){
+                $data['carton_status'] = 1;
+                $data['warehouse_qa_type'] = 0;
+            } elseif($last_scan_points[$k] == "Size Set"){
+                $data['carton_status'] = 1;
+                $data['warehouse_qa_type'] = 0;
+            } elseif($last_scan_points[$k] == "Carton"){
                 $data['carton_status'] = 1;
             } elseif($last_scan_points[$k] == "Packing"){
                 $data['carton_status'] = 1;
@@ -611,7 +697,7 @@ class Access extends CI_Controller {
                 $data['access_points_status'] = 4;
                 $data['packing_status'] = 1;
                 $data['carton_status'] = 1;
-            } elseif($last_scan_points[$k] == 2){
+            } elseif($last_scan_points[$k] == "Input Line"){
                 $data['access_points'] = 4;
                 $data['access_points_status'] = 4;
                 $data['packing_status'] = 1;
@@ -1375,6 +1461,27 @@ class Access extends CI_Controller {
         }
     }
 
+    public function changeApprovedExfactory()
+    {
+        $data['title'] = 'Change Approved Ex-Factory';
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+        $data['so_nos'] = $this->access_model->getAllSOs();
+        $data['maincontent'] = $this->load->view('change_approved_ex_factory', $data, true);
+        $this->load->view('master', $data);
+
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
     public function getExfactory()
     {
         $so_no=$this->input->post('so_no');
@@ -1397,6 +1504,22 @@ class Access extends CI_Controller {
         $data['message']='Ex-Factory Updated Successfully!';
         $this->session->set_userdata($data);
         redirect('access/changeExfactory');
+    }
+
+    public function changingApprovedExfactory(){
+        $so_no=$this->input->post('so_no');
+        $approved_exfactory=$this->input->post('approved_exfactory');
+        $date = explode('-', $approved_exfactory);
+        $year=$date[2];
+        $month=$date[0];
+        $day=$date[1];
+
+        $data['approved_ex_factory_date']=$year.'-'.$month.'-'.$day;
+
+        $this->access_model->updateTblNew('tb_po_detail', 'so_no', $so_no, $data);
+        $data['message']='Approved Ex-Factory Updated Successfully!';
+        $this->session->set_userdata($data);
+        redirect('access/changeApprovedExfactory');
     }
 
     public function poSizeUpdate()
@@ -5294,6 +5417,7 @@ class Access extends CI_Controller {
                                 'quantity' => "$quantity",
                                 'size' => "$size",
                                 'ex_factory_date' => "$ex_factory_date",
+                                'approved_ex_factory_date' => "$ex_factory_date",
                                 'crd_date' => "$crd_date",
                                 'is_manual_upload' =>1,
                                 'upload_date' =>"$date",
@@ -5337,6 +5461,7 @@ class Access extends CI_Controller {
                             'quantity' => "$quantity",
                             'size' => "$size",
                             'ex_factory_date' => "$ex_factory_date",
+                            'approved_ex_factory_date' => "$ex_factory_date",
                             'crd_date' => "$crd_date",
                             'is_manual_upload' => 1,
                             'upload_date' =>"$date",

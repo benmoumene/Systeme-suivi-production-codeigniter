@@ -203,6 +203,11 @@ $sizes_count = sizeof($sizes);
 
             $("a.className1, a.className2").contents().unwrap();
 //        Total carton quantity end
+
+        totalNetWeight();
+        totalGrossWeight();
+        totalCBM();
+
     }
 
     function cartonCalculations(i) {
@@ -232,11 +237,7 @@ $sizes_count = sizeof($sizes);
         var net_weight = (carton * net_weight_single_carton).toFixed(2);
         $("#net_weight_"+i).text(net_weight);
 
-        var sum = 0;
-        $(".net_weight").each(function(){
-            sum += +$(this).text();
-        });
-        $("#total_net_weight").text(sum.toFixed(2));
+        totalNetWeight();
 
         totalCBM();
     }
@@ -251,11 +252,7 @@ $sizes_count = sizeof($sizes);
         var gross_weight = (carton * gross_weight_single_carton).toFixed(2);
         $("#gross_weight_"+i).text(gross_weight);
 
-        var sum = 0;
-        $(".gross_weight").each(function(){
-            sum += +$(this).text();
-        });
-        $("#total_gross_weight").text(sum.toFixed(2));
+        totalGrossWeight();
 
         totalCBM();
     }
@@ -266,5 +263,21 @@ $sizes_count = sizeof($sizes);
             sum_cbm += +$(this).text();
         });
         $("#total_cbm").text(sum_cbm.toFixed(2));
+    }
+
+    function totalNetWeight() {
+        var sum_net_weight = 0;
+        $(".net_weight").each(function(){
+            sum_net_weight += +$(this).text();
+        });
+        $("#total_net_weight").text(sum_net_weight.toFixed(2));
+    }
+
+    function totalGrossWeight() {
+        var sum_gross_weight = 0;
+        $(".gross_weight").each(function(){
+            sum_gross_weight += +$(this).text();
+        });
+        $("#total_gross_weight").text(sum_gross_weight.toFixed(2));
     }
 </script>

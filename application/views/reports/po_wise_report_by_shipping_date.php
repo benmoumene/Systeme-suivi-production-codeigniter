@@ -38,13 +38,13 @@ $week_total_balance_qty = array();
 
 foreach ($dates as $dt){
 
-    array_push($week_date, $dt['ex_factory_date']);
+    array_push($week_date, $dt['approved_ex_factory_date']);
 
     ?>
 <table class="display table table-bordered table-striped" id="" border="1">
     <thead>
     <tr>
-        <th class="hidden-phone center" colspan="31"><h3>Ship Date: <?php echo $dt['ex_factory_date'];?></h3></th>
+        <th class="hidden-phone center" colspan="31"><h3>Ship Date: <?php echo $dt['approved_ex_factory_date'];?></h3></th>
     </tr>
     <tr>
         <th class="hidden-phone center">SO</th>
@@ -84,7 +84,7 @@ foreach ($dates as $dt){
     </thead>
     <tbody>
     <?php
-    $po_close_report = $this->method_call->getShipReportByDate($dt['ex_factory_date'], $brands_string, $po_type);
+    $po_close_report = $this->method_call->getShipReportByDate($dt['approved_ex_factory_date'], $brands_string, $po_type);
 
     $sew_balance_qty = 0;
     $balance_qty = 0;

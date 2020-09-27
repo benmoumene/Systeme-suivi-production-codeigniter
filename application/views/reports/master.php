@@ -264,7 +264,7 @@
 <!--                    <li> <a style="margin-bottom: 1px;" target="_blank" href="--><?php //echo base_url();?><!--dashboard/shipDateWiseReportByMonth"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Monthly Ship Report</b> </a> </li>-->
                     <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>dashboard/shipDateWiseReportMonth"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Monthly Report</b> </a> </li>
                     <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>dashboard/shipDateWiseReportBYDate"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Date Range Report</b> </a> </li>
-                    <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>dashboard/shipDateWiseDailyProductionReport"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>PO Daily Report</b> </a> </li>
+<!--                    <li> <a style="margin-bottom: 1px;" href="--><?php //echo base_url();?><!--dashboard/shipDateWiseDailyProductionReport"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>PO Daily Report</b> </a> </li>-->
                     <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>dashboard/warehouseReport"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Warehouse Report</b> </a> </li>
                     <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>dashboard/aqlReport"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>AQL Report</b> </a> </li>
                 </ul>
