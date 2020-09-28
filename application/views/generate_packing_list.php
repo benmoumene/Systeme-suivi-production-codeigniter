@@ -73,7 +73,7 @@ $sizes_count = sizeof($sizes);
             <th class="hidden-phone center" rowspan="2">AL</th>
             <th class="hidden-phone center" rowspan="2">COL</th>
             <th class="hidden-phone center" colspan="<?php echo $sizes_count?>">SIZE</th>
-            <th class="hidden-phone center" rowspan="2" style="width: 60px;">ASSORTED PACKED</th>
+            <th class="hidden-phone center" rowspan="2">ASSORTED</th>
             <th class="hidden-phone center" rowspan="2">TOTAL</th>
             <th class="hidden-phone center" rowspan="2">Total Ctns</th>
             <th class="hidden-phone center" rowspan="2">Net Weight</th>
@@ -116,23 +116,22 @@ $sizes_count = sizeof($sizes);
                 ?>
 
                 <td class="hidden-phone center size_carton_quantity"
-                    <?php if($count_size_carton_qty < $size_order_qty){ ?> style="background-color: red; color: white;" <?php } ?>
-                    <?php if($count_size_carton_qty == $size_order_qty){ ?> style="background-color: green; color: white;" <?php } ?>
-                    <?php if($count_size_carton_qty > $size_order_qty){ ?> style="background-color: yellow; color: white;" <?php } ?>
+                    <?php if($count_size_carton_qty < $size_order_qty){ ?> style="background-color: rgba(255,145,135,0.88); color: white;" <?php } ?>
+                    <?php if($count_size_carton_qty == $size_order_qty){ ?> style="background-color: rgba(112,255,86,0.88); color: white;" <?php } ?>
+                    <?php if($count_size_carton_qty > $size_order_qty){ ?> style="background-color: rgba(241,255,84,0.88); color: white;" <?php } ?>
                 >
-                    <a class="qty" target="_blank" href="<?php echo base_url();?>access/manualCartonPieceByPiece/<?php echo $p['so_no']?>/<?php echo $s['size']?>" style="background-color: #ffffff;">
+                    <a class="qty" target="_blank" href="<?php echo base_url();?>access/manualCartonPieceByPiece/<?php echo $p['so_no']?>/<?php echo $s['size']?>" style="color: #000000;">
                         <?php echo $count_size_carton_qty;?>
                     </a>
                 </td>
 
-                <td class="hidden
                 <?php
                 $po_total_carton_qty += $count_size_carton_qty;
                 }
 
                 $total_carton_qty += $po_total_carton_qty;
                 ?>
--phone center"></td>
+                <td class="hidden-phone center"></td>
                 <td class="hidden-phone center">
                     <span class="carton_qty"><?php echo $po_total_carton_qty;?></span>
                 </td>
