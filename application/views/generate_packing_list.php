@@ -125,14 +125,14 @@ $sizes_count = sizeof($sizes);
                     </a>
                 </td>
 
+                <td class="hidden
                 <?php
-                    $po_total_carton_qty += $count_size_carton_qty;
+                $po_total_carton_qty += $count_size_carton_qty;
                 }
 
                 $total_carton_qty += $po_total_carton_qty;
                 ?>
-
-                <td class="hidden-phone center"></td>
+-phone center"></td>
                 <td class="hidden-phone center">
                     <span class="carton_qty"><?php echo $po_total_carton_qty;?></span>
                 </td>
@@ -256,7 +256,7 @@ $sizes_count = sizeof($sizes);
 
         totalCBM();
     }
-    
+
     function totalCBM() {
         var sum_cbm = 0;
         $(".cbm").each(function(){

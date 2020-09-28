@@ -585,6 +585,10 @@ class Access extends CI_Controller {
     }
 
     public function saveToWarehouse(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
         $warehouse_type = $this->input->post('warehouse_type');
         $pcs_nos = $this->input->post('pcs_nos');
         $last_scan_points = $this->input->post('last_scan_points');
@@ -641,6 +645,9 @@ class Access extends CI_Controller {
                 $data['warehouse_qa_type'] = $warehouse_type;
             }
 
+            $data['is_manually_adjusted'] = 1;
+            $data['manual_adjustment_date_time'] = $date_time;
+
             $this->access_model->updateTblNew('tb_care_labels', 'pc_tracking_no', $pcs_no, $data);
         }
 
@@ -648,6 +655,10 @@ class Access extends CI_Controller {
     }
 
     public function addToCarton(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
         $pcs_nos = $this->input->post('pcs_nos');
         $last_scan_points = $this->input->post('last_scan_points');
 
@@ -714,6 +725,9 @@ class Access extends CI_Controller {
                 $data['packing_status'] = 1;
                 $data['carton_status'] = 1;
             }
+
+            $data['is_manually_adjusted'] = 1;
+            $data['manual_adjustment_date_time'] = $date_time;
 
             $this->access_model->updateTblNew('tb_care_labels', 'pc_tracking_no', $pcs_no, $data);
         }
