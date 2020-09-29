@@ -21,14 +21,14 @@ class Welcome extends CI_Controller {
 
 	public function index_x()
 	{
-		$data['title']='Viyellatex';
+		$data['title']='ECOFAB PTS';
 
 		$this->load->view('login');
 	}
 
     public function index()
     {
-        $data['title']='PTS';
+        $data['title']='ECOFAB PTS';
 
         $this->load->view('login_new');
     }

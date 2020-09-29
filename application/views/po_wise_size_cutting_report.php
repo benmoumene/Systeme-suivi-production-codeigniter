@@ -131,7 +131,7 @@ $count_unscanned_pc = $cut_qty - ($count_total_carton_qty + $total_wh_qty);
                         <th class="center">Carton</th>
                         <th class="center">Carton Blnc(Order)</th>
                         <th class="center">Carton Blnc(Cut)</th>
-                        <th class="center">Manual Close</th>
+                        <th class="center">Close by Admin</th>
 <!--                        <th class="center">Warehouse Qty</th>-->
                     </tr>
                     </thead>
