@@ -348,9 +348,11 @@ class Dashboard extends CI_Controller {
 
     public function index()
 	{
-		$data['title']='Production Summary Report';
+		$data['title']='Running PO Report';
 
-		$data['prod_summary'] = $this->dashboard_model->getProductionSummaryReport();
+        $data['brands'] = $this->access_model->getAllBrands();
+
+		$data['prod_summary'] = $this->dashboard_model->getProductionReport();
 
         $data['maincontent'] = $this->load->view('reports/report_index', $data, true);
         $this->load->view('reports/master', $data);
@@ -531,6 +533,21 @@ class Dashboard extends CI_Controller {
 //        $this->output->cache(1);
 
         echo $data['maincontent'] = $this->load->view('reports/care_label_line_prod_summary_report', $data);
+    }
+
+    public function getRunningPOs(){
+        $brands_string = $this->input->post('brands');
+
+        $where = '';
+
+        if($brands_string != ''){
+            $where .= " AND brand in ($brands_string)";
+        }
+
+        $data['prod_summary'] = $this->dashboard_model->getProductionReport($where);
+
+        echo $data['maincontent'] = $this->load->view('reports/care_label_line_prod_summary_report', $data);
+
     }
 
     public function getProductionReport(){

@@ -218,8 +218,9 @@
       </div>-->
       <div class="left_nav_slidebar">
         <ul>
-            <li><a href="<?php echo base_url();?>dashboard/indexPc"><i class="fa fa-home"></i> 1st Floor <span class="left_nav_pointer"></span></a></li>
-            <li><a href="<?php echo base_url();?>dashboard/indexPc_2"><i class="fa fa-home"></i> 2nd Floor <span class="left_nav_pointer"></span></a></li>
+            <li><a href="<?php echo base_url();?>dashboard/"><i class="fa fa-home"></i> Dashboard <span class="left_nav_pointer"></span></a></li>
+<!--            <li><a href="--><?php //echo base_url();?><!--dashboard/indexPc"><i class="fa fa-home"></i> 1st Floor <span class="left_nav_pointer"></span></a></li>-->
+<!--            <li><a href="--><?php //echo base_url();?><!--dashboard/indexPc_2"><i class="fa fa-home"></i> 2nd Floor <span class="left_nav_pointer"></span></a></li>-->
             <li> <a href="javascript:void(0);"> <i class="fa fa-cut"></i> Cutting Reports <span class="plus"><i class="fa fa-plus"></i></span></a>
               <ul>
 <!--                  <li> <a style="margin-bottom: 1px;" target="_blank" href="--><?php //echo base_url();?><!--dashboard/dateWiseCuttingReport"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Date Wise Cutting</b> </a> </li>-->
