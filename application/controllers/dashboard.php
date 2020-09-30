@@ -360,16 +360,14 @@ class Dashboard extends CI_Controller {
 
     public function indexPc()
     {
-//        $this->output->clear_all_cache();
-        $data['title']='1st Floor';
-
-        $where = '';
-        $where .= " AND brand in ('BBD', 'BMB', 'BBS', 'BGM', 'BMA', 'BMC', 'BMS', 'BOM', 'HUGO', 'HUM', 'M&S T11', 'M&ST11', 'M&S', 'TIMBERLAND')";
-
-//        $data['prod_summary'] = $this->dashboard_model->getProductionSummaryReport($where);
-
-        $data['maincontent'] = $this->load->view('reports/report_index_pc', $data, true);
-        $this->load->view('reports/master', $data);
+        redirect('dashboard/index');
+//        $data['title']='1st Floor';
+//
+//        $where = '';
+//        $where .= " AND brand in ('BBD', 'BMB', 'BBS', 'BGM', 'BMA', 'BMC', 'BMS', 'BOM', 'HUGO', 'HUM', 'M&S T11', 'M&ST11', 'M&S', 'TIMBERLAND')";
+//
+//        $data['maincontent'] = $this->load->view('reports/report_index_pc', $data, true);
+//        $this->load->view('reports/master', $data);
     }
 
     public function index_1()
@@ -640,16 +638,15 @@ class Dashboard extends CI_Controller {
 
     public function indexPc_2()
     {
-//        $this->output->clear_all_cache();
-        $data['title']='2nd Floor';
+        redirect('dashboard/index');
 
-        $where = '';
-        $where .= " AND t1.brand in ('OLYMP')";
-
-//        $data['prod_summary'] = $this->dashboard_model->getProductionSummaryReport($where);
-
-        $data['maincontent'] = $this->load->view('reports/report_index_pc_2', $data, true);
-        $this->load->view('reports/master', $data);
+//        $data['title']='2nd Floor';
+//
+//        $where = '';
+//        $where .= " AND t1.brand in ('OLYMP')";
+//
+//        $data['maincontent'] = $this->load->view('reports/report_index_pc_2', $data, true);
+//        $this->load->view('reports/master', $data);
     }
 
     public function getProductionSummaryReport_2(){
