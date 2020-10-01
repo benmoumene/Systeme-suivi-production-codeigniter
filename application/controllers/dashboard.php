@@ -457,6 +457,37 @@ class Dashboard extends CI_Controller {
         echo $maincontent = $this->load->view('reports/floor_wise_finishing_po_item_report_data', $data);
     }
 
+    public function getLineScanningErrorAdjustment(){
+
+        $where = " AND line_id != 0 AND access_points=1 AND access_points_status=1";
+
+        $res = $this->dashboard_model->selectTableDataRowQuery('*', 'tb_care_labels', $where);
+
+        foreach($res AS $v){
+            $pc_tracking_no = $v['pc_tracking_no'];
+            $line_input_date_time = $v['line_input_date_time'];
+            $mid_line_qc_date_time = $v['mid_line_qc_date_time'];
+            $end_line_qc_date_time = $v['end_line_qc_date_time'];
+
+            if($end_line_qc_date_time != '0000-00-00 00:00:00'){
+                $data['access_points'] = 4;
+                $data['access_points_status'] = 4;
+            } elseif ($mid_line_qc_date_time != '0000-00-00 00:00:00'){
+                $data['access_points'] = 3;
+                $data['access_points_status'] = 1;
+            } elseif ($line_input_date_time != '0000-00-00 00:00:00'){
+                $data['access_points'] = 2;
+                $data['access_points_status'] = 1;
+            }
+
+            $this->dashboard_model->updateTblNew('tb_care_labels', 'pc_tracking_no', $pc_tracking_no, $data);
+        }
+
+        echo  "<script type='text/javascript'>";
+        echo "window.open('', '_self', ''); window.close();";
+        echo "</script>";
+    }
+
     public function aqlReport()
     {
         $data['title']='AQL Report';

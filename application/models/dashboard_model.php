@@ -21,6 +21,12 @@ class Dashboard_model extends CI_Model {
         $this->db->delete($tbl);
     }
 
+    public function selectTableDataRowQuery($fields, $table_name, $where){
+        $sql="SELECT $fields FROM $table_name WHERE 1 $where";
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
     public function testSelectQuery(){
 
         $sql = "Select * From tb_floor";
@@ -4076,6 +4082,14 @@ class Dashboard_model extends CI_Model {
     public function updateTbl_2($tbl, $po_no, $data)
     {
         $this->db->where('po_no', $po_no);
+        $query = $this->db->update($tbl, $data);
+
+        return $query;
+    }
+
+    public function updateTblNew($tbl, $match_to_column, $value_to_match, $data)
+    {
+        $this->db->where($match_to_column, $value_to_match);
         $query = $this->db->update($tbl, $data);
 
         return $query;
