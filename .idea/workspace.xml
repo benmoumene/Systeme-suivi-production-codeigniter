@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fdf3a7-84b8-4c03-909e-2a58cce5012a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/dashboard.php" afterPath="$PROJECT_DIR$/application/controllers/dashboard.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reports/care_label_line_prod_summary_report.php" afterPath="$PROJECT_DIR$/application/views/reports/care_label_line_prod_summary_report.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reports/floor_wise_finishing_po_item_report.php" afterPath="$PROJECT_DIR$/application/views/reports/floor_wise_finishing_po_item_report.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reports/report_index.php" afterPath="$PROJECT_DIR$/application/views/reports/report_index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reports/ship_date_wise_report.php" afterPath="$PROJECT_DIR$/application/views/reports/ship_date_wise_report.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reports/ship_date_wise_report_by_date.php" afterPath="$PROJECT_DIR$/application/views/reports/ship_date_wise_report_by_date.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reports/ship_date_wise_report_live.php" afterPath="$PROJECT_DIR$/application/views/reports/ship_date_wise_report_live.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reports/ship_date_wise_report_month.php" afterPath="$PROJECT_DIR$/application/views/reports/ship_date_wise_report_month.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reports/warehouse_report.php" afterPath="$PROJECT_DIR$/application/views/reports/warehouse_report.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -486,8 +477,8 @@
       <file leaf-file-name="report_index.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/reports/report_index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="461">
-              <caret line="80" column="66" lean-forward="false" selection-start-line="80" selection-start-column="66" selection-end-line="80" selection-end-column="66" />
+            <state relative-caret-position="510">
+              <caret line="291" column="10" lean-forward="false" selection-start-line="264" selection-start-column="4" selection-end-line="291" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -1748,12 +1739,12 @@
       <workItem from="1601263280500" duration="12201000" />
       <workItem from="1601349064330" duration="3083000" />
       <workItem from="1601441181652" duration="8373000" />
-      <workItem from="1601521807327" duration="4098000" />
+      <workItem from="1601521807327" duration="4355000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5893208000" />
+    <option name="totallyTimeSpent" value="5893465000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -3355,8 +3346,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/reports/report_index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
-          <caret line="80" column="66" lean-forward="false" selection-start-line="80" selection-start-column="66" selection-end-line="80" selection-end-column="66" />
+        <state relative-caret-position="510">
+          <caret line="291" column="10" lean-forward="false" selection-start-line="264" selection-start-column="4" selection-end-line="291" selection-end-column="10" />
           <folding />
         </state>
       </provider>

@@ -262,34 +262,34 @@
 <br />
 <br />
 <br />
-<div class="row">
-    <div class="col-md-12">
-        <div class="col-md-4">
-            <div class="block-web">
-
-                <div class="porlets-content">
-
-                    <div class="table-responsive">
-                        <table class="display table table-bordered table-striped" id="">
-                            <thead>
-                            <tr>
-                                <!--                                <th class="hidden-phone center"><a target="_blank" href="--><?php //echo base_url();?><!--dashboard/poWiseCuttingReport" class="btn btn-danger">Cutting</a></th>-->
-                                <th class="hidden-phone center"><a target="" href="<?php echo base_url();?>dashboard/poWiseSizeReport" class="btn btn-success">PO Report</a></th>
-                                <th class="hidden-phone center" colspan="2"><a href="<?php echo base_url();?>dashboard/lineWisePoItemReport" class="btn btn-primary">LINE</a></th>
-                                <th class="hidden-phone center" colspan="2"><a href="<?php echo base_url();?>dashboard/finishingRunningPoReportByBrand" class="btn btn-warning">Finishing</a></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
-                        </table>
-                    </div><!--/table-responsive-->
-                </div>
-
-            </div><!--/porlets-content-->
-        </div><!--/block-web-->
-    </div><!--/col-md-12-->
-</div>
+<!--<div class="row">-->
+<!--    <div class="col-md-12">-->
+<!--        <div class="col-md-4">-->
+<!--            <div class="block-web">-->
+<!---->
+<!--                <div class="porlets-content">-->
+<!---->
+<!--                    <div class="table-responsive">-->
+<!--                        <table class="display table table-bordered table-striped" id="">-->
+<!--                            <thead>-->
+<!--                            <tr>-->
+<!--                                <!--                                <th class="hidden-phone center"><a target="_blank" href="-->--><?php ////echo base_url();?><!--<!--dashboard/poWiseCuttingReport" class="btn btn-danger">Cutting</a></th>-->-->
+<!--                                <th class="hidden-phone center"><a target="" href="--><?php //echo base_url();?><!--dashboard/poWiseSizeReport" class="btn btn-success">PO Report</a></th>-->
+<!--                                <th class="hidden-phone center" colspan="2"><a href="--><?php //echo base_url();?><!--dashboard/lineWisePoItemReport" class="btn btn-primary">LINE</a></th>-->
+<!--                                <th class="hidden-phone center" colspan="2"><a href="--><?php //echo base_url();?><!--dashboard/finishingRunningPoReportByBrand" class="btn btn-warning">Finishing</a></th>-->
+<!--                            </tr>-->
+<!--                            </thead>-->
+<!--                            <tbody>-->
+<!---->
+<!--                            </tbody>-->
+<!--                        </table>-->
+<!--                    </div><!--/table-responsive-->-->
+<!--                </div>-->
+<!---->
+<!--            </div><!--/porlets-content-->-->
+<!--        </div><!--/block-web-->-->
+<!--    </div><!--/col-md-12-->-->
+<!--</div>-->
 
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
