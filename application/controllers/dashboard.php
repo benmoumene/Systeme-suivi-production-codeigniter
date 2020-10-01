@@ -81,7 +81,7 @@ class Dashboard extends CI_Controller {
 
         $object->setActiveSheetIndex(0);
 
-        $table_columns = array("PO", "Plan Line", "Lines", "Brand", "ORDER", "ExFac", "CUT", "CUT PASS", "CUT BLNC", "INPUT", "COLLAR", "COLLAR BLNC", "CUFF", "CUFF BLNC", "MID", "MID BLNC", "END", "END BLNC", "PACK", "PACK BLNC", "CARTON", "CARTON BLNC", "OTHERS", "REMARKS");
+        $table_columns = array("PO", "PLAN LINE", "LINES", "BRAND", "ORDER", "EX-FAC", "APPROVED EX-FAC", "CUT", "CUT PASS", "CUT BLNC", "INPUT", "COLLAR", "COLLAR BLNC", "CUFF", "CUFF BLNC", "MID", "MID BLNC", "END", "END BLNC", "PACK", "PACK BLNC", "CARTON", "CARTON BLNC", "OTHERS", "REMARKS");
 
         $column = 0;
 
@@ -110,6 +110,7 @@ class Dashboard extends CI_Controller {
 
             if($v['status'] != 'CLOSE') {
                 $ship_date = $v['ex_factory_date'];
+                $approved_ex_factory_date = $v['approved_ex_factory_date'];
 
                 if ($v['item'] == '') {
                     $item = 'NA';
@@ -149,24 +150,25 @@ class Dashboard extends CI_Controller {
                 $object->getActiveSheet()->setCellValueByColumnAndRow(3, $excel_row, $v["brand"]);
                 $object->getActiveSheet()->setCellValueByColumnAndRow(4, $excel_row, $v["total_order_qty"]);
                 $object->getActiveSheet()->setCellValueByColumnAndRow(5, $excel_row, $v["ex_factory_date"]);
-                $object->getActiveSheet()->setCellValueByColumnAndRow(6, $excel_row, $v["total_cut_qty"]);
-                $object->getActiveSheet()->setCellValueByColumnAndRow(7, $excel_row, $v["total_cut_input_qty"]);
-                $object->getActiveSheet()->setCellValueByColumnAndRow(8, $excel_row, $cut_balance_qty);
-                $object->getActiveSheet()->setCellValueByColumnAndRow(9, $excel_row, $v["count_input_qty_line"]);
-                $object->getActiveSheet()->setCellValueByColumnAndRow(10, $excel_row, $v["collar_bndl_qty"]);
-                $object->getActiveSheet()->setCellValueByColumnAndRow(11, $excel_row, $collar_balance_qty);
-                $object->getActiveSheet()->setCellValueByColumnAndRow(12, $excel_row, $v["cuff_bndl_qty"]);
-                $object->getActiveSheet()->setCellValueByColumnAndRow(13, $excel_row, $cuff_balance_qty);
-                $object->getActiveSheet()->setCellValueByColumnAndRow(14, $excel_row, $v["count_mid_line_qc_pass"]);
-                $object->getActiveSheet()->setCellValueByColumnAndRow(15, $excel_row, $mid_balance_qty);
-                $object->getActiveSheet()->setCellValueByColumnAndRow(16, $excel_row, $v["count_end_line_qc_pass"]);
-                $object->getActiveSheet()->setCellValueByColumnAndRow(17, $excel_row, $end_balance_qty);
-                $object->getActiveSheet()->setCellValueByColumnAndRow(18, $excel_row, $v["count_packing_pass"]);
-                $object->getActiveSheet()->setCellValueByColumnAndRow(19, $excel_row, ($pack_balance_qty > 0 ? $pack_balance_qty : 0));
-                $object->getActiveSheet()->setCellValueByColumnAndRow(20, $excel_row, $v["count_carton_pass"]);
-                $object->getActiveSheet()->setCellValueByColumnAndRow(21, $excel_row, ($carton_balance_qty > 0 ? $carton_balance_qty : 0));
-                $object->getActiveSheet()->setCellValueByColumnAndRow(22, $excel_row, $total_others);
-                $object->getActiveSheet()->setCellValueByColumnAndRow(23, $excel_row, $v["status"]);
+                $object->getActiveSheet()->setCellValueByColumnAndRow(6, $excel_row, $approved_ex_factory_date);
+                $object->getActiveSheet()->setCellValueByColumnAndRow(7, $excel_row, $v["total_cut_qty"]);
+                $object->getActiveSheet()->setCellValueByColumnAndRow(8, $excel_row, $v["total_cut_input_qty"]);
+                $object->getActiveSheet()->setCellValueByColumnAndRow(9, $excel_row, $cut_balance_qty);
+                $object->getActiveSheet()->setCellValueByColumnAndRow(10, $excel_row, $v["count_input_qty_line"]);
+                $object->getActiveSheet()->setCellValueByColumnAndRow(11, $excel_row, $v["collar_bndl_qty"]);
+                $object->getActiveSheet()->setCellValueByColumnAndRow(12, $excel_row, $collar_balance_qty);
+                $object->getActiveSheet()->setCellValueByColumnAndRow(13, $excel_row, $v["cuff_bndl_qty"]);
+                $object->getActiveSheet()->setCellValueByColumnAndRow(14, $excel_row, $cuff_balance_qty);
+                $object->getActiveSheet()->setCellValueByColumnAndRow(15, $excel_row, $v["count_mid_line_qc_pass"]);
+                $object->getActiveSheet()->setCellValueByColumnAndRow(16, $excel_row, $mid_balance_qty);
+                $object->getActiveSheet()->setCellValueByColumnAndRow(17, $excel_row, $v["count_end_line_qc_pass"]);
+                $object->getActiveSheet()->setCellValueByColumnAndRow(18, $excel_row, $end_balance_qty);
+                $object->getActiveSheet()->setCellValueByColumnAndRow(19, $excel_row, $v["count_packing_pass"]);
+                $object->getActiveSheet()->setCellValueByColumnAndRow(20, $excel_row, ($pack_balance_qty > 0 ? $pack_balance_qty : 0));
+                $object->getActiveSheet()->setCellValueByColumnAndRow(21, $excel_row, $v["count_carton_pass"]);
+                $object->getActiveSheet()->setCellValueByColumnAndRow(22, $excel_row, ($carton_balance_qty > 0 ? $carton_balance_qty : 0));
+                $object->getActiveSheet()->setCellValueByColumnAndRow(23, $excel_row, $total_others);
+                $object->getActiveSheet()->setCellValueByColumnAndRow(24, $excel_row, $v["status"]);
                 $excel_row++;
 
             }
@@ -447,7 +449,7 @@ class Dashboard extends CI_Controller {
         }
 
         if($po_from_date != '' && $po_from_date != 'undefined--undefined' && $po_to_date != '' && $po_to_date != 'undefined--undefined'){
-            $where .= " AND ex_factory_date Between '$po_from_date' AND '$po_to_date'";
+            $where .= " AND approved_ex_factory_date Between '$po_from_date' AND '$po_to_date'";
         }
 
         $data['prod_summary'] = $this->dashboard_model->getProductionReport($where);
@@ -4240,7 +4242,7 @@ class Dashboard extends CI_Controller {
         }
 
         if($search_date != ''){
-            $where .= " AND DATE_FORMAT(ex_factory_date, '%Y-%m') = '$search_date'";
+            $where .= " AND DATE_FORMAT(approved_ex_factory_date, '%Y-%m') = '$search_date'";
         }
 
         $data['wh_pcs'] = $this->dashboard_model->getWarehousePcsReport($where);

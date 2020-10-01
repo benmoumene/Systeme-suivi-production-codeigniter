@@ -49,8 +49,8 @@
                                     }
     //                            ?>
                             </select>
+                            <span style="font-size: 11px;">* Select Brands</span>
                         </div>
-                        <span style="font-size: 11px;">* Select Brands</span>
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -62,28 +62,28 @@
                                 <option value="1">SIZE SET</option>
                                 <option value="2">SAMPLE</option>
                             </select>
+                            <span><b> Select PO Type </b></span>
                         </div>
-                        <span><b> Select PO Type </b></span>
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
                         <div class="form-group">
                             <input type="text" class="form-control form-control-inline input-medium default-date-picker" id="from_date" name="from_date" required="required" autocomplete="off" />
+                            <span><b> Ship Date From </b></span>
                         </div>
-                        <span><b> Ship Date From </b></span>
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
                         <div class="form-group">
                             <input type="text" class="form-control form-control-inline input-medium default-date-picker" id="to_date" name="to_date" required="required" autocomplete="off" />
+                            <span><b> Ship Date To </b></span>
                         </div>
-                        <span><b> Ship Date To </b></span>
                     </div>
                 </div>
                 <div class="col-md-1">
-                    <span class="btn btn-success" id="search_btn" onclick="getFinishingRunningPoReportByBrand('brands');">Search</span>
+                    <span class="btn btn-success" id="search_btn" onclick="getFinishingRunningPoReportByBrand('brands');">SEARCH</span>
                 </div>
 
                 <div class="col-md-1" id="loader" style="display: none;"><div class="loader"></div></div>

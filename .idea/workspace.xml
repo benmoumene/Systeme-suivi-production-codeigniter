@@ -2,7 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a6fdf3a7-84b8-4c03-909e-2a58cce5012a" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/dashboard.php" afterPath="$PROJECT_DIR$/application/controllers/dashboard.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reports/care_label_line_prod_summary_report.php" afterPath="$PROJECT_DIR$/application/views/reports/care_label_line_prod_summary_report.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reports/floor_wise_finishing_po_item_report.php" afterPath="$PROJECT_DIR$/application/views/reports/floor_wise_finishing_po_item_report.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reports/report_index.php" afterPath="$PROJECT_DIR$/application/views/reports/report_index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reports/ship_date_wise_report.php" afterPath="$PROJECT_DIR$/application/views/reports/ship_date_wise_report.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reports/ship_date_wise_report_by_date.php" afterPath="$PROJECT_DIR$/application/views/reports/ship_date_wise_report_by_date.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reports/ship_date_wise_report_live.php" afterPath="$PROJECT_DIR$/application/views/reports/ship_date_wise_report_live.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reports/ship_date_wise_report_month.php" afterPath="$PROJECT_DIR$/application/views/reports/ship_date_wise_report_month.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/reports/warehouse_report.php" afterPath="$PROJECT_DIR$/application/views/reports/warehouse_report.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,27 +26,17 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="dashboard.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="dashboard.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/dashboard.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="640" column="36" lean-forward="true" selection-start-line="640" selection-start-column="36" selection-end-line="640" selection-end-column="36" />
+            <state relative-caret-position="285">
+              <caret line="4223" column="74" lean-forward="false" selection-start-line="4223" selection-start-column="58" selection-end-line="4223" selection-end-column="74" />
               <folding>
-                <marker date="1601462783884" expanded="true" signature="40644:41508" ph="..." />
-                <marker date="1601462783884" expanded="true" signature="42174:43184" ph="..." />
-                <marker date="1601462783884" expanded="true" signature="257034:257113" ph="..." />
-                <marker date="1601462783884" expanded="true" signature="258880:258961" ph="..." />
+                <marker date="1601525701428" expanded="true" signature="40863:41727" ph="..." />
+                <marker date="1601525701428" expanded="true" signature="42393:43403" ph="..." />
+                <marker date="1601525701428" expanded="true" signature="257262:257341" ph="..." />
+                <marker date="1601525701428" expanded="true" signature="259108:259189" ph="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="master.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/reports/master.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="169">
-              <caret line="222" column="76" lean-forward="true" selection-start-line="222" selection-start-column="76" selection-end-line="222" selection-end-column="76" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -46,7 +45,7 @@
         <entry file="file://$PROJECT_DIR$/application/models/dashboard_model.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="200">
-              <caret line="2684" column="87" lean-forward="true" selection-start-line="2684" selection-start-column="87" selection-end-line="2684" selection-end-column="87" />
+              <caret line="2684" column="87" lean-forward="false" selection-start-line="2684" selection-start-column="87" selection-end-line="2684" selection-end-column="87" />
               <folding>
                 <marker date="1601194102317" expanded="true" signature="508:530" ph="Select * Fro... tb_floor" />
                 <marker date="1601194102317" expanded="true" signature="673:704" ph="Select * Fro... tb_warehouse_type" />
@@ -484,31 +483,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="report_index.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="report_index.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/reports/report_index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="35" column="24" lean-forward="true" selection-start-line="35" selection-start-column="24" selection-end-line="35" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ship_date_wise_report.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/reports/ship_date_wise_report.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="278">
-              <caret line="225" column="80" lean-forward="true" selection-start-line="225" selection-start-column="80" selection-end-line="225" selection-end-column="80" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="report_index_pc.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/reports/report_index_pc.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="293" column="8" lean-forward="true" selection-start-line="293" selection-start-column="8" selection-end-line="293" selection-end-column="8" />
+            <state relative-caret-position="461">
+              <caret line="80" column="66" lean-forward="false" selection-start-line="80" selection-start-column="66" selection-end-line="80" selection-end-column="66" />
               <folding />
             </state>
           </provider>
@@ -525,17 +504,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getAllShipDates</find>
-      <find>getShipDateWiseDailyReport</find>
-      <find>smsFileUploadTest</find>
-      <find>shipDateWiseDailyProductionReport</find>
-      <find>packingList</find>
-      <find>getBrandWiseShipDates</find>
-      <find>getShipDateLists</find>
-      <find>getProductionReport()</find>
-      <find>addtoca</find>
-      <find>manualCartonPieceByPiece</find>
-      <find>addToCarton</find>
       <find>saveToWarehouse</find>
       <find>getSizesbyShipDate</find>
       <find>getPOsbyShipDate</find>
@@ -549,12 +517,23 @@
       <find>getPoItemDetail</find>
       <find>getPoSizeQty</find>
       <find>deletePO</find>
-      <find>index()</find>
       <find>getProductionReport</find>
-      <find>getProductionSummaryReport</find>
       <find>shipdate</find>
-      <find>getRunningPOs</find>
       <find>indexPc</find>
+      <find>getRunningPOs</find>
+      <find>mailAttachmentHBFileDownload</find>
+      <find>mailAttachmentOlympFileDownload</find>
+      <find>getProductionSummaryReport</find>
+      <find>index()</find>
+      <find>finishingRunningPoReportByBrand</find>
+      <find>getFinishingRunningPoReportByBrand</find>
+      <find>getProductionReport(</find>
+      <find>getWarehousePcsReport</find>
+      <find>shipDateWiseReport()</find>
+      <find>shipDateWiseReportlive</find>
+      <find>shipDateWiseReportMonth</find>
+      <find>shipDateWiseReportBYDate</find>
+      <find>warehouseReport</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -563,13 +542,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/views/reports/line_hourly_report_auto_mail.php" />
-        <option value="$PROJECT_DIR$/application/views/line_running_po_list.php" />
-        <option value="$PROJECT_DIR$/application/views/line_output_control.php" />
-        <option value="$PROJECT_DIR$/application/views/line_finishing_alter.php" />
-        <option value="$PROJECT_DIR$/application/views/po_output_control.php" />
-        <option value="$PROJECT_DIR$/application/views/reports/po_wise_report_by_ship_date.php" />
-        <option value="$PROJECT_DIR$/application/views/reports/line_quality_report.php" />
         <option value="$PROJECT_DIR$/application/views/reports/line_po_item_report.php" />
         <option value="$PROJECT_DIR$/application/views/finishing_floor_performance_dashboard_new.php" />
         <option value="$PROJECT_DIR$/application/views/line_quality_defects_reload.php" />
@@ -611,9 +583,16 @@
         <option value="$PROJECT_DIR$/application/views/po_wise_size_cutting_report.php" />
         <option value="$PROJECT_DIR$/application/controllers/welcome.php" />
         <option value="$PROJECT_DIR$/application/views/login_new.php" />
-        <option value="$PROJECT_DIR$/application/views/reports/report_index.php" />
         <option value="$PROJECT_DIR$/application/views/reports/master.php" />
+        <option value="$PROJECT_DIR$/application/views/reports/care_label_line_prod_summary_report.php" />
+        <option value="$PROJECT_DIR$/application/views/reports/floor_wise_finishing_po_item_report.php" />
+        <option value="$PROJECT_DIR$/application/views/reports/warehouse_report.php" />
         <option value="$PROJECT_DIR$/application/controllers/dashboard.php" />
+        <option value="$PROJECT_DIR$/application/views/reports/ship_date_wise_report.php" />
+        <option value="$PROJECT_DIR$/application/views/reports/ship_date_wise_report_live.php" />
+        <option value="$PROJECT_DIR$/application/views/reports/ship_date_wise_report_month.php" />
+        <option value="$PROJECT_DIR$/application/views/reports/ship_date_wise_report_by_date.php" />
+        <option value="$PROJECT_DIR$/application/views/reports/report_index.php" />
       </list>
     </option>
   </component>
@@ -645,6 +624,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -749,7 +729,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -1768,18 +1747,19 @@
       <workItem from="1601179139760" duration="15864000" />
       <workItem from="1601263280500" duration="12201000" />
       <workItem from="1601349064330" duration="3083000" />
-      <workItem from="1601441181652" duration="7662000" />
+      <workItem from="1601441181652" duration="8373000" />
+      <workItem from="1601521807327" duration="4098000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5888399000" />
+    <option name="totallyTimeSpent" value="5893208000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20497803" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21303074" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1811,20 +1791,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/views/packing_data.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="35" column="86" lean-forward="false" selection-start-line="35" selection-start-column="86" selection-end-line="35" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/po_item_wise_poly_remain_pcs.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="57" lean-forward="true" selection-start-line="11" selection-start-column="57" selection-end-line="11" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/carton_prod_data_new.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="580">
@@ -1962,7 +1928,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="328">
           <caret line="361" column="63" lean-forward="false" selection-start-line="361" selection-start-column="63" selection-end-line="361" selection-end-column="63" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1970,7 +1935,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="141">
           <caret line="70" column="0" lean-forward="true" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1992,7 +1956,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
           <caret line="54" column="64" lean-forward="true" selection-start-line="54" selection-start-column="64" selection-end-line="54" selection-end-column="64" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2000,7 +1963,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
           <caret line="443" column="66" lean-forward="true" selection-start-line="443" selection-start-column="66" selection-end-line="443" selection-end-column="66" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2011,31 +1973,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/reports/ship_date_wise_report_live.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="237" column="64" lean-forward="false" selection-start-line="237" selection-start-column="64" selection-end-line="237" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/reports/po_wise_report_by_ship_date_live.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="93" lean-forward="true" selection-start-line="4" selection-start-column="93" selection-end-line="4" selection-end-column="93" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/reports/ship_date_wise_report_month.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="218" column="69" lean-forward="false" selection-start-line="218" selection-start-column="69" selection-end-line="218" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/reports/ship_date_wise_report_by_date.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="226" column="70" lean-forward="true" selection-start-line="226" selection-start-column="70" selection-end-line="226" selection-end-column="70" />
         </state>
       </provider>
     </entry>
@@ -2057,7 +1998,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-840">
           <caret line="79" column="71" lean-forward="true" selection-start-line="79" selection-start-column="71" selection-end-line="79" selection-end-column="71" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2065,7 +2005,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2448">
           <caret line="144" column="56" lean-forward="false" selection-start-line="144" selection-start-column="56" selection-end-line="144" selection-end-column="56" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2787,7 +2726,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-913">
           <caret line="18" column="2" lean-forward="true" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2803,7 +2741,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="362">
           <caret line="257" column="0" lean-forward="true" selection-start-line="257" selection-start-column="0" selection-end-line="257" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2811,7 +2748,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="227">
           <caret line="284" column="61" lean-forward="false" selection-start-line="284" selection-start-column="61" selection-end-line="284" selection-end-column="61" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2886,22 +2822,40 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="131" column="66" lean-forward="false" selection-start-line="131" selection-start-column="66" selection-end-line="131" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/reports/report_index_pc.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4981">
+          <caret line="293" column="8" lean-forward="true" selection-start-line="293" selection-start-column="8" selection-end-line="293" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/reports/master.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3774">
+          <caret line="222" column="76" lean-forward="false" selection-start-line="222" selection-start-column="76" selection-end-line="222" selection-end-column="76" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/reports/care_label_line_prod_summary_report.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="36" lean-forward="false" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="36" />
-          <folding />
+        <state relative-caret-position="1430">
+          <caret line="103" column="17" lean-forward="false" selection-start-line="103" selection-start-column="17" selection-end-line="103" selection-end-column="17" />
+          <folding>
+            <element signature="n#style#0;n#th#0;n#tr#0;n#thead#0;n#table#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#td#10;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/dashboard_model.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
-          <caret line="2684" column="87" lean-forward="true" selection-start-line="2684" selection-start-column="87" selection-end-line="2684" selection-end-column="87" />
+          <caret line="2684" column="87" lean-forward="false" selection-start-line="2684" selection-start-column="87" selection-end-line="2684" selection-end-column="87" />
           <folding>
             <marker date="1601194102317" expanded="true" signature="508:530" ph="Select * Fro... tb_floor" />
             <marker date="1601194102317" expanded="true" signature="673:704" ph="Select * Fro... tb_warehouse_type" />
@@ -3338,48 +3292,72 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/reports/report_index_pc.php">
+    <entry file="file://$PROJECT_DIR$/application/views/reports/floor_wise_finishing_po_item_report.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="293" column="8" lean-forward="true" selection-start-line="293" selection-start-column="8" selection-end-line="293" selection-end-column="8" />
+        <state relative-caret-position="346">
+          <caret line="101" column="0" lean-forward="true" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/reports/ship_date_wise_report.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="225" column="80" lean-forward="true" selection-start-line="225" selection-start-column="80" selection-end-line="225" selection-end-column="80" />
+        <state relative-caret-position="266">
+          <caret line="84" column="121" lean-forward="false" selection-start-line="84" selection-start-column="121" selection-end-line="84" selection-end-column="121" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/reports/report_index.php">
+    <entry file="file://$PROJECT_DIR$/application/views/reports/ship_date_wise_report_live.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="35" column="24" lean-forward="true" selection-start-line="35" selection-start-column="24" selection-end-line="35" selection-end-column="24" />
+        <state relative-caret-position="193">
+          <caret line="94" column="125" lean-forward="false" selection-start-line="94" selection-start-column="125" selection-end-line="94" selection-end-column="125" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/reports/master.php">
+    <entry file="file://$PROJECT_DIR$/application/views/reports/ship_date_wise_report_month.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="222" column="76" lean-forward="true" selection-start-line="222" selection-start-column="76" selection-end-line="222" selection-end-column="76" />
+        <state relative-caret-position="227">
+          <caret line="88" column="121" lean-forward="false" selection-start-line="88" selection-start-column="121" selection-end-line="88" selection-end-column="121" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/reports/ship_date_wise_report_by_date.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="686">
+          <caret line="65" column="69" lean-forward="true" selection-start-line="65" selection-start-column="69" selection-end-line="65" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/reports/warehouse_report.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="83" column="121" lean-forward="false" selection-start-line="83" selection-start-column="121" selection-end-line="83" selection-end-column="121" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/dashboard.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="640" column="36" lean-forward="true" selection-start-line="640" selection-start-column="36" selection-end-line="640" selection-end-column="36" />
+        <state relative-caret-position="285">
+          <caret line="4223" column="74" lean-forward="false" selection-start-line="4223" selection-start-column="58" selection-end-line="4223" selection-end-column="74" />
           <folding>
-            <marker date="1601462783884" expanded="true" signature="40644:41508" ph="..." />
-            <marker date="1601462783884" expanded="true" signature="42174:43184" ph="..." />
-            <marker date="1601462783884" expanded="true" signature="257034:257113" ph="..." />
-            <marker date="1601462783884" expanded="true" signature="258880:258961" ph="..." />
+            <marker date="1601525701428" expanded="true" signature="40863:41727" ph="..." />
+            <marker date="1601525701428" expanded="true" signature="42393:43403" ph="..." />
+            <marker date="1601525701428" expanded="true" signature="257262:257341" ph="..." />
+            <marker date="1601525701428" expanded="true" signature="259108:259189" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/reports/report_index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="461">
+          <caret line="80" column="66" lean-forward="false" selection-start-line="80" selection-start-column="66" selection-end-line="80" selection-end-column="66" />
+          <folding />
         </state>
       </provider>
     </entry>

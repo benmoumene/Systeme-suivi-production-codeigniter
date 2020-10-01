@@ -86,7 +86,7 @@
 
                             </div>
                             <div class="col-md-2">
-                                <button class="btn btn-primary" id="submit_btn" onclick="getShipDateWiseReport();">Search</button>
+                                <button class="btn btn-primary" id="submit_btn" onclick="getShipDateWiseReport();">SEARCH</button>
                             </div>
                             <div class="col-md-1" id="loader" style="display: none;"><div class="loader"></div></div>
                         </div>

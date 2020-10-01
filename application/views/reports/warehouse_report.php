@@ -81,7 +81,7 @@
 
                             </div>
                             <div class="col-md-2">
-                                <button class="btn btn-primary" id="submit_btn" onclick="getWarehousePcsReport();">Search</button>
+                                <button class="btn btn-primary" id="submit_btn" onclick="getWarehousePcsReport();">SEARCH</button>
                             </div>
                             <div class="col-md-1" id="loader" style="display: none;"><div class="loader"></div></div>
                         </div>

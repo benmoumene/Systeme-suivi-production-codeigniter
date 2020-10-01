@@ -58,9 +58,28 @@
                 <div class="col-md-1">
                     <div id="loader" style="display: none;"><div class="loader"></div></div>
                 </div>
-                <div class="col-md-6"></div>
+                <div class="col-md-5">
+                    <div class="table-responsive">
+                        <table class="display table table-bordered table-striped" id="">
+                            <thead>
+                            <tr>
+                                <!--                                <th class="hidden-phone center"><a target="_blank" href="--><?php //echo base_url();?><!--dashboard/poWiseCuttingReport" class="btn btn-danger">Cutting</a></th>-->
+                                <th class="hidden-phone center"><a target="" href="<?php echo base_url();?>dashboard/poWiseSizeReport" class="btn btn-info">PO REPORT</a></th>
+                                <th class="hidden-phone center" colspan="2"><a href="<?php echo base_url();?>dashboard/lineWisePoItemReport" class="btn btn-primary">LINE REPORT</a></th>
+                                <th class="hidden-phone center" colspan="2"><a href="<?php echo base_url();?>dashboard/finishingRunningPoReportByBrand" class="btn btn-warning">FINISHING REPORT</a></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
                 <div class="col-md-1">
-                    <span class="btn btn-primary" style="color: #FFF;" id="btnExport123" onclick="ExportToExcel('table_id')"><b>Export Excel</b></span>
+                    <span class="btn btn-default" id="btnExport123" onclick="ExportToExcel('table_id')">
+                        <i class="fa fa-arrow-down"></i> <b> EXCEL</b>
+                    </span>
                 </div>
             </div>
         </div>
@@ -104,7 +123,7 @@
             <table class="table table-scroll table-striped" border="1" id="table_id">
                 <thead>
                 <tr style="background-color: #defa9e; font-size: 20px;">
-                    <th class="text-center" colspan="10" style="width: 53%;">RUNNING PO LIST</th>
+                    <th class="text-center" colspan="11" style="width: 55.2%;">RUNNING PO LIST</th>
                     <th class="" colspan="3" style="text-align: center;">Cutting</th>
                     <!--            <th class="" colspan="1" style="text-align: center;">Range</th>-->
                     <th class="" colspan="5" style="text-align: center;">Sewing</th>
@@ -121,6 +140,7 @@
                     <th class="" style="width: 10%"><span data-toggle="tooltip" title="Quality-Color">QL-CLR</span></th>
                     <th class=""><span data-toggle="tooltip" title="Order Qty">OQ</span></th>
                     <th class=""><span data-toggle="tooltip" title="Ex-Factory Date">ExFac</span></th>
+                    <th class=""><span data-toggle="tooltip" title="Approved Ex-Factory">App. ExFac</span></th>
                     <th class=""><span data-toggle="tooltip" title="Cut QTY">CQ</span></th>
                     <th class=""><span data-toggle="tooltip" title="Cut Balance">CBQ</span></th>
                     <th class=""><span data-toggle="tooltip" title="Cut Pass QTY">CPQ</span></th>
@@ -152,6 +172,7 @@
 //            if(($cur_date <= $v['ex_factory_date']) || ($till_date <= $v['ex_factory_date']) || (($v['total_cut_qty'] - $total_finishing_wh_qa) > 0)){
 
                     $ship_date = $v['ex_factory_date'];
+                    $approved_ship_date = $v['approved_ex_factory_date'];
 
                     $upcoming_month = date('Y-m-d', strtotime('+1 month'));
 
@@ -193,7 +214,10 @@
                             <td class="" style="width: 10%"><?php echo $v['quality'].'_'.$v['color'];?></td>
                             <td class=""><?php echo $v['total_order_qty'];?></td>
                             <td class="" <?php if($cur_date > $ship_date){ ?> style="background-color: #ff481f; color: #fff;" <?php } ?> >
-                                <?php echo $v['ex_factory_date'];?>
+                                <?php echo $ship_date;?>
+                            </td>
+                            <td class="" <?php if($cur_date > $approved_ship_date){ ?> style="background-color: #ff481f; color: #fff;" <?php } ?> >
+                                <?php echo $approved_ship_date;?>
                             </td>
                             <td class=""><?php echo $v['total_cut_qty'];?></td>
                             <td class=""><?php echo $v['total_cut_qty']-$v['total_cut_input_qty'];?></td>
