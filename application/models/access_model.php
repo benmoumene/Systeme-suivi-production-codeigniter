@@ -6274,6 +6274,32 @@ class Access_model extends CI_Model {
         return $query;
     }
 
+    public function getMachineList($where){
+        $sql="SELECT t1.*, t2.line_code, t3.machine_name, t4.machine_model, t5.location_name
+              FROM `tb_machine_list` AS t1
+                
+              LEFT JOIN
+              tb_line AS t2
+              ON t1.line_id=t2.id
+              
+              LEFT JOIN
+              tb_machine_name AS t3
+              ON t1.machine_name_id=t3.id
+              
+              LEFT JOIN
+              tb_machine_model AS t4
+              ON t1.model_no_id=t4.id
+              
+              LEFT JOIN
+              tb_other_locations AS t5
+              ON t1.other_location_id=t5.id
+              
+              WHERE 1 $where";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
     public function manualClosedById($p_id)
     {
         $sql="select * from tb_care_labels where id=$p_id";

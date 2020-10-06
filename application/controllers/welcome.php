@@ -93,6 +93,7 @@ class Welcome extends CI_Controller {
                 $data1['line_id']=$result->line_id;
                 $data1['floor_id']=$result->floor_id;
                 $data1['is_print_allowed']=$result->is_print_allowed;
+                $data1['buyer_condition']=$result->buyer_condition;
 
                 $this->session->set_userdata($data1);
 

@@ -1719,6 +1719,343 @@ class Access extends CI_Controller {
         echo 'done';
     }
 
+    public function getMachineNames(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $data['title'] = 'Machine Names';
+
+        $line_id = $this->session->userdata('line_id');
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+        $data['msg'] = '';
+        $data['session_out'] = $this->session_out;
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['machine_names'] = $this->access_model->selectTableDataRowQuery('*', 'tb_machine_name', '');
+
+            $data['maincontent'] = $this->load->view('machine_names', $data, true);
+            $this->load->view('master', $data);
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
+    public function saveNewMachineName(){
+        $data['machine_name'] = $this->input->post('new_machine_name');
+        $data['machine_description'] = $this->input->post('new_machine_description');
+
+        $this->access_model->insertingData('tb_machine_name', $data);
+
+        redirect('access/getMachineNames');
+    }
+
+    public function updateMachineName(){
+        $machine_name_id = $this->input->post('edit_machine_name_id');
+
+        $data['machine_name'] = $this->input->post('edit_machine_name');
+        $data['machine_description'] = $this->input->post('edit_machine_description');
+
+        $this->access_model->updateTblNew('tb_machine_name', 'id', $machine_name_id, $data);
+
+        $data['message'] = 'Successfully Updated!';
+        $this->session->set_userdata($data);
+        redirect('access/getMachineNames');
+    }
+
+    public function getMachineModels(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $data['title'] = 'Machine Models';
+
+        $line_id = $this->session->userdata('line_id');
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+        $data['msg'] = '';
+        $data['session_out'] = $this->session_out;
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['machine_models'] = $this->access_model->selectTableDataRowQuery('*', 'tb_machine_model', '');
+
+            $data['maincontent'] = $this->load->view('machine_models', $data, true);
+            $this->load->view('master', $data);
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
+    public function saveNewMachineModel(){
+        $data['machine_model'] = $this->input->post('new_machine_model');
+        $data['machine_model_description'] = $this->input->post('new_machine_model_description');
+
+        $this->access_model->insertingData('tb_machine_model', $data);
+
+        redirect('access/getMachineModels');
+    }
+
+    public function updateMachineModel(){
+        $machine_model_id = $this->input->post('edit_machine_model_id');
+
+        $data['machine_model'] = $this->input->post('edit_machine_model');
+        $data['machine_model_description'] = $this->input->post('edit_machine_model_description');
+
+        $this->access_model->updateTblNew('tb_machine_model', 'id', $machine_model_id, $data);
+
+        $data['message'] = 'Successfully Updated!';
+        $this->session->set_userdata($data);
+        redirect('access/getMachineModels');
+    }
+
+    public function getMachineLocations(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $data['title'] = 'Locations';
+
+        $line_id = $this->session->userdata('line_id');
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+        $data['msg'] = '';
+        $data['session_out'] = $this->session_out;
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['locations'] = $this->access_model->selectTableDataRowQuery('*', 'tb_other_locations', '');
+
+            $data['maincontent'] = $this->load->view('locations', $data, true);
+            $this->load->view('master', $data);
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
+    public function saveNewLocation(){
+        $data['location_name'] = $this->input->post('new_location_name');
+        $data['location_description'] = $this->input->post('new_location_description');
+
+        $this->access_model->insertingData('tb_other_locations', $data);
+
+        redirect('access/getMachineLocations');
+    }
+
+    public function updateLocation(){
+        $location_id = $this->input->post('edit_location_id');
+
+        $data['location_name'] = $this->input->post('edit_location_name');
+        $data['location_description'] = $this->input->post('edit_location_description');
+
+        $this->access_model->updateTblNew('tb_other_locations', 'id', $location_id, $data);
+
+        redirect('access/getMachineLocations');
+    }
+
+    public function getMachineList(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $data['title'] = 'Machine List';
+
+        $line_id = $this->session->userdata('line_id');
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+        $data['msg'] = '';
+        $data['session_out'] = $this->session_out;
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['machine_nos'] = $this->access_model->selectTableDataRowQuery('machine_no', 'tb_machine_list', '');
+            $data['machine_models'] = $this->access_model->selectTableDataRowQuery('*', 'tb_machine_model', '');
+            $data['machine_names'] = $this->access_model->selectTableDataRowQuery('*', 'tb_machine_name', '');
+            $data['other_locations'] = $this->access_model->selectTableDataRowQuery('*', 'tb_other_locations', '');
+            $data['lines'] = $this->access_model->selectTableDataRowQuery('*', 'tb_line', ' ORDER BY (line_code * 1)');
+
+            $data['machine_list'] = $this->access_model->getMachineList();
+
+            $data['maincontent'] = $this->load->view('machine_list', $data, true);
+            $this->load->view('master', $data);
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
+    public function addMachineNo(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $data['title'] = 'Add New Machine';
+
+        $line_id = $this->session->userdata('line_id');
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+        $data['msg'] = '';
+        $data['session_out'] = $this->session_out;
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['machine_nos'] = $this->access_model->selectTableDataRowQuery('machine_no', 'tb_machine_list', '');
+            $data['machine_models'] = $this->access_model->selectTableDataRowQuery('*', 'tb_machine_model', '');
+            $data['machine_names'] = $this->access_model->selectTableDataRowQuery('*', 'tb_machine_name', '');
+            $data['other_locations'] = $this->access_model->selectTableDataRowQuery('*', 'tb_other_locations', '');
+            $data['lines'] = $this->access_model->selectTableDataRowQuery('*', 'tb_line', ' ORDER BY (line_code * 1)');
+
+            $data['maincontent'] = $this->load->view('add_new_machine', $data, true);
+            $this->load->view('master', $data);
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
+    public function editMachineNo($machine_id){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $data['title'] = 'Edit Machine';
+
+        $data['machine_id'] = $machine_id;
+
+        $line_id = $this->session->userdata('line_id');
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+        $data['msg'] = '';
+        $data['session_out'] = $this->session_out;
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        $where = '';
+
+        if(sizeof($res) > 0) {
+            $data['machine_nos'] = $this->access_model->selectTableDataRowQuery('machine_no', 'tb_machine_list', '');
+            $data['machine_models'] = $this->access_model->selectTableDataRowQuery('*', 'tb_machine_model', '');
+            $data['machine_names'] = $this->access_model->selectTableDataRowQuery('*', 'tb_machine_name', '');
+            $data['other_locations'] = $this->access_model->selectTableDataRowQuery('*', 'tb_other_locations', '');
+            $data['lines'] = $this->access_model->selectTableDataRowQuery('*', 'tb_line', ' ORDER BY (line_code * 1)');
+
+            $where = " AND t1.id='$machine_id'";
+
+            $data['machine_info'] = $this->access_model->getMachineList($where);
+
+            $data['maincontent'] = $this->load->view('edit_machine', $data, true);
+            $this->load->view('master', $data);
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
+    public function saveNewMachine(){
+        $data['machine_no'] = $this->input->post('new_machine_no');
+        $data['machine_name_id'] = $this->input->post('machine_name_id');
+        $data['model_no_id'] = $this->input->post('model_no_id');
+        $data['line_id'] = $this->input->post('line_id');
+        $data['other_location_id'] = $this->input->post('other_location_id');
+        $data['status'] = $this->input->post('status');
+        $data['service_status'] = $this->input->post('service_status');
+
+        $this->access_model->insertingData('tb_machine_list', $data);
+
+        $data['message'] = 'Successfully Saved!';
+        $this->session->set_userdata($data);
+        redirect('access/addMachineNo');
+    }
+
+    public function updateMachine(){
+        $machine_id = $this->input->post('machine_id');
+        $data['machine_no'] = $this->input->post('machine_no');
+        $data['machine_name_id'] = $this->input->post('machine_name_id');
+        $data['model_no_id'] = $this->input->post('model_no_id');
+        $data['line_id'] = $this->input->post('line_id');
+        $data['other_location_id'] = $this->input->post('other_location_id');
+        $data['status'] = $this->input->post('status');
+        $data['service_status'] = $this->input->post('service_status');
+
+        $this->access_model->updateTblNew('tb_machine_list', 'id', $machine_id, $data);
+
+        $data['message'] = 'Successfully Updated!';
+        $this->session->set_userdata($data);
+        redirect('access/getMachineList/');
+    }
+
+    public function checkMachineAvailability(){
+        $new_machine_no = $this->input->post('new_machine_no');
+
+        $where = '';
+        if($new_machine_no != ''){
+            $where .= " AND machine_no='$new_machine_no'";
+        }
+
+        $res = $this->access_model->selectTableDataRowQuery('machine_no', 'tb_machine_list', $where);
+
+        echo json_encode($res);
+    }
+
+    public function filterMachineList(){
+        $machine_no = $this->input->post('machine_no');
+        $machine_name = $this->input->post('machine_name');
+        $model = $this->input->post('model');
+        $line_id = $this->input->post('line_id');
+        $other_location = $this->input->post('other_location');
+
+        $where = '';
+
+        if($machine_no != ''){
+            $where .= " AND t1.machine_no='$machine_no'";
+        }
+
+        if($machine_name != ''){
+            $where .= " AND t1.machine_name_id='$machine_name'";
+        }
+
+        if($model != ''){
+            $where .= " AND t1.model_no='$model'";
+        }
+
+        if($line_id != ''){
+            $where .= " AND t1.line_id='$line_id'";
+        }
+
+        if($other_location != ''){
+            $where .= " AND t1.other_location_id = '$other_location'";
+        }
+
+        $data['machine_list'] = $this->access_model->getMachineList($where);
+
+        echo $maincontent = $this->load->view('filter_machine_list', $data);
+    }
+
     public function care_label_end_line_new(){
         $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
         
@@ -2688,34 +3025,13 @@ class Access extends CI_Controller {
         $this->load->view('po_item_detail', $data);
     }
 
-    public function washGmtStatus($sap_no, $so_no, $purchase_order, $item, $quality, $color, $status){
+    public function washGmtStatus($so_no, $status){
 
         $where = '';
 
         if($so_no != ''){
             $where .= " AND so_no = '$so_no'";
         }
-
-        if($sap_no != ''){
-            $where .= " AND po_no = '$sap_no'";
-        }
-
-        if($purchase_order != ''){
-            $where .= " AND purchase_order = '$purchase_order'";
-        }
-
-        if($item != '' && $item != 'NA'){
-            $where .= " AND item = '$item'";
-        }
-
-        if($quality != ''){
-            $where .= " AND quality = '$quality'";
-        }
-
-        if($color != ''){
-            $where .= " AND color = '$color'";
-        }
-
 
         $res = $this->access_model->updateWashGmtStatus($where, $status);
 
@@ -4059,13 +4375,15 @@ class Access extends CI_Controller {
         $data['user_name'] = $this->session->userdata('user_name');
         $data['user_description'] = $this->session->userdata('user_description');
         $data['access_points'] = $this->session->userdata('access_points');
+        $buyer_condition = $this->session->userdata('buyer_condition');
 
         $cur_url = __METHOD__;
 
         $res = $this->checkAuthorization($data['access_points'], $cur_url);
 
         if(sizeof($res) > 0) {
-        $data['purchase_order_nos'] = $this->access_model->getAllPurchaseOrdersForOlymp();
+//        $data['purchase_order_nos'] = $this->access_model->getAllPurchaseOrdersForOlymp();
+        $data['purchase_order_nos'] = $this->access_model->selectTableDataRowQuery('*', 'tb_po_detail', " AND brand IN ($buyer_condition) GROUP BY so_no");
 
         $data['maincontent'] = $this->load->view('po_close_by_merchent', $data, true);
         $this->load->view('master', $data);
@@ -5328,14 +5646,14 @@ class Access extends CI_Controller {
             foreach ($line_of_text as $k => $v) {
                 if ($v[0] != '' && $v[1] != '' && $v[2] != '' && $v[3] != '' && $v[4] != '' && $v[6] != '' && $v[7] != '') {
 
-                    $purch_order = $v[0];
-                    $itm = $v[1];
-                    $qlty = $v[2];
-                    $clr = $v[3];
-                    $style_no = $v[4];
-                    $style_name = $v[5];
-                    $brnd = $v[6];
-                    $sz = $v[7];
+                    $purch_order = preg_replace('/[^A-Za-z0-9.;\-]/', '-', $v[0]);
+                    $itm = preg_replace('/[^A-Za-z0-9.;\-]/', '-', $v[1]);
+                    $qlty = preg_replace('/[^A-Za-z0-9.;\-]/', '-', $v[2]);
+                    $clr = preg_replace('/[^A-Za-z0-9.;\-]/', '-', $v[3]);
+                    $style_no = preg_replace('/[^A-Za-z0-9.;\-]/', '-', $v[4]);
+                    $style_name = preg_replace('/[^A-Za-z0-9.;\-]/', '-', $v[5]);
+                    $brnd = preg_replace('/[^A-Za-z0-9.;\-]/', '-', $v[6]);
+                    $sz = preg_replace('/[^A-Za-z0-9.;\-]/', '-', $v[7]);
                     $quantity = $v[8];
 //                    $ex_factory_date = $v[9];
 //                    $ex_factory_date="";

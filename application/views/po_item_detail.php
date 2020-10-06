@@ -47,12 +47,12 @@
                                                     }
                                                     if($v['wash_gmt'] == 0){
                                                     ?>
-                                                        <a href="<?php echo base_url();?>access/washGmtStatus/<?php echo $v['po_no'].'/'.$v['so_no'].'/'.$v['purchase_order'].'/'.$item.'/'.$v['quality'].'/'.$v['color'];?>/1" class="btn btn-primary">Wash</a>
+                                                        <a href="<?php echo base_url();?>access/washGmtStatus/<?php echo $v['so_no'];?>/1" class="btn btn-primary">Wash</a>
                                                     <?php }
 
                                                     if($v['wash_gmt'] == 1){
                                                     ?>
-                                                        <a href="<?php echo base_url();?>access/washGmtStatus/<?php echo $v['po_no'].'/'.$v['so_no'].'/'.$v['purchase_order'].'/'.$item.'/'.$v['quality'].'/'.$v['color'];?>/0" class="btn btn-warning">Non-Wash</a>
+                                                        <a href="<?php echo base_url();?>access/washGmtStatus/<?php echo $v['so_no'];?>/0" class="btn btn-warning">Non-Wash</a>
                                                     <?php } ?>
                                                 </td>
                                             </tr>

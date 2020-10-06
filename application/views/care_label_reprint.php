@@ -66,7 +66,7 @@ $sl++;
         <!--            <p style="margin-bottom: -5px;">Bundle Range: --><?php //echo $bundle_range;?><!--</p>-->
         <p style="margin-bottom: -5px;">Style No: <?php echo $style_no.'-'.substr($brand, 0, 1);?></p>
         <p style="margin-bottom: -5px;">Style Name: <?php echo $style_name;?></p>
-        <p style="margin-bottom: -0px;">Size: <?php echo $size.'-'.$bundle_no;?></p>
+        <p style="margin-bottom: -0px;">Size: <?php echo $size.'-'.$layer_group;?></p>
         <!--            <p style="margin-bottom: -5px;">Brand: --><?php //echo $brand;?><!--</p>-->
         <div style="float: left; margin-bottom: -5px; margin-left: 1px;">
             <?php
@@ -98,7 +98,7 @@ $sl++;
         <p style="margin-bottom: -5px;">Quality: <?php echo $quality.'-'.$color;?></p>
         <p style="margin-bottom: -5px;">Style No: <?php echo $style_no.'-'.substr($brand, 0, 1);?></p>
         <!--            <p style="margin-bottom: -5px;">Color: --><?php //echo $color;?><!--</p>-->
-        <p style="margin-bottom: 0px;">Size: <?php echo $size.'-'.$bundle_no;?></p>
+        <p style="margin-bottom: 0px;">Size: <?php echo $size.'-'.$layer_group;?></p>
         <div style="float: left; margin-left: 1px;">
             <?php
             $cl_no_file = $pc_tracking_no.'.png';
