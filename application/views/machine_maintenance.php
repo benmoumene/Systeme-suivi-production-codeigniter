@@ -21,15 +21,15 @@
 </style>
 <div class="pull-left breadcrumb_admin clear_both">
         <div class="pull-left page_title theme_color">
-          <h1>Line-Finishing Alter</h1>
+          <h1>Machine Maintenance</h1>
+            <a class="btn btn-warning" href="<?php echo base_url()?>access/lineFinishingAlter">Finishing Alter</a>
           <a class="btn btn-success" href="<?php echo base_url()?>access/care_label_end_line_new">End Line QC</a>
-<!--          <a class="btn btn-primary" href="--><?php //echo base_url()?><!--access/poOutputControl">Output Control</a>-->
-          <a class="btn btn-danger" href="<?php echo base_url()?>access/machineMaintenance">Machine Maintenance</a>
+          <a class="btn btn-primary" href="<?php echo base_url()?>access/poOutputControl">Output Control</a>
         </div>
         <div class="pull-right">
           <ol class="breadcrumb">
               <li><a href="<?php echo base_url();?>">Home</a></li>
-              <li class="active">Line-Finishing Alter</li>
+              <li class="active">Machine Maintenance</li>
           </ol>
         </div>
       </div>

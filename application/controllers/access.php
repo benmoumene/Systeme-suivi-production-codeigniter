@@ -977,46 +977,60 @@ class Access extends CI_Controller {
     }
 
     public function printCareLabels($po_no, $so_no, $cut_tracking_no){
+        $data['title'] = 'Bundle Ticket Parts';
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
 
-        $limit = "";
+        $cur_url = __METHOD__;
 
-        $get_data['po_no'] = $po_no;
-        $get_data['so_no'] = $so_no;
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
 
-        $get_data['cut_tracking_no'] = $cut_tracking_no;
-        $get_data['care_label_list'] = $this->access_model->checkCutCareLabelAvailability($po_no, $so_no, $cut_tracking_no, $limit);
+        if(sizeof($res) > 0) {
 
-        $count_pcs = 0;
+            $limit = "";
 
-        if(!empty($get_data['care_label_list'])){
+            $get_data['po_no'] = $po_no;
+            $get_data['so_no'] = $so_no;
 
-            foreach ($get_data['care_label_list'] as $k => $v_c){
+            $get_data['cut_tracking_no'] = $cut_tracking_no;
+            $get_data['care_label_list'] = $this->access_model->checkCutCareLabelAvailability($po_no, $so_no, $cut_tracking_no, $limit);
 
-                $carelabel_tracking_no = $v_c['pc_tracking_no'];
+            $count_pcs = 0;
 
-                $data['img_url']="";
-                if($carelabel_tracking_no != '')
-                {
-                    $count_pcs++;
-                    $this->load->library('ciqrcode');
-                    $qr_image=$carelabel_tracking_no.'.png';
-                    $params['data'] = $carelabel_tracking_no;
-                    $params['level'] = 'H';
-                    $params['size'] = 8;
-                    $params['savename'] =FCPATH."uploads/qr_image/".$qr_image;
+            if(!empty($get_data['care_label_list'])){
 
+                foreach ($get_data['care_label_list'] as $k => $v_c){
 
-                    if($this->ciqrcode->generate($params))
+                    $carelabel_tracking_no = $v_c['pc_tracking_no'];
+
+                    $data['img_url']="";
+                    if($carelabel_tracking_no != '')
                     {
-                        $data['img_url']=$qr_image;
+                        $count_pcs++;
+                        $this->load->library('ciqrcode');
+                        $qr_image=$carelabel_tracking_no.'.png';
+                        $params['data'] = $carelabel_tracking_no;
+                        $params['level'] = 'H';
+                        $params['size'] = 8;
+                        $params['savename'] =FCPATH."uploads/qr_image/".$qr_image;
+
+
+                        if($this->ciqrcode->generate($params))
+                        {
+                            $data['img_url']=$qr_image;
+                        }
                     }
                 }
             }
+
+            $get_data['count_pcs'] = $count_pcs;
+
+            $data['maincontent'] = $this->load->view('care_label_print', $get_data);
+
+        }else{
+            echo $this->load->view('404');
         }
-
-        $get_data['count_pcs'] = $count_pcs;
-
-        $data['maincontent'] = $this->load->view('care_label_print', $get_data);
     }
 
     public function getPrintCareLabels(){
@@ -1164,15 +1178,23 @@ class Access extends CI_Controller {
         $data['user_description'] = $this->session->userdata('user_description');
         $data['access_points'] = $this->session->userdata('access_points');
 
-        $data['po_no'] = $po_no;
-        $data['so_no'] = $so_no;
-        $data['cut_tracking_no'] = $cut_tracking_no;
+        $cur_url = __METHOD__;
 
-        $data['bundle_ticket_part']=$this->access_model->search_bundle_ticket_other_part($po_no);
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
 
+        if(sizeof($res) > 0) {
+            $data['po_no'] = $po_no;
+            $data['so_no'] = $so_no;
+            $data['cut_tracking_no'] = $cut_tracking_no;
 
-        $data['maincontent'] = $this->load->view('bundle_ticket_other_parts', $data, true);
-        $this->load->view('master', $data);
+            $data['bundle_ticket_part']=$this->access_model->search_bundle_ticket_other_part($po_no);
+
+            $data['maincontent'] = $this->load->view('bundle_ticket_other_parts', $data, true);
+            $this->load->view('master', $data);
+
+        }else{
+            echo $this->load->view('404');
+        }
     }
 
     public function generateBundleTicketOtherParts($part_name, $po_no, $so_no, $cut_tracking_no){
@@ -2337,6 +2359,36 @@ class Access extends CI_Controller {
             $this->dashboard_model->insertTblData('tb_daily_line_summary', $data_l);
         }
 
+    }
+
+    public function machineMaintenance(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $s_data['session_last_action_date_time'] = $date_time;
+        $this->session->set_userdata($s_data);
+
+        $data['title'] = 'Machine Maintenance';
+
+        $line_id = $this->session->userdata('line_id');
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+        $data['msg'] = '';
+        $data['session_out'] = $this->session_out;
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['maincontent'] = $this->load->view('machine_maintenance', $data, true);
+            $this->load->view('master', $data);
+        }else{
+            echo $this->load->view('404');
+        }
     }
 
     public function lineFinishingAlter(){

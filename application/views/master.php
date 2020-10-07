@@ -314,6 +314,11 @@
                     <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/cut_scan"><i class="fa fa-circle"></i> Cut Complete </a></li>
                 </ul>
             </li>
+            <li> <a href="javascript:void(0);"> <i class="fa fa-print"></i> Print <span class="plus"><i class="fa fa-plus"></i></span></a>
+                <ul>
+                    <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/po_cut_for_care_label"><i class="fa fa-circle"></i> Print Care Label </a></li>
+                </ul>
+            </li>
 
             <li> </li>
 

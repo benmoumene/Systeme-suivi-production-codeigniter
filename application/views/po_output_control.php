@@ -24,6 +24,7 @@
           <h1>PO Output Control</h1>
           <a class="btn btn-success" href="<?php echo base_url()?>access/care_label_end_line_new">End Line QC</a>
             <a class="btn btn-warning" href="<?php echo base_url()?>access/lineFinishingAlter">Finishing Alter</a>
+            <a class="btn btn-danger" href="<?php echo base_url()?>access/machineMaintenance">Machine Maintenance</a>
         </div>
         <div class="pull-right">
           <ol class="breadcrumb">

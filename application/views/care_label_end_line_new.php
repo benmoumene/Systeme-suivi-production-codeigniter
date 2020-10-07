@@ -23,7 +23,8 @@
         <div class="pull-left page_title theme_color">
           <h1>End Line QC</h1>
           <a class="btn btn-warning" href="<?php echo base_url()?>access/lineFinishingAlter">Finishing Alter</a>
-          <a class="btn btn-success" href="<?php echo base_url()?>access/poOutputControl">Output Control</a>
+<!--          <a class="btn btn-success" href="--><?php //echo base_url()?><!--access/poOutputControl">Output Control</a>-->
+          <a class="btn btn-danger" href="<?php echo base_url()?>access/machineMaintenance">Machine Maintenance</a>
         </div>
         <div class="pull-right">
           <ol class="breadcrumb">
