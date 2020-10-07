@@ -207,7 +207,7 @@
 <!--            <li> <a href="--><?php //echo base_url();?><!--access/po_list"><i class="fa fa-circle"></i> PO List </a></li>-->
 
             <?php
-            if($access_points == 0){
+            if($access_points == 1000){
             ?>
                 <li> <a href="javascript:void(0);"> <i class="fa fa-exchange"></i> Change <span class="plus"><i class="fa fa-plus"></i></span></a>
                     <ul>
@@ -243,7 +243,55 @@
             <?php
             }
 
-                if($access_points == 1){
+            if($access_points == 0){ ?>
+
+                <li> <a href="javascript:void(0);"> <i class="fa fa-cut"></i> Cutting <span class="plus"><i class="fa fa-plus"></i></span></a>
+                    <ul>
+                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/cutting_new"><i class="fa fa-circle"></i> Cutting New </a></li>
+                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/group_po_item_making"><i class="fa fa-circle"></i> Group-PO-Item </a></li>
+                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/poPartDetail"><i class="fa fa-circle"></i> Set Parts </a></li>
+                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/multiple_po_item_remain_qty_excel"><i class="fa fa-circle"></i> Export PO-Item EXCEL </a></li>
+                    </ul>
+                </li>
+                <li> <a href="javascript:void(0);"> <i class="fa fa-barcode"></i> Scan <span class="plus"><i class="fa fa-plus"></i></span></a>
+                    <ul>
+                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/lay_scan"><i class="fa fa-circle"></i> Lay Complete </a></li>
+                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/cut_scan"><i class="fa fa-circle"></i> Cut Complete </a></li>
+                    </ul>
+                </li>
+                <li> <a href="javascript:void(0);"> <i class="fa fa-print"></i> Print <span class="plus"><i class="fa fa-plus"></i></span></a>
+                    <ul>
+                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/po_cut_for_care_label"><i class="fa fa-circle"></i> Print Care Label </a></li>
+                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/reprintRequest"><i class="fa fa-circle"></i> Reprint Label </a></li>
+                    </ul>
+                </li>
+
+                <li> <a href="javascript:void(0);"> <i class="fa fa-bar-chart-o"></i> Cutting Reports <span class="plus"><i class="fa fa-plus"></i></span></a>
+                    <ul>
+                        <!--                  <li> <a href="--><?php //echo base_url();?><!--access/care_label_report"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>CL Sent Report</b> </a> </li>-->
+                        <!--                  <li> <a href="--><?php //echo base_url();?><!--access/care_label_report_new"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>CL Sent To Prod.</b> </a> </li>-->
+                        <!--                  <li> <a style="margin-bottom: 1px;" href="--><?php //echo base_url();?><!--access/sendingToProductionReport"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>CL Sent To Prod.</b> </a> </li>-->
+                        <!--                  <li> <a style="margin-bottom: 1px;" href="--><?php //echo base_url();?><!--access/sendingToProductionReportByPO"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>CL To Prod. By PO</b> </a> </li>-->
+                        <!--                  <li> <a style="margin-bottom: 1px;" target="_blank" href="--><?php //echo base_url();?><!--access/cuttingTableWiseReport"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Cut-Table Report</b> </a> </li>-->
+                        <!--                  <li> <a style="margin-bottom: 1px;" target="_blank" href="--><?php //echo base_url();?><!--access/poWiseCuttingReport"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>PO-Wise Cutting</b> </a> </li>-->
+                        <!--                  <li> <a style="margin-bottom: 1px;" target="_blank" href="--><?php //echo base_url();?><!--access/cuttingStockReport"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Cutting Stock Report</b> </a> </li>-->
+                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/print_bundle_summary_page"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b> Bundle Summary </b> </a> </li>
+                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/cutting_summary"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b> Cutting Summary </b> </a> </li>
+                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/print_input_ticket"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b> Get Input Ticket </b> </a> </li>
+                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>dashboard/cutPackageReportChart"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b> Cutting Dashboard </b> </a> </li>
+                    </ul>
+                </li>
+                <li> <a href="javascript:void(0);"> <i class="fa fa-bar-chart-o"></i> PO Info <span class="plus"><i class="fa fa-plus"></i></span></a>
+                    <ul>
+                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/poInfoReport"><i class="fa fa-circle"></i> Date Wise PO </a> </li>
+                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/poSearchReport"><i class="fa fa-circle"></i> PO Search </a> </li>
+                    </ul>
+                </li>
+                <li> </li>
+
+            <?php }
+
+            if($access_points == 1){
                     // access_point = 1 = cutting
             ?>
 
@@ -267,43 +315,6 @@
                 </ul>
             </li>
 
-            <li> <a href="javascript:void(0);"> <i class="fa fa-cut"></i> Cutting <span class="plus"><i class="fa fa-plus"></i></span></a>
-                <ul>
-                    <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/cutting_new"><i class="fa fa-circle"></i> Cutting New </a></li>
-                    <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/group_po_item_making"><i class="fa fa-circle"></i> Group-PO-Item </a></li>
-                    <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/poPartDetail"><i class="fa fa-circle"></i> Set Parts </a></li>
-                    <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/multiple_po_item_remain_qty_excel"><i class="fa fa-circle"></i> Export PO-Item EXCEL </a></li>
-                </ul>
-            </li>
-
-            <li> <a href="javascript:void(0);"> <i class="fa fa-print"></i> Print <span class="plus"><i class="fa fa-plus"></i></span></a>
-                <ul>
-                    <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/po_cut_for_care_label"><i class="fa fa-circle"></i> Print Care Label </a></li>
-                    <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/reprintRequest"><i class="fa fa-circle"></i> Reprint Label </a></li>
-                </ul>
-            </li>
-
-            <li> <a href="javascript:void(0);"> <i class="fa fa-bar-chart-o"></i> Cutting Reports <span class="plus"><i class="fa fa-plus"></i></span></a>
-              <ul>
-<!--                  <li> <a href="--><?php //echo base_url();?><!--access/care_label_report"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>CL Sent Report</b> </a> </li>-->
-<!--                  <li> <a href="--><?php //echo base_url();?><!--access/care_label_report_new"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>CL Sent To Prod.</b> </a> </li>-->
-<!--                  <li> <a style="margin-bottom: 1px;" href="--><?php //echo base_url();?><!--access/sendingToProductionReport"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>CL Sent To Prod.</b> </a> </li>-->
-<!--                  <li> <a style="margin-bottom: 1px;" href="--><?php //echo base_url();?><!--access/sendingToProductionReportByPO"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>CL To Prod. By PO</b> </a> </li>-->
-<!--                  <li> <a style="margin-bottom: 1px;" target="_blank" href="--><?php //echo base_url();?><!--access/cuttingTableWiseReport"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Cut-Table Report</b> </a> </li>-->
-<!--                  <li> <a style="margin-bottom: 1px;" target="_blank" href="--><?php //echo base_url();?><!--access/poWiseCuttingReport"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>PO-Wise Cutting</b> </a> </li>-->
-<!--                  <li> <a style="margin-bottom: 1px;" target="_blank" href="--><?php //echo base_url();?><!--access/cuttingStockReport"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Cutting Stock Report</b> </a> </li>-->
-                  <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/print_bundle_summary_page"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b> Bundle Summary </b> </a> </li>
-                  <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/cutting_summary"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b> Cutting Summary </b> </a> </li>
-                  <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/print_input_ticket"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b> Get Input Ticket </b> </a> </li>
-                  <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>dashboard/cutPackageReportChart"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b> Cutting Dashboard </b> </a> </li>
-              </ul>
-            </li>
-            <li> <a href="javascript:void(0);"> <i class="fa fa-bar-chart-o"></i> PO Info <span class="plus"><i class="fa fa-plus"></i></span></a>
-                <ul>
-                    <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/poInfoReport"><i class="fa fa-circle"></i> Date Wise PO </a> </li>
-                    <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/poSearchReport"><i class="fa fa-circle"></i> PO Search </a> </li>
-                </ul>
-            </li>
             <li> </li>
 
             <?php
