@@ -570,12 +570,20 @@ class Access extends CI_Controller {
     }
 
     public function removeFromCarton(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
         $pcs_nos = $this->input->post('pcs_nos');
+
+        $user_description = $this->session->userdata('user_description');
 
         foreach ($pcs_nos AS $pcs_no){
 
             $data = array(
-                'carton_status' => 0
+                'carton_status' => 0,
+                'manual_adjustment_date_time' => $date_time,
+                'manual_adjustment_by' => $user_description,
             );
 
             $this->access_model->updateTblNew('tb_care_labels', 'pc_tracking_no', $pcs_no, $data);
@@ -659,6 +667,8 @@ class Access extends CI_Controller {
         $date_time=$datex->format('Y-m-d H:i:s');
         $date=$datex->format('Y-m-d');
 
+        $user_description = $this->session->userdata('user_description');
+
         $pcs_nos = $this->input->post('pcs_nos');
         $last_scan_points = $this->input->post('last_scan_points');
 
@@ -728,6 +738,7 @@ class Access extends CI_Controller {
 
             $data['is_manually_adjusted'] = 1;
             $data['manual_adjustment_date_time'] = $date_time;
+            $data['manual_adjustment_by'] = $user_description;
 
             $this->access_model->updateTblNew('tb_care_labels', 'pc_tracking_no', $pcs_no, $data);
         }
