@@ -4273,7 +4273,7 @@ class Dashboard extends CI_Controller {
         }
 
         if($search_date != ''){
-            $where .= " AND DATE_FORMAT(approved_ex_factory_date, '%Y-%m') = '$search_date'";
+            $where .= " AND DATE_FORMAT(ex_factory_date, '%Y-%m') = '$search_date'";
         }
 
         $data['wh_pcs'] = $this->dashboard_model->getWarehousePcsReport($where);

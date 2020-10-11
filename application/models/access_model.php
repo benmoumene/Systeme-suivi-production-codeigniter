@@ -264,7 +264,7 @@ class Access_model extends CI_Model {
 
     public function update_package_on_carelabel($bundle_tracking_no, $date_time)
     {
-        $sql = "UPDATE tb_care_labels SET is_package_ready=1,package_ready_date_time='$date_time' WHERE `bundle_tracking_no` = '$bundle_tracking_no'";
+        $sql = "UPDATE vt_few_days_po_pcs SET is_package_ready=1,package_ready_date_time='$date_time' WHERE `bundle_tracking_no` = '$bundle_tracking_no'";
 
         $query = $this->db->query($sql);
         return $query;
@@ -567,7 +567,7 @@ class Access_model extends CI_Model {
     }
 
     public function getPoItemBySapNo($sap_no){
-        $sql = "SELECT *  FROM `vt_po_detail_cutting_dept` 
+        $sql = "SELECT *  FROM `tb_po_detail` 
                WHERE `po_no` = '$sap_no' 
                GROUP BY po_no, so_no, purchase_order, item 
                ORDER BY po_no, so_no, purchase_order, item";
@@ -589,11 +589,11 @@ class Access_model extends CI_Model {
         return $query;
     }
 
-    public function getCutInfoByPoItem($sap_no, $po_no, $item_no){
+    public function getCutInfoByPoItem($sap_no, $so_no){
         $sql = "SELECT t1.*, t2.purchase_order, t2.cut_no, t2.bundle, t2.planned_cut_qty, t2.bundle_range_start, t2.bundle_range_end
-                FROM (SELECT *  FROM `tb_po_detail` WHERE `po_no` = '$sap_no' AND `purchase_order` LIKE '%$po_no%' AND `item` LIKE '%$item_no%' GROUP BY po_no, purchase_order, item LIMIT 1) as t1
+                FROM (SELECT *  FROM `tb_po_detail` WHERE `po_no` = '$sap_no' AND `so_no` = '$so_no' GROUP BY po_no, purchase_order, item LIMIT 1) as t1
                 INNER JOIN
-                (SELECT * FROM `tb_cut_summary`  WHERE `po_no` = '$sap_no' AND `purchase_order` LIKE '%$po_no%' AND `item` LIKE '%$item_no%' ORDER BY id DESC LIMIT 1) as t2
+                (SELECT * FROM `tb_cut_summary`  WHERE `po_no` = '$sap_no' AND `so_no` = '$so_no' ORDER BY id DESC LIMIT 1) as t2
                 ON t1.po_no=t2.po_no AND t1.purchase_order=t2.purchase_order AND t1.item=t2.item";
 
 
@@ -611,11 +611,11 @@ class Access_model extends CI_Model {
     public function getSizeWisePoItemCutQty($sap_no, $so_no, $purchase_no, $item, $quality, $color){
         $sql = "Select t1.*, t2.po_item_size_wise_cut_qty From 
                 (SELECT po_no, so_no, purchase_order, item, quality, color, size, SUM(quantity) as po_item_size_wise_order_qty
-                FROM `vt_po_detail_cutting_dept` GROUP BY po_no, so_no, purchase_order, item, quality, color, size) as t1
+                FROM `tb_po_detail` GROUP BY po_no, so_no, purchase_order, item, quality, color, size) as t1
                 
                 LEFT JOIN
                 (SELECT po_no, so_no, purchase_order, item, quality, color, size, SUM(cut_qty) as po_item_size_wise_cut_qty
-                FROM `vt_cut_summary_cutting_dept` GROUP BY po_no, so_no, purchase_order, item, quality, color, size) as t2
+                FROM `tb_cut_summary` GROUP BY po_no, so_no, purchase_order, item, quality, color, size) as t2
                 
                 ON t1.po_no=t2.po_no AND t1.so_no=t2.so_no AND t1.purchase_order=t2.purchase_order 
                 AND t1.item=t2.item AND t1.quality=t2.quality AND t1.color=t2.color AND t1.size=t2.size
@@ -654,14 +654,14 @@ class Access_model extends CI_Model {
     public function getSizeWisePoItemCutQtyBySize($sap_no, $so_no, $purchase_order, $item, $quality, $color, $size){
         $sql = "Select t1.*, t2.cut_qty From 
                 (SELECT po_no, so_no, purchase_order, item, quality, color, size, ex_factory_date, SUM(quantity) as order_qty
-                FROM `vt_po_detail_cutting_dept` 
+                FROM `tb_po_detail` 
                 WHERE po_no='$sap_no' AND so_no='$so_no' AND purchase_order='$purchase_order' 
                 AND item='$item' AND quality='$quality' AND color='$color' AND size='$size'
                 GROUP BY po_no, so_no, purchase_order, item, quality, color, size) as t1
                 
                 LEFT JOIN
                 (SELECT po_no, so_no, purchase_order, item, quality, color, size, SUM(cut_qty) as cut_qty
-                FROM `vt_cut_summary_cutting_dept` 
+                FROM `tb_cut_summary` 
                 WHERE po_no='$sap_no' AND so_no='$so_no' AND purchase_order='$purchase_order' 
                 AND item='$item' AND quality='$quality' AND color='$color' AND size='$size'
                 GROUP BY po_no, so_no, purchase_order, item, quality, color, size) as t2
@@ -687,7 +687,7 @@ class Access_model extends CI_Model {
     }
 
     public function getSizesBySapNo($sap_no){
-        $sql = "SELECT t1.* FROM (SELECT *, SUM(quantity) as total_qty FROM `vt_po_detail_cutting_dept`
+        $sql = "SELECT t1.* FROM (SELECT *, SUM(quantity) as total_qty FROM `tb_po_detail`
                 WHERE po_no='$sap_no' GROUP by po_no, size) as t1
                 LEFT JOIN
                 `tb_size_serial` as t2
@@ -1269,13 +1269,15 @@ class Access_model extends CI_Model {
                 FROM `vt_wash_return` as t1
                 
                 LEFT JOIN
-                (SELECT *, SUM(quantity) as total_order_qty FROM `vt_po_detail` 
+                (SELECT *, SUM(quantity) as total_order_qty FROM `tb_po_detail` 
                 GROUP BY po_no, so_no, purchase_order, item, quality, color) as t2
                 ON t1.po_no=t2.po_no AND t1.so_no=t2.so_no AND t1.purchase_order=t2.purchase_order 
                 AND t1.item=t2.item AND t1.quality=t2.quality AND t1.color=t2.color
                 
                 LEFT JOIN
-                `vt_wash_send` as t3
+                (SELECT po_no, so_no, purchase_order, item, quality, color, brand, style_no, style_name, 
+                COUNT(pc_tracking_no) as count_washing_qty, MAX(going_wash_scan_date_time) as max_going_wash_scan_date_time
+                FROM `tb_care_labels` WHERE is_going_wash = 1) as t3
                 ON t1.po_no=t3.po_no AND t1.so_no=t3.so_no AND t1.purchase_order=t3.purchase_order 
                 AND t1.item=t3.item AND t1.quality=t3.quality AND t1.color=t3.color
                 
@@ -1450,7 +1452,12 @@ class Access_model extends CI_Model {
               FROM vt_few_days_po_pcs    
             ) vt_few_days_po_pcs WHERE 1 $condition_1  GROUP BY so_no,po_no,item,quality,color,purchase_order) as t1
             LEFT JOIN
-            vt_po_summary as t2
+            (SELECT po_no, so_no, purchase_order, item, quality, color, style_no, style_name, brand, 
+            ex_factory_date, smv, wash_gmt, SUM(quantity) AS total_order_qty, status, po_type, 
+            aql_plan_date, aql_status, aql_action_date, aql_remarks, aql_action_by
+            FROM `tb_po_detail`
+            GROUP BY po_no, so_no, purchase_order, item, quality, color
+            ) as t2
             ON t1.so_no=t2.so_no AND t1.po_no=t2.po_no AND t1.purchase_order=t2.purchase_order AND t1.quality=t2.quality AND t1.color=t2.color
               WHERE  (t1.total_cut_input_qty - t1.count_packing_pass) > 0
             ORDER by packing_date_time DESC";
@@ -1705,7 +1712,11 @@ class Access_model extends CI_Model {
                   FROM vt_few_days_po_pcs    
                 ) vt_few_days_po_pcs WHERE  1 $condition_1  GROUP BY so_no,po_no,item,quality,color,purchase_order) as t1
                 LEFT JOIN
-                vt_po_summary as t2
+                (SELECT po_no, so_no, purchase_order, item, quality, color, style_no, style_name, brand, ex_factory_date, smv, wash_gmt, SUM(quantity) AS total_order_qty, status, po_type, aql_plan_date, aql_status, aql_action_date, aql_remarks, aql_action_by
+                FROM `tb_po_detail` 
+                WHERE DATE_FORMAT(ex_factory_date, '%Y-%m-%d') BETWEEN (CURDATE() - INTERVAL 90 day) AND (CURDATE() + INTERVAL 90 day)
+                GROUP BY po_no, so_no, purchase_order, item, quality, color
+                ) as t2
                 ON t1.so_no=t2.so_no AND t1.po_no=t2.po_no AND t1.purchase_order=t2.purchase_order AND t1.quality=t2.quality AND t1.color=t2.color
                 ORDER by carton_date_time DESC";
 
@@ -2578,10 +2589,14 @@ class Access_model extends CI_Model {
                 FROM tb_cut_summary WHERE 1 $where GROUP BY po_no,so_no,item,quality,color,purchase_order
                 )  as t1
                 LEFT JOIN
-                vt_po_summary as t2
+                tb_production_summary as t2
                 ON t1.so_no=t2.so_no AND t1.po_no=t2.po_no AND t1.purchase_order=t2.purchase_order AND t1.item=t2.item AND t1.quality=t2.quality AND t1.color=t2.color
                 LEFT JOIN
-                vt_cut as t3
+                (SELECT *, MIN(bundle) as bundle_start, MAX(bundle) as bundle_end, SUM(cut_qty) as total_cut_qty, MAX(cutting_collar_cuff_bundle_last_action_date_time) as max_cutting_collar_cuff_bundle_last_action_date_time
+                FROM `tb_cut_summary` 
+                WHERE 1 AND DATE_FORMAT(ex_factory_date, '%Y-%m-%d') BETWEEN (CURDATE() - INTERVAL 60 day) AND (CURDATE() + INTERVAL 90 day) 
+                GROUP BY po_no, so_no, purchase_order, item, quality, color
+                ) as t3
                 ON t1.so_no=t3.so_no AND t1.po_no=t3.po_no AND t1.purchase_order=t3.purchase_order AND t1.item=t3.item AND t1.quality=t3.quality AND t1.color=t3.color
                 ORDER  BY cutting_collar_bundle_ready_date_time) AS A
                 
@@ -2754,7 +2769,8 @@ class Access_model extends CI_Model {
                 ) vt_few_days_po_pcs WHERE line_id=$line_no GROUP BY so_no,po_no,item,quality,color,purchase_order, line_id) as t1
                 
                 LEFT JOIN
-                vt_po_summary as t2
+                (Select so_no, po_no, purchase_order, quality, color, SUM(quantity) AS total_order_qty, smv
+                FROM tb_po_detail GROUP  BY so_no) as t2
                 ON t1.so_no=t2.so_no AND t1.po_no=t2.po_no AND t1.purchase_order=t2.purchase_order AND t1.quality=t2.quality AND t1.color=t2.color
                 
                 ORDER by mid_line_qc_date_time DESC
@@ -2906,7 +2922,8 @@ class Access_model extends CI_Model {
 
         $sql="SELECT B.*
                  FROM (SELECT po_no, so_no,line_id FROM `tb_line_running_pos` WHERE line_id=$line_id) as A
-                 LEFT JOIN(SELECT t1.*, t2.total_order_qty, t2.smv,t3.total_cut_qty 
+                 LEFT JOIN
+                 (SELECT t1.*, t2.total_order_qty, t2.smv, t3.total_cut_qty 
                  FROM (SELECT po_no,so_no,item,quality,color,purchase_order,
                  line_id,brand,ex_factory_date,style_no,style_name,line_input_date_time,
                  count(line_input_date_time) as count_input_qty_line,
@@ -2917,15 +2934,19 @@ class Access_model extends CI_Model {
                  FROM vt_few_days_po_pcs) vt_few_days_po_pcs
                  GROUP BY so_no,po_no,item,quality,color,purchase_order) as t1
                  LEFT JOIN
-                  vt_po_summary as t2
-                    ON t1.so_no=t2.so_no AND t1.po_no=t2.po_no AND t1.purchase_order=t2.purchase_order AND t1.quality=t2.quality AND t1.color=t2.color
+                  (SELECT po_no, so_no, purchase_order, item, quality, color, style_no, style_name, 
+                  brand, smv, SUM(quantity) AS total_order_qty
+                 FROM `tb_po_detail` 
+                 GROUP BY po_no, so_no, purchase_order, item, quality, color
+                 ) as t2
+                 ON t1.so_no=t2.so_no AND t1.po_no=t2.po_no AND t1.purchase_order=t2.purchase_order AND t1.quality=t2.quality AND t1.color=t2.color
                  LEFT JOIN
-                 vt_cut as t3
-                   ON t1.so_no=t3.so_no AND t1.po_no=t3.po_no AND t1.purchase_order=t3.purchase_order AND t1.quality=t3.quality AND t1.color=t3.color
-                   ORDER by line_input_date_time DESC) as B
+                 tb_production_summary as t3
+                 ON t1.so_no=t3.so_no AND t1.po_no=t3.po_no AND t1.purchase_order=t3.purchase_order AND t1.quality=t3.quality AND t1.color=t3.color
+                 ORDER by line_input_date_time DESC) as B
                  ON A.so_no=B.so_no AND A.po_no=B.po_no 
 
-                  ORDER BY line_input_date_time DESC";
+                 ORDER BY line_input_date_time DESC";
 
         $query = $this->db->query($sql)->result_array();
         return $query;
@@ -2982,7 +3003,11 @@ class Access_model extends CI_Model {
                 ) vt_few_days_po_pcs WHERE line_id=$line_id GROUP BY so_no,po_no,item,quality,color,purchase_order, line_id) as t1
                 
                 LEFT JOIN
-                vt_po_summary as t2
+                (SELECT po_no, so_no, purchase_order, item, quality, color, style_no, style_name, brand, 
+                ex_factory_date, smv, wash_gmt, SUM(quantity) AS total_order_qty, status, po_type, 
+                aql_plan_date, aql_status, aql_action_date, aql_remarks, aql_action_by
+                FROM `tb_po_detail` 
+                GROUP BY po_no, so_no, purchase_order, item, quality, color) as t2
                 ON t1.so_no=t2.so_no AND t1.po_no=t2.po_no AND t1.purchase_order=t2.purchase_order AND t1.quality=t2.quality AND t1.color=t2.color
                 
                 ORDER by mid_line_qc_date_time DESC
@@ -3146,7 +3171,11 @@ class Access_model extends CI_Model {
                 ) vt_few_days_po_pcs WHERE line_id=$line_id GROUP BY so_no,po_no,item,quality,color,purchase_order, line_id) as t1
                 
                 LEFT JOIN
-                vt_po_summary as t2
+                (SELECT po_no, so_no, purchase_order, item, quality, color, style_no, style_name, brand, ex_factory_date, 
+                smv, wash_gmt, SUM(quantity) AS total_order_qty, status, po_type, aql_plan_date, aql_status, aql_action_date, 
+                aql_remarks, aql_action_by
+                FROM `tb_po_detail` 
+                GROUP BY po_no, so_no, purchase_order, item, quality, color) as t2
                 ON t1.so_no=t2.so_no AND t1.po_no=t2.po_no AND t1.purchase_order=t2.purchase_order AND t1.quality=t2.quality AND t1.color=t2.color
                 
                 ORDER by mid_line_qc_date_time DESC
@@ -4866,7 +4895,7 @@ class Access_model extends CI_Model {
     }
 
     public function getLastCareLabel(){
-        $sql = "SELECT * FROM `tb_care_labels` ORDER BY ID DESC LIMIT 1";
+        $sql = "SELECT * FROM `vt_few_days_po_pcs` ORDER BY ID DESC LIMIT 1";
 
         $query = $this->db->query($sql)->result_array();
         return $query;
@@ -5867,7 +5896,7 @@ class Access_model extends CI_Model {
 
     public function goingWash($carelabel_tracking_no, $status, $date_time)
     {
-        $sql = "Update `vt_running_po_pcs` 
+        $sql = "Update `tb_care_labels` 
                 SET 
                 is_going_wash = $status,
                 going_wash_scan_date_time = '$date_time'
@@ -5879,7 +5908,7 @@ class Access_model extends CI_Model {
 
     public function washReturn($carelabel_tracking_no, $status, $date_time)
     {
-        $sql = "Update `tb_care_labels`
+        $sql = "Update `vt_few_days_po_pcs`
                 SET 
                 washing_status = $status,
                 washing_date_time = '$date_time'

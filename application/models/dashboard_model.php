@@ -2745,46 +2745,89 @@ class Dashboard_model extends CI_Model {
 
     public function getProductionReportLive($where)
     {
-        $sql="SELECT t1.line_id,t1.packing_date_time, t1.total_cut_qty, t1.total_cut_input_qty, 
-              t1.count_input_line_qc_pass, t1.count_mid_line_qc_pass, t1.count_end_line_qc_pass, t1.count_wash_send, 
-              t1.count_washing_pass, t1.count_finishing_alter_qty, t1.count_packing_pass, t1.count_carton_pass, t1.total_wh_qa, 
-              t2.*, t3.responsible_line, t4.so_fail_count
+//        $sql="SELECT t1.line_id,t1.packing_date_time, t1.total_cut_qty, t1.total_cut_input_qty,
+//              t1.count_input_line_qc_pass, t1.count_mid_line_qc_pass, t1.count_end_line_qc_pass, t1.count_wash_send,
+//              t1.count_washing_pass, t1.count_finishing_alter_qty, t1.count_packing_pass, t1.count_carton_pass, t1.total_wh_qa,
+//              t2.*, t3.responsible_line, t4.so_fail_count
+//              FROM
+//              (Select so_no, purchase_order, item, quality, color, brand, style_name, aql_plan_date, aql_action_date, aql_status,
+//              SUM(quantity) as total_order_qty, status
+//              FROM tb_po_detail
+//              WHERE 1 $where
+//              GROUP BY so_no) as t2
+//
+//              LEFT JOIN
+//              (SELECT po_no,so_no,item,quality,color,style_name,style_no,
+//              purchase_order,brand,ex_factory_date,packing_date_time,line_id,
+//              COUNT(pc_tracking_no) as total_cut_qty,
+//              COUNT(sent_to_production_date_time) as total_cut_input_qty,
+//              COUNT(line_input_date_time) as count_input_line_qc_pass,
+//              COUNT(mid_line_qc_date_time) as count_mid_line_qc_pass,
+//              COUNT(end_line_qc_date_time) as count_end_line_qc_pass,
+//              COUNT(is_going_wash) as count_wash_send,
+//              COUNT(washing_status) as count_washing_pass,
+//              COUNT(packing_status) as count_packing_pass,
+//              COUNT(finishing_qc_status) as count_finishing_alter_qty,
+//          	  COUNT(carton_status) as count_carton_pass,
+//              COUNT(warehouse_qa_type) as total_wh_qa
+//           FROM (
+//              SELECT
+//                so_no,po_no,item,quality,color,purchase_order,brand,ex_factory_date,packing_date_time,style_name,style_no,line_id,
+//                CASE WHEN  access_points=4 AND access_points_status=4 THEN end_line_qc_date_time END end_line_qc_date_time,
+//                CASE WHEN pc_tracking_no!='' THEN pc_tracking_no END pc_tracking_no,
+//                CASE WHEN sent_to_production=1 THEN sent_to_production_date_time END sent_to_production_date_time,
+//                CASE WHEN access_points>=3 AND access_points_status in (1, 4) THEN mid_line_qc_date_time END mid_line_qc_date_time,
+//                CASE WHEN access_points>=2 AND access_points_status in (1, 4) THEN line_input_date_time END line_input_date_time,
+//                CASE WHEN packing_status = 1 THEN packing_status END packing_status,
+//                CASE WHEN carton_status = 1 THEN carton_status END carton_status,
+//                CASE WHEN is_going_wash = 1 THEN is_going_wash END is_going_wash,
+//                CASE WHEN washing_status = 1 THEN washing_status END washing_status,
+//                CASE WHEN finishing_qc_status = 2 THEN finishing_qc_status END finishing_qc_status,
+//                CASE WHEN warehouse_qa_type != 0 THEN warehouse_qa_type END warehouse_qa_type
+//              FROM vt_few_days_po_pcs
+//            ) vt_few_days_po_pcs GROUP BY so_no) as t1
+//
+//            ON t1.so_no=t2.so_no
+//
+//            LEFT JOIN
+//            tb_production_summary as t3
+//            ON t1.so_no=t3.so_no
+//
+//            LEFT JOIN
+//            (Select so_no, COUNT(so_no) AS so_fail_count FROM tb_aql_status_log WHERE aql_status=2 GROUP BY so_no) as t4
+//            ON t1.so_no=t4.so_no
+//
+//            ORDER by t1.packing_date_time DESC";
+
+        $sql="SELECT t1.line_id,t1.packing_date_time, t1.count_end_line_qc_pass, 
+t1.count_finishing_alter_qty, t1.count_packing_pass, t1.count_carton_pass, 
+              t2.*, t3.responsible_line, t3.total_order_qty, t3.total_cut_qty, t3.total_cut_input_qty, 
+              t3.count_input_qty_line AS count_input_line_qc_pass, t3.count_mid_line_qc_pass,
+              t3.count_washing_qty AS count_wash_send, t3.count_washing_pass, t3.total_wh_qa, t4.so_fail_count
               FROM
-              (Select * FROM vt_po_summary WHERE 1 $where) as t2
+              (Select so_no, purchase_order, item, quality, color, brand, style_name, aql_plan_date, aql_action_date, aql_status, status 
+              FROM tb_po_detail
+              WHERE 1 $where
+              GROUP BY so_no) as t2
               
               LEFT JOIN
               (SELECT po_no,so_no,item,quality,color,style_name,style_no,
               purchase_order,brand,ex_factory_date,packing_date_time,line_id,
-              COUNT(pc_tracking_no) as total_cut_qty,
-              COUNT(sent_to_production_date_time) as total_cut_input_qty,
-              COUNT(line_input_date_time) as count_input_line_qc_pass,
-              COUNT(mid_line_qc_date_time) as count_mid_line_qc_pass,
               COUNT(end_line_qc_date_time) as count_end_line_qc_pass,
-              COUNT(is_going_wash) as count_wash_send, 
-              COUNT(washing_status) as count_washing_pass, 
               COUNT(packing_status) as count_packing_pass,  
               COUNT(finishing_qc_status) as count_finishing_alter_qty,  
-          	  COUNT(carton_status) as count_carton_pass,
-              COUNT(warehouse_qa_type) as total_wh_qa
+          	  COUNT(carton_status) as count_carton_pass
            FROM (
               SELECT
                 so_no,po_no,item,quality,color,purchase_order,brand,ex_factory_date,packing_date_time,style_name,style_no,line_id,
-                CASE WHEN  access_points=4 AND access_points_status=4 THEN end_line_qc_date_time END end_line_qc_date_time,    
-                CASE WHEN pc_tracking_no!='' THEN pc_tracking_no END pc_tracking_no,
-                CASE WHEN sent_to_production=1 THEN sent_to_production_date_time END sent_to_production_date_time,
-                CASE WHEN access_points>=3 AND access_points_status in (1, 4) THEN mid_line_qc_date_time END mid_line_qc_date_time,
-                CASE WHEN access_points>=2 AND access_points_status in (1, 4) THEN line_input_date_time END line_input_date_time,
+                CASE WHEN  access_points=4 AND access_points_status=4 THEN end_line_qc_date_time END end_line_qc_date_time,  
                 CASE WHEN packing_status = 1 THEN packing_status END packing_status,
                 CASE WHEN carton_status = 1 THEN carton_status END carton_status,
-                CASE WHEN is_going_wash = 1 THEN is_going_wash END is_going_wash,
-                CASE WHEN washing_status = 1 THEN washing_status END washing_status,
-                CASE WHEN finishing_qc_status = 2 THEN finishing_qc_status END finishing_qc_status,
-                CASE WHEN warehouse_qa_type != 0 THEN warehouse_qa_type END warehouse_qa_type 
-              FROM vt_few_days_po_pcs    
-            ) vt_few_days_po_pcs GROUP BY so_no,po_no,item,quality,color,purchase_order) as t1
+                CASE WHEN finishing_qc_status = 2 THEN finishing_qc_status END finishing_qc_status
+              FROM tb_care_labels    
+            ) tb_care_labels GROUP BY so_no) as t1
             
-            ON t1.so_no=t2.so_no AND t1.po_no=t2.po_no AND t1.purchase_order=t2.purchase_order 
-            AND t1.quality=t2.quality AND t1.color=t2.color
+            ON t1.so_no=t2.so_no
             
             LEFT JOIN
             tb_production_summary as t3
@@ -2795,6 +2838,7 @@ class Dashboard_model extends CI_Model {
             ON t1.so_no=t4.so_no
             
             ORDER by t1.packing_date_time DESC";
+
         $query = $this->db->query($sql)->result_array();
         return $query;
     }

@@ -6660,7 +6660,8 @@ class Access extends CI_Controller {
         $style_no_last_four = substr($style_no, -4);
 
 //        $cut_info = $this->access_model->getCutInfo($sap_no, $cut_no);
-        $cut_info = $this->access_model->getCutInfoByPoItem($sap_no, $purchase_order[0], $item_no[0]);
+//        $cut_info = $this->access_model->getCutInfoByPoItem($sap_no, $purchase_order[0], $item_no[0]);
+        $cut_info = $this->access_model->getCutInfoByPoItem($sap_no, $s_no);
         $actual_cut_qty_till_prev_cut = $cut_info[0]['bundle_range_end'];
         $bundle_no_till_prev_cut = $cut_info[0]['bundle'];
 

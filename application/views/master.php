@@ -319,6 +319,21 @@
                     <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/po_cut_for_care_label"><i class="fa fa-circle"></i> Print Care Label </a></li>
                 </ul>
             </li>
+            <li> <a href="javascript:void(0);"> <i class="fa fa-bar-chart-o"></i> Cutting Reports <span class="plus"><i class="fa fa-plus"></i></span></a>
+                <ul>
+                    <!--                  <li> <a href="--><?php //echo base_url();?><!--access/care_label_report"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>CL Sent Report</b> </a> </li>-->
+                    <!--                  <li> <a href="--><?php //echo base_url();?><!--access/care_label_report_new"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>CL Sent To Prod.</b> </a> </li>-->
+                    <!--                  <li> <a style="margin-bottom: 1px;" href="--><?php //echo base_url();?><!--access/sendingToProductionReport"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>CL Sent To Prod.</b> </a> </li>-->
+                    <!--                  <li> <a style="margin-bottom: 1px;" href="--><?php //echo base_url();?><!--access/sendingToProductionReportByPO"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>CL To Prod. By PO</b> </a> </li>-->
+                    <!--                  <li> <a style="margin-bottom: 1px;" target="_blank" href="--><?php //echo base_url();?><!--access/cuttingTableWiseReport"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Cut-Table Report</b> </a> </li>-->
+                    <!--                  <li> <a style="margin-bottom: 1px;" target="_blank" href="--><?php //echo base_url();?><!--access/poWiseCuttingReport"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>PO-Wise Cutting</b> </a> </li>-->
+                    <!--                  <li> <a style="margin-bottom: 1px;" target="_blank" href="--><?php //echo base_url();?><!--access/cuttingStockReport"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Cutting Stock Report</b> </a> </li>-->
+                    <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/print_bundle_summary_page"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b> Bundle Summary </b> </a> </li>
+                    <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/cutting_summary"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b> Cutting Summary </b> </a> </li>
+                    <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/print_input_ticket"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b> Get Input Ticket </b> </a> </li>
+                    <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>dashboard/cutPackageReportChart"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b> Cutting Dashboard </b> </a> </li>
+                </ul>
+            </li>
 
             <li> </li>
 
