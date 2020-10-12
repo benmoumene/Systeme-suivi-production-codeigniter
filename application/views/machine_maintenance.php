@@ -24,7 +24,7 @@
           <h1>Machine Maintenance</h1>
             <a class="btn btn-warning" href="<?php echo base_url()?>access/lineFinishingAlter">Finishing Alter</a>
           <a class="btn btn-success" href="<?php echo base_url()?>access/care_label_end_line_new">End Line QC</a>
-          <a class="btn btn-primary" href="<?php echo base_url()?>access/poOutputControl">Output Control</a>
+<!--          <a class="btn btn-primary" href="--><?php //echo base_url()?><!--access/poOutputControl">Output Control</a>-->
         </div>
         <div class="pull-right">
           <ol class="breadcrumb">
@@ -40,35 +40,24 @@
                       <div class="porlets-content">
                           <h4><span id="p_er_msg" style="color: red;"></span></h4>
                           <h4><span id="p_s_msg" style="color: green;"></span></h4>
-                          <div class="col-md-1">
+                          <div class="col-md-2">
                               <!--                            <div class="panel-heading" style="color: green;"> Pass<span class="semi-bold"></span> </div>-->
 
-                              <input type="text" placeholder="Pass" class="form-control" name="carelabel_tracking_no" autofocus required id="carelabel_tracking_no" autocomplete="off" onkeyup="submitClQcInfo();" />
-                              <span style="">Pass</span>
-                              <button style="display: none;" id="submit_btn_save_pass" class="btn btn-success">Save</button>
+                              <input type="text" placeholder="Machine No" class="form-control" name="machine_no" autofocus required id="machine_no" autocomplete="off" onkeyup="submitClQcInfo();" />
+                              <span style="">Machine No.</span>
                               <br />
-                              <span style="margin-top: 20px;" id="refresh_report" class="btn btn-primary" onclick="getFinishingAlterLineReport();">Alter Report</span>
-                              <div class="col-md-1" id="loader" style="display: none;"><div class="loader"></div></div>
+                              <span style="margin-top: 20px;" id="refresh_report" class="btn btn-primary" onclick="getFinishingAlterLineReport();">Maintenance Report</span>
+
                           </div>
-                          <div class="col-md-4">
+                          <div class="col-md-2" id="solve_by_div" style="display: none">
+                              <!--                            <div class="panel-heading" style="color: green;"> Pass<span class="semi-bold"></span> </div>-->
 
-                              <!--                                <div class="panel-heading" style="color: red;"> Defects<span class="semi-bold"></span> </div>-->
-                              <!--                                <div class="panel-body">-->
-                              <h4><span id="er_msg" style="color: red;"></span></h4>
-                              <h4><span id="s_msg" style="color: green;"></span></h4>
-                              <div class="col-md-6">
-<!--                                  <input type="text" placeholder="Defect" class="form-control" name="carelabel_tracking_no_defect" required id="carelabel_tracking_no_defect" onkeyup="submitClQcDefectInfo();" />-->
-<!--                                  <span style=""> Defect</span>-->
+                              <input type="text" placeholder="Solved By" class="form-control" name="solved_by" autofocus required id="solved_by" autocomplete="off" onkeyup="submitClQcInfo();" />
+                              <span style="">Solved By</span>
 
-                              </div>
-                              <div class="col-md-6">
-                                  <button style="display: none;" id="submit_btn_save_defect" class="btn btn-success">Save</button>
-                              </div>
-
-
-                              <!--                                </div>-->
-                              <!--/col-md-6-->
                           </div>
+                          <div class="col-md-1" id="loader" style="display: none;"><div class="loader"></div></div>
+                          <div class="col-md-4"></div>
 
                       </div>
 
@@ -97,13 +86,10 @@
                                                   <table class="display table table-bordered table-striped" id="">
                                                       <thead>
                                                       <tr>
-                                                          <th class="hidden-phone center">PO-ITEM</th>
-                                                          <th class="hidden-phone center">Brand</th>
-                                                          <th class="hidden-phone center">STL</th>
-                                                          <th class="hidden-phone center">QL-CLR</th>
-                                                          <th class="hidden-phone center">Order</th>
-                                                          <th class="hidden-phone center">ExFac</th>
-                                                          <th class="hidden-phone center">Qty</th>
+                                                          <th class="hidden-phone center">Machine No</th>
+                                                          <th class="hidden-phone center">Machine Name</th>
+                                                          <th class="hidden-phone center">Machine Model</th>
+                                                          <th class="hidden-phone center">Status</th>
                                                       </tr>
                                                       </thead>
                                                       <tbody></tbody>
@@ -187,52 +173,103 @@
         }, 10000);
     });
 
-    $("#carelabel_tracking_no").blur(function(){
-        $("#carelabel_tracking_no").focus();
-    });
+//    $("#machine_no").blur(function(){
+//        $("#machine_no").focus();
+//    });
 
     function submitClQcInfo(){
 
-        var carelabel_tracking_no = $("#carelabel_tracking_no").val();
+        var machine_no = $("#machine_no").val();
 
-        var code_length = carelabel_tracking_no.length;
+        var last_variable = machine_no.slice(-1);
 
-        var rowCount = $('#defect_code_tbl tbody tr').length;
+        $("#p_er_msg").text('');
+        $("#p_s_msg").text('');
 
-        if((code_length == 10) && (carelabel_tracking_no != '')){
+        if(last_variable == '.'){
 
-            $("#carelabel_tracking_no").attr('readonly', true);
             $("#loader").css("display", "block");
+            $("#p_er_msg").text("");
 
             $.ajax({
                 type: "POST",
-                url: "<?php echo base_url();?>access/lineFinishingAlterDone/",
-                data: {carelabel_tracking_no: carelabel_tracking_no},
-                dataType: "html",
+                url: "<?php echo base_url();?>access/checkMachineStatus/",
+                data: {machine_no: machine_no},
+                dataType: "json",
                 success: function (data) {
 
-                    if(data != ''){
-                        $("#p_er_msg").empty();
-                        $("#er_msg").empty();
-                        $("#s_msg").empty();
-                        $("#p_s_msg").empty();
+                    if(data.length > 0){
 
-                        if(data == 'Successfully Updated'){
-                            $("#s_msg").text(carelabel_tracking_no+' '+data);
+                        var service_status = data[0].service_status;
+
+                        if(service_status  == 0){
+                            $("#p_er_msg").text("Machine is Out of Service!");
+                            $("#machine_no").val('');
+                            $("#loader").css("display", "none");
                         }
 
-                        if((data == 'Line Mismatch' || data == 'No Alter Request Found')){
-                            $("#er_msg").text(carelabel_tracking_no+' '+data);
+                        if(service_status  == 1){
+                            $.ajax({
+                                url: "<?php echo base_url();?>access/changeMachineStatusLog/",
+                                type: "POST",
+                                data: {machine_no: machine_no, service_status: 2},
+                                dataType: "html",
+                                success: function (data) {
+
+                                    if(data == 'done'){
+                                        $("#p_s_msg").text("Machine is Under Maintenance!");
+                                        $("#machine_no").val('');
+                                        $("#loader").css("display", "none");
+                                    }
+
+                                }
+                            });
                         }
 
-                        $("#carelabel_tracking_no_defect").val('');
-                        $("#carelabel_tracking_no").val('');
-                        $("#carelabel_tracking_no").focus();
+                        if(service_status  == 2){
+                            $("#loader").css("display", "none");
 
+                            $("#solve_by_div").css("display", "block");
+
+                            $("#solved_by").focus();
+
+                            var solved_by = $("#solved_by").val();
+
+                            var solved_by_last_variable = solved_by.slice(-1);
+
+                            if(solved_by_last_variable == '.'){
+                                $("#loader").css("display", "block");
+
+                                $("#solved_by").val('');
+
+                                $.ajax({
+                                    url: "<?php echo base_url();?>access/changeMachineStatusLog/",
+                                    type: "POST",
+                                    data: {machine_no: machine_no, service_status: 1, solved_by: solved_by},
+                                    dataType: "html",
+                                    success: function (data) {
+                                        $("#p_s_msg").text("Machine is RUNNING!");
+                                        $("#loader").css("display", "none");
+                                        $("#solve_by_div").css("display", "none");
+                                        $("#machine_no").val('');
+                                        $("#machine_no").focus();
+                                    }
+                                });
+                            }
+                        }
+
+                        if(service_status  == 3){
+                            $("#p_er_msg").text("Machine is Idle!");
+                            $("#machine_no").val('');
+                            $("#loader").css("display", "none");
+                        }
+
+                    }else{
+                        $("#p_er_msg").text("Machine Not Found!");
+                        $("#machine_no").val('');
+                        $("#loader").css("display", "none");
                     }
 
-                    $("#loader").css("display", "none");
-                    $("#carelabel_tracking_no").attr('readonly', false);
                 }
             });
 
@@ -240,57 +277,4 @@
 
     }
 
-    function getFinishingAlterLineReport() {
-        $("#loader").css("display", "block");
-//        $("#reload_div").load('<?php //echo base_url();?>//access/getProductionSummaryReport');
-
-        $("#reload_div").empty();
-
-//        setInterval(function(){
-//            $("#loader").css("display", "none");
-//        }, 15000);
-
-        $.ajax({
-            url: "<?php echo base_url();?>access/getFinishingAlterLineReport/",
-            type: "POST",
-            data: {},
-            dataType: "html",
-            success: function (data) {
-
-                console.log(data);
-
-                $("#reload_div").append(data);
-                $("#loader").css("display", "none");
-            }
-        });
-
-    }
-
-    function getRemainingFinishingAlterPcs(so_no){
-        $("#remain_cl_list").empty();
-
-        $.ajax({
-            url: "<?php echo base_url();?>access/getRemainingFinishingAlterPcs/",
-            type: "POST",
-            data: {so_no: so_no},
-            dataType: "html",
-            success: function (data) {
-                $("#remain_cl_list").append(data);
-            }
-        });
-    }
-
-    function getRemainingFinishingAlterPcs(so_no){
-        $("#remain_cl_list").empty();
-
-        $.ajax({
-            url: "<?php echo base_url();?>access/getRemainingFinishingAlterPcs/",
-            type: "POST",
-            data: {so_no: so_no},
-            dataType: "html",
-            success: function (data) {
-                $("#remain_cl_list").append(data);
-            }
-        });
-    }
 </script>

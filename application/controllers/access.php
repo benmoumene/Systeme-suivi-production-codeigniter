@@ -711,6 +711,8 @@ class Access extends CI_Controller {
                 $data['packing_status'] = 1;
                 $data['carton_status'] = 1;
             } elseif($last_scan_points[$k] == "End Line"){
+                $data['access_points'] = 4;
+                $data['access_points_status'] = 4;
                 $data['packing_status'] = 1;
                 $data['carton_status'] = 1;
             } elseif($last_scan_points[$k] == "Mid Line"){
@@ -2010,7 +2012,15 @@ class Access extends CI_Controller {
     }
 
     public function saveNewMachine(){
-        $data['machine_no'] = $this->input->post('new_machine_no');
+        $machine = $this->input->post('new_machine_no');
+        $machine_no_last_char = substr($machine, -1);
+
+        if($machine_no_last_char != '.'){
+            $data['machine_no'] = $machine.'.';
+        }else{
+            $data['machine_no'] = $machine;
+        }
+
         $data['machine_name_id'] = $this->input->post('machine_name_id');
         $data['model_no_id'] = $this->input->post('model_no_id');
         $data['line_id'] = $this->input->post('line_id');
@@ -2027,7 +2037,16 @@ class Access extends CI_Controller {
 
     public function updateMachine(){
         $machine_id = $this->input->post('machine_id');
-        $data['machine_no'] = $this->input->post('machine_no');
+
+        $machine = $this->input->post('machine_no');
+        $machine_no_last_char = substr($machine, -1);
+
+        if($machine_no_last_char != '.'){
+            $data['machine_no'] = $machine.'.';
+        }else{
+            $data['machine_no'] = $machine;
+        }
+
         $data['machine_name_id'] = $this->input->post('machine_name_id');
         $data['model_no_id'] = $this->input->post('model_no_id');
         $data['line_id'] = $this->input->post('line_id');
@@ -2040,6 +2059,50 @@ class Access extends CI_Controller {
         $data['message'] = 'Successfully Updated!';
         $this->session->set_userdata($data);
         redirect('access/getMachineList/');
+    }
+
+    public function changeMachineStatusLog(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $line_id = $this->session->userdata('line_id');
+        $machine_no = $this->input->post('machine_no');
+        $service_status = $this->input->post('service_status');
+        $solved_by = $this->input->post('solved_by');
+
+        if($service_status == 2){
+            $data['service_status'] = $service_status;
+            $data['service_status_date_time'] = $date_time;
+
+            $this->access_model->updateTblNew('tb_machine_list', 'machine_no', $machine_no, $data);
+
+            $data_1['machine_no'] = $machine_no;
+            $data_1['line_id'] = $line_id;
+            $data_1['service_status'] = $service_status;
+            $data_1['problem_start_date_time'] = $date_time;
+
+            $this->access_model->insertingData('tb_machine_maintenance_log', $data_1);
+
+            echo 'done';
+        }
+
+        if($service_status == 1){
+            $data['service_status'] = $service_status;
+            $data['service_status_date_time'] = $date_time;
+
+            $this->access_model->updateTblNew('tb_machine_list', 'machine_no', $machine_no, $data);
+
+            $data_1['machine_no'] = $machine_no;
+            $data_1['line_id'] = $line_id;
+            $data_1['service_status'] = $service_status;
+            $data_1['problem_start_date_time'] = $date_time;
+
+            $this->access_model->updateTblFields('tb_machine_maintenance_log', " SET service_status='$service_status', problem_resolve_date_time='$date_time', resolved_by='$solved_by'", " AND machine_no='$machine_no' AND service_status=2");
+
+            echo 'done';
+        }
+
     }
 
     public function checkMachineAvailability(){
@@ -2400,6 +2463,14 @@ class Access extends CI_Controller {
         }else{
             echo $this->load->view('404');
         }
+    }
+
+    public function checkMachineStatus(){
+        $machine_no = $this->input->post('machine_no');
+
+        $res = $this->access_model->selectTableDataRowQuery('*', 'tb_machine_list', " AND machine_no='$machine_no'");
+
+        echo json_encode($res);
     }
 
     public function lineFinishingAlter(){
@@ -4735,7 +4806,24 @@ class Access extends CI_Controller {
 
         foreach ($pc_nos as $k => $pc_no){
 
-            $this->access_model->activeCl($pc_no, $date_time);
+            $res = $this->access_model->selectTableDataRowQuery("*", "vt_few_days_po_pcs", " AND pc_tracking_no = '$pc_no'");
+
+            $line_id = $res[0]['line_id'];
+            $line_access_points = $res[0]['access_points'];
+
+            if($line_id == 0){
+
+                $res_1 = $this->access_model->selectTableDataRowQuery("line_id", "vt_few_days_po_pcs", " AND so_no = (SELECT so_no FROM `vt_few_days_po_pcs` WHERE 1 AND pc_tracking_no='$pc_no') AND line_id != 0 GROUP BY line_id LIMIT 1");
+
+                $line_id = $res_1[0]['line_id'];
+            }
+
+            if($line_access_points < 4 || $line_id == 0){
+                $this->access_model->updateTblFields('vt_few_days_po_pcs', " SET line_id='$line_id', access_points=3, access_points_status=1, mid_line_qc_date_time='$date_time', is_reprint_allow=1,reprint_allow_date_time='$date_time' ", " AND pc_tracking_no = '$pc_no'");
+            }else{
+                $this->access_model->activeCl($pc_no, $date_time);
+            }
+
             $data=$this->access_model->approveRequest($pc_no, $user_name);
 
         }

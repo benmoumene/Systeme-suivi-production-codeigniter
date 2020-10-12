@@ -2994,22 +2994,24 @@ t1.count_finishing_alter_qty, t1.count_packing_pass, t1.count_carton_pass,
                 )  as t1
                 
                 LEFT JOIN
-                vt_po_summary as t2
-                ON t1.so_no=t2.so_no AND t1.po_no=t2.po_no AND t1.purchase_order=t2.purchase_order 
-                AND t1.item=t2.item AND t1.quality=t2.quality AND t1.color=t2.color
+                (SELECT po_no, so_no, purchase_order, item, quality, color, SUM(quantity) AS total_order_qty
+                FROM `tb_po_detail` 
+                GROUP BY po_no, so_no, purchase_order, item, quality, color) as t2
+                ON t1.so_no=t2.so_no AND t1.po_no=t2.po_no
                 
                 LEFT JOIN
-                vt_cut as t3
-                ON t1.so_no=t3.so_no AND t1.po_no=t3.po_no AND t1.purchase_order=t3.purchase_order 
-                AND t1.item=t3.item AND t1.quality=t3.quality AND t1.color=t3.color
+                (SELECT *, MIN(bundle) as bundle_start, MAX(bundle) as bundle_end, SUM(cut_qty) as total_cut_qty, 
+                MAX(cutting_collar_cuff_bundle_last_action_date_time) as max_cutting_collar_cuff_bundle_last_action_date_time
+                FROM `tb_cut_summary` 
+                GROUP BY po_no, so_no, purchase_order, item, quality, color) as t3
+                ON t1.so_no=t3.so_no AND t1.po_no=t3.po_no
                 
                 LEFT JOIN
                 (SELECT po_no,so_no,item,quality,color,purchase_order, SUM(cut_qty) AS count_cut_package_ready_qty 
                 FROM tb_cut_summary
                 WHERE is_package_ready=1
                 GROUP BY po_no,so_no,item,quality,color,purchase_order) AS t4
-                ON t1.so_no=t4.so_no AND t1.po_no=t4.po_no AND t1.purchase_order=t4.purchase_order 
-                AND t1.item=t4.item AND t1.quality=t4.quality AND t1.color=t4.color
+                ON t1.so_no=t4.so_no AND t1.po_no=t4.po_no
                 
                 ORDER  BY cutting_collar_bundle_ready_date_time";
 

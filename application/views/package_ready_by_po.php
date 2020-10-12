@@ -167,9 +167,6 @@
             data: {purchase_order_stuff: purchase_order_stuff},
             dataType: "html",
             success: function (data) {
-
-                console.log(data);
-
                 $("#report_content").append(data);
                 $("#loader").css("display", "none");
             }

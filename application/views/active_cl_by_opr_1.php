@@ -62,6 +62,7 @@
                                 <tr id="">
                                     <td><span class="sn"></span>.</td>
                                     <td><input type="text" name="pc_no[]" id="pc_no" value="" onblur="checkPcNoValidity(this);"></td>
+                                    <td id="line_"></td>
                                     <td><input type="text" name="reason[]" value=""></td>
                                     <td><input type="text" name="requested_by[]" value=""></td>
                                     <td><a class="btn btn-xs delete-record" data-id="1"><i class="glyphicon glyphicon-trash"></i></a></td>
@@ -81,6 +82,7 @@
                                 <tr>
                                     <th>Sl</th>
                                     <th>Pc No</th>
+                                    <th>Line</th>
                                     <th>Reason</th>
                                     <th>Requested By</th>
                                     <th>Action</th>
@@ -90,6 +92,9 @@
 
                                     <td><span class="sn">1</span>.</td>
                                     <td><input type="text" name="pc_no[]" id="pc_no" value="" required="required" onblur="checkPcNoValidity(this);"></td>
+                                    <td>
+                                        <span id="line_1"></span>
+                                    </td>
                                     <td><input type="text" name="reason[]" value="" required="required"></td>
                                     <td><input type="text" name="requested_by[]" value="" required="required"></td>
                                     <td><a class="btn btn-xs delete-record" data-id="1"><i class="glyphicon glyphicon-trash"></i></a></td>
@@ -123,6 +128,9 @@
         element.find('.delete-record').attr('data-id', size);
         element.appendTo('#tbl_posts_body');
         element.find('.sn').html(size);
+
+        var element_1 = document.getElementById("oldID");
+        element.id = "newID";
     });
 
 
