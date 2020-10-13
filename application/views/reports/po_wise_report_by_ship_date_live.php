@@ -13,7 +13,7 @@
             <th class="hidden-phone center">PO</th>
             <th class="hidden-phone center">Item</th>
             <th class="hidden-phone center">Quality</th>
-            <th class="hidden-phone center">Ex-Fac-Dt</th>
+            <th class="hidden-phone center">ExFac</th>
 
             <th class="hidden-phone center">Order</th>
 <!--            <th class="hidden-phone center">Cut</th>-->
