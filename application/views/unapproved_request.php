@@ -1,12 +1,12 @@
 <div class="pull-left breadcrumb_admin clear_both" xmlns="http://www.w3.org/1999/html">
     <div class="pull-left page_title theme_color">
-        <h1>Unapprove Request</h1>
-        <h2 class="">Unapprove Request...</h2>
+        <h1>Reprint Request</h1>
+        <h2 class="">Reprint Request...</h2>
     </div>
     <div class="pull-right">
         <ol class="breadcrumb">
             <li><a href="<?php echo base_url();?>">Home</a></li>
-            <li class="active">Request</li>
+            <li class="active">Reprint</li>
         </ol>
     </div>
 </div>
@@ -16,7 +16,7 @@
         <div class="block-web">
             <div class="header">
                 <div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-                <h3 class="content-header">Unapprove Request</h3>
+                <h3 class="content-header">Reprint Request</h3>
             </div>
 
 

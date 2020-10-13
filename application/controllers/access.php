@@ -2106,7 +2106,14 @@ class Access extends CI_Controller {
     }
 
     public function checkMachineAvailability(){
-        $new_machine_no = $this->input->post('new_machine_no');
+        $machine_no = $this->input->post('new_machine_no');
+        $machine_no_last_char = substr($machine_no, -1);
+
+        if($machine_no_last_char != '.'){
+            $new_machine_no = $machine_no.'.';
+        }else{
+            $new_machine_no = $machine_no;
+        }
 
         $where = '';
         if($new_machine_no != ''){
@@ -2136,7 +2143,7 @@ class Access extends CI_Controller {
         }
 
         if($model != ''){
-            $where .= " AND t1.model_no='$model'";
+            $where .= " AND t1.model_no_id='$model'";
         }
 
         if($line_id != ''){
@@ -2463,6 +2470,14 @@ class Access extends CI_Controller {
         }else{
             echo $this->load->view('404');
         }
+    }
+
+    public function getMachineMaintenanceReport(){
+        $line_id = $this->session->userdata('line_id');
+
+        $data['machine_maintenance'] = $this->access_model->getMachineMaintenanceReport($line_id);
+
+        echo $this->load->view('machine_maintenance_report', $data);
     }
 
     public function checkMachineStatus(){
@@ -4775,7 +4790,7 @@ class Access extends CI_Controller {
 
     public function unApproveRequest()
     {
-        $data['title'] = 'Unapprove Care Label';
+        $data['title'] = 'Reprint Request';
         $data['user_name'] = $this->session->userdata('user_name');
         $data['user_description'] = $this->session->userdata('user_description');
         $data['access_points'] = $this->session->userdata('access_points');

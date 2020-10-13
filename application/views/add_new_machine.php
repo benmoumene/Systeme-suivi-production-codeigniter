@@ -103,7 +103,7 @@
                                   <div class="form-group">
                                       <label for="new_other_location" class="col-form-label">Other Location:</label>
                                       <br />
-                                      <select class="form-control" id="other_location_id" name="other_location_id">
+                                      <select class="form-control" id="other_location_id" name="other_location_id" required="required">
                                           <option value="">Select Other Location</option>
                                           <?php foreach ($other_locations as $ol){ ?>
                                               <option value="<?php echo $ol['id']?>"><?php echo $ol['location_name'];?></option>

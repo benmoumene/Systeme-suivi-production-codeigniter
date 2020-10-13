@@ -46,7 +46,7 @@
                               <input type="text" placeholder="Machine No" class="form-control" name="machine_no" autofocus required id="machine_no" autocomplete="off" onkeyup="submitClQcInfo();" />
                               <span style="">Machine No.</span>
                               <br />
-                              <span style="margin-top: 20px;" id="refresh_report" class="btn btn-primary" onclick="getFinishingAlterLineReport();">Maintenance Report</span>
+                              <span style="margin-top: 20px;" id="refresh_report" class="btn btn-primary" onclick="getMachineMaintenanceReport();">Maintenance Report</span>
 
                           </div>
                           <div class="col-md-2" id="solve_by_div" style="display: none">
@@ -275,6 +275,23 @@
 
         }
 
+    }
+    
+    function getMachineMaintenanceReport() {
+        $("#reload_div").empty();
+        $("#loader").css("display", "block");
+
+        $.ajax({
+            url: "<?php echo base_url();?>access/getMachineMaintenanceReport/",
+            type: "POST",
+            data: {},
+            dataType: "html",
+            success: function (data) {
+                $("#reload_div").append(data);
+
+                $("#loader").css("display", "none");
+            }
+        });
     }
 
 </script>

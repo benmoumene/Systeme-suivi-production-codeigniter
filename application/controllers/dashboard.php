@@ -400,6 +400,29 @@ class Dashboard extends CI_Controller {
         $this->load->view('reports/master', $data);
     }
 
+    public function getLineWiseMaintenanceReport(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $data['date_time'] = $date_time;
+
+        $data['title'] = 'Line Maintenance Report';
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['access_points'] = $this->session->userdata('access_points');
+
+        $data['lines'] = $this->access_model->getLines();
+
+        $data['maincontent'] = $this->load->view('reports/line_maintenance_report', $data);
+    }
+
+    public function getMachineMaintenanceReport($line_id){
+
+        return $machine_maintenance = $this->access_model->getMachineMaintenanceReport($line_id);
+
+    }
+
     public function getProductionSummaryReportNew(){
         $ex_factory_date = $this->input->post('ex_factory_date');
 

@@ -6314,6 +6314,28 @@ class Access_model extends CI_Model {
 
     public function selectTableDataRowQuery($fields, $table_name, $where){
         $sql="SELECT $fields FROM $table_name WHERE 1 $where";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
+    public function getMachineMaintenanceReport($line_id){
+        $sql="SELECT t1.*, t3.machine_name, t4.machine_model
+            FROM 
+            (SELECT * FROM `tb_machine_maintenance_log` WHERE line_id=$line_id AND service_status=2) AS t1
+            
+            LEFT JOIN
+            tb_machine_list AS t2
+            ON t1.machine_no=t2.machine_no
+            
+            LEFT JOIN
+            tb_machine_name AS t3
+            ON t3.id=t2.machine_name_id
+            
+            LEFT JOIN
+            tb_machine_model AS t4
+            ON t4.id=t2.model_no_id";
+
         $query = $this->db->query($sql)->result_array();
         return $query;
     }

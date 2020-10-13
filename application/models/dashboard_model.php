@@ -2800,12 +2800,12 @@ class Dashboard_model extends CI_Model {
 //            ORDER by t1.packing_date_time DESC";
 
         $sql="SELECT t1.line_id,t1.packing_date_time, t1.count_end_line_qc_pass, 
-t1.count_finishing_alter_qty, t1.count_packing_pass, t1.count_carton_pass, 
+              t1.count_finishing_alter_qty, t1.count_packing_pass, t1.count_carton_pass, 
               t2.*, t3.responsible_line, t3.total_order_qty, t3.total_cut_qty, t3.total_cut_input_qty, 
               t3.count_input_qty_line AS count_input_line_qc_pass, t3.count_mid_line_qc_pass,
               t3.count_washing_qty AS count_wash_send, t3.count_washing_pass, t3.total_wh_qa, t4.so_fail_count
               FROM
-              (Select so_no, purchase_order, item, quality, color, brand, style_name, aql_plan_date, aql_action_date, aql_status, status 
+              (Select so_no, purchase_order, item, quality, color, brand, style_name, ex_factory_date, aql_plan_date, aql_action_date, aql_status, status 
               FROM tb_po_detail
               WHERE 1 $where
               GROUP BY so_no) as t2
