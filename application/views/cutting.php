@@ -156,20 +156,18 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <div class="form-group">
                                     <input type="text" readonly required class="form-control" id="planned_cut_qty" name="planned_cut_qty">
                                     <span style="font-size: 11px;">* Planned Cut Qty </span>
                                 </div>
                             </div>
 
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <div class="form-group">
                                     <input type="text" readonly required class="form-control" id="actual_cut_qty" name="actual_cut_qty">
                                     <input type="hidden" readonly required class="form-control" id="last_actual_cut_qty" name="last_actual_cut_qty">
                                     <span style="font-size: 11px;">* Actual Cut Qty </span>
-
-
 
                                     <input type="hidden" name="" id="so_no" value="" readonly>
                                     <input type="hidden" name="" id="exfacdate" value="" readonly>
@@ -401,6 +399,7 @@
                 dataType: "html",
                 success: function (data) {
                     $("#set_form").append(data);
+                    $("#loader").css("display", "none");
                 }
             });
 
@@ -421,7 +420,7 @@
                 }
             });
 
-            $("#loader").css("display", "none");
+
         }
     }
 

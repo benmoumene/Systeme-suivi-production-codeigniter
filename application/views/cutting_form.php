@@ -25,7 +25,6 @@
                                     <option value="<?php echo $v['purchase_order'].'~'.$v['item'].'~'.$sap_no.'~'.$v['so_no'].'~'.$v['quality'].'~'.$v['color'].'~'.$v['style_no'].'~'.$v['style_name'];?>"><?php echo $v['purchase_order'].'~'.$v['item'];?></option>
                                     <?php } ?>
                                 </select>
-
     <!--                            Cut Qty - --><?php //echo $k+1;?>
                             </th>
 

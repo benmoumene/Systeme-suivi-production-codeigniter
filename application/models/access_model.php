@@ -569,8 +569,8 @@ class Access_model extends CI_Model {
     public function getPoItemBySapNo($sap_no){
         $sql = "SELECT *  FROM `tb_po_detail` 
                WHERE `po_no` = '$sap_no' 
-               GROUP BY po_no, so_no, purchase_order, item 
-               ORDER BY po_no, so_no, purchase_order, item";
+               GROUP BY po_no, so_no 
+               ORDER BY po_no, so_no";
 
         $query = $this->db->query($sql)->result_array();
         return $query;
@@ -611,21 +611,20 @@ class Access_model extends CI_Model {
     public function getSizeWisePoItemCutQty($sap_no, $so_no, $purchase_no, $item, $quality, $color){
         $sql = "Select t1.*, t2.po_item_size_wise_cut_qty From 
                 (SELECT po_no, so_no, purchase_order, item, quality, color, size, SUM(quantity) as po_item_size_wise_order_qty
-                FROM `tb_po_detail` GROUP BY po_no, so_no, purchase_order, item, quality, color, size) as t1
+                FROM `tb_po_detail`
+                WHERE po_no='$sap_no' AND so_no='$so_no' 
+                GROUP BY po_no, so_no, size) as t1
                 
                 LEFT JOIN
                 (SELECT po_no, so_no, purchase_order, item, quality, color, size, SUM(cut_qty) as po_item_size_wise_cut_qty
-                FROM `tb_cut_summary` GROUP BY po_no, so_no, purchase_order, item, quality, color, size) as t2
+                FROM `tb_cut_summary` GROUP BY po_no, so_no, size) as t2
                 
-                ON t1.po_no=t2.po_no AND t1.so_no=t2.so_no AND t1.purchase_order=t2.purchase_order 
-                AND t1.item=t2.item AND t1.quality=t2.quality AND t1.color=t2.color AND t1.size=t2.size
+                ON t1.po_no=t2.po_no AND t1.so_no=t2.so_no AND t1.size=t2.size
                 
                 LEFT JOIN
                 `tb_size_serial` as t3
                 ON t1.size=t3.size
                 
-                WHERE t1.po_no='$sap_no' AND t1.so_no='$so_no' AND t1.purchase_order='$purchase_no' AND t1.item='$item'
-                AND t1.quality='$quality' AND t1.color='$color'
                 ORDER BY t1.purchase_order, t1.item, t3.serial";
 
         $query = $this->db->query($sql)->result_array();
