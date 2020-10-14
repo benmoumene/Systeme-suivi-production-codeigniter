@@ -56,7 +56,7 @@
                     ?>
                     <tr>
                         <td class="hidden-phone center">
-                            <span style="color: #727dff; cursor: pointer;" onclick="getSizeWiseReport('<?php echo $v['po_no']; ?>', '<?php echo $v['so_no']; ?>', '<?php echo $v['purchase_order'];?>','<?php echo $v['item'];?>', '<?php echo $v['quality']; ?>', '<?php echo $v['color']; ?>');"><?php echo $v['purchase_order'] . '-' . $v['item']; ?></span>
+                            <?php echo $v['purchase_order'] . '-' . $v['item']; ?>
                         </td>
                         <td class="hidden-phone center"><?php echo $v['brand']; ?></td>
                         <td class="hidden-phone center"><?php echo $v['style_no'] . '-' . $v['style_name']; ?></td>

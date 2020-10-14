@@ -122,8 +122,10 @@
                                         $last_scanning_point = "Wash Return";
                                     } elseif($b['is_going_wash'] == 1){
                                         $last_scanning_point = "Wash Send";
-                                    } elseif($b['access_points'] == 4){
+                                    } elseif(($b['access_points'] == 4) && ($b['access_points_status'] == 4)){
                                         $last_scanning_point = "End Line";
+                                    } elseif(($b['access_points'] == 4) && ($b['access_points_status'] == 2)){
+                                        $last_scanning_point = "Mid Line";
                                     } elseif($b['access_points'] == 3){
                                         $last_scanning_point = "Mid Line";
                                     } elseif($b['access_points'] == 2){

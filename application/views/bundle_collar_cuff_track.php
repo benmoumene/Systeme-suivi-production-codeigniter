@@ -81,67 +81,7 @@
                 </div><!--/block-web-->
             </div><!--/col-md-12-->
         </form>
-          <div class="row">
-              <div class="col-md-8 scroll2">
-                  <div class="block-web">
 
-                      <div class="porlets-content">
-
-                          <div class="table-responsive" id="size_tbl">
-                              <table class="display table table-bordered table-striped">
-                                  <thead>
-                                  <tr>
-                                      <th class="hidden-phone center">Size</th>
-                                      <th class="hidden-phone center">Ordered Qty</th>
-                                      <th class="hidden-phone center">Collar</th>
-                                      <th class="hidden-phone center">Cuff</th>
-                                  </tr>
-                                  </thead>
-                                  <tbody>
-                                  <tr>
-                                      <td class="hidden-phone center"></td>
-                                      <td class="hidden-phone center"></td>
-                                      <td class="hidden-phone center"></td>
-                                      <td class="hidden-phone center"></td>
-                                  </tr>
-                                  </tbody>
-                              </table>
-                          </div><!--/table-responsive-->
-                      </div>
-
-                  </div><!--/porlets-content-->
-              </div><!--/block-web-->
-<!--              <div class="col-md-4">-->
-<!--                  <div class="">-->
-<!---->
-<!--                      <div class="porlets-content">-->
-<!---->
-<!--                          <div class="table-responsive">-->
-<!--                              <table class="display table table-bordered table-striped" id="">-->
-<!--                                  <thead>-->
-<!--                                  <tr>-->
-<!--                                      <th class="hidden-phone center"><a target="_blank" href="--><?php //echo base_url();?><!--dashboard/poWiseCuttingReport" class="btn btn-danger">Cutting</a></th>-->
-<!--                                      <th class="hidden-phone center" colspan="2"><a target="_blank" href="--><?php //echo base_url();?><!--dashboard/lineWisePoItemReport" class="btn btn-primary">LINE</a></th>-->
-<!--                                      <th class="hidden-phone center" colspan="3"><a target="_blank" href="--><?php //echo base_url();?><!--dashboard/poWisePackingReport" class="btn btn-success">Packing</a></th>-->
-<!--                                  </tr>-->
-<!--                                  </thead>-->
-<!--                                  <tbody>-->
-<!---->
-<!--                                  </tbody>-->
-<!--                              </table>-->
-<!--                          </div>-->
-<!--                      </div>-->
-<!---->
-<!--                  </div>-->
-<!--              </div>-->
-              <div class="col-md-3 scroll4">
-                  <div class="porlets-content">
-                      <div class="table-responsive" id="">
-
-                      </div>
-                  </div>
-              </div>
-          </div>
       </div>
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

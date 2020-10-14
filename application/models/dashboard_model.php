@@ -1746,23 +1746,17 @@ class Dashboard_model extends CI_Model {
                 access_points=4 AND access_points_status=4
                 AND DATE_FORMAT(end_line_qc_date_time, '%Y-%m-%d') = '$date'
                 AND line_id=$line_id AND manually_closed=0
-                GROUP BY so_no, po_no, purchase_order, item, quality, color, line_id) AS t1
+                GROUP BY so_no, line_id) AS t1
                 
                 LEFT JOIN 
                 (SELECT so_no, po_no, smv, purchase_order, style_no, style_name, item, quality, color,
                  SUM(quantity) as order_qty
-                FROM `tb_po_detail` GROUP BY so_no, po_no, purchase_order, item, quality, color) AS t2
-                ON t1.so_no=t2.so_no AND t1.po_no=t2.po_no AND t1.purchase_order=t2.purchase_order 
-                AND t1.item=t2.item AND t1.quality=t2.quality AND t1.color=t2.color
+                FROM `tb_po_detail` GROUP BY so_no) AS t2
+                ON t1.so_no=t2.so_no
                 
                 LEFT JOIN 
-                (SELECT so_no, po_no, brand, purchase_order, style_no, style_name, item, quality, color, ex_factory_date, 
-                COUNT(id) as count_end_line_qc_pass
-                FROM `tb_care_labels` 
-                WHERE access_points=4 AND access_points_status=4 AND manually_closed=0
-                GROUP BY so_no, po_no, purchase_order, item, quality, color) as t3
-                ON t1.so_no=t3.so_no AND t1.po_no=t3.po_no AND t1.purchase_order=t3.purchase_order 
-                AND t1.item=t3.item AND t1.quality=t3.quality AND t1.color=t3.color";
+                tb_production_summary as t3
+                ON t1.so_no=t3.so_no";
 
         $query = $this->db->query($sql)->result_array();
         return $query;
@@ -2714,25 +2708,24 @@ class Dashboard_model extends CI_Model {
                     CASE WHEN access_points=4 AND access_points_status=4 THEN end_line_qc_date_time END end_line_qc_date_time,
                     CASE WHEN manually_closed=1 THEN manually_closed END manually_closed
                    
-                  FROM vt_few_days_po_pcs 
+                  FROM tb_care_labels 
                     
-                ) vt_few_days_po_pcs WHERE line_id != 0 GROUP BY so_no,po_no,item,quality,color,purchase_order, line_id) as t1
+                ) tb_care_labels WHERE line_id != 0 GROUP BY so_no, line_id) as t1
                 
                 LEFT JOIN
                 (SELECT so_no,po_no,item,quality,color,purchase_order, line_id, MIN(line_input_date_time) AS min_line_input_date_time
-                FROM vt_few_days_po_pcs WHERE line_id != 0 GROUP BY so_no,po_no,item,quality,color,purchase_order, line_id) AS t2
-                ON t1.so_no=t2.so_no AND t1.po_no=t2.po_no AND t1.item=t2.item AND t1.quality=t2.quality 
-                AND t1.color=t2.color AND t1.purchase_order=t2.purchase_order AND t1.line_id=t2.line_id
+                FROM tb_care_labels WHERE line_id != 0 GROUP BY so_no, line_id) AS t2
+                ON t1.so_no=t2.so_no AND t1.line_id=t2.line_id
                 
                 LEFT JOIN
-                (SELECT so_no, manually_closed FROM `vt_few_days_po_pcs` 
+                (SELECT so_no, manually_closed FROM `tb_care_labels` 
                 WHERE manually_closed=1 
                 GROUP BY so_no, manually_closed) AS t3
                 ON t1.so_no=t3.so_no
                 
                 LEFT JOIN
                 (SELECT so_no, line_id, MIN(DATE_FORMAT(end_line_qc_date_time, '%Y-%m-%d')) AS min_line_output_date
-                FROM `vt_few_days_po_pcs` 
+                FROM `tb_care_labels` 
                 WHERE line_id != 0 AND end_line_qc_date_time!='0000-00-00 00:00:00'
                 GROUP BY so_no, line_id) AS t4
                 ON t1.so_no=t4.so_no AND t1.line_id=t4.line_id

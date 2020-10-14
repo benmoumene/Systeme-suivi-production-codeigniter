@@ -680,62 +680,88 @@ class Access extends CI_Controller {
 
             if($last_scan_points[$k] == "Buyer Warehouse"){
                 $data['carton_status'] = 1;
+                $data['carton_date_time'] = $date_time;
                 $data['warehouse_qa_type'] = 0;
             } elseif($last_scan_points[$k] == "Factory Warehouse"){
                 $data['carton_status'] = 1;
+                $data['carton_date_time'] = $date_time;
                 $data['warehouse_qa_type'] = 0;
             } elseif($last_scan_points[$k] == "Trash"){
                 $data['carton_status'] = 1;
+                $data['carton_date_time'] = $date_time;
                 $data['warehouse_qa_type'] = 0;
             } elseif($last_scan_points[$k] == "Production Sample Warehouse"){
                 $data['carton_status'] = 1;
+                $data['carton_date_time'] = $date_time;
                 $data['warehouse_qa_type'] = 0;
             } elseif($last_scan_points[$k] == "Other Purpose"){
                 $data['carton_status'] = 1;
+                $data['carton_date_time'] = $date_time;
                 $data['warehouse_qa_type'] = 0;
             } elseif($last_scan_points[$k] == "Lost"){
                 $data['carton_status'] = 1;
+                $data['carton_date_time'] = $date_time;
                 $data['warehouse_qa_type'] = 0;
             } elseif($last_scan_points[$k] == "Size Set"){
                 $data['carton_status'] = 1;
+                $data['carton_date_time'] = $date_time;
                 $data['warehouse_qa_type'] = 0;
             } elseif($last_scan_points[$k] == "Carton"){
                 $data['carton_status'] = 1;
+                $data['carton_date_time'] = $date_time;
             } elseif($last_scan_points[$k] == "Packing"){
                 $data['carton_status'] = 1;
+                $data['packing_date_time'] = $date_time;
             } elseif($last_scan_points[$k] == "Wash Return"){
                 $data['packing_status'] = 1;
+                $data['packing_date_time'] = $date_time;
                 $data['carton_status'] = 1;
+                $data['carton_date_time'] = $date_time;
             } elseif($last_scan_points[$k] == "Wash Send"){
                 $data['washing_status'] = 1;
+                $data['washing_date_time'] = $date_time;
                 $data['packing_status'] = 1;
+                $data['packing_date_time'] = $date_time;
                 $data['carton_status'] = 1;
+                $data['carton_date_time'] = $date_time;
             } elseif($last_scan_points[$k] == "End Line"){
-                $data['access_points'] = 4;
-                $data['access_points_status'] = 4;
                 $data['packing_status'] = 1;
+                $data['packing_date_time'] = $date_time;
                 $data['carton_status'] = 1;
+                $data['carton_date_time'] = $date_time;
             } elseif($last_scan_points[$k] == "Mid Line"){
                 $data['access_points'] = 4;
                 $data['access_points_status'] = 4;
+                $data['end_line_qc_date_time'] = $date_time;
                 $data['packing_status'] = 1;
+                $data['packing_date_time'] = $date_time;
                 $data['carton_status'] = 1;
+                $data['carton_date_time'] = $date_time;
             } elseif($last_scan_points[$k] == "Input Line"){
                 $data['access_points'] = 4;
                 $data['access_points_status'] = 4;
+                $data['end_line_qc_date_time'] = $date_time;
                 $data['packing_status'] = 1;
+                $data['packing_date_time'] = $date_time;
                 $data['carton_status'] = 1;
+                $data['carton_date_time'] = $date_time;
             } elseif($last_scan_points[$k] == "Cutting"){
                 $data['access_points'] = 4;
                 $data['access_points_status'] = 4;
+                $data['end_line_qc_date_time'] = $date_time;
                 $data['packing_status'] = 1;
+                $data['packing_date_time'] = $date_time;
                 $data['carton_status'] = 1;
+                $data['carton_date_time'] = $date_time;
             } elseif($last_scan_points[$k] == "Cutting not Sent"){
                 $data['sent_to_production'] = 1;
                 $data['access_points'] = 4;
                 $data['access_points_status'] = 4;
+                $data['end_line_qc_date_time'] = $date_time;
                 $data['packing_status'] = 1;
+                $data['packing_date_time'] = $date_time;
                 $data['carton_status'] = 1;
+                $data['carton_date_time'] = $date_time;
             }
 
             $data['is_manually_adjusted'] = 1;
