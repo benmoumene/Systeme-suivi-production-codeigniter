@@ -256,9 +256,6 @@
             data: {},
             dataType: "html",
             success: function (data) {
-
-                console.log(data);
-
                 $("#reload_div").append(data);
                 $("#loader").css("display", "none");
             }

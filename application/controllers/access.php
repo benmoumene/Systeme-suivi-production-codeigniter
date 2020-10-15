@@ -599,64 +599,134 @@ class Access extends CI_Controller {
 
         $warehouse_type = $this->input->post('warehouse_type');
         $pcs_nos = $this->input->post('pcs_nos');
-        $last_scan_points = $this->input->post('last_scan_points');
+
+        $user_description = $this->session->userdata('user_description');
 
         $data = array();
 
         foreach ($pcs_nos AS $k => $pcs_no){
 
-            $last_scan_points[$k];
+            $pcs_info = $this->access_model->selectTableDataRowQuery(' * ', 'tb_care_labels', " AND pc_tracking_no='$pcs_no'");
 
-            if($last_scan_points[$k] == "Carton"){
-                $data['carton_status'] = 0;
-                $data['warehouse_qa_type'] = $warehouse_type;
-            } elseif($last_scan_points[$k] == "Packing"){
-                $data['carton_status'] = 0;
-                $data['warehouse_qa_type'] = $warehouse_type;
-            } elseif($last_scan_points[$k] == "Wash Return"){
-                $data['packing_status'] = 1;
-                $data['carton_status'] = 0;
-                $data['warehouse_qa_type'] = $warehouse_type;
-            } elseif($last_scan_points[$k] == "Wash Send"){
-                $data['washing_status'] = 1;
-                $data['packing_status'] = 1;
-                $data['carton_status'] = 0;
-                $data['warehouse_qa_type'] = $warehouse_type;
-            } elseif($last_scan_points[$k] == "End Line"){
-                $data['packing_status'] = 1;
-                $data['carton_status'] = 0;
-                $data['warehouse_qa_type'] = $warehouse_type;
-            } elseif($last_scan_points[$k] == "Mid Line"){
-                $data['access_points'] = 4;
-                $data['access_points_status'] = 4;
-                $data['packing_status'] = 1;
-                $data['carton_status'] = 0;
-                $data['warehouse_qa_type'] = $warehouse_type;
-            } elseif($last_scan_points[$k] == "Input Line"){
-                $data['access_points'] = 4;
-                $data['access_points_status'] = 4;
-                $data['packing_status'] = 1;
-                $data['carton_status'] = 0;
-                $data['warehouse_qa_type'] = $warehouse_type;
-            } elseif($last_scan_points[$k] == "Cutting"){
-                $data['access_points'] = 4;
-                $data['access_points_status'] = 4;
-                $data['packing_status'] = 1;
-                $data['carton_status'] = 0;
-                $data['warehouse_qa_type'] = $warehouse_type;
-            } elseif($last_scan_points[$k] == "Cutting not Sent"){
+            $warehouse_qa_type = $pcs_info[0]['warehouse_qa_type'];
+            $carton_status = $pcs_info[0]['carton_status'];
+            $packing_status = $pcs_info[0]['packing_status'];
+            $access_points = $pcs_info[0]['access_points'];
+            $access_points_status = $pcs_info[0]['access_points_status'];
+            $line_id = $pcs_info[0]['line_id'];
+            $sent_to_production = $pcs_info[0]['sent_to_production'];
+
+
+            if($sent_to_production == 0){
                 $data['sent_to_production'] = 1;
                 $data['access_points'] = 4;
                 $data['access_points_status'] = 4;
+                $data['end_line_qc_date_time'] = $date_time;
                 $data['packing_status'] = 1;
-                $data['carton_status'] = 0;
+                $data['packing_date_time'] = $date_time;
+                $data['warehouse_qa_type'] = $warehouse_type;
+
+                if($line_id == 0){
+
+                    $res_1 = $this->access_model->selectTableDataRowQuery("line_id", "tb_care_labels", " AND so_no = (SELECT so_no FROM `tb_care_labels` WHERE 1 AND pc_tracking_no='$pcs_no') AND line_id != 0 GROUP BY line_id LIMIT 1");
+
+                    $line_id = $res_1[0]['line_id'];
+
+                    $data['line_id'] = $line_id;
+                }
+
+                $this->access_model->updateTblFields('tb_today_line_output_qty', " SET manual_qty=manual_qty+1 ", " AND line_id=$line_id AND date = '$date' AND '$time' BETWEEN start_time AND end_time");
+
+            } elseif($sent_to_production == 1){
+                $data['access_points'] = 4;
+                $data['access_points_status'] = 4;
+                $data['end_line_qc_date_time'] = $date_time;
+                $data['packing_status'] = 1;
+                $data['packing_date_time'] = $date_time;
+                $data['warehouse_qa_type'] = $warehouse_type;
+
+                if($line_id == 0){
+
+                    $res_1 = $this->access_model->selectTableDataRowQuery("line_id", "tb_care_labels", " AND so_no = (SELECT so_no FROM `tb_care_labels` WHERE 1 AND pc_tracking_no='$pcs_no') AND line_id != 0 GROUP BY line_id LIMIT 1");
+
+                    $line_id = $res_1[0]['line_id'];
+
+                    $data['line_id'] = $line_id;
+                }
+
+                $this->access_model->updateTblFields('tb_today_line_output_qty', " SET manual_qty=manual_qty+1 ", " AND line_id=$line_id AND date = '$date' AND '$time' BETWEEN start_time AND end_time");
+
+            } elseif(($access_points == 2) && ($access_points_status == 1)){
+                $data['access_points'] = 4;
+                $data['access_points_status'] = 4;
+                $data['end_line_qc_date_time'] = $date_time;
+                $data['packing_status'] = 1;
+                $data['packing_date_time'] = $date_time;
+                $data['warehouse_qa_type'] = $warehouse_type;
+
+                if($line_id == 0){
+
+                    $res_1 = $this->access_model->selectTableDataRowQuery("line_id", "tb_care_labels", " AND so_no = (SELECT so_no FROM `tb_care_labels` WHERE 1 AND pc_tracking_no='$pcs_no') AND line_id != 0 GROUP BY line_id LIMIT 1");
+
+                    $line_id = $res_1[0]['line_id'];
+                }
+
+                $this->access_model->updateTblFields('tb_today_line_output_qty', " SET manual_qty=manual_qty+1 ", " AND line_id=$line_id AND date = '$date' AND '$time' BETWEEN start_time AND end_time");
+
+            } elseif(($access_points == 3) && ($access_points_status == 1)){
+                $data['access_points'] = 4;
+                $data['access_points_status'] = 4;
+                $data['end_line_qc_date_time'] = $date_time;
+                $data['packing_status'] = 1;
+                $data['packing_date_time'] = $date_time;
+                $data['warehouse_qa_type'] = $warehouse_type;
+
+                if($line_id == 0){
+
+                    $res_1 = $this->access_model->selectTableDataRowQuery("line_id", "tb_care_labels", " AND so_no = (SELECT so_no FROM `tb_care_labels` WHERE 1 AND pc_tracking_no='$pcs_no') AND line_id != 0 GROUP BY line_id LIMIT 1");
+
+                    $line_id = $res_1[0]['line_id'];
+                }
+
+                $this->access_model->updateTblFields('tb_today_line_output_qty', " SET manual_qty=manual_qty+1 ", " AND line_id=$line_id AND date = '$date' AND '$time' BETWEEN start_time AND end_time");
+
+            } elseif(($access_points == 4) && ($access_points_status == 2)){
+                $data['access_points'] = 4;
+                $data['access_points_status'] = 4;
+                $data['end_line_qc_date_time'] = $date_time;
+                $data['packing_status'] = 1;
+                $data['packing_date_time'] = $date_time;
+                $data['warehouse_qa_type'] = $warehouse_type;
+
+                if($line_id == 0){
+
+                    $res_1 = $this->access_model->selectTableDataRowQuery("line_id", "tb_care_labels", " AND so_no = (SELECT so_no FROM `tb_care_labels` WHERE 1 AND pc_tracking_no='$pcs_no') AND line_id != 0 GROUP BY line_id LIMIT 1");
+
+                    $line_id = $res_1[0]['line_id'];
+                }
+
+                $this->access_model->updateTblFields('tb_today_line_output_qty', " SET manual_qty=manual_qty+1 ", " AND line_id=$line_id AND date = '$date' AND '$time' BETWEEN start_time AND end_time");
+
+            } elseif(($access_points == 4) && ($access_points_status == 4)){
+                $data['packing_status'] = 1;
+                $data['packing_date_time'] = $date_time;
+                $data['warehouse_qa_type'] = $warehouse_type;
+            } elseif($packing_status == 0){
+                $data['packing_status'] = 1;
+                $data['packing_date_time'] = $date_time;
+                $data['warehouse_qa_type'] = $warehouse_type;
+            } elseif($carton_status == 0){
+                $data['warehouse_qa_type'] = $warehouse_type;
+            } elseif($warehouse_qa_type != 0){
                 $data['warehouse_qa_type'] = $warehouse_type;
             }
 
             $data['is_manually_adjusted'] = 1;
             $data['manual_adjustment_date_time'] = $date_time;
+            $data['manual_adjustment_by'] = $user_description;
 
             $this->access_model->updateTblNew('tb_care_labels', 'pc_tracking_no', $pcs_no, $data);
+
         }
 
         echo 'done';
@@ -665,95 +735,29 @@ class Access extends CI_Controller {
     public function addToCarton(){
         $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
         $date_time=$datex->format('Y-m-d H:i:s');
+        $time=$datex->format('H:i:s');
         $date=$datex->format('Y-m-d');
 
         $user_description = $this->session->userdata('user_description');
 
         $pcs_nos = $this->input->post('pcs_nos');
-        $last_scan_points = $this->input->post('last_scan_points');
 
         $data = array();
 
         foreach ($pcs_nos AS $k => $pcs_no){
 
-            $last_scan_points[$k];
+            $pcs_info = $this->access_model->selectTableDataRowQuery(' * ', 'tb_care_labels', " AND pc_tracking_no='$pcs_no'");
 
-            if($last_scan_points[$k] == "Buyer Warehouse"){
-                $data['carton_status'] = 1;
-                $data['carton_date_time'] = $date_time;
-                $data['warehouse_qa_type'] = 0;
-            } elseif($last_scan_points[$k] == "Factory Warehouse"){
-                $data['carton_status'] = 1;
-                $data['carton_date_time'] = $date_time;
-                $data['warehouse_qa_type'] = 0;
-            } elseif($last_scan_points[$k] == "Trash"){
-                $data['carton_status'] = 1;
-                $data['carton_date_time'] = $date_time;
-                $data['warehouse_qa_type'] = 0;
-            } elseif($last_scan_points[$k] == "Production Sample Warehouse"){
-                $data['carton_status'] = 1;
-                $data['carton_date_time'] = $date_time;
-                $data['warehouse_qa_type'] = 0;
-            } elseif($last_scan_points[$k] == "Other Purpose"){
-                $data['carton_status'] = 1;
-                $data['carton_date_time'] = $date_time;
-                $data['warehouse_qa_type'] = 0;
-            } elseif($last_scan_points[$k] == "Lost"){
-                $data['carton_status'] = 1;
-                $data['carton_date_time'] = $date_time;
-                $data['warehouse_qa_type'] = 0;
-            } elseif($last_scan_points[$k] == "Size Set"){
-                $data['carton_status'] = 1;
-                $data['carton_date_time'] = $date_time;
-                $data['warehouse_qa_type'] = 0;
-            } elseif($last_scan_points[$k] == "Carton"){
-                $data['carton_status'] = 1;
-                $data['carton_date_time'] = $date_time;
-            } elseif($last_scan_points[$k] == "Packing"){
-                $data['carton_status'] = 1;
-                $data['packing_date_time'] = $date_time;
-            } elseif($last_scan_points[$k] == "Wash Return"){
-                $data['packing_status'] = 1;
-                $data['packing_date_time'] = $date_time;
-                $data['carton_status'] = 1;
-                $data['carton_date_time'] = $date_time;
-            } elseif($last_scan_points[$k] == "Wash Send"){
-                $data['washing_status'] = 1;
-                $data['washing_date_time'] = $date_time;
-                $data['packing_status'] = 1;
-                $data['packing_date_time'] = $date_time;
-                $data['carton_status'] = 1;
-                $data['carton_date_time'] = $date_time;
-            } elseif($last_scan_points[$k] == "End Line"){
-                $data['packing_status'] = 1;
-                $data['packing_date_time'] = $date_time;
-                $data['carton_status'] = 1;
-                $data['carton_date_time'] = $date_time;
-            } elseif($last_scan_points[$k] == "Mid Line"){
-                $data['access_points'] = 4;
-                $data['access_points_status'] = 4;
-                $data['end_line_qc_date_time'] = $date_time;
-                $data['packing_status'] = 1;
-                $data['packing_date_time'] = $date_time;
-                $data['carton_status'] = 1;
-                $data['carton_date_time'] = $date_time;
-            } elseif($last_scan_points[$k] == "Input Line"){
-                $data['access_points'] = 4;
-                $data['access_points_status'] = 4;
-                $data['end_line_qc_date_time'] = $date_time;
-                $data['packing_status'] = 1;
-                $data['packing_date_time'] = $date_time;
-                $data['carton_status'] = 1;
-                $data['carton_date_time'] = $date_time;
-            } elseif($last_scan_points[$k] == "Cutting"){
-                $data['access_points'] = 4;
-                $data['access_points_status'] = 4;
-                $data['end_line_qc_date_time'] = $date_time;
-                $data['packing_status'] = 1;
-                $data['packing_date_time'] = $date_time;
-                $data['carton_status'] = 1;
-                $data['carton_date_time'] = $date_time;
-            } elseif($last_scan_points[$k] == "Cutting not Sent"){
+            $warehouse_qa_type = $pcs_info[0]['warehouse_qa_type'];
+            $carton_status = $pcs_info[0]['carton_status'];
+            $packing_status = $pcs_info[0]['packing_status'];
+            $access_points = $pcs_info[0]['access_points'];
+            $access_points_status = $pcs_info[0]['access_points_status'];
+            $line_id = $pcs_info[0]['line_id'];
+            $sent_to_production = $pcs_info[0]['sent_to_production'];
+
+
+            if($sent_to_production == 0){
                 $data['sent_to_production'] = 1;
                 $data['access_points'] = 4;
                 $data['access_points_status'] = 4;
@@ -762,6 +766,109 @@ class Access extends CI_Controller {
                 $data['packing_date_time'] = $date_time;
                 $data['carton_status'] = 1;
                 $data['carton_date_time'] = $date_time;
+
+                if($line_id == 0){
+
+                    $res_1 = $this->access_model->selectTableDataRowQuery("line_id", "tb_care_labels", " AND so_no = (SELECT so_no FROM `tb_care_labels` WHERE 1 AND pc_tracking_no='$pcs_no') AND line_id != 0 GROUP BY line_id LIMIT 1");
+
+                    $line_id = $res_1[0]['line_id'];
+
+                    $data['line_id'] = $line_id;
+                }
+
+                $this->access_model->updateTblFields('tb_today_line_output_qty', " SET manual_qty=manual_qty+1 ", " AND line_id=$line_id AND date = '$date' AND '$time' BETWEEN start_time AND end_time");
+
+            } elseif($sent_to_production == 1){
+                $data['access_points'] = 4;
+                $data['access_points_status'] = 4;
+                $data['end_line_qc_date_time'] = $date_time;
+                $data['packing_status'] = 1;
+                $data['packing_date_time'] = $date_time;
+                $data['carton_status'] = 1;
+                $data['carton_date_time'] = $date_time;
+
+                if($line_id == 0){
+
+                    $res_1 = $this->access_model->selectTableDataRowQuery("line_id", "tb_care_labels", " AND so_no = (SELECT so_no FROM `tb_care_labels` WHERE 1 AND pc_tracking_no='$pcs_no') AND line_id != 0 GROUP BY line_id LIMIT 1");
+
+                    $line_id = $res_1[0]['line_id'];
+
+                    $data['line_id'] = $line_id;
+                }
+
+                $this->access_model->updateTblFields('tb_today_line_output_qty', " SET manual_qty=manual_qty+1 ", " AND line_id=$line_id AND date = '$date' AND '$time' BETWEEN start_time AND end_time");
+
+            } elseif(($access_points == 2) && ($access_points_status == 1)){
+                $data['access_points'] = 4;
+                $data['access_points_status'] = 4;
+                $data['end_line_qc_date_time'] = $date_time;
+                $data['packing_status'] = 1;
+                $data['packing_date_time'] = $date_time;
+                $data['carton_status'] = 1;
+                $data['carton_date_time'] = $date_time;
+
+                if($line_id == 0){
+
+                    $res_1 = $this->access_model->selectTableDataRowQuery("line_id", "tb_care_labels", " AND so_no = (SELECT so_no FROM `tb_care_labels` WHERE 1 AND pc_tracking_no='$pcs_no') AND line_id != 0 GROUP BY line_id LIMIT 1");
+
+                    $line_id = $res_1[0]['line_id'];
+                }
+
+                $this->access_model->updateTblFields('tb_today_line_output_qty', " SET manual_qty=manual_qty+1 ", " AND line_id=$line_id AND date = '$date' AND '$time' BETWEEN start_time AND end_time");
+
+            } elseif(($access_points == 3) && ($access_points_status == 1)){
+                $data['access_points'] = 4;
+                $data['access_points_status'] = 4;
+                $data['end_line_qc_date_time'] = $date_time;
+                $data['packing_status'] = 1;
+                $data['packing_date_time'] = $date_time;
+                $data['carton_status'] = 1;
+                $data['carton_date_time'] = $date_time;
+
+                if($line_id == 0){
+
+                    $res_1 = $this->access_model->selectTableDataRowQuery("line_id", "tb_care_labels", " AND so_no = (SELECT so_no FROM `tb_care_labels` WHERE 1 AND pc_tracking_no='$pcs_no') AND line_id != 0 GROUP BY line_id LIMIT 1");
+
+                    $line_id = $res_1[0]['line_id'];
+                }
+
+                $this->access_model->updateTblFields('tb_today_line_output_qty', " SET manual_qty=manual_qty+1 ", " AND line_id=$line_id AND date = '$date' AND '$time' BETWEEN start_time AND end_time");
+
+            } elseif(($access_points == 4) && ($access_points_status == 2)){
+                $data['access_points'] = 4;
+                $data['access_points_status'] = 4;
+                $data['end_line_qc_date_time'] = $date_time;
+                $data['packing_status'] = 1;
+                $data['packing_date_time'] = $date_time;
+                $data['carton_status'] = 1;
+                $data['carton_date_time'] = $date_time;
+
+                if($line_id == 0){
+
+                    $res_1 = $this->access_model->selectTableDataRowQuery("line_id", "tb_care_labels", " AND so_no = (SELECT so_no FROM `tb_care_labels` WHERE 1 AND pc_tracking_no='$pcs_no') AND line_id != 0 GROUP BY line_id LIMIT 1");
+
+                    $line_id = $res_1[0]['line_id'];
+                }
+
+                $this->access_model->updateTblFields('tb_today_line_output_qty', " SET manual_qty=manual_qty+1 ", " AND line_id=$line_id AND date = '$date' AND '$time' BETWEEN start_time AND end_time");
+
+            } elseif(($access_points == 4) && ($access_points_status == 4)){
+                $data['packing_status'] = 1;
+                $data['packing_date_time'] = $date_time;
+                $data['carton_status'] = 1;
+                $data['carton_date_time'] = $date_time;
+            } elseif($packing_status == 0){
+                $data['packing_status'] = 1;
+                $data['packing_date_time'] = $date_time;
+                $data['carton_status'] = 1;
+                $data['carton_date_time'] = $date_time;
+            } elseif($carton_status == 0){
+                $data['carton_status'] = 1;
+                $data['carton_date_time'] = $date_time;
+            } elseif($warehouse_qa_type != 0){
+                $data['carton_status'] = 1;
+                $data['carton_date_time'] = $date_time;
+                $data['warehouse_qa_type'] = 0;
             }
 
             $data['is_manually_adjusted'] = 1;

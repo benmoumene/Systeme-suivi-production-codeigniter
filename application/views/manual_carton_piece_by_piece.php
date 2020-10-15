@@ -188,19 +188,12 @@
 
         });
 
-        $('input.last_scan').each(function () {
-            var sThisVal = $(this).val();
-
-            last_scan_points.push(sThisVal);
-
-        });
-
         if(pcs_nos.length > 0){
             $.ajax({
                 url:"<?php echo base_url('access/addToCarton')?>",
                 type:"post",
                 dataType:"html",
-                data:{ pcs_nos: pcs_nos, last_scan_points: last_scan_points },
+                data:{ pcs_nos: pcs_nos },
                 success:function (data) {
                     if(data='done'){
                         alert('Process Successful!');
@@ -239,7 +232,7 @@
                     url:"<?php echo base_url('access/saveToWarehouse')?>",
                     type:"post",
                     dataType:"html",
-                    data:{ pcs_nos: pcs_nos, last_scan_points: last_scan_points, warehouse_type: warehouse_type },
+                    data:{ pcs_nos: pcs_nos, warehouse_type: warehouse_type },
                     success:function (data) {
                         if(data='done'){
                             alert('Process Successful!');

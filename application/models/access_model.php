@@ -1487,7 +1487,7 @@ class Access_model extends CI_Model {
     public function getFinishingAlterLineReport($where){
         $sql="SELECT so_no, line_id, purchase_order, item, quality, color, style_no, style_name,
                brand, ex_factory_date, COUNT(id) as total_finishing_alter_qty
-               FROM `vt_running_po_pcs`
+               FROM `tb_care_labels`
                WHERE finishing_qc_status=2
                $where
                GROUP BY so_no";
@@ -1500,7 +1500,7 @@ class Access_model extends CI_Model {
         $sql1="SELECT t1.*, t2.line_code
                FROM (SELECT pc_tracking_no, so_no, purchase_order, item, size, 
                quality, color, style_no, style_name, ex_factory_date, line_id
-               FROM `vt_running_po_pcs` 
+               FROM `tb_care_labels` 
                WHERE finishing_qc_status=2 $where) AS t1
                LEFT JOIN
                tb_line AS t2
