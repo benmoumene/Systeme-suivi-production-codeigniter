@@ -21,13 +21,13 @@
 </style>
 <div class="pull-left breadcrumb_admin clear_both">
     <div class="pull-left page_title theme_color">
-        <h1>Ship Date Wise Report</h1>
-        <h2 class="">Ship Date Wise Report...</h2>
+        <h1>AQL</h1>
+        <h2 class="">AQL...</h2>
     </div>
     <div class="pull-right">
         <ol class="breadcrumb">
             <li><a href="<?php echo base_url();?>">Home</a></li>
-            <li class="active">Ship Date Wise Report</li>
+            <li class="active">AQL</li>
         </ol>
     </div>
 </div>

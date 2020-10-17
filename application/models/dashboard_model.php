@@ -751,10 +751,12 @@ class Dashboard_model extends CI_Model {
                 THEN cut_qty
                 ELSE 0 end) AS lay_complete_cut_pending_qty
                   
-                FROM tb_cut_summary GROUP BY po_no,so_no,item,quality,color,purchase_order
+                FROM tb_cut_summary GROUP BY po_no,so_no
                 )  as t1
                 LEFT JOIN
-                vt_po_summary as t2
+                (SELECT po_no, so_no, SUM(quantity) AS total_order_qty
+                FROM `tb_po_detail`
+                GROUP BY po_no, so_no) as t2
                 ON t1.so_no=t2.so_no
                 WHERE t1.lay_complete_qty > 0 OR t1.cut_complete_qty > 0 OR t1.lay_complete_cut_pending_qty > 0";
 
