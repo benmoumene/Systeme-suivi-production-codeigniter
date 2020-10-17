@@ -41,7 +41,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <select required class="form-control" id="po_no" name="po_no" onchange="getReportByPo(id);">
-                                <option value="">SO_PO_Item_Quality_Color_ExFacDate_Type</option>
+                                <option value="">SO_PO_Item_Quality_Color_StyleNo_ExFacDate_Type</option>
                             <?php
                                 foreach ($purchase_order_nos as $pos){
 
@@ -57,12 +57,12 @@
                                         $po_type='SAMPLE';
                                     }
                                     ?>
-                                    <option value="<?php echo $pos['so_no'].'_'.$pos['po_no'].'_'.$pos['purchase_order'].'_'.$pos['item'].'_'.$pos['color'];?>"><?php echo $pos['so_no'].'_'.$pos['purchase_order'].'_'.$pos['item'].'_'.$pos['quality'].'_'.$pos['color'].'_'.$pos['ex_factory_date'].'_'.$po_type;?></option>
+                                    <option value="<?php echo $pos['so_no'].'_'.$pos['po_no'].'_'.$pos['purchase_order'].'_'.$pos['item'].'_'.$pos['color'];?>"><?php echo $pos['so_no'].'_'.$pos['purchase_order'].'_'.$pos['item'].'_'.$pos['quality'].'_'.$pos['color'].'_'.$pos['style_no'].'_'.$pos['approved_ex_factory_date'].'_'.$po_type;?></option>
                             <?php
                                 }
 //                          ?>
                         </select>
-                        <span style="font-size: 11px;">* SO_PO_Item_Quality_Color_ExFacDate_Type</span>
+                        <p style="font-size: 11px; padding: 5px;">* SO_PO_Item_Quality_Color_StyleNo_ExFacDate_Type</p>
                     </div>
                 </div>
                 <div class="col-md-1" id="loader" style="display: none;"><div class="loader"></div></div>

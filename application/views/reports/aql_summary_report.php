@@ -54,7 +54,7 @@
                                             <tr>
                                                 <th class="hidden-phone center" rowspan="2" style="font-size: 20px;"><b>Brand</b></th>
                                                 <th class="hidden-phone center" colspan="4" style="font-size: 20px; background-color: #93e7ff;"><b>Today Plan AQL</b></th>
-                                                <th class="hidden-phone center" colspan="2" style="font-size: 20px; background-color: #fffdcd;"><b>Previous Date Due AQL</b></th>
+                                                <th class="hidden-phone center" colspan="2" style="font-size: 20px; background-color: #fffdcd;"><b>Previous Date Plan AQL</b></th>
                                             </tr>
                                             <tr>
                                                 <th class="hidden-phone center"><h4><b>Planned</b></h4></th>
@@ -80,12 +80,20 @@
                                                     <td class="hidden-phone center"><?php echo $today_plan_aql_count;?></td>
                                                     <td class="hidden-phone center"><?php echo $today_plan_aql_pass_count;?></td>
                                                     <td class="hidden-phone center"><?php echo $today_plan_aql_fail_count;?></td>
-                                                    <td class="hidden-phone center"><a href="<?php echo base_url()?>dashboard/getDetailsAqlreportToday/<?php echo $v['brand']?>" target="_blank"><?php echo $today_plan_aql_count-$today_plan_aql_pass_count;?></a></td>
+                                                    <td class="hidden-phone center">
+                                                        <a href="<?php echo base_url()?>dashboard/getDetailsAqlreportToday/<?php echo $v['brand']?>" target="_blank" class="btn btn-warning">
+                                                            <?php echo $today_plan_aql_count-$today_plan_aql_pass_count;?>
+                                                        </a>
+                                                    </td>
 <!--                                                    <td class="hidden-phone center">--><?php //echo $today_plan_aql_count-$today_plan_aql_pass_count;?><!--</td>-->
                                                     <td class="hidden-phone center"><?php echo $previous_due_aql_pass_count;?></td>
 <!--                                                    <td class="hidden-phone center">--><?php //echo $previous_due_aql_count;?><!--</td>-->
 <!--                                                    <td class="hidden-phone center">--><?php //echo $previous_due_aql_count;?><!--</td>-->
-                                                    <td class="hidden-phone center"><a href="<?php echo base_url()?>dashboard/getDetailsAqlreport/<?php echo $v['brand']?>" target="_blank"><?php echo $previous_due_aql_count;?></a></td>
+                                                    <td class="hidden-phone center">
+                                                        <a href="<?php echo base_url()?>dashboard/getDetailsAqlreport/<?php echo $v['brand']?>" target="_blank" class="btn btn-warning">
+                                                            <?php echo $previous_due_aql_count;?>
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                             <?php }
                                             } ?>

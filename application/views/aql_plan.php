@@ -42,20 +42,38 @@
             <div class="row">
                 <div class="form-group">
                     <label class="col-md-2"><b>Sales Order</b> <span style="color: red;">*</span></label>
-                  <div class="col-md-2">
+                  <div class="col-md-4">
                       <select name="sales_order" id="sales_order" class="form-control" onchange="getSoInfo();" required>
-                          <option value="">Sales Order</option>
-                          <?php foreach ($so_list as $v_so){ ?>
-                              <option value="<?php echo $v_so['so_no'];?>"><?php echo $v_so['so_no'];?></option>
+                          <option value="">SO_PO_Item_Quality_Color_StyleNo_ExFacDate_Type</option>
+                          <?php foreach ($so_list as $v_so){
+
+                              $po_type = '';
+
+                              if($v_so['po_type'] == 0){
+                                  $po_type = 'BULK';
+                              }
+
+                              if($v_so['po_type'] == 1){
+                                  $po_type = 'SIZE SET';
+                              }
+
+                              if($v_so['po_type'] == 2){
+                                  $po_type = 'SAMPLE';
+                              }
+                          ?>
+                              <option value="<?php echo $v_so['so_no'];?>">
+                                  <?php echo $v_so['so_no'].'_'.$v_so['purchase_order'].'_'.$v_so['item'].'_'.$v_so['quality'].'_'.$v_so['color'].'_'.$v_so['style_no'].'_'.$v_so['approved_ex_factory_date'].'_'.$po_type;?>
+                              </option>
                           <?php } ?>
                       </select>
+                      <p style="font-size: 11px; padding: 5px;">* SO_PO_Item_Quality_Color_StyleNo_ExFacDate_Type</p>
                   </div>
                 </div>
                 </div>
                 <div class="row">
                 <div class="form-group">
                     <label class="col-md-2"><b>PO</b> <span style="color: red;">*</span></label>
-                  <div class="col-md-2">
+                  <div class="col-md-4">
                       <input type="text" name="po" id="po" class="form-control" readonly required />
                   </div>
                 </div>
@@ -63,7 +81,7 @@
                 <div class="row">
                     <div class="form-group">
                         <label class="col-md-2"><b>ITEM</b> <span style="color: red;">*</span></label>
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <input type="text" name="item" id="item" class="form-control" readonly required />
                         </div>
                     </div>
@@ -71,7 +89,7 @@
                 <div class="row">
                 <div class="form-group">
                     <label class="col-md-2"><b>Quality</b> <span style="color: red;">*</span></label>
-                  <div class="col-md-2">
+                  <div class="col-md-4">
                       <input type="text" name="quality" id="quality" class="form-control" readonly required />
                   </div>
                 </div>
@@ -79,7 +97,7 @@
                 <div class="row">
                     <div class="form-group">
                         <label class="col-md-2"><b>Color</b> <span style="color: red;">*</span></label>
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <input type="text" name="color" id="color" class="form-control" readonly required />
                         </div>
                     </div>
@@ -87,7 +105,7 @@
                 <div class="row">
                     <div class="form-group">
                         <label class="col-md-2"><b>Style No</b> <span style="color: red;">*</span></label>
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <input type="text" name="style_no" id="style_no" class="form-control" readonly required />
                         </div>
                     </div>
@@ -95,7 +113,7 @@
                 <div class="row">
                     <div class="form-group">
                         <label class="col-md-2"><b>Style Name</b> <span style="color: red;">*</span></label>
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <input type="text" name="style_name" id="style_name" class="form-control" readonly required />
                         </div>
                     </div>
@@ -103,7 +121,7 @@
                 <div class="row">
                     <div class="form-group">
                         <label class="col-md-2"><b>AQL Date</b> <span style="color: red;">*</span></label>
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <input type="text" class="form-control form-control-inline input-medium default-date-picker" id="aql_plan_date" name="aql_plan_date" required="required" readonly="readonly" />
                         </div>
                         <div class="col-md-1">
