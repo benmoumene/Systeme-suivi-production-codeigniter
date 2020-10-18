@@ -52,37 +52,78 @@
                                     <table class="display table table-bordered table-striped" id="" border="1">
                                         <thead>
                                             <tr>
-                                                <th class="hidden-phone center">Brand</th>
-                                                <th class="hidden-phone center">Today AQL</th>
-                                                <th class="hidden-phone center">Previous Due AQL</th>
-                                                <th class="hidden-phone center">Pass</th>
-                                                <th class="hidden-phone center">Fail</th>
+                                                <th class="hidden-phone center">SO</th>
+                                                <th class="hidden-phone center">PO</th>
+                                                <th class="hidden-phone center">Item</th>
+                                                <th class="hidden-phone center">Quality</th>
+                                                <th class="hidden-phone center">Color</th>
+                                                <th class="hidden-phone center">Style</th>
+                                                <th class="hidden-phone center">ExFac</th>
+                                                <th class="hidden-phone center">Order</th>
+                                                <th class="hidden-phone center">Type</th>
+                                                <th class="hidden-phone center">AQL Plan</th>
+                                                <th class="hidden-phone center">AQL Status</th>
+                                                <th class="hidden-phone center">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
 
                                             foreach($aql_summary AS $v){
-                                                if($v['today_plan_aql_count'] != '' || $v['previous_due_aql_count'] || $v['today_plan_aql_pass_count'] || $v['previous_due_aql_pass_count']){
+
                                             ?>
                                                 <tr>
-                                                    <td class="hidden-phone center"><?php echo $v['brand'];?></td>
+                                                    <td class="hidden-phone center"><?php echo $v['so_no'];?></td>
+                                                    <td class="hidden-phone center"><?php echo $v['purchase_order'];?></td>
+                                                    <td class="hidden-phone center"><?php echo $v['item'];?></td>
+                                                    <td class="hidden-phone center"><?php echo $v['quality'];?></td>
+                                                    <td class="hidden-phone center"><?php echo $v['color'];?></td>
+                                                    <td class="hidden-phone center"><?php echo $v['style_no'].'-'.$v['style_name'];?></td>
+                                                    <td class="hidden-phone center"><?php echo $v['approved_ex_factory_date'];?></td>
+                                                    <td class="hidden-phone center"><?php echo $v['total_order_qty'];?></td>
                                                     <td class="hidden-phone center">
-                                                        <a class="btn btn-primary" href="<?php echo base_url()?>access/aqlListDetail/<?php echo $v['brand'];?>">
-                                                            <?php echo ($v['today_plan_aql_count'] != '' ? $v['today_plan_aql_count'] : 0);?>
-                                                        </a>
+                                                        <?php
+                                                            if($v['po_type'] == 0){
+                                                                echo "Bulk";
+                                                            }
+                                                            if($v['po_type'] == 1){
+                                                                echo "Size Set";
+                                                            }
+                                                            if($v['po_type'] == 2){
+                                                                echo "Sample";
+                                                            }
+                                                        ?>
+                                                    </td>
+                                                    <td class="hidden-phone center"><?php echo $v['aql_plan_date'];?></td>
+                                                    <td class="hidden-phone center">
+                                                        <?php
+                                                            if($v['aql_status'] == 0){
+                                                                echo 'Pending';
+                                                            }
+                                                            if($v['aql_status'] == 1){
+                                                                echo 'Pass';
+                                                            }
+                                                            if($v['aql_status'] == 2){
+                                                                echo 'Fail';
+                                                            }
+                                                        ?>
                                                     </td>
                                                     <td class="hidden-phone center">
-                                                        <a class="btn btn-primary" href="<?php echo base_url()?>access/getDueAqlTargetList/<?php echo $v['brand'];?>">
-                                                            <?php echo ($v['previous_due_aql_count'] != '' ? $v['previous_due_aql_count'] : 0);?>
-                                                        </a>
+
+                                                        <?php if($v['is_aql_offerred'] == 0){ ?>
+                                                            <span class="btn btn-warning" onclick="poAqlOffer('<?php echo $v['so_no'];?>');">OFFER</span>
+                                                        <?php }
+
+                                                        if($v['is_aql_offerred'] == 1){ ?>
+                                                            <span class="btn btn-success" onclick="poAqlPassStatus('<?php echo $v['so_no'];?>');">PASS</span>
+                                                            <span class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" onclick="setSoToModalFields('<?php echo $v['so_no'];?>')">FAIL</span>
+                                                        <?php } ?>
+
                                                     </td>
-                                                    <td class="hidden-phone center"><?php echo $v['today_plan_aql_pass_count']+$v['previous_due_aql_pass_count'];?></td>
-                                                    <td class="hidden-phone center"><?php echo $v['today_plan_aql_fail_count']+$v['previous_due_aql_fail_count'];?></td>
                                                 </tr>
                                             <?php
-                                                }
-                                            } ?>
+                                            }
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -97,30 +138,29 @@
 
 </div>
 
-<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
-
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel1"></h4>
+                <h5 class="modal-title" id="exampleModalLabel">Confirm AQL FAIL?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-
             <div class="modal-body">
-                <div class="col-md-3 scroll4">
-                    <div class="porlets-content">
-                        <div class="table-responsive" id="wh_cl_list">
-
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">SO:</label>
+                    <input type="text" class="form-control" id="so_no" readonly="readonly">
+                </div>
+                <div class="form-group">
+                    <label for="message-text" class="col-form-label">Remarks</label>
+                    <textarea class="form-control" id="aql_remarks"></textarea>
                 </div>
             </div>
-
             <div class="modal-footer">
-                <!--                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-                <!--                <button type="button" class="btn btn-primary">Save changes</button>-->
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" onclick="poAqlFailStatus()">FAIL</button>
             </div>
-
         </div>
     </div>
 </div>
@@ -128,86 +168,60 @@
 <script type="text/javascript">
     $('select').select2();
 
-    $(function(){
-        $('#btnExport').click(function(){
-            var url='data:application/vnd.ms-excel,' + encodeURIComponent($('#table_content').html())
-            location.href=url
-            return false
-        })
-    })
-
-    window.addEventListener('keydown', function(event) {
-        if (event.keyCode === 80 && (event.ctrlKey || event.metaKey) && !event.altKey && (!event.shiftKey || window.chrome || window.opera)) {
-            event.preventDefault();
-            if (event.stopImmediatePropagation) {
-                event.stopImmediatePropagation();
-            } else {
-                event.stopPropagation();
-            }
-            return;
-        }
-    }, true);
-
-    function getShipDateWiseReport() {
-        var brands = $("#brands").val();
-        var po_type = $("#po_type").val();
-
-//        var from_dt = $("#from_date").val();
-//        var to_dt = $("#to_date").val();
-//
-//        var res1 = from_dt.split("-");
-//        var res2 = to_dt.split("-");
-//
-//        var from_date = res1[2]+'-'+res1[0]+'-'+res1[1];
-//        var to_date = res2[2]+'-'+res2[0]+'-'+res2[1];
-
-        var month_year = $("#src_date").val();
-
-        if(month_year != '' && brands != null && po_type != ''){
-            $("#loader").css("display", "block");
-
-            $("#table_content").empty();
-
-            $.ajax({
-                url: "<?php echo base_url();?>dashboard/getShipDateWiseReportMonth/",
-                type: "POST",
-                data: {brands: brands, month_year: month_year, po_type: po_type},
-                dataType: "html",
-                success: function (data) {
-                    $("#table_content").empty();
-                    $("#table_content").append(data);
-                    $("#loader").css("display", "none");
-                }
-            });
-        }else{
-            alert("Please Select Required Fields!");
-        }
-    }
-
-    function getWarehousePcs(po_no, so_no, purchase_order,item, quality, color) {
-        $("#wh_cl_list").empty();
+    function poAqlOffer(so_no) {
 
         $.ajax({
-            url: "<?php echo base_url();?>dashboard/getWarehouseSizePcs/",
+            url: "<?php echo base_url();?>access/poAqlOffer/",
             type: "POST",
-            data: {po_no: po_no, so_no: so_no, purchase_order: purchase_order, item: item, quality: quality, color: color},
+            data: {so_no: so_no},
             dataType: "html",
             success: function (data) {
-                $("#wh_cl_list").append(data);
+                if(data == 'done'){
+                    location.reload();
+                }
             }
         });
+
     }
 
-    function printDiv(divName) {
-        var printContents = document.getElementById(divName).innerHTML;
-        var originalContents = document.body.innerHTML;
+    function poAqlPassStatus(so_no) {
 
-        document.body.innerHTML = printContents;
+        $.ajax({
+            url: "<?php echo base_url();?>access/poAqlPassStatus/",
+            type: "POST",
+            data: {so_no: so_no},
+            dataType: "html",
+            success: function (data) {
+                if(data == 'done'){
+                    location.reload();
+                }
+            }
+        });
 
-        window.print();
-
-        document.body.innerHTML = originalContents;
-
-        location.reload();
     }
+
+    function poAqlFailStatus() {
+
+        var so_no = $("#so_no").val();
+        var aql_remarks = $("#aql_remarks").val();
+
+        $.ajax({
+            url: "<?php echo base_url();?>access/poAqlFailStatus/",
+            type: "POST",
+            data: {so_no: so_no, aql_remarks: aql_remarks},
+            dataType: "html",
+            success: function (data) {
+                if(data == 'done'){
+                    location.reload();
+                }
+            }
+        });
+
+    }
+
+    function setSoToModalFields(so_no) {
+        $("#so_no").val(so_no);
+        $("#aql_remarks").val('');
+    }
+
 </script>

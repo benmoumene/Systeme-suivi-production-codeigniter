@@ -7,7 +7,7 @@
         <table class="table table-bordered table-striped" id="" border="1">
             <thead>
             <tr>
-                <th class="hidden-phone center" colspan="10"><h3><?php echo $title;?></h3></th>
+                <th class="hidden-phone center" colspan="12"><h3><?php echo $title;?></h3></th>
             </tr>
             <tr>
                 <th class="hidden-phone center">SO</th>
@@ -18,8 +18,9 @@
                 <th class="hidden-phone center">Color</th>
                 <th class="hidden-phone center">Ex-fac</th>
                 <th class="hidden-phone center">Order</th>
-                <th class="hidden-phone center">AQL</th>
-                <th class="hidden-phone center">AQL Date</th>
+                <th class="hidden-phone center">AQL Plan</th>
+                <th class="hidden-phone center">AQL Offer</th>
+                <th class="hidden-phone center">AQL Status</th>
                 <th class="hidden-phone center">Remarks</th>
             </tr>
             </thead>
@@ -57,6 +58,8 @@
                     <td class="center"><?php echo $v['color'];?></td>
                     <td class="center"><?php echo $v['ex_factory_date'];?></td>
                     <td class="center"><?php echo $v['total_order_qty'];?></td>
+                    <td class="center"><?php echo $v['aql_plan_date'];?></td>
+                    <td class="center"><?php echo $v['aql_offer_date'];?></td>
                     <td class="center"
                         style="background-color:
                         <?php
@@ -74,14 +77,15 @@
                         <?php
                         if($v['aql_status'] == 0) {
                             echo "Pending";
-                        }elseif($v['aql_status'] == 1){
+                        }
+                        if($v['aql_status'] == 1){
                             echo 'Pass';
-                        }elseif($v['aql_status'] == 2){
+                        }
+                        if($v['aql_status'] == 2){
                             echo 'Fail';
                         }
                         ?>
                     </td>
-                    <td class="center"><?php echo $v['aql_plan_date'];?></td>
                     <td class="center"><?php echo $v['aql_remarks'];?></td>
 
                 </tr>
@@ -93,7 +97,7 @@
             <tr>
                 <td colspan="7" align="right"><h4><b>Total</b></h4></td>
                 <td class="center"><h4><b><?php echo $total_order_qty;?></b></h4></td>
-                <td colspan="3" align="right"><h4><b></b></h4></td>
+                <td colspan="4" align="right"><h4><b></b></h4></td>
 
             </tr>
             </tfoot>

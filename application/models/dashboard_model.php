@@ -2866,7 +2866,7 @@ class Dashboard_model extends CI_Model {
     public function getAqlSummaryReport($date)
     {
         $sql="SELECT t0.brand, t1.today_plan_aql_count, t2.today_plan_aql_pass_count, t3.today_plan_aql_fail_count,
-              t4.previous_due_aql_count, t5.previous_due_aql_pass_count
+              t4.previous_due_aql_count, t5.previous_due_aql_pass_count, t7.aql_offer_count
               
             FROM 
             (SELECT brand FROM `tb_po_detail` GROUP BY brand) AS t0
@@ -2930,7 +2930,16 @@ class Dashboard_model extends CI_Model {
             AND aql_action_date='$date'
             GROUP BY brand, so_no) AS F 
             GROUP BY F.brand) AS t6
-            ON t0.brand=t6.brand";
+            ON t0.brand=t6.brand
+            
+            LEFT JOIN
+            (SELECT F.brand, COUNT(F.so_no) AS aql_offer_count 
+            FROM (SELECT brand, so_no FROM `tb_po_detail` 
+            WHERE aql_offer_date=CURDATE()
+            AND is_aql_offerred=1
+            GROUP BY brand, so_no) AS F 
+            GROUP BY F.brand) AS t7
+            ON t0.brand=t7.brand";
 
         $query = $this->db->query($sql)->result_array();
         return $query;

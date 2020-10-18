@@ -103,7 +103,6 @@
                                                             <option value="">Select Status</option>
                                                             <option value="1">Pass</option>
                                                             <option value="2">Fail</option>
-
                                                         </select>
                                                     </td>
                                                     <td class="hidden-phone center">

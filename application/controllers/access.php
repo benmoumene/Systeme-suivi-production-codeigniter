@@ -9070,6 +9070,7 @@ class Access extends CI_Controller {
         $data['user_name'] = $this->session->userdata('user_name');
         $data['user_description'] = $this->session->userdata('user_description');
         $data['access_points'] = $this->session->userdata('access_points');
+        $buyer_condition = $this->session->userdata('buyer_condition');
         $data['msg'] = '';
 
         $cur_url = __METHOD__;
@@ -9077,7 +9078,8 @@ class Access extends CI_Controller {
         $res = $this->checkAuthorization($data['access_points'], $cur_url);
 
         if(sizeof($res) > 0) {
-        $data['aql_summary'] = $this->access_model->getAqlSummaryList($date);
+//        $data['aql_summary'] = $this->access_model->getAqlSummaryList($date);
+        $data['aql_summary'] = $this->access_model->selectTableDataRowQuery(" so_no, purchase_order, item, quality, color, style_no, style_name, brand, SUM(quantity) AS total_order_qty, approved_ex_factory_date, po_type, aql_plan_date, aql_status, aql_remarks, is_aql_offerred ", "tb_po_detail", " AND brand IN ($buyer_condition) AND aql_plan_date <= CURDATE() AND aql_plan_date != '0000-00-00' AND aql_status IN (0, 2) GROUP BY so_no");
 
         $data['maincontent'] = $this->load->view('aql_summary_list', $data, true);
         $this->load->view('master', $data);
@@ -9085,6 +9087,54 @@ class Access extends CI_Controller {
         }else{
             echo $this->load->view('404');
         }
+    }
+
+    public function poAqlOffer(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $user_id = $this->session->userdata('id');
+        $so_no = $this->input->post('so_no');
+
+        $this->access_model->updateTblFields('tb_po_detail', " SET is_aql_offerred=1, aql_offer_date='$date', aql_action_by=$user_id", " AND so_no='$so_no'");
+
+        echo 'done';
+    }
+
+    public function poAqlPassStatus(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $user_id = $this->session->userdata('id');
+        $so_no = $this->input->post('so_no');
+
+        $this->access_model->updateTblFields('tb_po_detail', " SET aql_status=1, aql_action_date='$date', aql_remarks='', aql_action_by=$user_id", " AND so_no='$so_no'");
+
+        echo 'done';
+    }
+
+    public function poAqlFailStatus(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $user_id = $this->session->userdata('id');
+        $so_no = $this->input->post('so_no');
+        $aql_remarks = $this->input->post('aql_remarks');
+
+        $this->access_model->updateTblFields('tb_po_detail', " SET aql_status=2, aql_action_date='$date', aql_remarks='$aql_remarks', is_aql_offerred=0, aql_offer_date='$date', aql_action_by=$user_id", " AND so_no='$so_no'");
+
+        $data['so_no'] = $so_no;
+        $data['aql_status'] = 2;
+        $data['aql_remarks'] = $aql_remarks;
+        $data['aql_status_date'] = $date_time;
+        $data['aql_action_by'] = $user_id;
+
+        $this->access_model->insertingData('tb_aql_status_log', $data);
+
+        echo 'done';
     }
 
     public function aqlListDetail($brand){
@@ -9137,11 +9187,11 @@ class Access extends CI_Controller {
 
             if($aql_status[$k] != ''){
                 //Update AQL Status Start
-                if($aql_status[$k] == 2){
-                    $data['aql_remarks'] = $aql_remarks[$k];
-                }
+
                 if($aql_status[$k] == 1){
                     $data['aql_remarks'] = '';
+                }else{
+                    $data['aql_remarks'] = $aql_remarks[$k];
                 }
                 $data['aql_status'] = $aql_status[$k];
                 $data['aql_action_date'] = $date;
@@ -9153,11 +9203,11 @@ class Access extends CI_Controller {
                 //Insert AQL Status Log Start
                 $data_1['so_no'] = $v;
                 $data_1['aql_status'] = $aql_status[$k];
-                if($aql_status[$k] == 2){
-                    $data_1['aql_remarks'] = $aql_remarks[$k];
-                }
+
                 if($aql_status[$k] == 1){
                     $data_1['aql_remarks'] = '';
+                }else{
+                    $data_1['aql_remarks'] = $aql_remarks[$k];
                 }
                 $data_1['aql_status_date'] = $date_time;
                 $data_1['aql_action_by'] = $this->session->userdata('id');

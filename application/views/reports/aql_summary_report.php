@@ -53,11 +53,12 @@
                                         <thead>
                                             <tr>
                                                 <th class="hidden-phone center" rowspan="2" style="font-size: 20px;"><b>Brand</b></th>
-                                                <th class="hidden-phone center" colspan="4" style="font-size: 20px; background-color: #93e7ff;"><b>Today Plan AQL</b></th>
+                                                <th class="hidden-phone center" colspan="5" style="font-size: 20px; background-color: #93e7ff;"><b>Today Plan AQL</b></th>
                                                 <th class="hidden-phone center" colspan="2" style="font-size: 20px; background-color: #fffdcd;"><b>Previous Date Plan AQL</b></th>
                                             </tr>
                                             <tr>
                                                 <th class="hidden-phone center"><h4><b>Planned</b></h4></th>
+                                                <th class="hidden-phone center"><h4><b>Offer</b></h4></th>
                                                 <th class="hidden-phone center"><h4><b>Pass</b></h4></th>
                                                 <th class="hidden-phone center"><h4><b>Fail</b></h4></th>
                                                 <th class="hidden-phone center"><h4><b>Balance</b></h4></th>
@@ -69,6 +70,7 @@
                                             <?php foreach($aql_summary AS $v){
                                                 if($v['today_plan_aql_count'] != '' || $v['today_plan_aql_pass_count'] != '' || $v['today_plan_aql_fail_count'] != '' || $v['previous_due_aql_count'] != '' || $v['previous_due_aql_pass_count'] != ''){
                                                 $today_plan_aql_count = ($v['today_plan_aql_count'] != '' ? $v['today_plan_aql_count'] : 0);
+                                                $today_aql_offer_count = ($v['aql_offer_count'] != '' ? $v['aql_offer_count'] : 0);
                                                 $today_plan_aql_pass_count = ($v['today_plan_aql_pass_count'] != '' ? $v['today_plan_aql_pass_count'] : 0);
                                                 $today_plan_aql_fail_count = ($v['today_plan_aql_fail_count'] != '' ? $v['today_plan_aql_fail_count'] : 0);
                                                 $previous_due_aql_count = ($v['previous_due_aql_count'] != '' ? $v['previous_due_aql_count'] : 0);
@@ -78,6 +80,7 @@
                                                 <tr>
                                                     <td class="hidden-phone center"><?php echo $v['brand'];?></td>
                                                     <td class="hidden-phone center"><?php echo $today_plan_aql_count;?></td>
+                                                    <td class="hidden-phone center"><?php echo $today_aql_offer_count;?></td>
                                                     <td class="hidden-phone center"><?php echo $today_plan_aql_pass_count;?></td>
                                                     <td class="hidden-phone center"><?php echo $today_plan_aql_fail_count;?></td>
                                                     <td class="hidden-phone center">
