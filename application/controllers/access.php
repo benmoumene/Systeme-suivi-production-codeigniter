@@ -9751,6 +9751,79 @@ class Access extends CI_Controller {
         }
     }
 
+    public function removePoPart(){
+        $data['title'] = 'Remove PO Part';
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['sap_no'] = $this->access_model->getSapPoNo();
+
+            $data['maincontent'] = $this->load->view('remove_po_part', $data, true);
+            $this->load->view('master', $data);
+
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
+    public function getPoParts(){
+        $po_no = $this->input->post('po_no');
+
+        $data['parts'] = $this->access_model->selectTableDataRowQuery("*", "tb_po_part_detail", " AND po_no='$po_no'");
+
+        echo $data['maincontent'] = $this->load->view('po_parts', $data);
+    }
+
+    public function deletePoPart(){
+        $part_id = $this->input->post('part_id');
+
+        $this->access_model->deleteTableData('tb_po_part_detail', 'id', $part_id);
+
+        echo 'done';
+    }
+
+    public function poCuttingManualPackageAdjustment(){
+        $data['title'] = 'Package Adjustment';
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['sap_no'] = $this->access_model->getSapPoNo();
+
+            $data['maincontent'] = $this->load->view('manual_package_adjustment', $data, true);
+            $this->load->view('master', $data);
+
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
+    public function cuttingPackageReadyManualAdjustmentProcess(){
+        $po_no = $this->input->post('po_no');
+
+        $bundle_nos = $this->access_model->selectTableDataRowQuery("bundle_tracking_no", 'tb_cut_summary', " AND po_no='$po_no' GROUP BY po_no, bundle_tracking_no");
+
+        foreach ($bundle_nos AS $v){
+            $this->packageReady($v['bundle_tracking_no']);
+        }
+
+        $data['message'] = 'Package Adjustment Successful!';
+        $this->session->set_userdata($data);
+
+        echo 'done';
+    }
+
     public function getRemainingPart()
     {
         $po_no = $this->input->post('po_no');

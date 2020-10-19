@@ -227,6 +227,8 @@
                         <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/search_care_label"><i class="fa fa-circle"></i> Search Care Label </a></li>
                         <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/active_print_label"><i class="fa fa-circle"></i> Active Print Label </a></li>
                         <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/delete_cutting"><i class="fa fa-circle"></i> Delete Cutting </a></li>
+                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/poCuttingManualPackageAdjustment"><i class="fa fa-circle"></i> Package Adjustment </a></li>
+                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/removePoPart"><i class="fa fa-circle"></i> Remove Part </a></li>
                     </ul>
                 </li>
 

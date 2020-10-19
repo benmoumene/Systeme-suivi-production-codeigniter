@@ -2866,7 +2866,7 @@ class Dashboard_model extends CI_Model {
     public function getAqlSummaryReport($date)
     {
         $sql="SELECT t0.brand, t1.today_plan_aql_count, t2.today_plan_aql_pass_count, t3.today_plan_aql_fail_count,
-              t4.previous_due_aql_count, t5.previous_due_aql_pass_count, t7.aql_offer_count
+              t4.previous_due_aql_count, t5.previous_due_aql_pass_count
               
             FROM 
             (SELECT brand FROM `tb_po_detail` GROUP BY brand) AS t0
@@ -2884,7 +2884,7 @@ class Dashboard_model extends CI_Model {
             (SELECT B.brand, COUNT(B.so_no) AS today_plan_aql_pass_count
             FROM (SELECT brand, so_no FROM `tb_po_detail` 
             WHERE aql_plan_date!='0000-00-00'
-            AND aql_plan_date='$date'
+            AND aql_action_date='$date'
             AND aql_status IN (1)
             GROUP BY brand, so_no) AS B 
             GROUP BY B.brand) AS t2
@@ -2894,7 +2894,7 @@ class Dashboard_model extends CI_Model {
             (SELECT C.brand, COUNT(C.so_no) AS today_plan_aql_fail_count
             FROM (SELECT brand, so_no FROM `tb_po_detail` 
             WHERE aql_plan_date!='0000-00-00'
-            AND aql_plan_date='$date'
+            AND aql_action_date='$date'
             AND aql_status IN (2)
             GROUP BY brand, so_no) AS C
             GROUP BY C.brand) AS t3
@@ -2930,16 +2930,34 @@ class Dashboard_model extends CI_Model {
             AND aql_action_date='$date'
             GROUP BY brand, so_no) AS F 
             GROUP BY F.brand) AS t6
-            ON t0.brand=t6.brand
-            
-            LEFT JOIN
-            (SELECT F.brand, COUNT(F.so_no) AS aql_offer_count 
+            ON t0.brand=t6.brand";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
+    public function getAqlOfferReport($brand)
+    {
+        $sql="SELECT F.brand, COUNT(F.so_no) AS aql_offer_count 
             FROM (SELECT brand, so_no FROM `tb_po_detail` 
             WHERE aql_offer_date=CURDATE()
-            AND is_aql_offerred=1
+            AND brand='$brand'
             GROUP BY brand, so_no) AS F 
-            GROUP BY F.brand) AS t7
-            ON t0.brand=t7.brand";
+            GROUP BY F.brand";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
+    public function getAqlFailReport($brand)
+    {
+        $sql="SELECT C.brand, COUNT(C.so_no) AS today_plan_aql_fail_count
+            FROM (SELECT brand, so_no FROM `tb_po_detail` 
+            WHERE aql_action_date=CURDATE()
+            AND aql_status=2
+            AND brand='$brand'
+            GROUP BY brand, so_no) AS C
+            GROUP BY C.brand";
 
         $query = $this->db->query($sql)->result_array();
         return $query;

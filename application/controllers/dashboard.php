@@ -526,6 +526,14 @@ class Dashboard extends CI_Controller {
         $this->load->view('reports/master', $data);
     }
 
+    public function getAqlOfferReport($brand){
+        return $this->dashboard_model->getAqlOfferReport($brand);
+    }
+
+    public function getAqlFailReport($brand){
+        return $this->dashboard_model->getAqlFailReport($brand);
+    }
+
     public function shipDateWiseReportlive()
     {
         $data['title']='Ship Date Wise Report Live';

@@ -72,9 +72,9 @@
 <!--        </div>-->
 
 
-        <div class="col-md-3"style="padding-top: 6px" >
+        <div class="col-md-3">
             <div class="form-group">
-                <button onclick="generateBundleTicket()">Save Part</button>
+                <button onclick="generateBundleTicket()" class="btn btn-success">SET PART</button>
             </div>
         </div>
 

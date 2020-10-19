@@ -70,9 +70,8 @@
                                             <?php foreach($aql_summary AS $v){
                                                 if($v['today_plan_aql_count'] != '' || $v['today_plan_aql_pass_count'] != '' || $v['today_plan_aql_fail_count'] != '' || $v['previous_due_aql_count'] != '' || $v['previous_due_aql_pass_count'] != ''){
                                                 $today_plan_aql_count = ($v['today_plan_aql_count'] != '' ? $v['today_plan_aql_count'] : 0);
-                                                $today_aql_offer_count = ($v['aql_offer_count'] != '' ? $v['aql_offer_count'] : 0);
                                                 $today_plan_aql_pass_count = ($v['today_plan_aql_pass_count'] != '' ? $v['today_plan_aql_pass_count'] : 0);
-                                                $today_plan_aql_fail_count = ($v['today_plan_aql_fail_count'] != '' ? $v['today_plan_aql_fail_count'] : 0);
+
                                                 $previous_due_aql_count = ($v['previous_due_aql_count'] != '' ? $v['previous_due_aql_count'] : 0);
                                                 $previous_due_aql_pass_count = ($v['previous_due_aql_pass_count'] != '' ? $v['previous_due_aql_pass_count'] : 0);
 
@@ -80,12 +79,29 @@
                                                 <tr>
                                                     <td class="hidden-phone center"><?php echo $v['brand'];?></td>
                                                     <td class="hidden-phone center"><?php echo $today_plan_aql_count;?></td>
-                                                    <td class="hidden-phone center"><?php echo $today_aql_offer_count;?></td>
+                                                    <td class="hidden-phone center">
+                                                        <?php
+
+                                                            $aql_offer_report = $this->method_call->getAqlOfferReport($v['brand']);
+                                                            $today_aql_offer_count = ($aql_offer_report[0]['aql_offer_count'] != '' ? $aql_offer_report[0]['aql_offer_count'] : 0);
+                                                            echo $today_aql_offer_count;
+                                                        ?>
+                                                    </td>
                                                     <td class="hidden-phone center"><?php echo $today_plan_aql_pass_count;?></td>
-                                                    <td class="hidden-phone center"><?php echo $today_plan_aql_fail_count;?></td>
+                                                    <td class="hidden-phone center">
+                                                        <?php
+
+                                                        $aql_fail_report = $this->method_call->getAqlFailReport($v['brand']);
+                                                        $today_plan_aql_fail_count = ($aql_fail_report[0]['today_plan_aql_fail_count'] != '' ? $aql_fail_report[0]['today_plan_aql_fail_count'] : 0);
+                                                        echo $today_plan_aql_fail_count;
+                                                        ?>
+                                                    </td>
                                                     <td class="hidden-phone center">
                                                         <a href="<?php echo base_url()?>dashboard/getDetailsAqlreportToday/<?php echo $v['brand']?>" target="_blank" class="btn btn-warning">
-                                                            <?php echo $today_plan_aql_count-$today_plan_aql_pass_count;?>
+                                                            <?php
+                                                            $today_balance = $today_plan_aql_count-$today_plan_aql_pass_count;
+                                                            echo ($today_balance > 0 ? $today_balance : 0);
+                                                            ?>
                                                         </a>
                                                     </td>
 <!--                                                    <td class="hidden-phone center">--><?php //echo $today_plan_aql_count-$today_plan_aql_pass_count;?><!--</td>-->
