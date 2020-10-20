@@ -1638,7 +1638,7 @@ class Dashboard_model extends CI_Model {
 
     public function getTodayLineProductionSummaryReport($date, $floor_id){
         $sql = "SELECT A.line_id, A.line_name, A.line_code, J.floor_name, K.target, 
-                K.remarks, B.total_line_output, B.efficiency, B.wip, B.dhu_sum,
+                K.remarks, B.total_line_output, B.total_manual_output, B.efficiency, B.wip, B.dhu_sum,
                 B.work_hour_1, B.work_hour_2, B.work_hour_3, B.work_hour_4
                 
                 FROM 
@@ -1647,8 +1647,8 @@ class Dashboard_model extends CI_Model {
                 FROM `tb_line` WHERE status=1 AND floor=$floor_id) as A
                 
                 LEFT JOIN
-                (SELECT line_id, `date`, SUM(qty) as total_line_output, efficiency, wip, SUM(dhu) AS dhu_sum,
-                work_hour_1, work_hour_2, work_hour_3, work_hour_4
+                (SELECT line_id, `date`, SUM(qty) as total_line_output, SUM(manual_qty) AS total_manual_output, 
+                efficiency, wip, SUM(dhu) AS dhu_sum, work_hour_1, work_hour_2, work_hour_3, work_hour_4
                 FROM `tb_today_line_output_qty` WHERE line_id !=0
                 AND `date`='$date'
                 GROUP BY `date`, line_id) as B

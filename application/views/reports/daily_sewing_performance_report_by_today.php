@@ -116,7 +116,10 @@ foreach ($floors as $v_f){
         $line_id = $v['line_id'];
         $line_target = ($v['target'] != '' ? $v['target'] : 0);
         $line_output = ($v['total_line_output'] != '' ? $v['total_line_output'] : 0);
+        $line_manual_output = ($v['total_manual_output'] != '' ? $v['total_manual_output'] : 0);
         $wip=$v['wip'];
+
+        $line_output = $line_output+$line_manual_output;
 
         $total_line_target += $line_target;
         $total_line_output += $line_output;

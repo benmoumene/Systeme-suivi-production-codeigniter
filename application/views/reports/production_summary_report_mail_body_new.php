@@ -123,7 +123,7 @@
                 $line_pre_info = $this->method_call->getLinePerformanceSummary($v['id'], $previous_date, $h['start_time'], $h['end_time']);
 
                 foreach ($line_pre_info as $lpi){
-                    $line_output += $lpi['qty'];
+                    $line_output += $lpi['qty']+$lpi['manual_qty'];
                 }
 
             }
