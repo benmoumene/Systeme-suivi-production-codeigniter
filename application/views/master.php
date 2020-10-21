@@ -466,14 +466,14 @@
                 // access_point = 2 = begining_of_line
                 ?>
                 <!--            <li> <a href="--><?php //echo base_url();?><!--access/care_label_end_line"><i class="fa fa-circle"></i> End-Line QC</a></li>-->
-                <li> <a href="<?php echo base_url();?>access/outputControl"><i class="fa fa-circle"></i> Line Output Control </a></li>
-                <li> <a href="<?php echo base_url();?>access/smv_form"><i class="fa fa-circle"></i> Set SMV </a></li>
+                <li> <a href="<?php echo base_url();?>access/outputControl"><i class="fa fa-list-ul"></i> Line Output Control </a></li>
+                <li> <a href="<?php echo base_url();?>access/smv_form"><i class="fa fa-clock-o"></i> Set SMV </a></li>
                 <li> <a href="<?php echo base_url();?>access/change_line"><i class="fa fa-exchange"></i> Change Line </a></li>
 <!--                <li> <a href="--><?php //echo base_url();?><!--access/manage_bundle_line"><i class="fa fa-circle"></i> Bundle-Line </a></li>-->
 <!--                <li> <a href="--><?php //echo base_url();?><!--access/washReport"><i class="fa fa-circle"></i> Wash Report </a></li>-->
                 <li> <a href="<?php echo base_url();?>access/aqlPlan"><i class="fa fa-circle"></i> AQL Plan </a></li>
-                <li> <a href="<?php echo base_url();?>access/unApproveRequest"><i class="fa fa-circle"></i> Request Reprint </a></li>
-                <li> <a href="<?php echo base_url();?>access/wash"><i class="fa fa-circle"></i> Wash Control </a></li>
+                <li> <a href="<?php echo base_url();?>access/unApproveRequest"><i class="fa fa-print"></i> Request Reprint </a></li>
+                <li> <a href="<?php echo base_url();?>access/wash"><i class="fa fa-tint"></i> Wash Control </a></li>
                 <li> <a href="<?php echo base_url();?>access/changeApprovedExfactory"><i class="fa fa-calendar" aria-hidden="true"></i> Approved Ship Date </a></li>
                 <li> <a href="javascript:void(0);"> <i class="fa fa-plus"></i> Target Assign <span class="plus"><i class="fa fa-plus"></i></span></a>
                     <ul>

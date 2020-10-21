@@ -124,12 +124,16 @@
                         <div class="col-md-4">
                             <input type="text" class="form-control form-control-inline input-medium default-date-picker" id="aql_plan_date" name="aql_plan_date" required="required" readonly="readonly" />
                         </div>
-                        <div class="col-md-1">
-                            <span class="btn btn-danger" onclick="resetAqlDate();">Reset</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label class="col-md-2"><b>Ready for AQL?</b></label>
+                        <div class="col-md-4">
+                            <input type="checkbox" class="form-control" id="ready_for_aql" name="ready_for_aql" value="1" />
                         </div>
                     </div>
                 </div>
-
             <br />
 
          
@@ -138,9 +142,6 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-1">
                     <button class="btn btn-primary" id="submit_btn">SAVE</button>
-                </div>
-                <div class="col-md-1">
-                    <button class="btn btn-warning" id="reset_btn" type="reset">RESET</button>
                 </div>
             </div>
         </div><br />
@@ -167,6 +168,8 @@
             $("#style_name").empty();
             $("#smv").empty();
 
+            $("#ready_for_aql").attr('checked', false);
+
             if(sales_order != ''){
                 $.ajax({
                     url: "<?php echo base_url();?>access/getSoInfo/",
@@ -180,6 +183,10 @@
                         $("#color").val(data[0].color);
                         $("#style_no").val(data[0].style_no);
                         $("#style_name").val(data[0].style_name);
+
+                        if(data[0].is_ready_for_aql == 1){
+                            $("#ready_for_aql").attr('checked', true);
+                        }
 
                         var aql_pln_dt = data[0].aql_plan_date;
                         var aql_pln_dt_array = aql_pln_dt.split("-");

@@ -73,7 +73,7 @@ $count_unscanned_pc = $cut_qty - ($count_total_carton_qty + $total_wh_qty);
                 <table class="table" border="1">
                     <thead>
                     <tr>
-                        <th class="center">Group PO</th>
+                        <th class="center">Group SO</th>
                         <th class="center">SO</th>
                         <th class="center">Purchase Order</th>
                         <th class="center">ITEM/WEEK</th>

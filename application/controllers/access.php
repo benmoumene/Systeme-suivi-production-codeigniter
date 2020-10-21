@@ -9035,6 +9035,7 @@ class Access extends CI_Controller {
 
     public function saveAqlPlan(){
         $sales_order = $this->input->post('sales_order');
+        $ready_for_aql = $this->input->post('ready_for_aql');
         $aql_pln_dt = $this->input->post('aql_plan_date');
 
         $plan_date_parts = explode("-", $aql_pln_dt);
@@ -9050,6 +9051,7 @@ class Access extends CI_Controller {
             $data['aql_action_by']=0;
         }
 
+        $data['is_ready_for_aql']=$ready_for_aql;
         $data['aql_plan_date']=$plan_date;
 
 
