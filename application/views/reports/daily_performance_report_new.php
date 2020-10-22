@@ -1,6 +1,6 @@
 <?php
 $cur_date = date('Y-m-d');
-$date_range = date('Y-m-d',(strtotime ( '-20 day' , strtotime ( $cur_date) ) ));
+$date_range = date('Y-m-d',(strtotime ( '-90 day' , strtotime ( $cur_date) ) ));
 ?>
 <style>
     .loader {

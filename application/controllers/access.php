@@ -9011,6 +9011,58 @@ class Access extends CI_Controller {
         echo 'Done';
     }
 
+    public function aqlPlanNew(){
+        $data['title'] = 'AQL Plan';
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+        $data['msg'] = '';
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+
+            $data['brands'] = $this->access_model->getAllBrands();
+            $data['ship_dates'] = $this->dashboard_model->getAllShipDates();
+
+            $data['maincontent'] = $this->load->view('aql_plan_new', $data, true);
+            $this->load->view('master', $data);
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
+    public function getShipDateWiseAqlPlanList(){
+        $po_type = $this->input->post('po_type');
+        $brands_string = $this->input->post('brands');
+
+        $ship_date = $this->input->post('ship_date');
+
+        $data['ex_factory_date'] = $ship_date;
+
+        $where = '';
+
+        if($brands_string != ''){
+            $where .= " AND brand in ($brands_string)";
+        }
+
+        if($po_type != ''){
+            $where .= " AND po_type = $po_type";
+        }
+
+        if($ship_date != '' && $ship_date != '1970-01-01'){
+            $where .= " AND approved_ex_factory_date='$ship_date'";
+        }
+
+        $where .= " GROUP BY so_no";
+
+        $data['po_list'] = $this->access_model->selectTableDataRowQuery("so_no, purchase_order, item, quality, color, style_no, style_name, brand, SUM(quantity) AS total_order_qty, ex_factory_date, approved_ex_factory_date, po_type, aql_plan_date, is_ready_for_aql, aql_status, is_aql_offerred", "tb_po_detail", $where);
+
+        echo $maincontent = $this->load->view('po_list_aql_plan_report', $data);
+    }
+
     public function aqlPlan(){
         $data['title'] = 'AQL Plan';
         $data['user_name'] = $this->session->userdata('user_name');
