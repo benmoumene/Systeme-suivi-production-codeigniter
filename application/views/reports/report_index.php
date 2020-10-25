@@ -53,12 +53,24 @@
                     <span><b>* Select Brands </b></span>
                 </div>
                 <div class="col-md-2">
+                    <!--                    <span style="font-size: 15px; margin-left: 1px; background-color: darkgreen; color: white;">PL=Planned Lines / OQ=Order Qty / CQ=Cut Qty / CPQ=Cut Pass Qty / CBQ=Cut Balance Qty / BR=Bundle Range / INR=Identity Number Range / IN= Line Input  </span> <br />-->
+                    <!--                    <span style="font-size: 15px; margin-left: 1px; background-color: darkgreen; color: white;">MPQ=Mid Pass Qty / EPQ=End Pass Qty / WGQ=Wash Going QTY / WQ=Wash Qty / PQ=Pack Qty / CTN=Carton Qty / WQ=Warehouse Qty / BQ=Balance Qty </span>-->
+                    <select class="form-control" name="po_type[]" id="po_type">
+                        <option value="">Select Type</option>
+                        <option value="0">BULK</option>
+                        <option value="1">SIZE SET</option>
+                        <option value="2">SAMPLE</option>
+                    </select>
+                    <br />
+                    <span><b>* Select Type </b></span>
+                </div>
+                <div class="col-md-2">
                     <span class="btn btn-success" onclick="getRunningPOs()">SEARCH</span>
                 </div>
                 <div class="col-md-1">
                     <div id="loader" style="display: none;"><div class="loader"></div></div>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-3">
                     <div class="table-responsive">
                         <table class="display table table-bordered table-striped" id="">
                             <thead>
@@ -394,6 +406,7 @@
     }
     
     function getRunningPOs() {
+        var po_type = $("#po_type").val();
         var brands = $("#brands").val();
         var brands_string = brands.toString();
 
@@ -402,7 +415,7 @@
         $.ajax({
             url: "<?php echo base_url();?>dashboard/getRunningPOs/",
             type: "POST",
-            data: {brands: brands_string},
+            data: {brands: brands_string, po_type: po_type},
             dataType: "html",
             success: function (data) {
                 $("#reload_div").empty();

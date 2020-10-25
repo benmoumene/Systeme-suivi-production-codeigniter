@@ -5951,7 +5951,7 @@ class Access extends CI_Controller {
                     $clr = preg_replace('/[^A-Za-z0-9.;\-]/', '-', $v[3]);
                     $style_no = preg_replace('/[^A-Za-z0-9.;\-]/', '-', $v[4]);
                     $style_name = preg_replace('/[^A-Za-z0-9.;\-]/', '-', $v[5]);
-                    $brnd = preg_replace('/[^A-Za-z0-9.;\-]/', '-', $v[6]);
+                    $brand = $v[6];
                     $sz = preg_replace('/[^A-Za-z0-9.;\-]/', '-', $v[7]);
                     $quantity = $v[8];
 //                    $ex_factory_date = $v[9];
@@ -5978,7 +5978,6 @@ class Access extends CI_Controller {
                     $color = (str_replace(" ", "", $clr));
                     $quality = (str_replace(" ", "", $qlty));
                     $size = (str_replace(" ", "", $sz));
-                    $brand = (trim($brnd));
 
 
                     $where = "";
@@ -9011,7 +9010,7 @@ class Access extends CI_Controller {
         echo 'Done';
     }
 
-    public function aqlPlanNew(){
+    public function aqlPlan(){
         $data['title'] = 'AQL Plan';
         $data['user_name'] = $this->session->userdata('user_name');
         $data['user_description'] = $this->session->userdata('user_description');
@@ -9063,7 +9062,7 @@ class Access extends CI_Controller {
         echo $maincontent = $this->load->view('po_list_aql_plan_report', $data);
     }
 
-    public function aqlPlan(){
+    public function aqlPlanOld(){
         $data['title'] = 'AQL Plan';
         $data['user_name'] = $this->session->userdata('user_name');
         $data['user_description'] = $this->session->userdata('user_description');
@@ -9112,6 +9111,35 @@ class Access extends CI_Controller {
         $data['message'] = "$sales_order - AQL Saved Successfully!";
         $this->session->set_userdata($data);
         redirect('access/aqlPlan');
+    }
+
+    public function saveAqlPlanNew(){
+        $so_no = $this->input->post('so_no');
+        $aql_pln_dt = $this->input->post('aql_plan_date');
+        $ready_for_aql = $this->input->post('ready_for_aql');
+
+        foreach($so_no AS $k => $v){
+            $plan_date_parts = explode("-", $aql_pln_dt[$k]);
+
+            $plan_dt = $plan_date_parts[2];
+            $plan_mon = $plan_date_parts[1];
+            $plan_yr = $plan_date_parts[0];
+
+            $plan_date = $plan_yr.'-'.$plan_mon.'-'.$plan_dt;
+
+//            if($plan_date == '0000-00-00'){
+//                $data['aql_status']=0;
+//                $data['aql_remarks']='';
+//                $data['aql_action_by']=0;
+//            }
+
+            $data['is_ready_for_aql']=$ready_for_aql[$k];
+            $data['aql_plan_date']=$plan_date;
+
+            $this->access_model->updateTblNew('tb_po_detail', 'so_no', $v, $data);
+        }
+
+        echo 'done';
     }
 
     public function aqlList(){

@@ -2798,11 +2798,12 @@ class Dashboard_model extends CI_Model {
 
         $sql="SELECT t1.line_id,t1.packing_date_time, t1.count_end_line_qc_pass, 
               t1.count_finishing_alter_qty, t1.count_packing_pass, t1.count_carton_pass, 
-              t2.*, t3.responsible_line, t3.total_order_qty, t3.total_cut_qty, t3.total_cut_input_qty, 
+              t2.*, t3.responsible_line, t3.total_cut_qty, t3.total_cut_input_qty, 
               t3.count_input_qty_line AS count_input_line_qc_pass, t3.count_mid_line_qc_pass,
               t3.count_washing_qty AS count_wash_send, t3.count_washing_pass, t3.total_wh_qa, t4.so_fail_count
               FROM
-              (Select so_no, purchase_order, item, quality, color, brand, style_name, ex_factory_date, aql_plan_date, aql_action_date, aql_status, status 
+              (Select so_no, purchase_order, item, quality, color, brand, style_name, SUM(quantity) as total_order_qty, 
+              ex_factory_date, approved_ex_factory_date, aql_plan_date, aql_action_date, aql_status, status 
               FROM tb_po_detail
               WHERE 1 $where
               GROUP BY so_no) as t2
@@ -2863,74 +2864,173 @@ class Dashboard_model extends CI_Model {
         return $query;
     }
 
-    public function getAqlSummaryReport($date)
+    public function getAqlSummaryReport($brands, $from_date, $to_date, $po_type)
     {
-        $sql="SELECT t0.brand, t1.today_plan_aql_count, t2.today_plan_aql_pass_count, t3.today_plan_aql_fail_count,
-              t4.previous_due_aql_count, t5.previous_due_aql_pass_count
-              
-            FROM 
-            (SELECT brand FROM `tb_po_detail` GROUP BY brand) AS t0
+//        $sql="SELECT t0.brand, t1.today_plan_aql_count, t2.today_plan_aql_pass_count, t3.today_plan_aql_fail_count,
+//              t4.previous_due_aql_count, t5.previous_due_aql_pass_count
+//
+//            FROM
+//            (SELECT brand FROM `tb_po_detail` GROUP BY brand) AS t0
+//
+//            LEFT JOIN
+//            (SELECT A.brand, COUNT(A.so_no) AS today_plan_aql_count
+//            FROM (SELECT brand, so_no FROM `tb_po_detail`
+//            WHERE aql_plan_date!='0000-00-00'
+//            AND aql_plan_date='$date'
+//            GROUP BY brand, so_no) AS A
+//            GROUP BY A.brand) AS t1
+//            ON t0.brand=t1.brand
+//
+//            LEFT JOIN
+//            (SELECT B.brand, COUNT(B.so_no) AS today_plan_aql_pass_count
+//            FROM (SELECT brand, so_no FROM `tb_po_detail`
+//            WHERE aql_plan_date!='0000-00-00'
+//            AND aql_action_date='$date'
+//            AND aql_status IN (1)
+//            GROUP BY brand, so_no) AS B
+//            GROUP BY B.brand) AS t2
+//            ON t0.brand=t2.brand
+//
+//            LEFT JOIN
+//            (SELECT C.brand, COUNT(C.so_no) AS today_plan_aql_fail_count
+//            FROM (SELECT brand, so_no FROM `tb_po_detail`
+//            WHERE aql_plan_date!='0000-00-00'
+//            AND aql_action_date='$date'
+//            AND aql_status IN (2)
+//            GROUP BY brand, so_no) AS C
+//            GROUP BY C.brand) AS t3
+//            ON t0.brand=t3.brand
+//
+//            LEFT JOIN
+//            (SELECT D.brand, COUNT(D.so_no) AS previous_due_aql_count
+//            FROM (SELECT brand, so_no FROM `tb_po_detail`
+//            WHERE aql_plan_date!='0000-00-00'
+//            AND aql_plan_date<'$date'
+//            AND aql_status IN (0, 2)
+//            GROUP BY brand, so_no) AS D
+//            GROUP BY D.brand) AS t4
+//            ON t0.brand=t4.brand
+//
+//            LEFT JOIN
+//            (SELECT E.brand, COUNT(E.so_no) AS previous_due_aql_pass_count
+//            FROM (SELECT brand, so_no FROM `tb_po_detail`
+//            WHERE aql_plan_date!='0000-00-00'
+//            AND aql_plan_date<'$date'
+//            AND aql_status IN (1)
+//            AND aql_action_date='$date'
+//            GROUP BY brand, so_no) AS E
+//            GROUP BY E.brand) AS t5
+//            ON t0.brand=t5.brand
+//
+//            LEFT JOIN
+//            (SELECT F.brand, COUNT(F.so_no) AS previous_due_aql_fail_count
+//            FROM (SELECT brand, so_no FROM `tb_po_detail`
+//            WHERE aql_plan_date!='0000-00-00'
+//            AND aql_plan_date<'$date'
+//            AND aql_status IN (2)
+//            AND aql_action_date='$date'
+//            GROUP BY brand, so_no) AS F
+//            GROUP BY F.brand) AS t6
+//            ON t0.brand=t6.brand";
 
-            LEFT JOIN
-            (SELECT A.brand, COUNT(A.so_no) AS today_plan_aql_count 
-            FROM (SELECT brand, so_no FROM `tb_po_detail` 
-            WHERE aql_plan_date!='0000-00-00'
-            AND aql_plan_date='$date'
-            GROUP BY brand, so_no) AS A 
-            GROUP BY A.brand) AS t1
-            ON t0.brand=t1.brand
-            
-            LEFT JOIN
-            (SELECT B.brand, COUNT(B.so_no) AS today_plan_aql_pass_count
-            FROM (SELECT brand, so_no FROM `tb_po_detail` 
-            WHERE aql_plan_date!='0000-00-00'
-            AND aql_action_date='$date'
-            AND aql_status IN (1)
-            GROUP BY brand, so_no) AS B 
-            GROUP BY B.brand) AS t2
-            ON t0.brand=t2.brand
-            
-            LEFT JOIN
-            (SELECT C.brand, COUNT(C.so_no) AS today_plan_aql_fail_count
-            FROM (SELECT brand, so_no FROM `tb_po_detail` 
-            WHERE aql_plan_date!='0000-00-00'
-            AND aql_action_date='$date'
-            AND aql_status IN (2)
-            GROUP BY brand, so_no) AS C
-            GROUP BY C.brand) AS t3
-            ON t0.brand=t3.brand
-            
-            LEFT JOIN
-            (SELECT D.brand, COUNT(D.so_no) AS previous_due_aql_count 
-            FROM (SELECT brand, so_no FROM `tb_po_detail` 
-            WHERE aql_plan_date!='0000-00-00'
-            AND aql_plan_date<'$date'
-            AND aql_status IN (0, 2)
-            GROUP BY brand, so_no) AS D 
-            GROUP BY D.brand) AS t4
-            ON t0.brand=t4.brand
-            
-            LEFT JOIN
-            (SELECT E.brand, COUNT(E.so_no) AS previous_due_aql_pass_count 
-            FROM (SELECT brand, so_no FROM `tb_po_detail` 
-            WHERE aql_plan_date!='0000-00-00'
-            AND aql_plan_date<'$date'
-            AND aql_status IN (1)
-            AND aql_action_date='$date'
-            GROUP BY brand, so_no) AS E 
-            GROUP BY E.brand) AS t5
-            ON t0.brand=t5.brand
-            
-            LEFT JOIN
-            (SELECT F.brand, COUNT(F.so_no) AS previous_due_aql_fail_count 
-            FROM (SELECT brand, so_no FROM `tb_po_detail` 
-            WHERE aql_plan_date!='0000-00-00'
-            AND aql_plan_date<'$date'
-            AND aql_status IN (2)
-            AND aql_action_date='$date'
-            GROUP BY brand, so_no) AS F 
-            GROUP BY F.brand) AS t6
-            ON t0.brand=t6.brand";
+        $sql = "SELECT t1.*, t2.total_po, t3.today_planned_po, t4.today_offered_po, t5.today_passed_po, t6.today_failed_po,
+                t7.total_ready_for_aql_po, t8.total_offered_aql_po, t9.total_passed_aql_po, t10.total_failed_aql_po
+                
+                FROM
+                (SELECT brand, approved_ex_factory_date, SUM(quantity) AS total_order_qty FROM `tb_po_detail` 
+                WHERE 1 AND brand IN ($brands) 
+                 AND approved_ex_factory_date BETWEEN '$from_date' AND '$to_date' AND po_type=$po_type 
+                GROUP BY brand, approved_ex_factory_date) AS t1
+                
+                LEFT JOIN
+                (SELECT COUNT(A.so_no) AS total_po, A.brand, A.approved_ex_factory_date
+                FROM
+                (SELECT so_no, brand, approved_ex_factory_date FROM `tb_po_detail` 
+                WHERE 1 AND brand IN ($brands) 
+                 AND approved_ex_factory_date BETWEEN '$from_date' AND '$to_date' AND po_type=$po_type 
+                GROUP BY so_no, brand, approved_ex_factory_date) AS A
+                GROUP BY A.brand, A.approved_ex_factory_date) AS t2
+                ON t1.brand=t2.brand AND t1.approved_ex_factory_date=t2.approved_ex_factory_date
+                
+                LEFT JOIN
+                (SELECT COUNT(A.so_no) AS today_planned_po, A.brand, A.approved_ex_factory_date
+                FROM
+                (SELECT so_no, brand, approved_ex_factory_date FROM `tb_po_detail` 
+                WHERE 1 AND brand IN ($brands) 
+                 AND approved_ex_factory_date BETWEEN '$from_date' AND '$to_date' AND po_type=$po_type AND aql_plan_date=CURDATE()
+                GROUP BY so_no, brand, approved_ex_factory_date) AS A
+                GROUP BY A.brand, A.approved_ex_factory_date) AS t3
+                ON t1.brand=t3.brand AND t1.approved_ex_factory_date=t3.approved_ex_factory_date
+                
+                LEFT JOIN
+                (SELECT COUNT(A.so_no) AS today_offered_po, A.brand, A.approved_ex_factory_date
+                FROM
+                (SELECT so_no, brand, approved_ex_factory_date FROM `tb_po_detail` 
+                WHERE 1 AND brand IN ($brands) 
+                 AND approved_ex_factory_date BETWEEN '$from_date' AND '$to_date' AND po_type=$po_type AND aql_offer_date=CURDATE()
+                GROUP BY so_no, brand, approved_ex_factory_date) AS A
+                GROUP BY A.brand, A.approved_ex_factory_date) AS t4
+                ON t1.brand=t4.brand AND t1.approved_ex_factory_date=t4.approved_ex_factory_date
+                
+                LEFT JOIN
+                (SELECT COUNT(A.so_no) AS today_passed_po, A.brand, A.approved_ex_factory_date
+                FROM
+                (SELECT so_no, brand, approved_ex_factory_date FROM `tb_po_detail` 
+                WHERE 1 AND brand IN ($brands) 
+                 AND approved_ex_factory_date BETWEEN '$from_date' AND '$to_date' AND po_type=$po_type AND aql_action_date=CURDATE() AND aql_status=1
+                GROUP BY so_no, brand, approved_ex_factory_date) AS A
+                GROUP BY A.brand, A.approved_ex_factory_date) AS t5
+                ON t1.brand=t5.brand AND t1.approved_ex_factory_date=t5.approved_ex_factory_date
+                
+                LEFT JOIN
+                (SELECT COUNT(A.so_no) AS today_failed_po, A.brand, A.approved_ex_factory_date
+                FROM
+                (SELECT so_no, brand, approved_ex_factory_date FROM `tb_po_detail` 
+                WHERE 1 AND brand IN ($brands) 
+                 AND approved_ex_factory_date BETWEEN '$from_date' AND '$to_date' AND po_type=$po_type AND aql_action_date=CURDATE() AND aql_status=2
+                GROUP BY so_no, brand, approved_ex_factory_date) AS A
+                GROUP BY A.brand, A.approved_ex_factory_date) AS t6
+                ON t1.brand=t6.brand AND t1.approved_ex_factory_date=t6.approved_ex_factory_date
+                
+                LEFT JOIN
+                (SELECT COUNT(A.so_no) AS total_ready_for_aql_po, A.brand, A.approved_ex_factory_date
+                FROM
+                (SELECT so_no, brand, approved_ex_factory_date FROM `tb_po_detail` 
+                WHERE 1 AND brand IN ($brands) 
+                 AND approved_ex_factory_date BETWEEN '$from_date' AND '$to_date' AND po_type=$po_type AND is_ready_for_aql=1
+                GROUP BY so_no, brand, approved_ex_factory_date) AS A
+                GROUP BY A.brand, A.approved_ex_factory_date) AS t7
+                ON t1.brand=t7.brand AND t1.approved_ex_factory_date=t7.approved_ex_factory_date
+                      
+                LEFT JOIN
+                (SELECT COUNT(A.so_no) AS total_offered_aql_po, A.brand, A.approved_ex_factory_date
+                FROM
+                (SELECT so_no, brand, approved_ex_factory_date FROM `tb_po_detail` 
+                WHERE 1 AND brand IN ($brands) 
+                 AND approved_ex_factory_date BETWEEN '$from_date' AND '$to_date' AND po_type=$po_type AND is_aql_offerred=1
+                GROUP BY so_no, brand, approved_ex_factory_date) AS A
+                GROUP BY A.brand, A.approved_ex_factory_date) AS t8
+                ON t1.brand=t8.brand AND t1.approved_ex_factory_date=t8.approved_ex_factory_date
+                
+                LEFT JOIN
+                (SELECT COUNT(A.so_no) AS total_passed_aql_po, A.brand, A.approved_ex_factory_date
+                FROM
+                (SELECT so_no, brand, approved_ex_factory_date FROM `tb_po_detail` 
+                WHERE 1 AND brand IN ($brands) 
+                 AND approved_ex_factory_date BETWEEN '$from_date' AND '$to_date' AND po_type=$po_type AND aql_status=1
+                GROUP BY so_no, brand, approved_ex_factory_date) AS A
+                GROUP BY A.brand, A.approved_ex_factory_date) AS t9
+                ON t1.brand=t9.brand AND t1.approved_ex_factory_date=t9.approved_ex_factory_date
+                
+                LEFT JOIN
+                (SELECT COUNT(A.so_no) AS total_failed_aql_po, A.brand, A.approved_ex_factory_date
+                FROM
+                (SELECT so_no, brand, approved_ex_factory_date FROM `tb_po_detail` 
+                WHERE 1 AND brand IN ($brands) 
+                 AND approved_ex_factory_date BETWEEN '$from_date' AND '$to_date' AND po_type=0 AND aql_status=2
+                GROUP BY so_no, brand, approved_ex_factory_date) AS A
+                GROUP BY A.brand, A.approved_ex_factory_date) AS t10
+                ON t1.brand=t10.brand AND t1.approved_ex_factory_date=t10.approved_ex_factory_date";
 
         $query = $this->db->query($sql)->result_array();
         return $query;

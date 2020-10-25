@@ -520,10 +520,34 @@ class Dashboard extends CI_Controller {
         $date_time=$datex->format('Y-m-d H:i:s');
         $date=$datex->format('Y-m-d');
 
-        $data['aql_summary'] = $this->dashboard_model->getAqlSummaryReport($date);
+        $data['brands'] = $this->access_model->getAllBrands();
+
+//        $data['aql_summary'] = $this->dashboard_model->getAqlSummaryReport($date);
 
         $data['maincontent'] = $this->load->view('reports/aql_summary_report', $data, true);
         $this->load->view('reports/master', $data);
+    }
+
+    public function getAQLSummaryReport(){
+        $brands = $this->input->post('brands');
+        $from_date = $this->input->post('from_date');
+        $to_date = $this->input->post('to_date');
+        $po_type = $this->input->post('po_type');
+
+        $data['aql_reports'] = $this->dashboard_model->getAqlSummaryReport($brands, $from_date, $to_date, $po_type);
+
+        echo $data['maincontent'] = $this->load->view('reports/aql_summary_filter_report', $data);
+    }
+
+    public function getAQLFailSummaryReport(){
+        $brands = $this->input->post('brands');
+        $from_date = $this->input->post('from_date');
+        $to_date = $this->input->post('to_date');
+        $po_type = $this->input->post('po_type');
+
+        $data['aql_fail_reports'] = $this->dashboard_model->selectTableDataRowQuery("so_no, purchase_order, item, quality, color, style_no, style_name, brand, SUM(quantity) AS total_order_qty, aql_action_date, approved_ex_factory_date", "tb_po_detail", " AND brand IN ($brands) AND po_type=$po_type AND approved_ex_factory_date BETWEEN '$from_date' AND '$to_date' AND aql_status=2");
+
+        echo $data['maincontent'] = $this->load->view('reports/aql_fail_summary_filter_report', $data);
     }
 
     public function getAqlOfferReport($brand){
@@ -598,12 +622,17 @@ class Dashboard extends CI_Controller {
     }
 
     public function getRunningPOs(){
+        $po_type = $this->input->post('po_type');
         $brands_string = $this->input->post('brands');
 
         $where = '';
 
         if($brands_string != ''){
             $where .= " AND brand in ($brands_string)";
+        }
+
+        if($po_type != ''){
+            $where .= " AND po_type = $po_type";
         }
 
         $data['prod_summary'] = $this->dashboard_model->getProductionReport($where);
@@ -1278,7 +1307,7 @@ class Dashboard extends CI_Controller {
             $this->email->set_newline("\r\n");
             $this->email->from('pts@interfabshirt.com'); // change it to yours
             $this->email->to('Silke.Wippert@olymp.com'); // change it to yours
-            $this->email->cc('ahasan-interfab@viyellatexgroup.com, abdullah.khan@viyellatexgroup.com, moazzem.huq@interfabshirt.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, dinendra.sanjeewa@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, nipunsarker56@gmail.com, shafayet.chowdhury@interfabshirt.com, shehab.ahameed@interfabshirt.com, hasib.hossain@interfabshirt.com, sahil.islam@interfabshirt.com, fahim.ashab@interfabshirt.com');// change it to yours
+            $this->email->cc('ahasan-interfab@viyellatexgroup.com, abdullah.khan@viyellatexgroup.com, moazzem.huq@interfabshirt.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, nipunsarker56@gmail.com, shafayet.chowdhury@interfabshirt.com, shehab.ahameed@interfabshirt.com, hasib.hossain@interfabshirt.com, sahil.islam@interfabshirt.com, fahim.ashab@interfabshirt.com');// change it to yours
 //            $this->email->to('nipun.sarker@interfabshirt.com'); // change it to yours
             $this->email->subject('OLYMP PTS Report (Auto-Mail)');
             $this->email->message("$content_data");
@@ -1473,7 +1502,7 @@ class Dashboard extends CI_Controller {
 //            $this->email->from('ecofab.pts@gmail.com'); // change it to yours
 //            $this->email->to('nipunsarker56@gmail.com, nipun.sarker@interfabshirt.com');// change it to yours
             $this->email->to('Silke.Wippert@olymp.com');// change it to yours
-            $this->email->cc('ahasan-interfab@viyellatexgroup.com, abdullah.khan@viyellatexgroup.com, moazzem.huq@interfabshirt.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, dinendra.sanjeewa@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, nipunsarker56@gmail.com, shafayet.chowdhury@interfabshirt.com, shehab.ahameed@interfabshirt.com, hasib.hossain@interfabshirt.com, sahil.islam@interfabshirt.com, fahim.ashab@interfabshirt.com');// change it to yours
+            $this->email->cc('ahasan-interfab@viyellatexgroup.com, abdullah.khan@viyellatexgroup.com, moazzem.huq@interfabshirt.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, nipunsarker56@gmail.com, shafayet.chowdhury@interfabshirt.com, shehab.ahameed@interfabshirt.com, hasib.hossain@interfabshirt.com, sahil.islam@interfabshirt.com, fahim.ashab@interfabshirt.com');// change it to yours
             $this->email->cc('nipun.sarker@interfabshirt.com');// change it to yours
             $this->email->subject('Olymp PTS Report (Auto-Mail)');
             $this->email->message("$content_data");
@@ -1662,7 +1691,7 @@ class Dashboard extends CI_Controller {
             $this->load->library('email', $config);
             $this->email->set_newline("\r\n");
             $this->email->from('pts@interfabshirt.com'); // change it to yours
-            $this->email->to('ali.hossain@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, dinendra.sanjeewa@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shefat.hossain@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, maksudul.hasan@interfabshirt.com, shehab.ahameed@interfabshirt.com');// change it to yours
+            $this->email->to('ali.hossain@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shefat.hossain@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, maksudul.hasan@interfabshirt.com, shehab.ahameed@interfabshirt.com');// change it to yours
 //            $this->email->to('nipun.sarker@interfabshirt.com');// change it to yours
             $this->email->subject('PTS Test Auto-Mail');
             $this->email->message("$content_data");
@@ -1848,7 +1877,7 @@ class Dashboard extends CI_Controller {
             $this->email->from('pts@interfabshirt.com'); // change it to yours
 //            $this->email->to('nipun.sarker@interfabshirt.com');// change it to yours
 //            $this->email->to('Heinrich_Vinke@hugoboss.com');// change it to yours
-            $this->email->to('ahasan-interfab@viyellatexgroup.com, abdullah.khan@viyellatexgroup.com, moazzem.huq@interfabshirt.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, dinendra.sanjeewa@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shefat.hossain@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, nipunsarker56@gmail.com, shafayet.chowdhury@interfabshirt.com, maksudul.hasan@interfabshirt.com, shehab.ahameed@interfabshirt.com');// change it to yours
+            $this->email->to('ahasan-interfab@viyellatexgroup.com, abdullah.khan@viyellatexgroup.com, moazzem.huq@interfabshirt.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shefat.hossain@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, nipunsarker56@gmail.com, shafayet.chowdhury@interfabshirt.com, maksudul.hasan@interfabshirt.com, shehab.ahameed@interfabshirt.com');// change it to yours
             $this->email->subject('PTS Report (Auto-Mail)');
             $this->email->message("$content_data");
             $this->email->attach("uploads/mail_attachment/hb_running_po.xlsx");
@@ -2043,7 +2072,7 @@ class Dashboard extends CI_Controller {
 //            $this->email->from('ecofab.pts@interfabshirt.com'); // change it to yours
 //            $this->email->to('nipunsarker56@gmail.com, nipun.sarker@interfabshirt.com');// change it to yours
 //            $this->email->to('Heinrich_Vinke@hugoboss.com');// change it to yours
-//            $this->email->cc('ahasan-interfab@viyellatexgroup.com, abdullah.khan@viyellatexgroup.com, moazzem.huq@interfabshirt.com, yaman.hasanat@viyellatexgroup.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, dinendra.sanjeewa@interfabshirt.com, athula.bandara@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, faijul.haque@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shefat.hossain@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, nipunsarker56@gmail.com, shafayet.chowdhury@interfabshirt.com, maksudul.hasan@interfabshirt.com, shehab.ahameed@interfabshirt.com');// change it to yours
+//            $this->email->cc('ahasan-interfab@viyellatexgroup.com, abdullah.khan@viyellatexgroup.com, moazzem.huq@interfabshirt.com, yaman.hasanat@viyellatexgroup.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, faijul.haque@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shefat.hossain@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, nipunsarker56@gmail.com, shafayet.chowdhury@interfabshirt.com, maksudul.hasan@interfabshirt.com, shehab.ahameed@interfabshirt.com');// change it to yours
             $this->email->to('Galya_Milcheva@hugoboss.com, Diego_Quadrelli@hugoboss.com, nipun.sarker@interfabshirt.com, maksudul.hasan@interfabshirt.com, nipunsarker56@gmail.com, ecofab.itsupport@interfabshirt.com');// change it to yours
             $this->email->subject('PTS Report (Auto-Mail)');
             $this->email->message("$content_data");
@@ -2147,7 +2176,7 @@ class Dashboard extends CI_Controller {
             $this->email->from('pts@interfabshirt.com'); // change it to yours
 //            $this->email->to('nipun.sarker@interfabshirt.com');// change it to yours
             $this->email->to('ahasan-interfab@viyellatexgroup.com');// change it to yours
-            $this->email->cc('abdullah.khan@viyellatexgroup.com, yaman.hasanat@viyellatexgroup.com, moazzem.huq@interfabshirt.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, mahesh.hewage@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, dinendra.sanjeewa@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shefat.hossain@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shehab.ahameed@interfabshirt.com, sahil.islam@interfabshirt.com, maksudul.hasan@interfabshirt.com');// change it to yours
+            $this->email->cc('abdullah.khan@viyellatexgroup.com, yaman.hasanat@viyellatexgroup.com, moazzem.huq@interfabshirt.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, mahesh.hewage@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shefat.hossain@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shehab.ahameed@interfabshirt.com, sahil.islam@interfabshirt.com, maksudul.hasan@interfabshirt.com');// change it to yours
             $this->email->subject('PTS Summary Report (Auto-Mail)');
             $this->email->message("$new_row_tbl");
             if($this->email->send())
@@ -2243,7 +2272,7 @@ class Dashboard extends CI_Controller {
 //            $this->email->from('pts@interfabshirt.com'); // change it to yours
 ////            $this->email->to('nipun.sarker@interfabshirt.com');// change it to yours
 //            $this->email->to('ahasan-interfab@viyellatexgroup.com');// change it to yours
-//            $this->email->cc('abdullah.khan@viyellatexgroup.com, yaman.hasanat@viyellatexgroup.com, moazzem.huq@interfabshirt.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, dinendra.sanjeewa@interfabshirt.com, athula.bandara@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, faijul.haque@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shefat.hossain@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shehab.ahameed@interfabshirt.com, sahil.islam@interfabshirt.com, maksudul.hasan@interfabshirt.com');// change it to yours
+//            $this->email->cc('abdullah.khan@viyellatexgroup.com, yaman.hasanat@viyellatexgroup.com, moazzem.huq@interfabshirt.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, faijul.haque@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shefat.hossain@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shehab.ahameed@interfabshirt.com, sahil.islam@interfabshirt.com, maksudul.hasan@interfabshirt.com');// change it to yours
 //            $this->email->subject('PTS Summary Report (Auto-Mail)');
 //            $this->email->message("$new_row_tbl");
 //            if($this->email->send())
@@ -2399,7 +2428,7 @@ class Dashboard extends CI_Controller {
             $this->email->from('pts@interfabshirt.com'); // change it to yours
 //            $this->email->to('nipun.sarker@interfabshirt.com');// change it to yours
             $this->email->to('ahasan-interfab@viyellatexgroup.com');// change it to yours
-            $this->email->cc('abdullah.khan@viyellatexgroup.com, yaman.hasanat@viyellatexgroup.com, moazzem.huq@interfabshirt.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, mahesh.hewage@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, dinendra.sanjeewa@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shefat.hossain@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, shehab.ahameed@interfabshirt.com, maksudul.hasan@interfabshirt.com, tanzir.hassan@interfabshirt.com');// change it to yours
+            $this->email->cc('abdullah.khan@viyellatexgroup.com, yaman.hasanat@viyellatexgroup.com, moazzem.huq@interfabshirt.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, mahesh.hewage@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shefat.hossain@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, shehab.ahameed@interfabshirt.com, maksudul.hasan@interfabshirt.com, tanzir.hassan@interfabshirt.com');// change it to yours
             $this->email->subject('PTS Summary Report (Auto-Mail)');
             $this->email->message("$new_row_tbl");
             if($this->email->send())
@@ -2501,7 +2530,7 @@ class Dashboard extends CI_Controller {
             $this->email->to('Silke.Wippert@olymp.com'); // change it to yours
             $this->email->cc('nipun.sarker@interfabshirt.com');// change it to yours
 //            $this->email->to('ahasan-interfab@viyellatexgroup.com');// change it to yours
-//            $this->email->cc('abdullah.khan@viyellatexgroup.com, yaman.hasanat@viyellatexgroup.com, moazzem.huq@interfabshirt.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, dinendra.sanjeewa@interfabshirt.com, athula.bandara@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, faijul.haque@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shefat.hossain@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shehab.ahameed@interfabshirt.com, sahil.islam@interfabshirt.com, maksudul.hasan@interfabshirt.com');// change it to yours
+//            $this->email->cc('abdullah.khan@viyellatexgroup.com, yaman.hasanat@viyellatexgroup.com, moazzem.huq@interfabshirt.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, faijul.haque@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shefat.hossain@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shehab.ahameed@interfabshirt.com, sahil.islam@interfabshirt.com, maksudul.hasan@interfabshirt.com');// change it to yours
             $this->email->subject('Second Floor PTS Summary Report (Auto-Mail)');
             $this->email->message("$new_row_tbl");
             if($this->email->send())
@@ -2765,7 +2794,7 @@ class Dashboard extends CI_Controller {
 //            $this->email->to('nipun.sarker@interfabshirt.com');// change it to yours
 //            $this->email->cc('');// change it to yours
 //            $this->email->to('ahasan-interfab@viyellatexgroup.com');// change it to yours
-//            $this->email->cc('abdullah.khan@viyellatexgroup.com, yaman.hasanat@viyellatexgroup.com, moazzem.huq@interfabshirt.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, dinendra.sanjeewa@interfabshirt.com, athula.bandara@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, faijul.haque@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shefat.hossain@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shehab.ahameed@interfabshirt.com, maksudul.hasan@interfabshirt.com');// change it to yours
+//            $this->email->cc('abdullah.khan@viyellatexgroup.com, yaman.hasanat@viyellatexgroup.com, moazzem.huq@interfabshirt.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, faijul.haque@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shefat.hossain@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shehab.ahameed@interfabshirt.com, maksudul.hasan@interfabshirt.com');// change it to yours
             $this->email->subject('PTS Summary Report (Auto-Mail)');
             $this->email->message("$new_row_tbl");
             if($this->email->send())
@@ -2842,7 +2871,7 @@ class Dashboard extends CI_Controller {
 //            $this->email->to('nipun.sarker@interfabshirt.com');// change it to yours
 //            $this->email->cc('');// change it to yours
 //            $this->email->to('ahasan-interfab@viyellatexgroup.com');// change it to yours
-//            $this->email->cc('abdullah.khan@viyellatexgroup.com, yaman.hasanat@viyellatexgroup.com, moazzem.huq@interfabshirt.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, dinendra.sanjeewa@interfabshirt.com, athula.bandara@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, faijul.haque@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shefat.hossain@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shehab.ahameed@interfabshirt.com, maksudul.hasan@interfabshirt.com');// change it to yours
+//            $this->email->cc('abdullah.khan@viyellatexgroup.com, yaman.hasanat@viyellatexgroup.com, moazzem.huq@interfabshirt.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, faijul.haque@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shefat.hossain@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shehab.ahameed@interfabshirt.com, maksudul.hasan@interfabshirt.com');// change it to yours
             $this->email->subject('PTS Summary Report (Auto-Mail)');
             $this->email->message("$new_row_tbl");
             if($this->email->send())

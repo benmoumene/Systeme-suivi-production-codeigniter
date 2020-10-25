@@ -203,7 +203,40 @@
             alert("Please Select Required Fields!");
         }
     }
+    
+    function saveAqlPlan() {
+        var so_no = [];
+        $("input[name='so_no[]']").each(function() {
+            so_no.push($(this).val());
+        });
 
+        var aql_plan_date = [];
+        $("input[name='aql_plan_date[]']").each(function() {
+            aql_plan_date.push($(this).val());
+        });
+
+        var ready_for_aql = [];
+        $('.ready_for_aql').each(function (index) {
+            ready_for_aql.push(this.value);
+        });
+
+        $("#loader").css("display", "block");
+
+        $.ajax({
+            url: "<?php echo base_url();?>access/saveAqlPlanNew/",
+            type: "POST",
+            data: {so_no: so_no, aql_plan_date: aql_plan_date, ready_for_aql: ready_for_aql},
+            dataType: "html",
+            success: function (data) {
+
+                if(data == 'done'){
+                    $("#loader").css("display", "none");
+                    $("#submit_btn").click();
+                }
+
+            }
+        });
+    }
 
     function printDiv(divName) {
         var printContents = document.getElementById(divName).innerHTML;
@@ -218,19 +251,4 @@
         location.reload();
     }
 
-    function getWarehousePcs(po_no, so_no, purchase_order,item, quality, color) {
-        $("#wh_cl_list").empty();
-
-            $.ajax({
-                url: "<?php echo base_url();?>dashboard/getWarehouseSizePcs/",
-                type: "POST",
-                data: {po_no: po_no, so_no: so_no, purchase_order: purchase_order, item: item, quality: quality, color: color},
-                dataType: "html",
-                success: function (data) {
-                    $("#wh_cl_list").append(data);
-                }
-            });
-
-
-    }
 </script>

@@ -4,7 +4,7 @@
         <tr>
             <th colspan="9"></th>
             <th class="center">
-                <button class="btn btn-success">SAVE</button>
+                <button class="btn btn-success" onclick="saveAqlPlan();">SAVE</button>
             </th>
         </tr>
         <tr>
@@ -38,9 +38,10 @@
                 <input type="date" name="aql_plan_date[]" id="aql_plan_date" value="<?php echo ($v['aql_plan_date'] != '' ? $v['aql_plan_date'] : '0000-00-00');?>"/>
             </td>
             <td class="center">
-                <center>
-                    <input type="checkbox" class="form-control" id="ready_for_aql" name="ready_for_aql[]" value="1" <?php if($v['is_ready_for_aql'] == 1){ ?> checked="checked" <?php } ?> />
-                </center>
+                <select class="form-control ready_for_aql" id="ready_for_aql" name="ready_for_aql[]">
+                    <option value="0" <?php if($v['is_ready_for_aql'] == 0){ ?> selected="selected" <?php } ?>>No</option>
+                    <option value="1" <?php if($v['is_ready_for_aql'] == 1){ ?> selected="selected" <?php } ?>>Yes</option>
+                </select>
             </td>
         </tr>
     <?php
@@ -51,7 +52,7 @@
         <tr>
             <td colspan="9"></td>
             <td class="center">
-                <button class="btn btn-success">SAVE</button>
+                <button class="btn btn-success" onclick="saveAqlPlan();">SAVE</button>
             </td>
         </tr>
     </tfoot>

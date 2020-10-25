@@ -42,86 +42,118 @@
                 </div>
 
                 <div class="porlets-content">
-                    <div id="print_div">
                     <div class="row">
-                        <sec class="table-responsive">
-                            <section class="panel default blue_title h2">
+                        <div class="form-group">
+                            <div class="col-md-2">
+                                <select class="form-control" name="brands[]" id="brands" multiple data-placeholder="Select Brands">
+                                    <?php foreach ($brands as $v){
+                                        if($v['brand'] != ''){
+                                            ?>
+                                            <option value="<?php echo "'".$v['brand']."'"?>"><?php echo $v['brand']?></option>
+                                            <?php
+                                        }
+                                    } ?>
+                                </select>
+                                <br />
+                                <span><b>* Select Brands </b></span>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" class="form-control form-control-inline input-medium default-date-picker" id="from_date" name="from_date" readonly="readonly" placeholder="mm-dd-YYY">
+                                <span><b>* Ship Date From </b></span>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" class="form-control form-control-inline input-medium default-date-picker" id="to_date" name="to_date" readonly="readonly" placeholder="mm-dd-YYY">
+                                <span><b>* Ship Date To </b></span>
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-control" name="po_type[]" id="po_type">
+                                    <option value="">PO Type...</option>
+                                    <option value="0">Bulk</option>
+                                    <option value="1">Size Set</option>
+                                    <option value="2">Sample</option>
+                                </select>
+                                <span><b>* PO Type </b></span>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-primary" id="submit_btn" onclick="getAQLSummaryReport();">SEARCH</button>
+                            </div>
+                            <div class="col-md-1" id="loader" style="display: none;"><div class="loader"></div></div>
+                        </div>
+                    </div>
 
-                                <div class="panel-body" id="table_content" style="overflow-x:auto;">
+                    <br />
 
-                                    <table class="display table table-bordered table-striped" id="" border="1">
+                    <div id="print_div">
+                        <div class="row">
+
+                            <div id="table_content">
+                                <div class="col-md-12" id="tableWrap">
+
+
+                                    <table class="table table-bordered table-striped" id="" border="1">
                                         <thead>
-                                            <tr>
-                                                <th class="hidden-phone center" rowspan="2" style="font-size: 20px;"><b>Brand</b></th>
-                                                <th class="hidden-phone center" colspan="5" style="font-size: 20px; background-color: #93e7ff;"><b>Today Plan AQL</b></th>
-                                                <th class="hidden-phone center" colspan="2" style="font-size: 20px; background-color: #fffdcd;"><b>Previous Date Plan AQL</b></th>
-                                            </tr>
-                                            <tr>
-                                                <th class="hidden-phone center"><h4><b>Planned</b></h4></th>
-                                                <th class="hidden-phone center"><h4><b>Offer</b></h4></th>
-                                                <th class="hidden-phone center"><h4><b>Pass</b></h4></th>
-                                                <th class="hidden-phone center"><h4><b>Fail</b></h4></th>
-                                                <th class="hidden-phone center"><h4><b>Balance</b></h4></th>
-                                                <th class="hidden-phone center"><h4><b>Today Pass</b></h4></th>
-                                                <th class="hidden-phone center"><h4><b>Balance</b></h4></th>
-                                            </tr>
+                                        <tr style="font-size: 20px;">
+                                            <th class="hidden-phone center" rowspan="2">Brand</th>
+                                            <th class="hidden-phone center" rowspan="2">ETD</th>
+                                            <th class="hidden-phone center" colspan="5" style="background-color: rgba(105,216,138,0.88);">Today AQL Status</th>
+                                            <th class="hidden-phone center" colspan="7" style="background-color: rgba(180,216,28,0.88);">PO CLOSING STATUS</th>
+                                        </tr>
+                                        <tr style="font-size: 16px;">
+                                            <th class="hidden-phone center">Plan</th>
+                                            <th class="hidden-phone center">Offer</th>
+                                            <th class="hidden-phone center">Pass</th>
+                                            <th class="hidden-phone center">Fail</th>
+                                            <th class="hidden-phone center">Blnc</th>
+                                            <th class="hidden-phone center">PO</th>
+                                            <th class="hidden-phone center">Ready for AQL</th>
+                                            <th class="hidden-phone center">Offered AQL</th>
+                                            <th class="hidden-phone center">Pass</th>
+                                            <th class="hidden-phone center">Fail</th>
+                                            <th class="hidden-phone center">Offer Blnc</th>
+                                            <th class="hidden-phone center">Closing Blnc</th>
+                                        </tr>
                                         </thead>
-                                        <tbody style="font-size: 16px;">
-                                            <?php foreach($aql_summary AS $v){
-                                                if($v['today_plan_aql_count'] != '' || $v['today_plan_aql_pass_count'] != '' || $v['today_plan_aql_fail_count'] != '' || $v['previous_due_aql_count'] != '' || $v['previous_due_aql_pass_count'] != ''){
-                                                $today_plan_aql_count = ($v['today_plan_aql_count'] != '' ? $v['today_plan_aql_count'] : 0);
-                                                $today_plan_aql_pass_count = ($v['today_plan_aql_pass_count'] != '' ? $v['today_plan_aql_pass_count'] : 0);
+                                        <tbody>
 
-                                                $previous_due_aql_count = ($v['previous_due_aql_count'] != '' ? $v['previous_due_aql_count'] : 0);
-                                                $previous_due_aql_pass_count = ($v['previous_due_aql_pass_count'] != '' ? $v['previous_due_aql_pass_count'] : 0);
-
-                                                ?>
-                                                <tr>
-                                                    <td class="hidden-phone center"><?php echo $v['brand'];?></td>
-                                                    <td class="hidden-phone center"><?php echo $today_plan_aql_count;?></td>
-                                                    <td class="hidden-phone center">
-                                                        <?php
-
-                                                            $aql_offer_report = $this->method_call->getAqlOfferReport($v['brand']);
-                                                            $today_aql_offer_count = ($aql_offer_report[0]['aql_offer_count'] != '' ? $aql_offer_report[0]['aql_offer_count'] : 0);
-                                                            echo $today_aql_offer_count;
-                                                        ?>
-                                                    </td>
-                                                    <td class="hidden-phone center"><?php echo $today_plan_aql_pass_count;?></td>
-                                                    <td class="hidden-phone center">
-                                                        <?php
-
-                                                        $aql_fail_report = $this->method_call->getAqlFailReport($v['brand']);
-                                                        $today_plan_aql_fail_count = ($aql_fail_report[0]['today_plan_aql_fail_count'] != '' ? $aql_fail_report[0]['today_plan_aql_fail_count'] : 0);
-                                                        echo $today_plan_aql_fail_count;
-                                                        ?>
-                                                    </td>
-                                                    <td class="hidden-phone center">
-                                                        <a href="<?php echo base_url()?>dashboard/getDetailsAqlreportToday/<?php echo $v['brand']?>" target="_blank" class="btn btn-warning">
-                                                            <?php
-                                                            $today_balance = $today_plan_aql_count-$today_plan_aql_pass_count;
-                                                            echo ($today_balance > 0 ? $today_balance : 0);
-                                                            ?>
-                                                        </a>
-                                                    </td>
-<!--                                                    <td class="hidden-phone center">--><?php //echo $today_plan_aql_count-$today_plan_aql_pass_count;?><!--</td>-->
-                                                    <td class="hidden-phone center"><?php echo $previous_due_aql_pass_count;?></td>
-<!--                                                    <td class="hidden-phone center">--><?php //echo $previous_due_aql_count;?><!--</td>-->
-<!--                                                    <td class="hidden-phone center">--><?php //echo $previous_due_aql_count;?><!--</td>-->
-                                                    <td class="hidden-phone center">
-                                                        <a href="<?php echo base_url()?>dashboard/getDetailsAqlreport/<?php echo $v['brand']?>" target="_blank" class="btn btn-warning">
-                                                            <?php echo $previous_due_aql_count;?>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            <?php }
-                                            } ?>
                                         </tbody>
                                     </table>
                                 </div>
-                            </section>
-                        </sec>
-                    </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+
+                            <div id="table_content_2">
+                                <div class="col-md-12" id="tableWrap">
+
+
+                                    <table class="table table-bordered table-striped" id="" border="1">
+                                        <thead>
+                                            <tr style="font-size: 20px;">
+                                                <th class="hidden-phone center" colspan="12" style="background-color: rgba(216,114,94,0.88);">FAIL LIST</th>
+                                            </tr>
+                                            <tr style="font-size: 16px;">
+                                                <th class="hidden-phone center">#</th>
+                                                <th class="hidden-phone center">SO</th>
+                                                <th class="hidden-phone center">PO</th>
+                                                <th class="hidden-phone center">ITEM</th>
+                                                <th class="hidden-phone center">QUALITY</th>
+                                                <th class="hidden-phone center">COLOR</th>
+                                                <th class="hidden-phone center">STYLE</th>
+                                                <th class="hidden-phone center">STYLE NAME</th>
+                                                <th class="hidden-phone center">BRAND</th>
+                                                <th class="hidden-phone center">ExFac</th>
+                                                <th class="hidden-phone center">ORDER QTY</th>
+                                                <th class="hidden-phone center">AQL DATE</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -181,6 +213,55 @@
         }
     }, true);
 
+    function getAQLSummaryReport() {
+        var brands = $("#brands").val();
+
+        if(brands != null){
+            var brands_string = brands.toString();
+        }
+
+        var po_type = $("#po_type").val();
+
+        var from_dt = $("#from_date").val();
+        var to_dt = $("#to_date").val();
+
+        var res1 = from_dt.split("-");
+        var res2 = to_dt.split("-");
+
+        var from_date = res1[2]+'-'+res1[0]+'-'+res1[1];
+        var to_date = res2[2]+'-'+res2[0]+'-'+res2[1];
+
+        if(brands_string != '' && from_date != '' && to_date != '' && po_type != ''){
+            $("#loader").css("display", "block");
+
+            $("#table_content").empty();
+            $("#table_content_2").empty();
+
+            $.ajax({
+                url: "<?php echo base_url();?>dashboard/getAQLSummaryReport/",
+                type: "POST",
+                data: {brands: brands_string, from_date: from_date, to_date: to_date, po_type: po_type},
+                dataType: "html",
+                success: function (data) {
+                    $("#table_content").append(data);
+                    $("#loader").css("display", "none");
+                }
+            });
+
+            $.ajax({
+                url: "<?php echo base_url();?>dashboard/getAQLFailSummaryReport/",
+                type: "POST",
+                data: {brands: brands_string, from_date: from_date, to_date: to_date, po_type: po_type},
+                dataType: "html",
+                success: function (data) {
+                    $("#table_content_2").append(data);
+                    $("#loader").css("display", "none");
+                }
+            });
+        }else{
+            alert("Please Select Required Fields!");
+        }
+    }
 
 
     function printDiv(divName) {
@@ -195,4 +276,5 @@
 
         location.reload();
     }
+
 </script>
