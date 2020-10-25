@@ -300,6 +300,16 @@ class Access extends CI_Controller {
         echo "PO Detail Backup Done";
     }
 
+    public function backUpDefectTrackingTable(){
+        $src_date = $this->input->post('src_date');
+        $des_db = $this->input->post('des_db');
+
+        $this->access_model->copyToBackUpDefectTrackingTable($src_date, $des_db);
+        $this->access_model->deleteFromDefectTrackingTable($src_date);
+
+        echo "Defect Tracking Backup Done";
+    }
+
     public function delete_cutting(){
         $data['title']='Delete Cutting';
         $data['user_name'] = $this->session->userdata('user_name');

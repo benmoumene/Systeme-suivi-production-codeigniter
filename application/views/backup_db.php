@@ -65,22 +65,27 @@
     </div>
     <br />
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
             <span class="btn btn-primary" onclick="backUpCareLabelTable();">Care Label Table</span>
             <br />
             <span id="success_msg_1" style="color: #308309; font-size: 20px;"></span>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <span class="btn btn-success" onclick="backUpCutSummaryTable();">Cut Summary Table</span>
             <br />
             <span id="success_msg_2" style="color: #308309; font-size: 20px;"></span>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <span class="btn btn-warning" onclick="backUpPoDetailTable();">PO Detail Table</span>
             <br />
             <span id="success_msg_3" style="color: #308309; font-size: 20px;"></span>
         </div>
-        <div class="col-md-3" id="loader" style="display: none;">
+        <div class="col-md-2">
+            <span class="btn btn-primary" onclick="backUpDefectTrackingTable();">Defect Tracking Table</span>
+            <br />
+            <span id="success_msg_4" style="color: #308309; font-size: 20px;"></span>
+        </div>
+        <div class="col-md-1" id="loader" style="display: none;">
             <div class="loader"></div>
         </div>
     </div>
@@ -169,6 +174,34 @@
             success: function (data) {
                 if (data == 'PO Detail Backup Done'){
                     $("#success_msg_3").text(data);
+                    $("#loader").css("display", "none");
+                }
+            }
+        });
+
+        }else {
+            alert('Please Select Required Fields!');
+        }
+    }
+
+    function backUpDefectTrackingTable() {
+
+        var des_db = $("#des_db").val();
+        var src_date = $("#src_date").val();
+
+        if(des_db != '' && src_date != ''){
+
+        $("#loader").css("display", "block");
+        $("#success_msg_4").empty();
+
+        $.ajax({
+            url: "<?php echo base_url();?>access/backUpDefectTrackingTable/",
+            type: "POST",
+            data: {src_date: src_date, des_db: des_db},
+            dataType: "html",
+            success: function (data) {
+                if (data == 'Defect Tracking Backup Done'){
+                    $("#success_msg_4").text(data);
                     $("#loader").css("display", "none");
                 }
             }

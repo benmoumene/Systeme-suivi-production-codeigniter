@@ -2259,6 +2259,16 @@ class Access_model extends CI_Model {
         return $query;
     }
 
+    public function copyToBackUpDefectTrackingTable($src_date, $des_db){
+
+        $sql = "INSERT INTO $des_db.tb_defects_tracking
+                SELECT * from efl_db_pts.tb_defects_tracking
+                WHERE DATE_FORMAT(defect_date_time, '%Y-%m') = '$src_date'";
+
+        $query = $this->db->query($sql);
+        return $query;
+    }
+
     public function getAllDatabases(){
         $anotherdb = $this->load->database('anotherdb', TRUE);
 
@@ -2309,6 +2319,15 @@ class Access_model extends CI_Model {
 
         $sql = "DELETE FROM efl_db_pts.tb_po_detail 
                 WHERE DATE_FORMAT(ex_factory_date, '%Y-%m') = '$src_date'";
+
+        $query = $this->db->query($sql);
+        return $query;
+    }
+
+    public function deleteFromDefectTrackingTable($src_date){
+
+        $sql = "DELETE FROM efl_db_pts.tb_defects_tracking 
+                WHERE DATE_FORMAT(defect_date_time, '%Y-%m') = '$src_date'";
 
         $query = $this->db->query($sql);
         return $query;
