@@ -1535,6 +1535,46 @@ class Access extends CI_Controller {
         }
     }
 
+    public function groupSoReform(){
+        $data['title'] = 'Group SO Reform';
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+        $data['msg'] = '';
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['so_list'] = $this->access_model->selectTableDataRowQuery("po_no", "tb_po_detail", " GROUP BY po_no");
+
+            $data['maincontent'] = $this->load->view('group_so_reform', $data, true);
+            $this->load->view('master', $data);
+
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
+    public function reformGroupSo(){
+        $group_so = $this->input->post('group_so');
+
+        $this->access_model->updateTblFields("tb_po_detail", " SET po_no=so_no ", " AND po_no='$group_so'");
+        $this->access_model->updateTblFields("tb_cut_summary", " SET po_no=so_no ", " AND po_no='$group_so'");
+        $this->access_model->updateTblFields("tb_care_labels", " SET po_no=so_no ", " AND po_no='$group_so'");
+
+        echo 'done';
+    }
+
+    public function getIndividualSoList(){
+        $group_so = $this->input->post('group_so');
+
+        $data['so_list'] = $this->access_model->selectTableDataRowQuery("po_no, so_no, purchase_order, item, quality, color, brand, style_no, style_name, SUM(quantity) AS total_order_qty", "tb_po_detail", " AND po_no='$group_so' GROUP BY po_no, so_no");
+
+        echo $data['maincontent'] = $this->load->view('so_list_filter', $data);
+    }
+
     public function isValidSo(){
         $po_no = $this->input->post('po_no');
 
@@ -6882,6 +6922,7 @@ class Access extends CI_Controller {
         $quality = $this->input->post('quality');
         $po_type = $this->input->post('po_type');
         $style_type = $this->input->post('style_type');
+        $per_bundle_qty = $this->input->post('per_bundle_qty');
 
         $size_field = "size";
         $qty_field = "qty";
@@ -6959,10 +7000,10 @@ class Access extends CI_Controller {
 //                        print_r("PO: ".$po_no.' / '."Item: ".$item.' / '."Size: ".$size.'-'.$lay.' / '."Qty: ".$quantity);
 //                        echo '</pre>';
 
-                        $cut_seg = ($quantity/10);
+                        $cut_seg = ($quantity/$per_bundle_qty);
                         $round_cut_seg = round($cut_seg);
                         $floor_cut_seg = floor($cut_seg);
-                        $after_dec = ($cut_seg - (int)$cut_seg) * 10;
+                        $after_dec = ($cut_seg - (int)$cut_seg) * $per_bundle_qty;
 
 //                        echo '<pre>';
 //                        print_r($cut_seg);
@@ -6981,7 +7022,7 @@ class Access extends CI_Controller {
 
                             if($floor_cut_seg >= $i){
                                 $bundle_start = $bundle_end+1 ;
-                                $bundle_end = ($bundle_start + 10) - 1;
+                                $bundle_end = ($bundle_start + $per_bundle_qty) - 1;
                             }
 
                             if($floor_cut_seg < $i){

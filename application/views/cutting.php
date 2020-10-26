@@ -173,7 +173,15 @@
                                     <input type="hidden" name="" id="exfacdate" value="" readonly>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <input type="number" required class="form-control" id="per_bundle_qty" name="per_bundle_qty" value="10">
+                                    <span style="font-size: 11px;">* Per Bundle Qty </span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-1">
                                 <div class="form-group">
                                     <div id="loader" style="display: none;"><div class="loader"></div></div>
                                 </div>
@@ -292,6 +300,7 @@
         var style_name = $("#style_name").val();
         var color = $("#color").val();
         var style_type = $("#style_type").val();
+        var per_bundle_qty = $("#per_bundle_qty").val();
 
         var so_no = $("#so_no").val();
         var exfacdate = $("#exfacdate").val();
@@ -314,7 +323,7 @@
         var lays = [];
 //        var ex_factory_date = [];
 
-        if(count_rows != '' && count_rows != 0 && count_rows != undefined && layer != '' && layer != 0 && layer != undefined && style_type != '' && style_type != 0 && style_type != undefined && cut_no != '' && cut_no != 0 && cut_no != undefined && po_type != '' && po_type != undefined && purchase_order_item != '' && purchase_order_item != 0 && purchase_order_item != undefined){
+        if(count_rows != '' && count_rows != 0 && count_rows != undefined && layer != '' && layer != 0 && layer != undefined && style_type != '' && style_type != 0 && style_type != undefined && cut_no != '' && cut_no != 0 && cut_no != undefined && po_type != '' && po_type != undefined && purchase_order_item != '' && purchase_order_item != 0 && purchase_order_item != undefined && per_bundle_qty != '' && per_bundle_qty != 0 && per_bundle_qty != undefined){
             for(var i=0; i < count_rows; i++){
                 var ratio = $("#ratio"+i).val();
                 if(ratio != '' && ratio != 0 && ratio != undefined){
@@ -354,7 +363,7 @@
                 $.ajax({
                     url: "<?php echo base_url();?>access/saveBundleCutNew/",
                     type: "POST",
-                    data: {sap_no: sap_no, so_no: so_no, ex_factory_date: exfacdate, cut_no: cut_no, brand: brand, style_no: style_no, style_name: style_name, color: color, quality: quality, po_type: po_type, style_type: style_type, actual_cut_qty: actual_cut_qty, planned_cut_qty: planned_cut_qty, size: sizes, qty: qty, item: item_no, purchase_order: po, lay: lays},
+                    data: {sap_no: sap_no, so_no: so_no, ex_factory_date: exfacdate, cut_no: cut_no, brand: brand, style_no: style_no, style_name: style_name, color: color, quality: quality, po_type: po_type, style_type: style_type, actual_cut_qty: actual_cut_qty, planned_cut_qty: planned_cut_qty, size: sizes, qty: qty, item: item_no, purchase_order: po, lay: lays, per_bundle_qty: per_bundle_qty},
                     dataType: "html",
                     success: function (data) {
                         $("#set_form").empty();

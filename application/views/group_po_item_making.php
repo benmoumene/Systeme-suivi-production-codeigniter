@@ -1,7 +1,7 @@
 <div class="pull-left breadcrumb_admin clear_both">
     <div class="pull-left page_title theme_color">
         <h1>Cut-Group Making</h1>
-        <h2 class="">Cut-Group Making...</h2>
+        <a href="<?php echo base_url();?>access/groupSoReform" class="btn btn-warning">Group SO Reform</a>
     </div>
     <div class="pull-right">
         <ol class="breadcrumb">
@@ -14,10 +14,6 @@
 <div class="row">
     <div class="col-md-12">
         <div class="block-web">
-            <div class="header">
-                <div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-                <h3 class="content-header">Cut-Group Making</h3>
-            </div>
             <div class="porlets-content">
                 <div style="padding-top:10px">
                     <h6 style="color:red">
