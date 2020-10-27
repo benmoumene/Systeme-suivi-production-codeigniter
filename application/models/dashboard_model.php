@@ -2933,8 +2933,10 @@ class Dashboard_model extends CI_Model {
 //            GROUP BY F.brand) AS t6
 //            ON t0.brand=t6.brand";
 
-        $sql = "SELECT t1.*, t2.total_po, t3.today_planned_po, t4.today_offered_po, t5.today_passed_po, t6.today_failed_po,
-                t7.total_ready_for_aql_po, t8.total_offered_aql_po, t9.total_passed_aql_po, t10.total_failed_aql_po
+        $sql = "SELECT t1.*, t2.total_po, t3.today_planned_po, t3.today_plan_order_qty, t4.today_offered_po, t4.today_offered_order_qty, 
+                t5.today_passed_po, t5.today_passed_order_qty, t6.today_failed_po, t6.today_failed_order_qty,
+                t7.total_ready_for_aql_po, t7.total_ready_for_aql_order_qty, t8.total_offered_aql_po, t8.total_offered_aql_order_qty,
+                t9.total_passed_aql_po, t9.total_passed_aql_order_qty, t10.total_failed_aql_po, t10.total_failed_aql_order_qty
                 
                 FROM
                 (SELECT brand, approved_ex_factory_date, SUM(quantity) AS total_order_qty FROM `tb_po_detail` 
@@ -2953,9 +2955,9 @@ class Dashboard_model extends CI_Model {
                 ON t1.brand=t2.brand AND t1.approved_ex_factory_date=t2.approved_ex_factory_date
                 
                 LEFT JOIN
-                (SELECT COUNT(A.so_no) AS today_planned_po, A.brand, A.approved_ex_factory_date
+                (SELECT COUNT(A.so_no) AS today_planned_po, A.brand, A.approved_ex_factory_date, SUM(A.plan_order_qty) AS today_plan_order_qty
                 FROM
-                (SELECT so_no, brand, approved_ex_factory_date FROM `tb_po_detail` 
+                (SELECT so_no, brand, approved_ex_factory_date, SUM(quantity) AS plan_order_qty FROM `tb_po_detail` 
                 WHERE 1 AND brand IN ($brands) 
                  AND approved_ex_factory_date BETWEEN '$from_date' AND '$to_date' AND po_type=$po_type AND aql_plan_date=CURDATE()
                 GROUP BY so_no, brand, approved_ex_factory_date) AS A
@@ -2963,9 +2965,9 @@ class Dashboard_model extends CI_Model {
                 ON t1.brand=t3.brand AND t1.approved_ex_factory_date=t3.approved_ex_factory_date
                 
                 LEFT JOIN
-                (SELECT COUNT(A.so_no) AS today_offered_po, A.brand, A.approved_ex_factory_date
+                (SELECT COUNT(A.so_no) AS today_offered_po, A.brand, A.approved_ex_factory_date, SUM(A.offered_order_qty) AS today_offered_order_qty
                 FROM
-                (SELECT so_no, brand, approved_ex_factory_date FROM `tb_po_detail` 
+                (SELECT so_no, brand, approved_ex_factory_date, SUM(quantity) AS offered_order_qty FROM `tb_po_detail` 
                 WHERE 1 AND brand IN ($brands) 
                  AND approved_ex_factory_date BETWEEN '$from_date' AND '$to_date' AND po_type=$po_type AND aql_offer_date=CURDATE()
                 GROUP BY so_no, brand, approved_ex_factory_date) AS A
@@ -2973,9 +2975,9 @@ class Dashboard_model extends CI_Model {
                 ON t1.brand=t4.brand AND t1.approved_ex_factory_date=t4.approved_ex_factory_date
                 
                 LEFT JOIN
-                (SELECT COUNT(A.so_no) AS today_passed_po, A.brand, A.approved_ex_factory_date
+                (SELECT COUNT(A.so_no) AS today_passed_po, A.brand, A.approved_ex_factory_date, SUM(A.passed_order_qty) AS today_passed_order_qty
                 FROM
-                (SELECT so_no, brand, approved_ex_factory_date FROM `tb_po_detail` 
+                (SELECT so_no, brand, approved_ex_factory_date, SUM(quantity) AS passed_order_qty FROM `tb_po_detail` 
                 WHERE 1 AND brand IN ($brands) 
                  AND approved_ex_factory_date BETWEEN '$from_date' AND '$to_date' AND po_type=$po_type AND aql_action_date=CURDATE() AND aql_status=1
                 GROUP BY so_no, brand, approved_ex_factory_date) AS A
@@ -2983,9 +2985,9 @@ class Dashboard_model extends CI_Model {
                 ON t1.brand=t5.brand AND t1.approved_ex_factory_date=t5.approved_ex_factory_date
                 
                 LEFT JOIN
-                (SELECT COUNT(A.so_no) AS today_failed_po, A.brand, A.approved_ex_factory_date
+                (SELECT COUNT(A.so_no) AS today_failed_po, A.brand, A.approved_ex_factory_date, SUM(A.failed_order_qty) AS today_failed_order_qty
                 FROM
-                (SELECT so_no, brand, approved_ex_factory_date FROM `tb_po_detail` 
+                (SELECT so_no, brand, approved_ex_factory_date, SUM(quantity) AS failed_order_qty FROM `tb_po_detail` 
                 WHERE 1 AND brand IN ($brands) 
                  AND approved_ex_factory_date BETWEEN '$from_date' AND '$to_date' AND po_type=$po_type AND aql_action_date=CURDATE() AND aql_status=2
                 GROUP BY so_no, brand, approved_ex_factory_date) AS A
@@ -2993,9 +2995,9 @@ class Dashboard_model extends CI_Model {
                 ON t1.brand=t6.brand AND t1.approved_ex_factory_date=t6.approved_ex_factory_date
                 
                 LEFT JOIN
-                (SELECT COUNT(A.so_no) AS total_ready_for_aql_po, A.brand, A.approved_ex_factory_date
+                (SELECT COUNT(A.so_no) AS total_ready_for_aql_po, A.brand, A.approved_ex_factory_date, SUM(A.ready_for_aql_order_qty) AS total_ready_for_aql_order_qty
                 FROM
-                (SELECT so_no, brand, approved_ex_factory_date FROM `tb_po_detail` 
+                (SELECT so_no, brand, approved_ex_factory_date, SUM(quantity) AS ready_for_aql_order_qty FROM `tb_po_detail` 
                 WHERE 1 AND brand IN ($brands) 
                  AND approved_ex_factory_date BETWEEN '$from_date' AND '$to_date' AND po_type=$po_type AND is_ready_for_aql=1
                 GROUP BY so_no, brand, approved_ex_factory_date) AS A
@@ -3003,9 +3005,9 @@ class Dashboard_model extends CI_Model {
                 ON t1.brand=t7.brand AND t1.approved_ex_factory_date=t7.approved_ex_factory_date
                       
                 LEFT JOIN
-                (SELECT COUNT(A.so_no) AS total_offered_aql_po, A.brand, A.approved_ex_factory_date
+                (SELECT COUNT(A.so_no) AS total_offered_aql_po, A.brand, A.approved_ex_factory_date, SUM(offered_aql_order_qty) AS total_offered_aql_order_qty
                 FROM
-                (SELECT so_no, brand, approved_ex_factory_date FROM `tb_po_detail` 
+                (SELECT so_no, brand, approved_ex_factory_date, SUM(quantity) AS offered_aql_order_qty FROM `tb_po_detail` 
                 WHERE 1 AND brand IN ($brands) 
                  AND approved_ex_factory_date BETWEEN '$from_date' AND '$to_date' AND po_type=$po_type AND is_aql_offerred=1
                 GROUP BY so_no, brand, approved_ex_factory_date) AS A
@@ -3013,9 +3015,9 @@ class Dashboard_model extends CI_Model {
                 ON t1.brand=t8.brand AND t1.approved_ex_factory_date=t8.approved_ex_factory_date
                 
                 LEFT JOIN
-                (SELECT COUNT(A.so_no) AS total_passed_aql_po, A.brand, A.approved_ex_factory_date
+                (SELECT COUNT(A.so_no) AS total_passed_aql_po, A.brand, A.approved_ex_factory_date, SUM(A.passed_aql_order_qty) AS total_passed_aql_order_qty
                 FROM
-                (SELECT so_no, brand, approved_ex_factory_date FROM `tb_po_detail` 
+                (SELECT so_no, brand, approved_ex_factory_date, SUM(quantity) AS passed_aql_order_qty FROM `tb_po_detail` 
                 WHERE 1 AND brand IN ($brands) 
                  AND approved_ex_factory_date BETWEEN '$from_date' AND '$to_date' AND po_type=$po_type AND aql_status=1
                 GROUP BY so_no, brand, approved_ex_factory_date) AS A
@@ -3023,9 +3025,9 @@ class Dashboard_model extends CI_Model {
                 ON t1.brand=t9.brand AND t1.approved_ex_factory_date=t9.approved_ex_factory_date
                 
                 LEFT JOIN
-                (SELECT COUNT(A.so_no) AS total_failed_aql_po, A.brand, A.approved_ex_factory_date
+                (SELECT COUNT(A.so_no) AS total_failed_aql_po, A.brand, A.approved_ex_factory_date, SUM(A.failed_aql_order_qty) AS total_failed_aql_order_qty
                 FROM
-                (SELECT so_no, brand, approved_ex_factory_date FROM `tb_po_detail` 
+                (SELECT so_no, brand, approved_ex_factory_date, SUM(quantity) AS failed_aql_order_qty FROM `tb_po_detail` 
                 WHERE 1 AND brand IN ($brands) 
                  AND approved_ex_factory_date BETWEEN '$from_date' AND '$to_date' AND po_type=0 AND aql_status=2
                 GROUP BY so_no, brand, approved_ex_factory_date) AS A

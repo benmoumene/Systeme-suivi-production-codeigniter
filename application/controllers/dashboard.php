@@ -545,7 +545,7 @@ class Dashboard extends CI_Controller {
         $to_date = $this->input->post('to_date');
         $po_type = $this->input->post('po_type');
 
-        $data['aql_fail_reports'] = $this->dashboard_model->selectTableDataRowQuery("so_no, purchase_order, item, quality, color, style_no, style_name, brand, SUM(quantity) AS total_order_qty, aql_action_date, approved_ex_factory_date", "tb_po_detail", " AND brand IN ($brands) AND po_type=$po_type AND approved_ex_factory_date BETWEEN '$from_date' AND '$to_date' AND aql_status=2");
+        $data['aql_fail_reports'] = $this->dashboard_model->selectTableDataRowQuery("so_no, purchase_order, item, quality, color, style_no, style_name, brand, SUM(quantity) AS total_order_qty, aql_action_date, approved_ex_factory_date", "tb_po_detail", " AND brand IN ($brands) AND po_type=$po_type AND approved_ex_factory_date BETWEEN '$from_date' AND '$to_date' AND aql_status=2 GROUP BY so_no, approved_ex_factory_date");
 
         echo $data['maincontent'] = $this->load->view('reports/aql_fail_summary_filter_report', $data);
     }
