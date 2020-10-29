@@ -5995,14 +5995,14 @@ class Access extends CI_Controller {
             foreach ($line_of_text as $k => $v) {
                 if ($v[0] != '' && $v[1] != '' && $v[2] != '' && $v[3] != '' && $v[4] != '' && $v[6] != '' && $v[7] != '') {
 
-                    $purch_order = preg_replace('/[^A-Za-z0-9.;\-]/', '-', $v[0]);
-                    $itm = preg_replace('/[^A-Za-z0-9.;\-]/', '-', $v[1]);
-                    $qlty = preg_replace('/[^A-Za-z0-9.;\-]/', '-', $v[2]);
-                    $clr = preg_replace('/[^A-Za-z0-9.;\-]/', '-', $v[3]);
+                    $purch_order = preg_replace('/[^A-Za-z0-9.;\-]/', '-', str_replace(' ', '', $v[0]));
+                    $itm = $v[1];
+                    $qlty = $v[2];
+                    $clr = $v[3];
                     $style_no = preg_replace('/[^A-Za-z0-9.;\-]/', '-', $v[4]);
                     $style_name = preg_replace('/[^A-Za-z0-9.;\-]/', '-', $v[5]);
                     $brand = $v[6];
-                    $sz = preg_replace('/[^A-Za-z0-9.;\-]/', '-', $v[7]);
+                    $sz = preg_replace('/[^A-Za-z0-9.;\-]/', '-', str_replace(' ', '', $v[7]));
                     $quantity = $v[8];
 //                    $ex_factory_date = $v[9];
 //                    $ex_factory_date="";
