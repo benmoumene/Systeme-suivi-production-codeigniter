@@ -65,9 +65,19 @@
 
                           </select>
                       </div>
-                      <div class="col-md-2">
+                      <div class="col-md-1">
+                          <select required class="form-control" id="brand" name="brand">
+                              <option value="">Brand</option>
+
+                              <?php foreach ($machine_brands as $mbrand){ ?>
+                                  <option value="<?php echo $mbrand['id']?>"><?php echo $mbrand['brand'];?></option>
+                              <?php } ?>
+
+                          </select>
+                      </div>
+                      <div class="col-md-1">
                           <select required class="form-control" id="line_id" name="line_id">
-                              <option value="">Select Line</option>
+                              <option value="">Line</option>
                               <?php foreach ($lines as $l){ ?>
                                   <option value="<?php echo $l['id']?>"><?php echo $l['line_code'];?></option>
                               <?php } ?>
@@ -142,6 +152,7 @@
                           <th class="hidden-phone center">Machine No</th>
                           <th class="hidden-phone center">Machine Name</th>
                           <th class="hidden-phone center">Model</th>
+                          <th class="hidden-phone center">Brand</th>
                           <th class="hidden-phone center">Line</th>
                           <th class="hidden-phone center">Other Location</th>
                           <th class="hidden-phone center">Status</th>
@@ -165,6 +176,7 @@
                           <td class="center"><?php echo $v['machine_no'];?></td>
                           <td class="center"><?php echo $v['machine_name'];?></td>
                           <td class="center"><?php echo $v['machine_model'];?></td>
+                          <td class="center"><?php echo $v['brand'];?></td>
                           <td class="center"><?php echo $v['line_code'];?></td>
                           <td class="center"><?php echo $v['location_name'];?></td>
                           <td class="center"><?php echo ($v['status'] == 1 ? 'ACTIVE' : ($v['status'] == 0 ? 'INACTIVE' : '') );?></td>
@@ -207,6 +219,7 @@
         var machine_no = $("#machine_no").val();
         var machine_name = $("#machine_name").val();
         var model = $("#model").val();
+        var brand = $("#brand").val();
         var line_id = $("#line_id").val();
         var other_location = $("#other_location").val();
 
@@ -216,7 +229,7 @@
         $.ajax({
             url: "<?php echo base_url();?>access/filterMachineList/",
             type: "POST",
-            data: {machine_no: machine_no, machine_name: machine_name, model: model, line_id: line_id, other_location: other_location},
+            data: {machine_no: machine_no, machine_name: machine_name, model: model, brand: brand, line_id: line_id, other_location: other_location},
             dataType: "html",
             success: function (data) {
                 $("#table_body").append(data);

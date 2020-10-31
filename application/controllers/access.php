@@ -2015,6 +2015,43 @@ class Access extends CI_Controller {
         }
     }
 
+    public function getMachineBrands(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $data['title'] = 'Machine Brands';
+
+        $line_id = $this->session->userdata('line_id');
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+        $data['msg'] = '';
+        $data['session_out'] = $this->session_out;
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['machine_models'] = $this->access_model->selectTableDataRowQuery('*', 'tb_machine_brand', '');
+
+            $data['maincontent'] = $this->load->view('machine_brands', $data, true);
+            $this->load->view('master', $data);
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
+    public function saveNewMachineBrand(){
+        $data['brand'] = $this->input->post('new_machine_brand');
+        $data['status'] = $this->input->post('new_machine_brand_status');
+
+        $this->access_model->insertingData('tb_machine_brand', $data);
+
+        redirect('access/getMachineBrands');
+    }
+
     public function saveNewMachineModel(){
         $data['machine_model'] = $this->input->post('new_machine_model');
         $data['machine_model_description'] = $this->input->post('new_machine_model_description');
@@ -2022,6 +2059,19 @@ class Access extends CI_Controller {
         $this->access_model->insertingData('tb_machine_model', $data);
 
         redirect('access/getMachineModels');
+    }
+
+    public function updateMachineBrand(){
+        $machine_brand_id = $this->input->post('edit_machine_brand_id');
+
+        $data['brand'] = $this->input->post('edit_machine_brand');
+        $data['status'] = $this->input->post('edit_machine_brand_status');
+
+        $this->access_model->updateTblNew('tb_machine_brand', 'id', $machine_brand_id, $data);
+
+        $data['message'] = 'Successfully Updated!';
+        $this->session->set_userdata($data);
+        redirect('access/getMachineBrands');
     }
 
     public function updateMachineModel(){
@@ -2108,6 +2158,7 @@ class Access extends CI_Controller {
             $data['machine_nos'] = $this->access_model->selectTableDataRowQuery('machine_no', 'tb_machine_list', '');
             $data['machine_models'] = $this->access_model->selectTableDataRowQuery('*', 'tb_machine_model', '');
             $data['machine_names'] = $this->access_model->selectTableDataRowQuery('*', 'tb_machine_name', '');
+            $data['machine_brands'] = $this->access_model->selectTableDataRowQuery('*', 'tb_machine_brand', '');
             $data['other_locations'] = $this->access_model->selectTableDataRowQuery('*', 'tb_other_locations', '');
             $data['lines'] = $this->access_model->selectTableDataRowQuery('*', 'tb_line', ' ORDER BY (line_code * 1)');
 
@@ -2143,6 +2194,7 @@ class Access extends CI_Controller {
             $data['machine_nos'] = $this->access_model->selectTableDataRowQuery('machine_no', 'tb_machine_list', '');
             $data['machine_models'] = $this->access_model->selectTableDataRowQuery('*', 'tb_machine_model', '');
             $data['machine_names'] = $this->access_model->selectTableDataRowQuery('*', 'tb_machine_name', '');
+            $data['machine_brands'] = $this->access_model->selectTableDataRowQuery('*', 'tb_machine_brand', '');
             $data['other_locations'] = $this->access_model->selectTableDataRowQuery('*', 'tb_other_locations', '');
             $data['lines'] = $this->access_model->selectTableDataRowQuery('*', 'tb_line', ' ORDER BY (line_code * 1)');
 
@@ -2180,6 +2232,7 @@ class Access extends CI_Controller {
             $data['machine_nos'] = $this->access_model->selectTableDataRowQuery('machine_no', 'tb_machine_list', '');
             $data['machine_models'] = $this->access_model->selectTableDataRowQuery('*', 'tb_machine_model', '');
             $data['machine_names'] = $this->access_model->selectTableDataRowQuery('*', 'tb_machine_name', '');
+            $data['machine_brands'] = $this->access_model->selectTableDataRowQuery('*', 'tb_machine_brand', '');
             $data['other_locations'] = $this->access_model->selectTableDataRowQuery('*', 'tb_other_locations', '');
             $data['lines'] = $this->access_model->selectTableDataRowQuery('*', 'tb_line', ' ORDER BY (line_code * 1)');
 
@@ -2206,6 +2259,7 @@ class Access extends CI_Controller {
 
         $data['machine_name_id'] = $this->input->post('machine_name_id');
         $data['model_no_id'] = $this->input->post('model_no_id');
+        $data['brand_id'] = $this->input->post('brand_id');
         $data['line_id'] = $this->input->post('line_id');
         $data['other_location_id'] = $this->input->post('other_location_id');
         $data['status'] = $this->input->post('status');
@@ -2232,6 +2286,7 @@ class Access extends CI_Controller {
 
         $data['machine_name_id'] = $this->input->post('machine_name_id');
         $data['model_no_id'] = $this->input->post('model_no_id');
+        $data['brand_id'] = $this->input->post('brand_id');
         $data['line_id'] = $this->input->post('line_id');
         $data['other_location_id'] = $this->input->post('other_location_id');
         $data['status'] = $this->input->post('status');
@@ -2312,6 +2367,7 @@ class Access extends CI_Controller {
         $machine_no = $this->input->post('machine_no');
         $machine_name = $this->input->post('machine_name');
         $model = $this->input->post('model');
+        $brand = $this->input->post('brand');
         $line_id = $this->input->post('line_id');
         $other_location = $this->input->post('other_location');
 
@@ -2327,6 +2383,10 @@ class Access extends CI_Controller {
 
         if($model != ''){
             $where .= " AND t1.model_no_id='$model'";
+        }
+
+        if($brand != ''){
+            $where .= " AND t1.brand_id='$brand'";
         }
 
         if($line_id != ''){

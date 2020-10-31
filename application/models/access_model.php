@@ -6360,7 +6360,7 @@ class Access_model extends CI_Model {
     }
 
     public function getMachineList($where){
-        $sql="SELECT t1.*, t2.line_code, t3.machine_name, t4.machine_model, t5.location_name
+        $sql="SELECT t1.*, t2.line_code, t3.machine_name, t4.machine_model, t5.location_name, t6.brand
               FROM `tb_machine_list` AS t1
                 
               LEFT JOIN
@@ -6378,6 +6378,10 @@ class Access_model extends CI_Model {
               LEFT JOIN
               tb_other_locations AS t5
               ON t1.other_location_id=t5.id
+              
+              LEFT JOIN
+              tb_machine_brand AS t6
+              ON t1.brand_id=t6.id
               
               WHERE 1 $where";
 

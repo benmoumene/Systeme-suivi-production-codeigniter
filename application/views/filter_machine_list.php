@@ -12,6 +12,7 @@ foreach ($machine_list as $v){ ?>
         <td class="center"><?php echo $v['machine_no'];?></td>
         <td class="center"><?php echo $v['machine_name'];?></td>
         <td class="center"><?php echo $v['machine_model'];?></td>
+        <td class="center"><?php echo $v['brand'];?></td>
         <td class="center"><?php echo $v['line_code'];?></td>
         <td class="center"><?php echo $v['location_name'];?></td>
         <td class="center"><?php echo ($v['status'] == 1 ? 'ACTIVE' : ($v['status'] == 0 ? 'INACTIVE' : '') );?></td>

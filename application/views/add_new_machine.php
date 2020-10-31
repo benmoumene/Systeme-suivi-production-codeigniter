@@ -87,6 +87,20 @@
                                       </select>
                                   </div>
                                   <div class="form-group">
+                                      <label for="new_model" class="col-form-label">Brand:</label>
+                                      <br />
+                                      <select class="form-control" id="brand_id" name="brand_id" required="required">
+                                          <option value="">Select Brand</option>
+                                          <?php foreach ($machine_brands as $mb){ ?>
+                                              <option value="<?php echo $mb['id']?>"><?php echo $mb['brand'];?></option>
+                                          <?php } ?>
+                                      </select>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <div class="form-group">
                                       <label for="new_line" class="col-form-label">Line:</label>
                                       <br />
                                       <select class="form-control select" id="line_id" name="line_id">
@@ -96,10 +110,6 @@
                                           <?php } ?>
                                       </select>
                                   </div>
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-md-6">
                                   <div class="form-group">
                                       <label for="new_other_location" class="col-form-label">Other Location:</label>
                                       <br />
@@ -110,15 +120,7 @@
                                           <?php } ?>
                                       </select>
                                   </div>
-                                  <div class="form-group">
-                                      <label for="new_status" class="col-form-label">Status:</label>
-                                      <br />
-                                      <select class="form-control" id="status" name="status" required="required">
-                                          <option value="">Select Status</option>
-                                          <option value="1">Active</option>
-                                          <option value="0">Inactive</option>
-                                      </select>
-                                  </div>
+
                               </div>
                               <div class="col-md-6">
                                   <div class="form-group">
@@ -133,12 +135,25 @@
                                       </select>
                                   </div>
                                   <div class="form-group">
-                                  <br />
+                                      <label for="new_status" class="col-form-label">Status:</label>
+                                      <br />
+                                      <select class="form-control" id="status" name="status" required="required">
+                                          <option value="">Select Status</option>
+                                          <option value="1">Active</option>
+                                          <option value="0">Inactive</option>
+                                      </select>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="row">
+
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <br />
                                       <button type="submit" class="btn btn-primary" id="modal_submit_btn">SAVE</button>
                                   </div>
                               </div>
                           </div>
-
                       </div>
                   </div>
               </div>
