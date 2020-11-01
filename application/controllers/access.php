@@ -2205,6 +2205,14 @@ class Access extends CI_Controller {
         }
     }
 
+    public function getLastMachineNoByModel(){
+        $model_no_id = $this->input->post('model_no_id');
+
+        $res = $this->access_model->selectTableDataRowQuery("COUNT(id) AS machine_qty_count", "tb_machine_list", " AND model_no_id='$model_no_id'");
+
+        echo json_encode($res);
+    }
+
     public function editMachineNo($machine_id){
         $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
 
@@ -2245,6 +2253,12 @@ class Access extends CI_Controller {
         }else{
             echo $this->load->view('404');
         }
+    }
+
+    public function deleteMachineNo($machine_id){
+        $this->access_model->deleteTableData('tb_machine_list', 'id', $machine_id);
+
+        redirect('access/getMachineList');
     }
 
     public function saveNewMachine(){

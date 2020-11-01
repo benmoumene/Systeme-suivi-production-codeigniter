@@ -62,7 +62,7 @@
                               <div class="col-md-6">
                                   <div class="form-group">
                                       <label for="machine_no" class="col-form-label">Machine No:</label>
-                                      <input type="text" class="form-control" id="machine_no" name="machine_no" autocomplete="off" required="required" onblur="checkMachineAvailability()" value="<?php echo $machine_info[0]['machine_no'];?>">
+                                      <input type="text" class="form-control" id="machine_no" name="machine_no" autocomplete="off" required="required" readonly="readonly" onblur="checkMachineAvailability()" value="<?php echo $machine_info[0]['machine_no'];?>">
                                       <input type="hidden" class="form-control" id="machine_id" name="machine_id" autocomplete="off" required="required" value="<?php echo $machine_id;?>">
                                   </div>
                                   <div class="form-group">

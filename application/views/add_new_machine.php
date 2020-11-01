@@ -61,8 +61,14 @@
                           <div class="row">
                               <div class="col-md-6">
                                   <div class="form-group">
-                                      <label for="new_machine_no" class="col-form-label">Machine No:</label>
-                                      <input type="text" class="form-control" id="new_machine_no" name="new_machine_no" autocomplete="off" onblur="checkMachineAvailability()" required="required">
+                                      <label for="new_model" class="col-form-label">Model:</label>
+                                      <br />
+                                      <select class="form-control" id="model_no_id" name="model_no_id" required="required" onchange="getLastMachineNoByModel();">
+                                          <option value="">Select Model</option>
+                                          <?php foreach ($machine_models as $mm){ ?>
+                                              <option value="<?php echo $mm['id']?>"><?php echo $mm['machine_model'];?></option>
+                                          <?php } ?>
+                                      </select>
                                   </div>
                                   <div class="form-group">
                                       <label for="new_description" class="col-form-label">Machine Name:</label>
@@ -77,14 +83,8 @@
                               </div>
                               <div class="col-md-6">
                                   <div class="form-group">
-                                      <label for="new_model" class="col-form-label">Model:</label>
-                                      <br />
-                                      <select class="form-control" id="model_no_id" name="model_no_id" required="required">
-                                          <option value="">Select Model</option>
-                                          <?php foreach ($machine_models as $mm){ ?>
-                                              <option value="<?php echo $mm['id']?>"><?php echo $mm['machine_model'];?></option>
-                                          <?php } ?>
-                                      </select>
+                                      <label for="new_machine_no" class="col-form-label">Machine No:</label>
+                                      <input type="text" class="form-control" id="new_machine_no" name="new_machine_no" autocomplete="off" onblur="checkMachineAvailability()" required="required" readonly="readonly">
                                   </div>
                                   <div class="form-group">
                                       <label for="new_model" class="col-form-label">Brand:</label>
@@ -182,6 +182,36 @@
 
             }
         });
+
+    }
+    
+    function getLastMachineNoByModel() {
+        var model_no_id = $("#model_no_id").val();
+        var machine_model = $( "#model_no_id option:selected" ).text();
+
+        if(model_no_id != ''){
+            $.ajax({
+                url: "<?php echo base_url();?>access/getLastMachineNoByModel/",
+                type: "POST",
+                data: {model_no_id: model_no_id},
+                dataType: "json",
+                success: function (data) {
+
+                    if(data.length > 0){
+                        var machine_no = parseInt(data[0].machine_qty_count) + 1;
+
+                        var new_machine_no = (machine_model+'-'+machine_no+'.');
+
+                        $("#new_machine_no").val(new_machine_no);
+                    }else {
+                        alert('No Data Found!');
+                    }
+
+                }
+            });
+        }else{
+            alert('Please Select Machine Model!');
+        }
 
     }
 

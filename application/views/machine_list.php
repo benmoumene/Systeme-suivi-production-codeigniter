@@ -198,6 +198,7 @@
                           </td>
                           <td class="center">
                               <a href="<?php echo base_url();?>access/editMachineNo/<?php echo $v['id'];?>" class="btn btn-warning" title="EDIT" onclick="getSetDataToModal(<?php echo $k;?>);"><i class="fa fa-edit"></i></a>
+                              <a href="<?php echo base_url();?>access/deleteMachineNo/<?php echo $v['id'];?>" class="btn btn-danger" title="DELETE" onclick="if (confirm('Are you sure to delete the machine?')){return true;}else{event.stopPropagation(); event.preventDefault();};"><i class="fa fa-times"></i></a>
                           </td>
                       </tr>
 
