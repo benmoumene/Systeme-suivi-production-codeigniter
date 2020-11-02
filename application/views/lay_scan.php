@@ -58,12 +58,52 @@
         <div class="col-md-1">
             <div class="col-md-1" id="loader" style="display: none;"><div class="loader"></div></div>
         </div>
-
-
-        <div class="col-md-11 scroll" id="reload_div">
-
         </div><!--/block-web-->
     </div><!--/col-md-12-->
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <span class="btn btn-success" onclick="getLayScanningReport();">REPORT</span>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <sec class="table-responsive">
+                    <section class="panel default blue_title h2">
+
+                        <div class="panel-body" id="table_content" style="overflow-x:auto;">
+
+                            <table class="display table table-bordered table-striped" id="" border="1">
+                                <thead>
+                                    <tr>
+                                        <th class="hidden-phone center">GROUP SO</th>
+                                        <th class="hidden-phone center">SO</th>
+                                        <th class="hidden-phone center">Purchase Order</th>
+                                        <th class="hidden-phone center">Item</th>
+                                        <th class="hidden-phone center">Quality</th>
+                                        <th class="hidden-phone center">Color</th>
+                                        <th class="hidden-phone center">Style</th>
+                                        <th class="hidden-phone center">Style Name</th>
+                                        <th class="hidden-phone center">Brand</th>
+                                        <th class="hidden-phone center">Cut No</th>
+                                        <th class="hidden-phone center">Qty</th>
+                                        <th class="hidden-phone center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </sec>
+            </div>
+        </div>
+    </div>
 
 </div>
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -147,6 +187,43 @@
         }
 
 
+    }
+    
+    function getLayScanningReport() {
+        $("#table_content").empty();
+        $("#loader").css("display", "block");
+
+        $.ajax({
+            type: "GET",
+            url: "<?php echo base_url();?>access/getLayScanningReport/",
+            data: {},
+            dataType: "html",
+            success: function (data) {
+                $("#table_content").append(data);
+                $("#loader").css("display", "none");
+            }
+        });
+    }
+
+    function removeLayScanByPoCut(po_no, cut_no) {
+        $("#loader").css("display", "block");
+
+        $.ajax({
+            type: "POST",
+            url: "<?php echo base_url();?>access/removeLayScanByPoCut/",
+            data: {po_no: po_no, cut_no: cut_no},
+            dataType: "html",
+            success: function (data) {
+                if(data == 'done'){
+                    getLayScanningReport();
+                }
+
+                if(data == 'already cut'){
+                    alert('SO: '+po_no+', Cut:'+cut_no+' is Already Cutting Complete!');
+                    $("#loader").css("display", "none");
+                }
+            }
+        });
     }
 
 </script>

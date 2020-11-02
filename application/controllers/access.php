@@ -7546,6 +7546,44 @@ class Access extends CI_Controller {
         }
     }
 
+    public function getCutScanningReport(){
+        $data['cut_data'] = $this->access_model->selectTableDataRowQuery("po_no, so_no, purchase_order, item, quality, color, style_no, style_name, ex_factory_date, brand, cut_no, SUM(cut_qty) AS total_cut_qty", "tb_cut_summary", " AND is_cutting_complete=1 AND DATE_FORMAT(cutting_complete_date_time, '%Y-%m-%d')=CURDATE() GROUP BY po_no");
+
+        echo $this->load->view('cut_complete_filter_report', $data);
+    }
+
+    public function getLayScanningReport(){
+        $data['lay_data'] = $this->access_model->selectTableDataRowQuery("po_no, so_no, purchase_order, item, quality, color, style_no, style_name, ex_factory_date, brand, cut_no, SUM(cut_qty) AS total_cut_qty", "tb_cut_summary", " AND is_lay_complete=1 AND DATE_FORMAT(lay_complete_date_time, '%Y-%m-%d')=CURDATE() GROUP BY po_no");
+
+        echo $this->load->view('lay_complete_filter_report', $data);
+    }
+
+    public function removeCutScanByPoCut(){
+        $po_no = $this->input->post('po_no');
+        $cut_no = $this->input->post('cut_no');
+
+        $res = $this->access_model->updateTblFields('tb_cut_summary', "SET is_cutting_complete=0, cutting_complete_date_time='0000-00-00 00:00:00'", " AND po_no='$po_no' AND cut_no='$cut_no'");
+
+        echo 'done';
+    }
+
+    public function removeLayScanByPoCut(){
+        $po_no = $this->input->post('po_no');
+        $cut_no = $this->input->post('cut_no');
+
+        $res = $this->access_model->selectTableDataRowQuery('*', 'tb_cut_summary', " AND po_no='$po_no' AND cut_no='$cut_no' AND is_cutting_complete=1");
+
+        if(sizeof($res) > 0){
+            echo 'already cut';
+        }else{
+            $this->access_model->updateTblFields('tb_cut_summary', "SET is_lay_complete=0, lay_complete_date_time='0000-00-00 00:00:00'", " AND po_no='$po_no' AND cut_no='$cut_no'");
+
+            echo 'done';
+        }
+
+
+    }
+
     public function inputToLay()
     {
         $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));

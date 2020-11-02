@@ -113,27 +113,27 @@
 
                                         <table class="display table table-bordered table-striped" id="" border="1">
                                             <thead>
-                                            <tr>
-                                                <th class="hidden-phone center">SO</th>
-                                                <th class="hidden-phone center">Brand</th>
-                                                <th class="hidden-phone center">Purchase Order</th>
-                                                <th class="hidden-phone center">Item</th>
-                                                <th class="hidden-phone center">Style</th>
-                                                <th class="hidden-phone center">Quality</th>
-                                                <th class="hidden-phone center">Color</th>
-                                                <th class="hidden-phone center">Order</th>
-                                                <th class="hidden-phone center">Cut</th>
-                                                <th class="hidden-phone center">Cut Pass</th>
-                                                <th class="hidden-phone center">Sewed</th>
-                                                <th class="hidden-phone center">Sew Balance</th>
-                                                <th class="hidden-phone center">Packed</th>
-                                                <th class="hidden-phone center">Carton</th>
-                                                <th class="hidden-phone center">Warehouse</th>
-                                                <th class="hidden-phone center">Other</th>
-                                                <th class="hidden-phone center">Balance</th>
-                                                <!--        <th class="hidden-phone center">Ex-Fac Date</th>-->
-                                                <th class="hidden-phone center">Closing Date</th>
-                                            </tr>
+                                                <tr>
+                                                    <th class="hidden-phone center">SO</th>
+                                                    <th class="hidden-phone center">Brand</th>
+                                                    <th class="hidden-phone center">Purchase Order</th>
+                                                    <th class="hidden-phone center">Item</th>
+                                                    <th class="hidden-phone center">Style</th>
+                                                    <th class="hidden-phone center">Quality</th>
+                                                    <th class="hidden-phone center">Color</th>
+                                                    <th class="hidden-phone center">Order</th>
+                                                    <th class="hidden-phone center">Cut</th>
+                                                    <th class="hidden-phone center">Cut Pass</th>
+                                                    <th class="hidden-phone center">Sewed</th>
+                                                    <th class="hidden-phone center">Sew Balance</th>
+                                                    <th class="hidden-phone center">Packed</th>
+                                                    <th class="hidden-phone center">Carton</th>
+                                                    <th class="hidden-phone center">Warehouse</th>
+                                                    <th class="hidden-phone center">Other</th>
+                                                    <th class="hidden-phone center">Balance</th>
+                                                    <!--        <th class="hidden-phone center">Ex-Fac Date</th>-->
+                                                    <th class="hidden-phone center">Closing Date</th>
+                                                </tr>
                                             </thead>
                                             <tbody>
 
