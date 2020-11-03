@@ -4260,8 +4260,12 @@ class Dashboard extends CI_Controller {
 
             $finishing_trgt = $this->access_model->getFinishingTarget($where1);
 
-            $data['finishing_target'] = $finishing_trgt[0]['target'];
+            $data['line_report'] = $this->access_model->getTodayFinishingOutputReport($floor_id);
+            $flr_trgt = $this->access_model->getTodayFinishingTarget($floor_id, $date);
+            $data['line_target'] = $flr_trgt[0]['target'];
+            $data['line_target_hour'] = $flr_trgt[0]['target_hour'];
 
+            $data['finishing_target'] = $finishing_trgt[0]['target'];
 
             $finishing_report = $this->access_model->getFinishingFloorOutputReport($where, $where2);
             $data['finishing_output_qty'] = $finishing_report[0]['finishing_output_qty'];
