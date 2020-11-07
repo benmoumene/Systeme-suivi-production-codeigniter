@@ -2323,22 +2323,6 @@ class Access extends CI_Controller {
         $service_status = $this->input->post('service_status');
         $solved_by = $this->input->post('solved_by');
 
-        if($service_status == 2){
-            $data['service_status'] = $service_status;
-            $data['service_status_date_time'] = $date_time;
-
-            $this->access_model->updateTblNew('tb_machine_list', 'machine_no', $machine_no, $data);
-
-            $data_1['machine_no'] = $machine_no;
-            $data_1['line_id'] = $line_id;
-            $data_1['service_status'] = $service_status;
-            $data_1['problem_start_date_time'] = $date_time;
-
-            $this->access_model->insertingData('tb_machine_maintenance_log', $data_1);
-
-            echo 'done';
-        }
-
         if($service_status == 1){
             $data['service_status'] = $service_status;
             $data['service_status_date_time'] = $date_time;
@@ -2352,8 +2336,24 @@ class Access extends CI_Controller {
 
             $this->access_model->updateTblFields('tb_machine_maintenance_log', " SET service_status='$service_status', problem_resolve_date_time='$date_time', resolved_by='$solved_by'", " AND machine_no='$machine_no' AND service_status=2");
 
-            echo 'done';
         }
+
+        if($service_status == 2){
+            $data['service_status'] = $service_status;
+            $data['service_status_date_time'] = $date_time;
+
+            $this->access_model->updateTblNew('tb_machine_list', 'machine_no', $machine_no, $data);
+
+            $data_1['machine_no'] = $machine_no;
+            $data_1['line_id'] = $line_id;
+            $data_1['service_status'] = $service_status;
+            $data_1['problem_start_date_time'] = $date_time;
+
+            $this->access_model->insertingData('tb_machine_maintenance_log', $data_1);
+
+        }
+
+        echo 'done';
 
     }
 

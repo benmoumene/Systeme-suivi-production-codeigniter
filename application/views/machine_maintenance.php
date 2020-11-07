@@ -205,6 +205,7 @@
                         if(service_status  == 0){
                             $("#p_er_msg").text("Machine is Out of Service!");
                             $("#machine_no").val('');
+                            $("#solved_by").val('');
                             $("#loader").css("display", "none");
                         }
 
@@ -219,6 +220,7 @@
                                     if(data == 'done'){
                                         $("#p_s_msg").text("Machine is Under Maintenance!");
                                         $("#machine_no").val('');
+                                        $("#solved_by").val('');
                                         $("#loader").css("display", "none");
                                     }
 
@@ -251,6 +253,7 @@
                                         $("#p_s_msg").text("Machine is RUNNING!");
                                         $("#loader").css("display", "none");
                                         $("#solve_by_div").css("display", "none");
+                                        $("#solved_by").val('');
                                         $("#machine_no").val('');
                                         $("#machine_no").focus();
                                     }
@@ -261,12 +264,14 @@
                         if(service_status  == 3){
                             $("#p_er_msg").text("Machine is Idle!");
                             $("#machine_no").val('');
+                            $("#solved_by").val('');
                             $("#loader").css("display", "none");
                         }
 
                     }else{
                         $("#p_er_msg").text("Machine Not Found!");
                         $("#machine_no").val('');
+                        $("#solved_by").val('');
                         $("#loader").css("display", "none");
                     }
 
