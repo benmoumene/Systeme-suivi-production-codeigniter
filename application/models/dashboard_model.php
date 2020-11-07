@@ -27,6 +27,34 @@ class Dashboard_model extends CI_Model {
         return $query;
     }
 
+    public function getLinesMachineUnderMainterance(){
+        $sql = "SELECT t2.id, t2.line_name, t2.line_code, t2.unit, t2.floor, t2.status 
+                FROM 
+                (SELECT * FROM `tb_machine_maintenance_log` 
+                WHERE service_status=2 GROUP BY line_id) AS t1
+                
+                INNER JOIN
+                tb_line AS t2
+                ON t1.line_id=t2.id";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
+    public function getMaintenanceReport(){
+        $sql = "SELECT t2.id, t2.line_name, t2.line_code, t2.unit, t2.floor, t2.status 
+                FROM 
+                (SELECT * FROM `tb_machine_maintenance_log` 
+                WHERE service_status=2 GROUP BY line_id) AS t1
+                
+                INNER JOIN
+                tb_line AS t2
+                ON t1.line_id=t2.id";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
     public function testSelectQuery(){
 
         $sql = "Select * From tb_floor";

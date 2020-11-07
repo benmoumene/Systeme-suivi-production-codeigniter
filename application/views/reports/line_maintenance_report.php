@@ -99,7 +99,8 @@
 
     <?php
 
-    foreach ($lines AS $k => $line){
+
+    foreach ($lines AS $line){
 
         $line_id = $line['id'];
 
@@ -109,7 +110,7 @@
 
             <?php
 
-            $machine_maintenance_list = $this->method_call->getMachineMaintenanceReport($line_id, $h['start_time'], $h['end_time']);
+            $machine_maintenance_list = $this->method_call->getMachineMaintenanceReport($line_id);
 
             foreach ($machine_maintenance_list as $m){
 
@@ -121,7 +122,7 @@
             ?>
 
                 <td align="center" title="<?php echo $m['problem_start_date_time'];?>" onclick="">
-                    <?php echo $m['machine_no'].' / '.$m['machine_name'].'('.$hour.' Min)';?>
+                    <?php echo $m['machine_no'].'('.$hour.' Min)';?>
                 </td>
 
             <?php
@@ -138,19 +139,34 @@
 
     </tbody>
 </table>
-
-<!-- The Modal -->
-<div id="myModal" class="modal">
-
-    <!-- Modal content -->
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <div id="loader" class="loader" style="display: block;"></div>
-        <div id="quality"></div>
-    </div>
-
-</div>
-
+<br />
+<table id="" border="1" width="100%" style="border: 1px solid black;">
+    <thead>
+        <tr style="background-color: #f7ffb0;">
+            <th align="center" style="font-size: 20px; font-weight: 900; width: 40px; background-color: rgba(216,170,154,0.88);" colspan="6">Maintenance Report</th>
+        </tr>
+        <tr style="background-color: rgba(216,170,154,0.88);">
+            <th align="center" style="font-size: 18px;">Line</th>
+            <th align="center" style="font-size: 18px;">Machine Code</th>
+            <th align="center" style="font-size: 18px;">Machine Name</th>
+            <th align="center" style="font-size: 18px;">Problem At</th>
+            <th align="center" style="font-size: 18px;">Solved At</th>
+            <th align="center" style="font-size: 18px;">Resolved By</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($maintenance_report AS $mr){ ?>
+        <tr style="font-size: 16px;">
+            <td align="center"><?php echo $mr['line_code']?></td>
+            <td align="center"><?php echo $mr['machine_no']?></td>
+            <td align="center"><?php echo $mr['machine_name']?></td>
+            <td align="center"><?php echo $mr['problem_start_date_time']?></td>
+            <td align="center"><?php echo $mr['problem_resolve_date_time']?></td>
+            <td align="center"><?php echo $mr['resolved_by']?></td>
+        </tr>
+    <?php } ?>
+    </tbody>
+</table>
 
 </body>
 </html>

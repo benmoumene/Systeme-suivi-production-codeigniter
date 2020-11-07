@@ -2732,7 +2732,12 @@ class Access extends CI_Controller {
     public function getMachineMaintenanceReport(){
         $line_id = $this->session->userdata('line_id');
 
-        $data['machine_maintenance'] = $this->access_model->getMachineMaintenanceReport($line_id);
+        $where = '';
+        if($line_id != ''){
+            $where .= " AND line_id=$line_id";
+        }
+
+        $data['machine_maintenance'] = $this->access_model->getMachineMaintenanceReport($where);
 
         echo $this->load->view('machine_maintenance_report', $data);
     }

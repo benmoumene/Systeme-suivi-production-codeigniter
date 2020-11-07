@@ -412,14 +412,23 @@ class Dashboard extends CI_Controller {
         $data['user_name'] = $this->session->userdata('user_name');
         $data['access_points'] = $this->session->userdata('access_points');
 
-        $data['lines'] = $this->access_model->getLines();
+        $data['lines'] = $this->dashboard_model->getLinesMachineUnderMainterance();
+
+        $where = " OR DATE_FORMAT(problem_start_date_time, '%Y-%m-%d')='$date'";
+
+        $data['maintenance_report'] = $this->access_model->getMachineMaintenanceReport($where);
 
         $data['maincontent'] = $this->load->view('reports/line_maintenance_report', $data);
     }
 
     public function getMachineMaintenanceReport($line_id){
 
-        return $machine_maintenance = $this->access_model->getMachineMaintenanceReport($line_id);
+        $where = '';
+        if($line_id != ''){
+            $where .= " AND line_id=$line_id";
+        }
+
+        return $machine_maintenance = $this->access_model->getMachineMaintenanceReport($where);
 
     }
 

@@ -6338,10 +6338,10 @@ class Access_model extends CI_Model {
         return $query;
     }
 
-    public function getMachineMaintenanceReport($line_id){
-        $sql="SELECT t1.*, t3.machine_name, t4.machine_model
+    public function getMachineMaintenanceReport($where){
+        $sql="SELECT t1.*, t3.machine_name, t4.machine_model, t5.line_code
             FROM 
-            (SELECT * FROM `tb_machine_maintenance_log` WHERE line_id=$line_id AND service_status=2) AS t1
+            (SELECT * FROM `tb_machine_maintenance_log` WHERE service_status=2 $where) AS t1
             
             LEFT JOIN
             tb_machine_list AS t2
@@ -6353,7 +6353,11 @@ class Access_model extends CI_Model {
             
             LEFT JOIN
             tb_machine_model AS t4
-            ON t4.id=t2.model_no_id";
+            ON t4.id=t2.model_no_id
+            
+            LEFT JOIN
+            tb_line AS t5
+            ON t5.id=t1.line_id";
 
         $query = $this->db->query($sql)->result_array();
         return $query;
