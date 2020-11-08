@@ -2287,16 +2287,19 @@ class Access extends CI_Controller {
     }
 
     public function updateMachine(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
         $machine_id = $this->input->post('machine_id');
 
         $machine = $this->input->post('machine_no');
-        $machine_no_last_char = substr($machine, -1);
-
-        if($machine_no_last_char != '.'){
-            $data['machine_no'] = $machine.'.';
-        }else{
-            $data['machine_no'] = $machine;
-        }
+//        $machine_no_last_char = substr($machine, -1);
+//        if($machine_no_last_char != '.'){
+//            $data['machine_no'] = $machine.'.';
+//        }else{
+//            $data['machine_no'] = $machine;
+//        }
 
         $data['machine_name_id'] = $this->input->post('machine_name_id');
         $data['model_no_id'] = $this->input->post('model_no_id');
@@ -2307,6 +2310,10 @@ class Access extends CI_Controller {
         $data['service_status'] = $this->input->post('service_status');
 
         $this->access_model->updateTblNew('tb_machine_list', 'id', $machine_id, $data);
+
+        $status = $data['status'];
+
+        $this->access_model->updateTblFields('tb_machine_maintenance_log', "SET service_status=$status, problem_resolve_date_time='$date_time', resolved_by='Maintenance Admin'", " AND machine_no='$machine' AND service_status != 1");
 
         $data['message'] = 'Successfully Updated!';
         $this->session->set_userdata($data);

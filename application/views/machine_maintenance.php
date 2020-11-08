@@ -22,9 +22,24 @@
 <div class="pull-left breadcrumb_admin clear_both">
         <div class="pull-left page_title theme_color">
           <h1>Machine Maintenance</h1>
-            <a class="btn btn-warning" href="<?php echo base_url()?>access/lineFinishingAlter">Finishing Alter</a>
-          <a class="btn btn-success" href="<?php echo base_url()?>access/care_label_end_line_new">End Line QC</a>
+
+            <?php if($access_points == 8){ ?>
+                <a class="btn btn-success" href="<?php echo base_url()?>access/bundle_collar_cuff_track">COLLAR-CUFF</a>
+            <?php } ?>
+
+          <?php if($access_points == 4){ ?>
+          <a class="btn btn-warning" href="<?php echo base_url()?>access/lineFinishingAlter">FINISHING ALTER</a>
+          <a class="btn btn-success" href="<?php echo base_url()?>access/care_label_end_line_new">END LINE QC</a>
 <!--          <a class="btn btn-primary" href="--><?php //echo base_url()?><!--access/poOutputControl">Output Control</a>-->
+          <?php } ?>
+
+          <?php if($access_points == 3){ ?>
+              <a class="btn btn-success" href="<?php echo base_url()?>access/care_label_mid_line_new">MID LINE QC</a>
+          <?php } ?>
+
+          <?php if($access_points == 2){ ?>
+              <a class="btn btn-success" href="<?php echo base_url()?>access/care_label_input_line">LINE INPUT</a>
+          <?php } ?>
         </div>
         <div class="pull-right">
           <ol class="breadcrumb">

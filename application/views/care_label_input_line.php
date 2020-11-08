@@ -22,7 +22,7 @@
 <div class="pull-left breadcrumb_admin clear_both">
         <div class="pull-left page_title theme_color">
           <h1>LINE INPUT POINT</h1>
-          <h2 class="">LINE INPUT POINT...</h2>
+          <a class="btn btn-danger" href="<?php echo base_url()?>access/machineMaintenance">Machine Maintenance</a>
         </div>
         <div class="pull-right">
           <ol class="breadcrumb">

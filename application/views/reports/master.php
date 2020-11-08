@@ -258,7 +258,8 @@
 
             <li> <a href="javascript:void(0);"> <i class="fa fa-cogs"></i> Maintenance Report <span class="plus"><i class="fa fa-plus"></i></span></a>
                 <ul>
-                    <li> <a style="margin-bottom: 1px;" target="_blank" href="<?php echo base_url();?>dashboard/getLineWiseMaintenanceReport"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Line Maintenance</b> </a> </li>
+                    <li><a style="margin-bottom: 1px;" target="_blank" href="<?php echo base_url();?>dashboard/getLineWiseMaintenanceReport"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Line Maintenance</b> </a> </li>
+                    <li><a style="margin-bottom: 1px;" href="<?php echo base_url();?>dashboard/getMachineList"><span>&nbsp;</span><i class="fa fa-circle"></i> Machine List </a></li>
                 </ul>
             </li>
 

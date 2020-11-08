@@ -414,11 +414,72 @@ class Dashboard extends CI_Controller {
 
         $data['lines'] = $this->dashboard_model->getLinesMachineUnderMainterance();
 
-        $where = " OR DATE_FORMAT(problem_start_date_time, '%Y-%m-%d')='$date'";
+        $where = " OR DATE_FORMAT(problem_start_date_time, '%Y-%m-%d')='$date' OR DATE_FORMAT(problem_resolve_date_time, '%Y-%m-%d')='$date'";
 
         $data['maintenance_report'] = $this->access_model->getMachineMaintenanceReport($where);
 
         $data['maincontent'] = $this->load->view('reports/line_maintenance_report', $data);
+    }
+
+    public function getMachineList(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $data['title'] = 'Machine List';
+
+            $data['machine_nos'] = $this->access_model->selectTableDataRowQuery('machine_no', 'tb_machine_list', '');
+            $data['machine_models'] = $this->access_model->selectTableDataRowQuery('*', 'tb_machine_model', '');
+            $data['machine_names'] = $this->access_model->selectTableDataRowQuery('*', 'tb_machine_name', '');
+            $data['machine_brands'] = $this->access_model->selectTableDataRowQuery('*', 'tb_machine_brand', '');
+            $data['other_locations'] = $this->access_model->selectTableDataRowQuery('*', 'tb_other_locations', '');
+            $data['lines'] = $this->access_model->selectTableDataRowQuery('*', 'tb_line', ' ORDER BY (line_code * 1)');
+
+            $data['machine_list'] = $this->access_model->getMachineList();
+
+            $data['maincontent'] = $this->load->view('reports/machine_list', $data, true);
+            $this->load->view('master', $data);
+
+    }
+
+    public function filterMachineList(){
+        $machine_no = $this->input->post('machine_no');
+        $machine_name = $this->input->post('machine_name');
+        $model = $this->input->post('model');
+        $brand = $this->input->post('brand');
+        $line_id = $this->input->post('line_id');
+        $other_location = $this->input->post('other_location');
+
+        $where = '';
+
+        if($machine_no != ''){
+            $where .= " AND t1.machine_no='$machine_no'";
+        }
+
+        if($machine_name != ''){
+            $where .= " AND t1.machine_name_id='$machine_name'";
+        }
+
+        if($model != ''){
+            $where .= " AND t1.model_no_id='$model'";
+        }
+
+        if($brand != ''){
+            $where .= " AND t1.brand_id='$brand'";
+        }
+
+        if($line_id != ''){
+            $where .= " AND t1.line_id='$line_id'";
+        }
+
+        if($other_location != ''){
+            $where .= " AND t1.other_location_id = '$other_location'";
+        }
+
+        $data['machine_list'] = $this->access_model->getMachineList($where);
+
+        echo $maincontent = $this->load->view('reports/filter_machine_list', $data);
     }
 
     public function getMachineMaintenanceReport($line_id){
