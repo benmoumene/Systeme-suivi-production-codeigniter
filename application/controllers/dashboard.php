@@ -422,24 +422,20 @@ class Dashboard extends CI_Controller {
     }
 
     public function getMachineList(){
-        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
-
-        $date_time=$datex->format('Y-m-d H:i:s');
-        $date=$datex->format('Y-m-d');
 
         $data['title'] = 'Machine List';
 
-            $data['machine_nos'] = $this->access_model->selectTableDataRowQuery('machine_no', 'tb_machine_list', '');
-            $data['machine_models'] = $this->access_model->selectTableDataRowQuery('*', 'tb_machine_model', '');
-            $data['machine_names'] = $this->access_model->selectTableDataRowQuery('*', 'tb_machine_name', '');
-            $data['machine_brands'] = $this->access_model->selectTableDataRowQuery('*', 'tb_machine_brand', '');
-            $data['other_locations'] = $this->access_model->selectTableDataRowQuery('*', 'tb_other_locations', '');
-            $data['lines'] = $this->access_model->selectTableDataRowQuery('*', 'tb_line', ' ORDER BY (line_code * 1)');
+        $data['machine_nos'] = $this->access_model->selectTableDataRowQuery('machine_no', 'tb_machine_list', '');
+        $data['machine_models'] = $this->access_model->selectTableDataRowQuery('*', 'tb_machine_model', '');
+        $data['machine_names'] = $this->access_model->selectTableDataRowQuery('*', 'tb_machine_name', '');
+        $data['machine_brands'] = $this->access_model->selectTableDataRowQuery('*', 'tb_machine_brand', '');
+        $data['other_locations'] = $this->access_model->selectTableDataRowQuery('*', 'tb_other_locations', '');
+        $data['lines'] = $this->access_model->selectTableDataRowQuery('*', 'tb_line', ' ORDER BY (line_code * 1)');
 
-            $data['machine_list'] = $this->access_model->getMachineList();
+        $data['machine_list'] = $this->access_model->getMachineList();
 
-            $data['maincontent'] = $this->load->view('reports/machine_list', $data, true);
-            $this->load->view('master', $data);
+        $data['maincontent'] = $this->load->view('reports/machine_list', $data, true);
+        $this->load->view('reports/master', $data);
 
     }
 

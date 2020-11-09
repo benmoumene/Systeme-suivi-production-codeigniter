@@ -40,12 +40,12 @@
                             </tr>
                             <tr style="background-color: #b9ffb2;">
                                 <th class="center" style="font-size: 20px; font-weight: 900;"></th>
-                                <th colspan="1" class="center" style="font-size: 20px; font-weight: 900;"><h3>CUT</h3></th>
+                                <th colspan="1" class="center" style="font-size: 20px; font-weight: 900;"><h3>CUTTING</h3></th>
                                 <th colspan="3" class="center" style="font-size: 20px; font-weight: 900;"><h3>LINE</h3></th>
                             </tr>
                             <tr style="background-color: #f7ffb0;">
                                 <th class="center" style="font-size: 20px; font-weight: 900;">Plan Line</th>
-                                <th class="center" style="font-size: 20px; font-weight: 900;">Cut Ready Qty</th>
+                                <th class="center" style="font-size: 20px; font-weight: 900;">Stock Qty</th>
                                 <th class="center" style="font-size: 20px; font-weight: 900;">Super Market</th>
                                 <th class="center" style="font-size: 20px; font-weight: 900;">Line WIP</th>
                                 <th class="center" style="font-size: 20px; font-weight: 900;">TOTAL WIP</th>

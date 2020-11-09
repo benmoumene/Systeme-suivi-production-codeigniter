@@ -118,8 +118,8 @@ class Dashboard_model extends CI_Model {
         $sql = "SELECT 
                 (SELECT COUNT(id)
                 FROM `tb_care_labels`
-                WHERE is_package_ready=1 AND line_id=0 AND planned_line_id != 0 
-                AND package_sent_to_production=0) AS cut_ready_qty,
+                WHERE is_package_ready=1 AND line_id=0 AND planned_line_id != 0
+                AND package_sent_to_production=0 AND manually_closed=0) AS cut_ready_qty,
                 
                 (SELECT COUNT(t1.cut_tracking_no) 
                 FROM (SELECT cut_tracking_no FROM `tb_cut_summary` 
@@ -645,7 +645,7 @@ class Dashboard_model extends CI_Model {
                 LEFT JOIN
                 (SELECT planned_line_id, COUNT(id) as ready_qty 
                 FROM `tb_care_labels` 
-                WHERE is_package_ready=1 AND line_id=0 
+                WHERE is_package_ready=1 AND line_id=0 AND planned_line_id != 0
                 AND package_sent_to_production=0 AND manually_closed=0
                 GROUP BY planned_line_id) AS t2
                 ON t1.id=t2.planned_line_id
