@@ -92,7 +92,9 @@ $count_unscanned_pc = $cut_qty - ($count_total_carton_qty + $total_wh_qty);
                     <tbody>
                     <tr>
                         <td class="center"><?php echo $po_no;?></td>
-                        <td class="center"><?php echo $so_no;?></td>
+                        <td class="center">
+                            <a href="<?php echo base_url();?>dashboard/getPieceByPieceDetailBySo/<?php echo $so_no;?>" target="_blank"><?php echo $so_no;?></a>
+                        </td>
                         <td class="center"><?php echo $purchase_order;?></td>
                         <td class="center"><?php echo $item;?></td>
                         <td class="center"><?php echo $style_no.'-'.$style_name;?></td>

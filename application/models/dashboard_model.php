@@ -880,6 +880,18 @@ class Dashboard_model extends CI_Model {
         return $query;
     }
 
+    public function getPieceByPieceDetailBySo($where){
+        $sql = "SELECT t1.*, t2.line_code
+                FROM (SELECT * FROM `tb_care_labels` WHERE 1 $where) AS t1
+                
+                LEFT JOIN
+                tb_line AS t2
+                ON t1.line_id=t2.id";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
     public function getCuttingExtraProductionReport($date, $starting_time, $ending_time){
 
 //        $sql = "SELECT COUNT(pc_tracking_no) as normal_hour_cutting_output

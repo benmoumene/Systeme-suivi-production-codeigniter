@@ -3921,6 +3921,35 @@ class Dashboard extends CI_Controller {
         echo $maincontent;
     }
 
+    public function getPieceByPieceDetailBySo($so_no){
+        $data['title'] = "Piece By Piece Detail";
+
+        $where = '';
+        if($so_no != ''){
+            $where .= " AND so_no='$so_no'";
+        }
+
+        $data['pieces'] = $this->dashboard_model->getPieceByPieceDetailBySo($where);
+
+        $data['maincontent'] = $this->load->view('reports/piece_by_piece_detail', $data, true);
+        $this->load->view('reports/master', $data);
+    }
+
+    public function getPieceByPieceDetailFilter(){
+        $piece_no = $this->input->post('piece_no');
+
+        $where = '';
+        if($piece_no != ''){
+            $where .= " AND pc_tracking_no='$piece_no'";
+        }
+
+        $data['pieces'] = $this->dashboard_model->getPieceByPieceDetailBySo($where);
+
+        $maincontent = $this->load->view('reports/piece_by_piece_detail_filter', $data);
+
+        echo $maincontent;
+    }
+
     public function getPoItemWiseSizeReport(){
         $po_no = $this->input->post('po_no');
         $so_no = $this->input->post('so_no');

@@ -96,7 +96,11 @@
 
             ?>
             <tr>
-                <td class="center"><?php echo $v['so_no'];?></td>
+                <td class="center">
+                    <a href="<?php echo base_url();?>dashboard/getPieceByPieceDetailBySo/<?php echo $v['so_no'];?>" target="_blank">
+                        <?php echo $v['so_no'];?>
+                    </a>
+                </td>
                 <td class="center"><?php echo $v['brand'];?></td>
                 <td class="center"><?php echo $v['responsible_line'];?></td>
                 <td class="center"><?php echo $v['style_name'];?></td>
