@@ -117,14 +117,16 @@
         }
     }
 
-    function deletePoPart(id) {
+    function deletePoPart(id, part_code) {
+        var po_no = $("#po_no").val();
+
         var res = confirm("Are you sure to delete?");
 
         if(res == true){
             $.ajax({
                 url: "<?php echo base_url();?>access/deletePoPart/",
                 type: "POST",
-                data: {part_id: id},
+                data: {part_id: id, part_code: part_code, po_no: po_no},
                 dataType: "html",
                 success: function (data) {
 

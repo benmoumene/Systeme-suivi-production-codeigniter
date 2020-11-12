@@ -10038,9 +10038,48 @@ class Access extends CI_Controller {
     }
 
     public function deletePoPart(){
+        $po_no = $this->input->post('po_no');
         $part_id = $this->input->post('part_id');
+        $part_code = $this->input->post('part_code');
 
         $this->access_model->deleteTableData('tb_po_part_detail', 'id', $part_id);
+
+        if($part_code == 'collar_outer'){
+            $data['is_cutting_collar_bundle_ready'] = 0;
+            $data['cutting_collar_bundle_ready_date_time'] = '0000-00-00 00:00:00';
+        }
+
+        if($part_code == 'cuff_outer'){
+            $data['is_cutting_cuff_bundle_ready'] = 0;
+            $data['cutting_cuff_bundle_ready_date_time'] = '0000-00-00 00:00:00';
+        }
+
+        if($part_code == 'back'){
+            $data['is_cutting_back_bundle_ready'] = 0;
+            $data['cutting_back_bundle_ready_date_time'] = '0000-00-00 00:00:00';
+        }
+
+        if($part_code == 'yoke_upper'){
+            $data['is_cutting_yoke_bundle_ready'] = 0;
+            $data['cutting_yoke_bundle_ready_date_time'] = '0000-00-00 00:00:00';
+        }
+
+        if($part_code == 'sleeve_r'){
+            $data['is_cutting_sleeve_bundle_ready'] = 0;
+            $data['cutting_sleeve_bundle_ready_date_time'] = '0000-00-00 00:00:00';
+        }
+
+        if($part_code == 'slv_plkt_r'){
+            $data['is_cutting_sleeve_plkt_bundle_ready'] = 0;
+            $data['cutting_sleeve_plkt_bundle_ready_date_time'] = '0000-00-00 00:00:00';
+        }
+
+        if($part_code == 'pocket'){
+            $data['is_cutting_pocket_bundle_ready'] = 0;
+            $data['cutting_pocket_bundle_ready_date_time'] = '0000-00-00 00:00:00';
+        }
+
+        $this->access_model->updateTblNew('tb_cut_summary', 'po_no', $po_no, $data);
 
         echo 'done';
     }

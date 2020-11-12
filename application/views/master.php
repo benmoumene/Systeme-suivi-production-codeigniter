@@ -480,7 +480,6 @@
                         <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/cuttingTarget"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Cutting Target</b> </a> </li>
                         <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/finishingTarget"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Finishing Target</b> </a> </li>
                         <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/lineTarget"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Line Target</b> </a> </li>
-
                     </ul>
                 </li>
                 <?php

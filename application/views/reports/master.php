@@ -253,6 +253,7 @@
                     <li> <a style="margin-bottom: 1px;" target="_blank" href="<?php echo base_url();?>dashboard/dateWiseWashSendReport"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Wash Send</b> </a> </li>
                     <li> <a style="margin-bottom: 1px;" target="_blank" href="<?php echo base_url();?>dashboard/dateWiseWashReturnReport"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Wash Return</b> </a> </li>
                     <li> <a style="margin-bottom: 1px;" target="_blank" href="<?php echo base_url();?>dashboard/finishingPerformanceDashboard"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Performance Report</b> </a> </li>
+                    <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>dashboard/aqlReport"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>AQL Report</b> </a> </li>
                 </ul>
             </li>
 
@@ -266,6 +267,7 @@
             <li> <a href="javascript:void(0);"> <i class="fa fa-bar-chart-o"></i> Reports <span class="plus"><i class="fa fa-plus"></i></span></a>
                 <ul>
                     <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>dashboard/dailyPerformanceReportNew"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Daily Performance</b> </a> </li>
+                    <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>dashboard/dateRangePerformanceReport"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Date Wise Production</b> </a> </li>
 <!--                    <li> <a style="margin-bottom: 1px;" target="_blank" href="--><?php //echo base_url();?><!--dashboard/poClosingReport"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>PO Closing Report</b> </a> </li>-->
                     <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>dashboard/shipDateWiseReport"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Ship Date Wise Report</b> </a> </li>
                     <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>dashboard/shipDateWiseReportlive"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Ship Date Report Live</b> </a> </li>
@@ -274,7 +276,6 @@
                     <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>dashboard/shipDateWiseReportBYDate"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Date Range Report</b> </a> </li>
 <!--                    <li> <a style="margin-bottom: 1px;" href="--><?php //echo base_url();?><!--dashboard/shipDateWiseDailyProductionReport"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>PO Daily Report</b> </a> </li>-->
                     <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>dashboard/warehouseReport"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Warehouse Report</b> </a> </li>
-                    <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>dashboard/aqlReport"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>AQL Report</b> </a> </li>
                 </ul>
             </li>
 

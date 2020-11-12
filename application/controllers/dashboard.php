@@ -2985,6 +2985,37 @@ class Dashboard extends CI_Controller {
         $this->load->view('reports/master', $data);
     }
 
+    public function dateRangePerformanceReport(){
+        $data['title']='Date Wise Production';
+
+        $data['maincontent'] = $this->load->view('reports/date_range_performance_report', $data, true);
+        $this->load->view('reports/master', $data);
+    }
+
+    public function getDateRangeSummaryReport(){
+        $department = $this->input->post('department');
+        $from_date = $this->input->post('from_date');
+        $to_date = $this->input->post('to_date');
+
+        if($department == 'cutting'){
+            $data['cutting_report'] = $this->dashboard_model->selectTableDataRowQuery('*', 'tb_daily_cut_summary', " AND date BETWEEN '$from_date' AND '$to_date'");
+
+            echo $content = $this->load->view('reports/cutting_performance_report_by_date_range', $data);
+        }
+
+        if($department == 'sewing'){
+            $data['line_prod'] = $this->dashboard_model->getDateRangeProductionSummaryReport($from_date, $to_date);
+
+            echo $content = $this->load->view('reports/sewing_performance_report_by_date_range', $data);
+        }
+
+        if($department == 'finishing'){
+            $data['finishing_prod'] = $this->dashboard_model->getDateRangeFinishingProductionSummaryReport($from_date, $to_date);
+
+            echo $content = $this->load->view('reports/finishing_performance_report_by_date_range', $data);
+        }
+    }
+
     public function dailyPerformanceReportNew(){
         $data['title']='Daily Performance Report';
 

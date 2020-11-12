@@ -30,8 +30,9 @@
             </td>
             <td class="center">
                 <a target="_blank" class="btn btn-warning" href="<?php echo base_url();?>dashboard/getDailyCartonReportDetail/<?php echo $search_date;?>/<?php echo $floor_name;?>/<?php echo $finishing_floor_id;?>">
-                    <?php echo $f['carton_qty'];?></td>
+                    <?php echo $f['carton_qty'];?>
                 </a>
+            </td>
         </tr>
     <?php } ?>
     </tbody>

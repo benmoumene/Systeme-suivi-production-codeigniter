@@ -3904,6 +3904,18 @@ class Dashboard_model extends CI_Model {
         return $query;
     }
 
+    public function getDateRangeProductionSummaryReport($from_date, $to_date){
+        $sql = "SELECT t1.*, t2.line_name, t2.line_code 
+                FROM `tb_daily_line_summary` as t1
+                LEFT JOIN 
+                `tb_line` as t2
+                ON t1.line_id=t2.id
+                WHERE `date` BETWEEN '$from_date' AND '$to_date'";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
     public function getDailyLineProductionSummaryReport($search_date){
         $sql = "SELECT t1.*, t2.line_name, t2.line_code 
                 FROM `tb_daily_line_summary` as t1
@@ -3929,6 +3941,19 @@ class Dashboard_model extends CI_Model {
                  WHERE DATE_FORMAT(carton_date_time, '%Y-%m-%d')='$search_date' 
                  GROUP BY finishing_floor_id) AS t3
                  ON t1.floor_id=t3.finishing_floor_id";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
+    public function getDateRangeFinishingProductionSummaryReport($from_date, $to_date){
+        $sql = "SELECT t1.*, t2.floor_name, t2.floor_code
+                FROM 
+                (SELECT * FROM `tb_daily_finish_summary` 
+                WHERE date BETWEEN '$from_date' AND '$to_date') as t1 
+                LEFT JOIN 
+                `tb_floor` as t2
+                ON t1.floor_id=t2.id";
 
         $query = $this->db->query($sql)->result_array();
         return $query;

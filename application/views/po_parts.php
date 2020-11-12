@@ -17,7 +17,7 @@
                     <td class="hidden-phone center"><?php echo $sl; $sl++;?></td>
                     <td class="hidden-phone center"><?php echo $p['part_code'];?></td>
                     <td class="hidden-phone center">
-                        <span class="btn btn-danger" onclick="deletePoPart(<?php echo $p['id'];?>);">X</span>
+                        <span class="btn btn-danger" onclick="deletePoPart(<?php echo $p['id'];?>, <?php echo $p['part_code'];?>);">X</span>
                     </td>
                 </tr>
             <?php } ?>
