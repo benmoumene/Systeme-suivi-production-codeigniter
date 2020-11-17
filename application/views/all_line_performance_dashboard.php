@@ -167,7 +167,7 @@
                     yValueFormatString: "00.00#",
                     dataPoints: [
                         <?php foreach ($line_report as $k_1 => $v_1){
-                        $dhu_sum = ($v_1['sum_dhu'] != '' ? $v_1['sum_dhu'] : 0);
+                        $dhu = ($v_1['dhu'] != '' ? $v_1['dhu'] : 0);
                         $work_hour_1 = ($v_1['work_hour_1'] != '' ? $v_1['work_hour_1'] : 0);
                         $work_hour_2 = ($v_1['work_hour_2'] != '' ? $v_1['work_hour_2'] : 0);
                         $work_hour_3 = ($v_1['work_hour_3'] != '' ? $v_1['work_hour_3'] : 0);
@@ -177,9 +177,9 @@
 
                         $hour = $res_hour[0]['hour'];
 
-                        $average_dhu = round($dhu_sum/$hour, 2);
+//                        $average_dhu = round($dhu_sum/$hour, 2);
                         ?>
-                        { label: "<?php echo $v_1['line_code'];?>", y: <?php echo $average_dhu * 10 ;?>, indexLabel: "<?php echo $average_dhu;?>" },
+                        { label: "<?php echo $v_1['line_code'];?>", y: <?php echo $dhu * 10 ;?>, indexLabel: "<?php echo $dhu;?>" },
                         <?php } ?>
                     ]
                 }
@@ -235,8 +235,8 @@
 
                             dataPoints_3.push({
                                 label: data[k].start_time+' - '+data[k].end_time,
-                                y: data[k].dhu * 1,
-                                indexLabel: data[k].dhu,
+                                y: data[k].hourly_dhu * 1,
+                                indexLabel: data[k].hourly_dhu,
                             });
                         }
 

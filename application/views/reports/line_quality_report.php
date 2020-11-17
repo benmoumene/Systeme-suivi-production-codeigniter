@@ -95,7 +95,7 @@
             </tr>
             <tr style="background-color: #f7ffb0;">
                 <th align="center" style="font-size: 16px; font-weight: 900;">LINE</th>
-                <th align="center" style="font-size: 16px; font-weight: 900;">AVG.DHU</th>
+                <th align="center" style="font-size: 16px; font-weight: 900;">DHU</th>
 
             <?php foreach ($defect_types AS $d){ ?>
                 <th align="center" style="font-size: 16px; font-weight: 900;"><?php echo $d['defect_name']?></th>
@@ -114,7 +114,10 @@
         <tr>
             <td align="center"><?php echo $line['line_code']; ?></td>
             <td align="center">
-                <?php echo round($line['sum_of_dhu']/$hour, 2); ?>
+                <?php
+//                echo round($line['sum_of_dhu']/$hour, 2);
+                ?>
+                <?php echo $line['dhu']; ?>
             </td>
 
             <?php

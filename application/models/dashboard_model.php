@@ -2882,7 +2882,7 @@ class Dashboard_model extends CI_Model {
     }
 
     public function getHourlyReportByLineCode($line_code, $date){
-        $sql="SELECT t1.*, t2.date, t2.start_time, t2.end_time, t2.qty, t2.efficiency, t2.wip, t2.dhu, 
+        $sql="SELECT t1.*, t2.date, t2.start_time, t2.end_time, t2.qty, t2.efficiency, t2.wip, t2.hourly_dhu, 
              t2.produce_minute_1, t2.work_minute_1, t2.work_hour_1, 
              t2.produce_minute_2, t2.work_minute_2, t2.work_hour_2, 
              t2.produce_minute_3, t2.work_minute_3, t2.work_hour_3, 
@@ -4243,7 +4243,7 @@ class Dashboard_model extends CI_Model {
         $sql = "SELECT t1.*, t2.line_name, t2.line_code, t3.target
                 FROM 
                 (SELECT line_id, `date`, SUM(qty) as total_output_qty, efficiency, 
-                SUM(dhu) as sum_dhu, work_hour_1, work_hour_2, work_hour_3, work_hour_4
+                dhu, work_hour_1, work_hour_2, work_hour_3, work_hour_4
                 FROM `tb_today_line_output_qty` 
                 WHERE `date`='$date'
                 GROUP BY line_id) as t1
@@ -4290,7 +4290,7 @@ class Dashboard_model extends CI_Model {
 
     public function lineQualityDefectSave($line_id, $dhu, $time){
         $sql="UPDATE `tb_today_line_output_qty`
-              SET dhu='$dhu'
+              SET hourly_dhu='$dhu'
               WHERE '$time' BETWEEN start_time AND end_time
               AND `line_id`=$line_id";
 

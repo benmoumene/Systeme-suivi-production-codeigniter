@@ -62,7 +62,7 @@
         $produce_minute += ($total_line_output * $smv);
 
 //                                            echo '<pre>';
-//                                            print_r('smv: '.$smv.' output: '.$total_line_output);
+//                                            print_r('so_no: '.$s['so_no'].'Prod Min: '.$smv*$total_line_output.'smv: '.$smv.' output: '.$total_line_output);
 //                                            echo '</pre>';
     }
 

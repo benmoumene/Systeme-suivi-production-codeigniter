@@ -24,6 +24,10 @@
                 ?>
                 <b>
                     <?php
+                    $total_output_qty = ($dhu_summary[0]['total_output_qty'] != '' ? $dhu_summary[0]['total_output_qty'] : 0);
+                    $total_no_of_defect = ($dhu_count[0]['count_defect'] != '' ? $dhu_count[0]['count_defect'] : 0);
+                    $total_inspected_qty = ($total_output_qty+$total_no_of_defect);
+
                     $dhu_sum = ($dhu_summary[0]['dhu_sum'] != '' ? $dhu_summary[0]['dhu_sum'] : 0);
                     $work_hour_1 = ($dhu_summary[0]['work_hour_1'] != '' ? $dhu_summary[0]['work_hour_1'] : 0);
                     $work_hour_2 = ($dhu_summary[0]['work_hour_2'] != '' ? $dhu_summary[0]['work_hour_2'] : 0);
@@ -33,12 +37,16 @@
                     $total_wh = $work_hour_1+$work_hour_2+$work_hour_3+$work_hour_4;
 
                     $average_dhu = round($dhu_sum/$hour, 2);
+
+                    $dhu_res = round(($total_no_of_defect * 100) / $total_inspected_qty, 2);
+
+                    $this->method_call->lineDhuUpdate($line_id, $dhu_res);
                     ?>
                 </b>
-                <b>AVG DHU(%): </b> <?php echo $average_dhu;?>
+                <b>DHU(%): </b> <?php echo $dhu_res;?>
             </td>
             <td style="font-size: 25px;">
-                <b>Defect Count: </b> <?php echo ($dhu_count[0]['count_defect'] != '' ? $dhu_count[0]['count_defect'] : 0);?>
+                <b>Defect Count: </b> <?php echo $total_no_of_defect;?>
             </td>
         </tr>
     <?php

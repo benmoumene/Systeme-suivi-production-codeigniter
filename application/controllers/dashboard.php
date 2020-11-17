@@ -1119,27 +1119,27 @@ class Dashboard extends CI_Controller {
         fclose ($excel_handler);
 
         if(file_exists('uploads/mail_attachment/last_day_prod.xls') == 1) {
-//            $config = Array(
-//                'protocol' => 'smtp',
-//                'smtp_host' => 'webmail.viyellatexgroup.com',
-//                'smtp_port' => 25,
-//                'smtp_user' => '', // change it to yours
-//                'smtp_pass' => '', // change it to yours
-//                'mailtype' => 'html',
-//                'charset' => 'utf-8',
-//                'wordwrap' => TRUE
-//            );
-
             $config = Array(
                 'protocol' => 'smtp',
-                'smtp_host' => 'ssl://smtp.gmail.com',
-                'smtp_port' => 465,
-                'smtp_user' => 'ecofab.pts@gmail.com', // change it to yours
-                'smtp_pass' => 'productiontrackingsystem@123', // change it to yours
+                'smtp_host' => 'webmail.viyellatexgroup.com',
+                'smtp_port' => 25,
+                'smtp_user' => '', // change it to yours
+                'smtp_pass' => '', // change it to yours
                 'mailtype' => 'html',
                 'charset' => 'utf-8',
                 'wordwrap' => TRUE
             );
+
+//            $config = Array(
+//                'protocol' => 'smtp',
+//                'smtp_host' => 'ssl://smtp.gmail.com',
+//                'smtp_port' => 465,
+//                'smtp_user' => 'ecofab.pts@gmail.com', // change it to yours
+//                'smtp_pass' => 'EcofabPTS@123', // change it to yours
+//                'mailtype' => 'html',
+//                'charset' => 'utf-8',
+//                'wordwrap' => TRUE
+//            );
 
             $content_data = '';
             $content_data .= 'Dear Concern,' . '<br />';
@@ -1150,9 +1150,9 @@ class Dashboard extends CI_Controller {
 
             $this->load->library('email', $config);
             $this->email->set_newline("\r\n");
-//            $this->email->from('pts@interfabshirt.com'); // change it to yours
-            $this->email->from('ecofab.pts@gmail.com'); // change it to yours
-            $this->email->to('shehab.ahameed@interfabshirt.com, monirul.islam@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, ecofab.ie@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com'); // change it to yours
+            $this->email->from('pts@interfabshirt.com'); // change it to yours
+//            $this->email->from('ecofab.pts@gmail.com'); // change it to yours
+            $this->email->to('shehab.ahameed@interfabshirt.com, monirul.islam@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, ecofab.ie@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, tanvir.sarkar@interfabshirt.com'); // change it to yours
             $this->email->cc('nipun.sarker@interfabshirt.com, hasib.hossain@interfabshirt.com, sahil.islam@interfabshirt.com, fahim.ashab@interfabshirt.com');// change it to yours
 //            $this->email->to('nipun.sarker@interfabshirt.com'); // change it to yours
             $this->email->subject("Production: $previous_date (Auto-Mail)");
@@ -1549,7 +1549,7 @@ class Dashboard extends CI_Controller {
 //                'smtp_host' => 'ssl://smtp.gmail.com',
 //                'smtp_port' => 465,
 //                'smtp_user' => 'ecofab.pts@gmail.com', // change it to yours
-//                'smtp_pass' => 'productiontrackingsystem@123', // change it to yours
+//                'smtp_pass' => 'EcofabPTS@123', // change it to yours
 //                'mailtype' => 'html',
 //                'charset' => 'utf-8',
 //                'wordwrap' => TRUE
@@ -2118,7 +2118,7 @@ class Dashboard extends CI_Controller {
                 'smtp_host' => 'ssl://smtp.gmail.com',
                 'smtp_port' => 465,
                 'smtp_user' => 'ecofab.pts@gmail.com', // change it to yours
-                'smtp_pass' => 'productiontrackingsystem@123', // change it to yours
+                'smtp_pass' => 'EcofabPTS@123', // change it to yours
                 'mailtype' => 'html',
                 'charset' => 'utf-8',
                 'wordwrap' => TRUE
@@ -2521,7 +2521,7 @@ class Dashboard extends CI_Controller {
         $date_time=$datex->format('Y-m-d H:i:s');
         $date=$datex->format('Y-m-d');
 
-        $previous_date = date( "Y-m-d", strtotime( $date . "-1 day"));
+        $previous_date = date( "Y-m-d", strtotime( $date . "-2 day"));
 //        $previous_date = date('Y-m-d');
 //        $previous_date = '2019-10-26';
         $data['previous_date'] = $previous_date;
@@ -2584,7 +2584,7 @@ class Dashboard extends CI_Controller {
                 'smtp_host' => 'ssl://smtp.gmail.com',
                 'smtp_port' => 465,
                 'smtp_user' => 'ecofab.pts@gmail.com', // change it to yours
-                'smtp_pass' => 'productiontrackingsystem@123', // change it to yours
+                'smtp_pass' => 'EcofabPTS@123', // change it to yours
                 'mailtype' => 'html',
                 'charset' => 'utf-8',
                 'wordwrap' => TRUE
@@ -6419,6 +6419,14 @@ class Dashboard extends CI_Controller {
         $date=$datex->format('Y-m-d');
 
         $this->dashboard_model->lineQualityDefectSave($line_id, $dhu, $time);
+    }
+
+    public function lineDhuUpdate($line_id, $dhu){
+        $data = array(
+            'dhu' => $dhu
+        );
+
+        $this->dashboard_model->updateTblNew('tb_today_line_output_qty', 'line_id', $line_id, $data);
     }
 
     public function getHoursByTimeRange(){

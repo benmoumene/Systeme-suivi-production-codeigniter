@@ -153,9 +153,9 @@
             $over_time_qty = $extra_line_qty[0]['qty'];
 
             $line_dhu = $this->method_call->getLineDhuSumReport($v['id'], $previous_date);
-            $line_sum_dhu = $line_dhu[0]['sum_dhu'];
+            $line_dhu = $line_dhu[0]['dhu'];
 
-            $average_dhu = round(($line_sum_dhu/$avg_of_work_hour), 2);
+//            $average_dhu = round(($line_sum_dhu/$avg_of_work_hour), 2);
 
 //            $over_time_qty = $v['total_line_output'] - $v['line_normal_hours_output'];
 
@@ -194,7 +194,7 @@
                     ?>
                 </td>
                 <td class="center"><?php echo $avg_of_work_hour;?></td>
-                <td class="center"><?php echo $average_dhu;?></td>
+                <td class="center"><?php echo $line_dhu;?></td>
                 <td class="center"><?php echo $remarks;?></td>
             </tr>
             <?php
@@ -207,7 +207,7 @@
                 'output' => ($total_line_output != '' ? $total_line_output : 0),
                 'work_hour' => ($avg_of_work_hour != '' ? $avg_of_work_hour : 0),
                 'efficiency' => ($line_efficiency != '' ? $line_efficiency : 0),
-                'dhu' => ($average_dhu != '' ? $average_dhu : 0),
+                'dhu' => ($line_dhu != '' ? $line_dhu : 0),
                 'date' => $previous_date,
                 'man_power_1' => $man_power_1,
                 'produce_minute_1' => $produce_minute_1,
