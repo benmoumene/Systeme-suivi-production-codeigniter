@@ -6395,8 +6395,31 @@ class Dashboard extends CI_Controller {
         $data['maincontent'] = $this->load->view('reports/line_quality_report', $data);
     }
 
+    public function getDateRangeQualityReport(){
+        $from_date = $this->input->post('from_date');
+        $to_date = $this->input->post('to_date');
+
+        $where = '';
+
+        if($from_date != '' && $to_date != ''){
+            $where .= " AND date BETWEEN '$from_date' AND '$to_date'";
+        }
+
+        $data['from_date'] = $from_date;
+        $data['to_date'] = $to_date;
+
+        $data['defect_types'] = $this->access_model->getAllTbl('tb_defect_types');
+        $data['lines'] = $this->dashboard_model->getDateRangeQualityReport($where);
+
+        echo $this->load->view('reports/quality_defect_filter_report', $data);
+    }
+
     public function getDefectCount($line_id, $defect_code, $date){
         return $this->dashboard_model->getDefectCount($line_id, $defect_code, $date);
+    }
+
+    public function getDefectCountDateRange($line_id, $defect_code, $from_date, $to_date){
+        return $this->dashboard_model->getDefectCountDateRange($line_id, $defect_code, $from_date, $to_date);
     }
 
     public function getLineDHUSummary($line_id){

@@ -2,11 +2,16 @@
 <html>
 <head>
     <title><?php echo $title;?></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!--    <meta http-equiv="refresh" content="30">-->
     <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/images/favicon.ico" type="image/x-icon" />
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+<!--    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
     <style>
         table, td, th {
@@ -88,12 +93,34 @@
     </style>
 </head>
 <body>
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <h4 class="text-right">
+                Select Date:
+            </h4>
+        </div>
+        <div class="col-md-3">
+            <input type="date" class="form-control" name="date_from" id="date_from"/>
+        </div>
+        <div class="col-md-3">
+            <input type="date" class="form-control" name="date_to" id="date_to"/>
+        </div>
+        <div class="col-md-2">
+            <span class="btn btn-success" onclick="getDateRangeQualityReport();">SEARCH</span>
+        </div>
+        <div class="col-md-1" id="loader" style="display: none;">
+            <div class="loader"></div>
+        </div>
+    </div>
+</div>
+
+<br />
 <table id="" border="1" width="100%" style="border: 1px solid black;">
         <thead>
             <tr style="background-color: #f7ffb0;">
-                <th align="center" style="font-size: 22px; font-weight: 900;" colspan="15">Line Defect Report: <?php echo $date;?></th>
-            </tr>
-            <tr style="background-color: #f7ffb0;">
+                <th align="center" style="font-size: 16px; font-weight: 900;">DATE</th>
                 <th align="center" style="font-size: 16px; font-weight: 900;">LINE</th>
                 <th align="center" style="font-size: 16px; font-weight: 900;">DHU</th>
 
@@ -103,7 +130,7 @@
                 <th align="center" style="font-size: 16px; font-weight: 900;">Total</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="table_content">
 
         <?php
 
@@ -112,6 +139,7 @@
             $total_defects = 0;
         ?>
         <tr>
+            <td align="center"><?php echo $date; ?></td>
             <td align="center"><?php echo $line['line_code']; ?></td>
             <td align="center">
                 <?php
@@ -152,3 +180,33 @@
 
 </body>
 </html>
+
+<script type="text/javascript">
+
+    function getDateRangeQualityReport() {
+        var from_date = $("#date_from").val();
+        var to_date = $("#date_to").val();
+
+
+        if(from_date != '' & to_date != '' && to_date >= from_date){
+            $("#loader").css("display", "block");
+            $("#table_content").empty();
+
+            $.ajax({
+                url: "<?php echo base_url();?>dashboard/getDateRangeQualityReport/",
+                type: "POST",
+                data: {from_date: from_date, to_date: to_date},
+                dataType: "html",
+                success: function (data) {
+                    $("#table_content").append(data);
+                    $("#loader").css("display", "none");
+                }
+            });
+        }else{
+            alert('Invalid Date Range!');
+        }
+
+
+    }
+
+</script>

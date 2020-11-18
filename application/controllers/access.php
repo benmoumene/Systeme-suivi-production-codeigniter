@@ -2658,9 +2658,12 @@ class Access extends CI_Controller {
 
 
         $line_dhu = $this->access_model->getLineDhuSumReport($line_id, $previous_date);
-        $line_sum_dhu = $line_dhu[0]['sum_dhu'];
+//        $line_sum_dhu = $line_dhu[0]['dhu'];
+//        $average_dhu = round(($line_sum_dhu/$avg_of_work_hour), 2);
 
-        $average_dhu = round(($line_sum_dhu/$avg_of_work_hour), 2);
+        $line_dhu = $line_dhu[0]['dhu'];
+        $line_manual_qty = $line_dhu[0]['manual_qty'];
+
         if($line_remarks != ''){
             $remarks = $line_remarks;
         }else{
@@ -2675,10 +2678,11 @@ class Access extends CI_Controller {
             'target' => ($line_target != '' ? $line_target : 0),
             'normal_output' => ($line_output != 0 ? $line_output : 0),
             'eot_output' => ($over_time_qty != '' ? $over_time_qty : 0),
+            'manual_qty' => ($line_manual_qty != '' ? $line_manual_qty : 0),
             'output' => ($total_line_output != '' ? $total_line_output : 0),
             'work_hour' => ($avg_of_work_hour != '' ? $avg_of_work_hour : 0),
             'efficiency' => ($line_efficiency != '' ? $line_efficiency : 0),
-            'dhu' => ($average_dhu != '' ? $average_dhu : 0),
+            'dhu' => ($line_dhu != '' ? $line_dhu : 0),
             'date' => $previous_date,
             'man_power_1' => $man_power_1,
             'produce_minute_1' => $produce_minute_1,

@@ -969,6 +969,21 @@ class Dashboard_model extends CI_Model {
         return $query;
     }
 
+    public function getDefectCountDateRange($line_id, $defect_code, $from_date, $to_date){
+
+        $where= '';
+        if($defect_code != ''){
+            $where .= " AND defect_code='$defect_code'";
+        }
+
+        $sql = "SELECT COUNT(id) AS count_defect FROM `tb_defects_tracking` 
+                WHERE DATE_FORMAT(defect_date_time, '%Y-%m-%d') BETWEEN '$from_date' AND '$to_date'
+                AND line_id=$line_id $where";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
     public function getDateWiseWashSendReport($po_from_date){
 
         $sql = "SELECT t1.*, t2.total_count_wash_send_qty, t3.total_order_qty, t3.ex_factory_date, 
@@ -4254,6 +4269,21 @@ class Dashboard_model extends CI_Model {
                 `line_daily_target` as t3
                 ON t1.line_id=t3.line_id AND t1.date=t3.date
                 ORDER BY (t2.line_code * 1) ASC";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
+    public function getDateRangeQualityReport($where){
+        $sql = "SELECT t1.*, t2.id, t2.line_code 
+                FROM 
+                (SELECT date, line_id, dhu 
+                FROM `tb_daily_line_summary` 
+                WHERE 1 $where) AS t1
+                
+                LEFT JOIN
+                tb_line AS t2
+                ON t1.line_id=t2.id";
 
         $query = $this->db->query($sql)->result_array();
         return $query;

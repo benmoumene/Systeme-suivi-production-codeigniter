@@ -154,6 +154,7 @@
 
             $line_dhu = $this->method_call->getLineDhuSumReport($v['id'], $previous_date);
             $line_dhu = $line_dhu[0]['dhu'];
+            $line_manual_qty = $line_dhu[0]['manual_qty'];
 
 //            $average_dhu = round(($line_sum_dhu/$avg_of_work_hour), 2);
 
@@ -204,6 +205,7 @@
                 'target' => ($line_target != '' ? $line_target : 0),
                 'normal_output' => ($line_output != 0 ? $line_output : 0),
                 'eot_output' => ($over_time_qty != '' ? $over_time_qty : 0),
+                'manual_qty' => ($line_manual_qty != '' ? $line_manual_qty : 0),
                 'output' => ($total_line_output != '' ? $total_line_output : 0),
                 'work_hour' => ($avg_of_work_hour != '' ? $avg_of_work_hour : 0),
                 'efficiency' => ($line_efficiency != '' ? $line_efficiency : 0),

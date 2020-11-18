@@ -142,7 +142,7 @@ class Access_model extends CI_Model {
     }
 
     public function getLineDhuSumReport($line_id, $date){
-        $sql = "SELECT dhu FROM 
+        $sql = "SELECT dhu, SUM(manual_qty) AS manual_qty FROM 
                 tb_today_line_output_qty
                 WHERE line_id=$line_id
                 AND `date`='$date'";
