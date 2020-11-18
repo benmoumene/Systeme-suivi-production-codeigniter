@@ -23,13 +23,7 @@
     <tbody>
     <?php
 
-    $total_line_target=0;
-    $total_line_normal_output=0;
-    $total_over_time_qty=0;
     $total_line_output=0;
-    $total_sum_efficiency=0;
-    $avg_work_hour=0;
-    $count_lines=0;
 
     $total_produce_min=0;
     $total_work_min=0;
@@ -71,7 +65,15 @@
         $count_lines++;
     }
 
-    $avg_work_hour = round(($total_work_hour / $count_lines), 2);
     ?>
     </tbody>
+    <tfoot>
+        <tr>
+            <th class="center" colspan="5"><h5>TOTAL</h5></th>
+            <th class="center">
+                <h5><?php echo $total_line_output;?></h5>
+            </th>
+            <th class="center" colspan="8"></th>
+        </tr>
+    </tfoot>
 </table>
