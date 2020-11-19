@@ -2741,7 +2741,7 @@ class Dashboard_model extends CI_Model {
     }
 
     public function getProductionReport($where){
-        $sql = "SELECT * FROM `tb_production_summary` WHERE 1 $where ORDER BY approved_ex_factory_date ASC";
+        $sql = "SELECT * FROM `tb_production_summary` WHERE 1 $where ORDER BY ex_factory_date ASC";
 
         $query = $this->db->query($sql)->result_array();
         return $query;
