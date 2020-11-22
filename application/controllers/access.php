@@ -10048,6 +10048,8 @@ class Access extends CI_Controller {
 
         $this->access_model->deleteTableData('tb_po_part_detail', 'id', $part_id);
 
+        $data = array();
+
         if($part_code == 'collar_outer'){
             $data['is_cutting_collar_bundle_ready'] = 0;
             $data['cutting_collar_bundle_ready_date_time'] = '0000-00-00 00:00:00';
@@ -10083,7 +10085,9 @@ class Access extends CI_Controller {
             $data['cutting_pocket_bundle_ready_date_time'] = '0000-00-00 00:00:00';
         }
 
-        $this->access_model->updateTblNew('tb_cut_summary', 'po_no', $po_no, $data);
+        if(sizeof($data)){
+            $this->access_model->updateTblNew('tb_cut_summary', 'po_no', $po_no, $data);
+        }
 
         echo 'done';
     }

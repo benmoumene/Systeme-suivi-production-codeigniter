@@ -252,6 +252,7 @@
                         <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/cutting_new"><i class="fa fa-circle"></i> Cutting New </a></li>
                         <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/group_po_item_making"><i class="fa fa-circle"></i> Group-PO-Item </a></li>
                         <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/poPartDetail"><i class="fa fa-circle"></i> Set Parts </a></li>
+                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/removePoPart"><i class="fa fa-circle"></i> Remove Part </a></li>
                         <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/multiple_po_item_remain_qty_excel"><i class="fa fa-circle"></i> Export PO-Item EXCEL </a></li>
                     </ul>
                 </li>

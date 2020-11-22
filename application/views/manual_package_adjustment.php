@@ -33,7 +33,7 @@
 </div>
 <div class="container clear_both padding_fix">
     <!--\\\\\\\ container  start \\\\\\-->
-    <form action="<?php echo base_url();?>access/deletingCutting" method="post" onsubmit="return confirm('Do you really want to Delete?');">
+
         <div class="row">
             <div class="col-md-12">
                 <div style="padding-top:10px">
@@ -77,7 +77,7 @@
             </div>
             <div class="col-md-1" id="loader" style="display: none;"><div class="loader"></div></div>
         </div>
-    </form>
+
 
 </div>
 

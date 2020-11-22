@@ -2521,7 +2521,7 @@ class Dashboard extends CI_Controller {
         $date_time=$datex->format('Y-m-d H:i:s');
         $date=$datex->format('Y-m-d');
 
-        $previous_date = date( "Y-m-d", strtotime( $date . "-2 day"));
+        $previous_date = date( "Y-m-d", strtotime( $date . "-1 day"));
 //        $previous_date = date('Y-m-d');
 //        $previous_date = '2019-10-26';
         $data['previous_date'] = $previous_date;

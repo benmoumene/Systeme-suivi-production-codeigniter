@@ -76,6 +76,7 @@
                                             <thead>
                                                 <tr>
                                                     <th class="hidden-phone center">Piece No</th>
+                                                    <th class="hidden-phone center">Size</th>
                                                     <th class="hidden-phone center">SO</th>
                                                     <th class="hidden-phone center">Type</th>
                                                     <th class="hidden-phone center">Brand</th>
@@ -103,6 +104,7 @@
                                             <?php foreach ($pieces as $p){ ?>
                                                 <tr>
                                                     <td class="center"><?php echo $p['pc_tracking_no'];?></td>
+                                                    <td class="center"><?php echo $p['size'];?></td>
                                                     <td class="center"><?php echo $p['so_no'];?></td>
                                                     <td class="center">
                                                         <?php

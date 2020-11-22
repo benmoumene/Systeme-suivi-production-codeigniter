@@ -32,6 +32,31 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-md-12">
+        <div style="padding-top:10px">
+            <h4 style="color:red">
+                <?php
+                $exc = $this->session->userdata('exception');
+                if (isset($exc)) {
+                    echo $exc;
+                    $this->session->unset_userdata('exception');
+                } ?>
+            </h4>
+
+            <h4 style="color:green">
+                <?php
+                $msg = $this->session->userdata('message');
+                if (isset($msg)) {
+                    echo $msg;
+                    $this->session->unset_userdata('message');
+                }
+                ?>
+            </h4>
+        </div>
+
+    </div><!--/block-web-->
+</div>
 
 <div class="row" style="padding-left: 10px">
     <div class="form-group">
@@ -49,10 +74,14 @@
             </div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-1">
             <div class="form-group">
-                <button onclick="getPoParts()" class="btn btn-success" id="btn_submit">SEARCH</button>
+                <button onclick="getPoParts()" class="btn btn-primary" id="btn_submit">SEARCH</button>
             </div>
+        </div>
+
+        <div class="col-md-1">
+            <span class="btn btn-success" id="btn_process" onclick="cuttingPackageReadyManualAdjustment();">PROCESS PACKAGE</span>
         </div>
 
         <div class="col-md-1" id="loader" style="display: none;"><div class="loader"></div></div>
@@ -132,11 +161,37 @@
 
                     if(data == 'done'){
                         $("#loader").css("display", "none");
-                        $("#btn_submit").click();
+                        $("#btn_process").click();
                     }
 
                 }
             });
         }
+    }
+
+    function cuttingPackageReadyManualAdjustment() {
+
+        var po_no = $("#po_no").val();
+
+        if(po_no != ''){
+            $("#loader").css("display", "block");
+
+            $.ajax({
+                url: "<?php echo base_url();?>access/cuttingPackageReadyManualAdjustmentProcess/",
+                type: "POST",
+                data: {po_no: po_no},
+                dataType: "html",
+                success: function (data) {
+                    if(data == 'done'){
+                        $("#loader").css("display", "none");
+                        location.reload();
+                    }
+                }
+            });
+
+        }else{
+            alert("Please Select PO!");
+        }
+
     }
 </script>
