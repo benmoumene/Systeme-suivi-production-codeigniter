@@ -2772,7 +2772,8 @@ class Dashboard_model extends CI_Model {
                 ) tb_care_labels WHERE line_id != 0 GROUP BY so_no, line_id) as t1
                 
                 LEFT JOIN
-                (SELECT so_no,po_no,item,quality,color,purchase_order, line_id, MIN(line_input_date_time) AS min_line_input_date_time
+                (SELECT so_no,po_no,item,quality,color,purchase_order, line_id, 
+                MIN(NULLIF(line_input_date_time, '0000-00-00 00:00:00')) AS min_line_input_date_time
                 FROM tb_care_labels WHERE line_id != 0 GROUP BY so_no, line_id) AS t2
                 ON t1.so_no=t2.so_no AND t1.line_id=t2.line_id
                 

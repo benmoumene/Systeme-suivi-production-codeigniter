@@ -30,13 +30,20 @@ firebase.initializeApp(firebaseConfig);
 var database = firebase.database();
 
 var cur_date = "<?php echo date('Y-m-d');?>";
+var pre_date = "<?php echo date('Y-m-d', strtotime("-1 day"));;?>";
 
-function writeUserData(line, target, output, efficiency) {
+var previousDateRef = this.database.ref("EcoFab/" + pre_date + "/");
+previousDateRef.remove();
+
+function writeUserData(line, target, output, efficiency, dhu) {
+
     firebase.database().ref("EcoFab/" + cur_date + "/" + "Line/" + line).set({
         Target: target,
         Output: output,
-        Efficiency: efficiency
+        Efficiency: efficiency,
+        DHU: dhu,
     });
+
 }
 </script>
 </body>
@@ -49,7 +56,7 @@ function writeUserData(line, target, output, efficiency) {
 
             window.open('', '_self', '').close();
 
-        }, 30000);
+        }, 60000);
 
 
             $.ajax({
@@ -69,9 +76,10 @@ function writeUserData(line, target, output, efficiency) {
                         var efficiency = (data[i].efficiency != null ? data[i].efficiency : 0);
                         var target = (data[i].target != null ? data[i].target : 0);
                         var total_output_qty = (data[i].total_output_qty != null ? data[i].total_output_qty : 0);
+                        var dhu = (data[i].dhu != null ? data[i].dhu : 0);
 
                         console.log(line_id+' ~ '+line_code+' ~ '+efficiency+' ~ '+target+' ~ '+total_output_qty);
-                        writeUserData(line_code, target, total_output_qty, efficiency);
+                        writeUserData(line_code, target, total_output_qty, efficiency, dhu);
                     }
 
                 }
