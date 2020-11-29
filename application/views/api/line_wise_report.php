@@ -11,7 +11,7 @@
 
 <body>
 <div id = "mydiv">
-    Click on this to see a dialogue box.
+    Loading...
 </div>
 
 <script type="text/javascript">

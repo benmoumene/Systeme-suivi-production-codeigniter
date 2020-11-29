@@ -92,6 +92,7 @@ class Welcome extends CI_Controller {
                 $data1['access_points']=$result->access_points; // 1=cutting, 2=line_begin, 3=midline_qc, 4=endline_qc
                 $data1['line_id']=$result->line_id;
                 $data1['floor_id']=$result->floor_id;
+                $data1['finishing_floor_id']=$result->finishing_floor_id;
                 $data1['is_print_allowed']=$result->is_print_allowed;
                 $data1['buyer_condition']=$result->buyer_condition;
 

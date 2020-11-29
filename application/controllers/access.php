@@ -749,6 +749,7 @@ class Access extends CI_Controller {
         $date=$datex->format('Y-m-d');
 
         $user_description = $this->session->userdata('user_description');
+        $finishing_floor_id = $this->session->userdata('finishing_floor_id');
 
         $pcs_nos = $this->input->post('pcs_nos');
 
@@ -787,6 +788,7 @@ class Access extends CI_Controller {
                 }
 
                 $this->access_model->updateTblFields('tb_today_line_output_qty', " SET manual_qty=manual_qty+1 ", " AND line_id=$line_id AND date = '$date' AND '$time' BETWEEN start_time AND end_time");
+                $this->access_model->updateTblFields('tb_today_finishing_output_qty', " SET manual_qty=manual_qty+1 ", " AND floor_id=$finishing_floor_id AND date = '$date' AND '$time' BETWEEN start_time AND end_time");
 
             } elseif($sent_to_production == 1){
                 $data['access_points'] = 4;
@@ -807,7 +809,7 @@ class Access extends CI_Controller {
                 }
 
                 $this->access_model->updateTblFields('tb_today_line_output_qty', " SET manual_qty=manual_qty+1 ", " AND line_id=$line_id AND date = '$date' AND '$time' BETWEEN start_time AND end_time");
-
+                $this->access_model->updateTblFields('tb_today_finishing_output_qty', " SET manual_qty=manual_qty+1 ", " AND floor_id=$finishing_floor_id AND date = '$date' AND '$time' BETWEEN start_time AND end_time");
             } elseif(($access_points == 2) && ($access_points_status == 1)){
                 $data['access_points'] = 4;
                 $data['access_points_status'] = 4;
@@ -825,7 +827,7 @@ class Access extends CI_Controller {
                 }
 
                 $this->access_model->updateTblFields('tb_today_line_output_qty', " SET manual_qty=manual_qty+1 ", " AND line_id=$line_id AND date = '$date' AND '$time' BETWEEN start_time AND end_time");
-
+                $this->access_model->updateTblFields('tb_today_finishing_output_qty', " SET manual_qty=manual_qty+1 ", " AND floor_id=$finishing_floor_id AND date = '$date' AND '$time' BETWEEN start_time AND end_time");
             } elseif(($access_points == 3) && ($access_points_status == 1)){
                 $data['access_points'] = 4;
                 $data['access_points_status'] = 4;
@@ -843,7 +845,7 @@ class Access extends CI_Controller {
                 }
 
                 $this->access_model->updateTblFields('tb_today_line_output_qty', " SET manual_qty=manual_qty+1 ", " AND line_id=$line_id AND date = '$date' AND '$time' BETWEEN start_time AND end_time");
-
+                $this->access_model->updateTblFields('tb_today_finishing_output_qty', " SET manual_qty=manual_qty+1 ", " AND floor_id=$finishing_floor_id AND date = '$date' AND '$time' BETWEEN start_time AND end_time");
             } elseif(($access_points == 4) && ($access_points_status == 2)){
                 $data['access_points'] = 4;
                 $data['access_points_status'] = 4;
@@ -861,17 +863,21 @@ class Access extends CI_Controller {
                 }
 
                 $this->access_model->updateTblFields('tb_today_line_output_qty', " SET manual_qty=manual_qty+1 ", " AND line_id=$line_id AND date = '$date' AND '$time' BETWEEN start_time AND end_time");
-
+                $this->access_model->updateTblFields('tb_today_finishing_output_qty', " SET manual_qty=manual_qty+1 ", " AND floor_id=$finishing_floor_id AND date = '$date' AND '$time' BETWEEN start_time AND end_time");
             } elseif(($access_points == 4) && ($access_points_status == 4)){
                 $data['packing_status'] = 1;
                 $data['packing_date_time'] = $date_time;
                 $data['carton_status'] = 1;
                 $data['carton_date_time'] = $date_time;
+
+                $this->access_model->updateTblFields('tb_today_finishing_output_qty', " SET manual_qty=manual_qty+1 ", " AND floor_id=$finishing_floor_id AND date = '$date' AND '$time' BETWEEN start_time AND end_time");
             } elseif($packing_status == 0){
                 $data['packing_status'] = 1;
                 $data['packing_date_time'] = $date_time;
                 $data['carton_status'] = 1;
                 $data['carton_date_time'] = $date_time;
+
+                $this->access_model->updateTblFields('tb_today_finishing_output_qty', " SET manual_qty=manual_qty+1 ", " AND floor_id=$finishing_floor_id AND date = '$date' AND '$time' BETWEEN start_time AND end_time");
             } elseif($carton_status == 0){
                 $data['carton_status'] = 1;
                 $data['carton_date_time'] = $date_time;
@@ -4188,6 +4194,9 @@ class Access extends CI_Controller {
         $size = $this->input->post('size');
         $group = $this->input->post('group');
 
+        $line_info = $this->access_model->getLineInfo($line_no_to);
+        $finishing_floor_id = $line_info[0]['finishing_floor_id'];
+
         $where = '';
 
         if($so_no != ''){
@@ -4206,7 +4215,7 @@ class Access extends CI_Controller {
             $where .= " AND line_id = '$line_no_from' AND access_points != 4 AND access_points_status != 4";
         }
 
-        $this->access_model->changingLinePlan( $line_no_to, $where);
+        $this->access_model->changingLinePlan( $line_no_to, $finishing_floor_id, $where);
 
         $data['message']="Successfully Line Changed!";
         $this->session->set_userdata($data);
@@ -5522,6 +5531,8 @@ class Access extends CI_Controller {
 
         $access_points = $this->session->userdata('access_points');
         $line_id = $this->session->userdata('line_id');
+        $floor_id = $this->session->userdata('floor_id');
+        $finishing_floor_id = $this->session->userdata('finishing_floor_id');
 
         $carelabel_tracking_no = $this->input->post('care_label_no');
 
@@ -5540,7 +5551,7 @@ class Access extends CI_Controller {
                 echo 'closed';
             }else{
                 if(($id == 0) && ($sent_to_production == 1)){
-                    $this->access_model->inputToLine($carelabel_tracking_no, $line_id, 2, 1, $date_time);
+                    $this->access_model->inputToLine($carelabel_tracking_no, $line_id, $finishing_floor_id, 2, 1, $date_time);
 
                     echo 'successfully inputed';
                 }

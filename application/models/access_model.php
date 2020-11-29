@@ -5797,13 +5797,14 @@ class Access_model extends CI_Model {
         return $query;
     }
 
-    public function inputToLine($carelabel_tracking_no, $line_id, $access_points, $access_point_status, $date_time)
+    public function inputToLine($carelabel_tracking_no, $line_id, $finishing_floor_id, $access_points, $access_point_status, $date_time)
     {
         $sql = "Update `vt_few_days_po_pcs` 
                 SET line_id = $line_id, 
                 access_points = 2,
                 access_points_status = 1,
-                line_input_date_time = '$date_time'
+                line_input_date_time = '$date_time',
+                finishing_floor_id = '$finishing_floor_id'
                 WHERE pc_tracking_no = '$carelabel_tracking_no'";
 
         $query = $this->db->query($sql);
@@ -6275,9 +6276,9 @@ class Access_model extends CI_Model {
         return $query;
     }
 
-    public function changingLinePlan($line_no_to, $where){
-        $sql="UPDATE `tb_care_labels` 
-              SET line_id='$line_no_to'
+    public function changingLinePlan($line_no_to, $finishing_floor_id, $where){
+        $sql="UPDATE `tb_care_labels`
+              SET line_id='$line_no_to', finishing_floor_id='$finishing_floor_id'
               WHERE 1 $where";
 
         $query = $this->db->query($sql);
