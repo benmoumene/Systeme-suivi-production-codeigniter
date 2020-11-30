@@ -1890,6 +1890,13 @@ class Access extends CI_Controller {
         $ex_day_1=$ex_factory_date_1[1];
         $data_1['ex_factory_date']=$ex_year_1.'-'.$ex_month_1.'-'.$ex_day_1;
 
+        $app_ex_factory_dt = $this->input->post('app_ex_fac_date');
+        $app_ex_factory_date = explode('-', $app_ex_factory_dt);
+        $app_ex_year=$app_ex_factory_date[2];
+        $app_ex_month=$app_ex_factory_date[0];
+        $app_ex_day=$app_ex_factory_date[1];
+        $data_1['approved_ex_factory_date']=$app_ex_year.'-'.$app_ex_month.'-'.$app_ex_day;
+
         $crd_dt = $this->input->post('crd_date');
         $crd_date = explode('-', $crd_dt);
         $year=$crd_date[2];

@@ -88,7 +88,7 @@
                 </div>
                 <div id="row">
                     <div class="col-md-12">
-                        <div class="col-md-8">
+                        <div class="col-md-10">
                             <div class="form-group">
                                 <table class="display table table-bordered table-striped">
                                     <thead>
@@ -109,6 +109,8 @@
                                             <td class="center">
                                                 <input type="text" name="color" id="color">
                                             </td>
+                                            <td class="center"></td>
+                                            <td class="center"></td>
                                         </tr>
                                         <tr>
                                             <td class="center">Style No</td>
@@ -127,6 +129,10 @@
                                             <td class="center">
                                                 <input type="text" class="form-control-inline input-small default-date-picker" id="crd_date" name="crd_date" required autocomplete="off" />
                                             </td>
+                                            <td class="center">App. Ex-Fac</td>
+                                            <td class="center">
+                                                <input type="text" class="form-control-inline input-small default-date-picker" id="app_ex_fac_date" name="app_ex_fac_date" required autocomplete="off" />
+                                            </td>
                                         </tr>
                                     </thead>
                                 </table>
@@ -136,7 +142,7 @@
                 </div>
                 <div id="row">
                     <div class="col-md-12">
-                        <div class="col-md-8">
+                        <div class="col-md-10">
                             <div class="form-group">
                                 <table class="display table table-bordered table-striped">
                                     <thead>
@@ -214,6 +220,7 @@
         $("#style_no").val('');
         $("#style_name").val('');
         $("#ex_fac_date").val('');
+        $("#app_ex_fac_date").val('');
         $("#crd_date").val('');
 
         $("#size_qty").empty();
@@ -251,6 +258,13 @@
                 var ex_date = ex_factory_dt_split[2];
                 var ex_factory_date = ex_month+"-"+ex_date+"-"+ex_year;
 
+                var app_ex_factory_dt = data[0].approved_ex_factory_date;
+                var app_ex_factory_dt_split = app_ex_factory_dt.split("-");
+                var app_ex_year = app_ex_factory_dt_split[0];
+                var app_ex_month = app_ex_factory_dt_split[1];
+                var app_ex_date = app_ex_factory_dt_split[2];
+                var app_ex_factory_date = app_ex_month+"-"+app_ex_date+"-"+app_ex_year;
+
                 var crd_dt = data[0].crd_date;
                 var crd_dt_split = crd_dt.split("-");
                 var crd_year = crd_dt_split[0];
@@ -266,6 +280,7 @@
                 $("#style_no").val(style_no);
                 $("#style_name").val(style_name);
                 $("#ex_fac_date").val(ex_factory_date);
+                $("#app_ex_fac_date").val(app_ex_factory_date);
                 $("#crd_date").val(crd_date);
 
                 $("#total_qty").append(total_order_qty);

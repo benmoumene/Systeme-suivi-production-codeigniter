@@ -4737,10 +4737,10 @@ class Access_model extends CI_Model {
         return $query;
     }
 
-    public function getTodayFinishingOutputReport($line_id)
+    public function getTodayFinishingOutputReport($floor_id)
     {
         $sql = "SELECT * FROM tb_today_finishing_output_qty 
-                WHERE floor_id=$line_id 
+                WHERE floor_id=$floor_id 
                 ORDER BY start_time DESC";
 
         $query = $this->db->query($sql)->result_array();

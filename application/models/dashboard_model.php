@@ -1898,6 +1898,74 @@ class Dashboard_model extends CI_Model {
         return $query;
     }
 
+    public function getFinishingFloorWiseProductionReport($date, $starting_time, $ending_time){
+//        $sql = "SELECT A.finishing_floor_id, J.floor_name, K.target,
+//                B.total_finishing_output, F.finishing_normal_hours_output
+//
+//                FROM
+//                (SELECT finishing_floor_id
+//                FROM `vt_few_days_po_pcs` WHERE finishing_floor_id !=0 GROUP BY  finishing_floor_id) as A
+//
+//                LEFT JOIN
+//                (SELECT finishing_floor_id, COUNT(pc_tracking_no) as total_finishing_output,
+//                DATE_FORMAT(packing_date_time, '%Y-%m-%d') as finishing_date_time
+//                FROM `vt_few_days_po_pcs` WHERE finishing_floor_id !=0
+//                AND DATE_FORMAT(packing_date_time, '%Y-%m-%d') = '$date'
+//                GROUP BY DATE_FORMAT(packing_date_time, '%Y-%m-%d'), finishing_floor_id) as B
+//                ON A.finishing_floor_id=B.finishing_floor_id
+//
+//                LEFT JOIN
+//                (SELECT finishing_floor_id, COUNT(pc_tracking_no) as finishing_normal_hours_output
+//                FROM `vt_few_days_po_pcs` WHERE finishing_floor_id !=0
+//                AND DATE_FORMAT(packing_date_time, '%Y-%m-%d') = '$date'
+//                AND TIME_FORMAT(packing_date_time, '%H:%i:%s') BETWEEN '$starting_time' AND '$ending_time'
+//                GROUP BY DATE_FORMAT(packing_date_time, '%Y-%m-%d'), finishing_floor_id) as F
+//                ON A.finishing_floor_id=F.finishing_floor_id
+//
+//                LEFT JOIN
+//                (SELECT floor_id, target, `date`
+//                FROM `finishing_daily_target`
+//                WHERE floor_id !=0 AND `date` = '$date'
+//                GROUP BY floor_id) as K
+//                ON A.finishing_floor_id=K.floor_id
+//
+//                LEFT JOIN
+//                tb_floor as J ON A.finishing_floor_id=J.id
+//
+//				ORDER BY J.id";
+
+        $sql = "SELECT A.id AS finishing_floor_id, A.floor_name, B.target, C.sum_normal_qty, C.sum_manual_qty, 
+                (C.sum_normal_qty+C.sum_manual_qty) AS total_finishing_output, D.finishing_normal_hours_output
+                FROM (SELECT * FROM `tb_floor`) AS A
+                
+                LEFT JOIN
+                (SELECT floor_id, target, `date`
+                FROM `finishing_daily_target` 
+                WHERE floor_id !=0 AND `date` = '$date'
+                GROUP BY floor_id) as B
+                ON A.id=B.floor_id
+                
+                LEFT JOIN
+                (SELECT floor_id, SUM(qty) AS sum_normal_qty, SUM(manual_qty) AS sum_manual_qty
+                FROM tb_today_finishing_output_qty
+                WHERE `date`='$date'
+                GROUP BY floor_id) AS C
+                ON A.id=C.floor_id
+                
+                LEFT JOIN
+                (SELECT finishing_floor_id, COUNT(pc_tracking_no) as finishing_normal_hours_output
+                FROM `vt_few_days_po_pcs` WHERE finishing_floor_id !=0
+                AND DATE_FORMAT(packing_date_time, '%Y-%m-%d') = '$date' 
+                AND TIME_FORMAT(packing_date_time, '%H:%i:%s') BETWEEN '$starting_time' AND '$ending_time'
+                GROUP BY DATE_FORMAT(packing_date_time, '%Y-%m-%d'), finishing_floor_id) as D
+                ON A.id=D.finishing_floor_id
+                                
+				ORDER BY A.id";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
     public function getFinishingProductionReport($date, $starting_time, $ending_time){
         $sql = "SELECT A.finishing_floor_id, A.floor_name, K.target, 
                 B.total_finishing_output, F.finishing_normal_hours_output
@@ -2014,7 +2082,7 @@ class Dashboard_model extends CI_Model {
     public function getPoOrderPackingInfobyPo($where){
         $sql="SELECT t1.*,t2.cut_qty, t3.cut_pass_qty,t4.sew_qty,t5.total_packing_qty,t6.total_carton_qty, t8.total_manually_closed_qty
                 FROM
-                (SELECT po_no,so_no,item,quality,color,purchase_order,style_no,style_name, ex_factory_date, status, 
+                (SELECT po_no,so_no,item,quality,color,purchase_order,style_no,style_name, ex_factory_date, approved_ex_factory_date, status, 
                 `size`,SUM(quantity) AS order_qty from tb_po_detail
                   WHERE 1 $where
                  GROUP BY po_no,so_no,item,quality,color,purchase_order,size) as t1

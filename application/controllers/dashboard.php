@@ -2301,7 +2301,8 @@ class Dashboard extends CI_Controller {
 
 //        $data['line_prod'] = $this->dashboard_model->getLineProductionSummaryReportNew($previous_date, $starting_time, $ending_time);
 
-        $data['finishing_prod'] = $this->dashboard_model->getFinishingProductionSummaryReport($previous_date, $starting_time, $ending_time);
+//        $data['finishing_prod'] = $this->dashboard_model->getFinishingProductionSummaryReport($previous_date, $starting_time, $ending_time);
+        $data['finishing_prod'] = $this->dashboard_model->getFinishingFloorWiseProductionReport($previous_date, $starting_time, $ending_time);
 
 
         echo $mail_content = $this->load->view('reports/production_summary_report_mail_body_new', $data, true);
@@ -4382,7 +4383,7 @@ class Dashboard extends CI_Controller {
         if($floor_id != '' && $floor_id != 0){
             $where .= " AND id=$floor_id";
             $where1 .= " AND floor_id=$floor_id AND date='$date'";
-            $where2 .= " AND DAte_FORMAT(packing_date_time, '%Y-%m-%d')='$date'";
+            $where2 .= " AND DAte_FORMAT(packing_date_time, '%Y-%m-%d')='$date' AND packing_status=1 AND is_manually_adjusted=0";
 
             $finishing_trgt = $this->access_model->getFinishingTarget($where1);
 
@@ -4419,7 +4420,7 @@ class Dashboard extends CI_Controller {
 
             $where .= " AND id=$floor_id";
             $where1 .= " AND floor_id=$floor_id AND date='$date'";
-            $where2 .= " AND DATE_FORMAT(packing_date_time, '%Y-%m-%d') ='$date'";
+            $where2 .= " AND DATE_FORMAT(packing_date_time, '%Y-%m-%d')='$date' AND packing_status=1 AND is_manually_adjusted=0";
 
             $finishing_trgt = $this->access_model->getFinishingTarget($where1);
             $data['hours'] = $this->access_model->getHours();
@@ -5746,7 +5747,7 @@ class Dashboard extends CI_Controller {
         if($floor_id != '' && $floor_id != 0){
             $where .= " AND id=$floor_id";
             $where1 .= " AND floor_id=$floor_id AND date='$date'";
-            $where2 .= " AND DATE_FORMAT(packing_date_time, '%Y-%m-%d') ='$date'";
+            $where2 .= " AND DATE_FORMAT(packing_date_time, '%Y-%m-%d') ='$date' AND packing_status=1 AND is_manually_adjusted=0";
 
             $finishing_trgt = $this->access_model->getFinishingTarget($where1);
             $data['hours'] = $this->access_model->getHours();

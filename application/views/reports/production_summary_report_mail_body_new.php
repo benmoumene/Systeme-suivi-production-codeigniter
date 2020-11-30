@@ -262,13 +262,14 @@
     <table width="100%">
         <thead>
         <tr style="background-color: #5d6155; color: #FFFFFF;">
-            <th colspan="5" class="center"><h2>Finishing Report</h2></th>
+            <th colspan="6" class="center"><h2>Finishing Report</h2></th>
         </tr>
         <tr style="background-color: #f7ffb0;">
             <th align="center">FLOOR</th>
             <th align="center">TARGET</th>
             <th align="center">10Hr OUTPUT</th>
-            <th align="center">Second Shift</th>
+            <th align="center">Extra Output</th>
+            <th align="center">Manual Qty</th>
             <th align="center">TOTAL</th>
         </tr>
         </thead>
@@ -286,6 +287,7 @@
                 <td align="center"><?php echo $f['target'];?></td>
                 <td align="center"><?php echo $f['finishing_normal_hours_output'];?></td>
                 <td align="center"><?php echo $over_time_finish_qty;?></td>
+                <td align="center"><?php echo $f['sum_manual_qty'];?></td>
                 <td align="center"><?php echo $f['total_finishing_output'];?></td>
             </tr>
             <?php
@@ -295,6 +297,7 @@
                 'target' => ($f['target'] != '' ? $f['target'] : 0),
                 'normal_output' => ($f['finishing_normal_hours_output'] != 0 ? $f['finishing_normal_hours_output'] : 0),
                 'eot_output' => ($over_time_finish_qty != '' ? $over_time_finish_qty : 0),
+                'manual_qty' => ($f['sum_manual_qty'] != '' ? $f['sum_manual_qty'] : 0),
                 'output' => ($f['total_finishing_output'] != '' ? $f['total_finishing_output'] : 0),
                 'date' => $previous_date
 
