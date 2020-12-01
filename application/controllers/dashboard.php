@@ -3101,7 +3101,8 @@ class Dashboard extends CI_Controller {
         $where='';
 
         if($department == 'finishing'){
-            $data['finishing_prod'] = $this->dashboard_model->getFinishingProductionReport($search_date, $starting_time, $ending_time);
+//            $data['finishing_prod'] = $this->dashboard_model->getFinishingProductionReport($search_date, $starting_time, $ending_time);
+            $data['finishing_prod'] = $this->dashboard_model->getFinishingFloorWiseProductionReport($search_date, $starting_time, $ending_time);
 
             echo $content = $this->load->view('reports/daily_finishing_performance_report_by_today', $data);
         }

@@ -1935,7 +1935,9 @@ class Dashboard_model extends CI_Model {
 //				ORDER BY J.id";
 
         $sql = "SELECT A.id AS finishing_floor_id, A.floor_name, B.target, C.sum_normal_qty, C.sum_manual_qty, 
-                (C.sum_normal_qty+C.sum_manual_qty) AS total_finishing_output, D.finishing_normal_hours_output
+                (C.sum_normal_qty+C.sum_manual_qty+D.finishing_extra_hours_output) AS total_finishing_output, 
+                D.finishing_extra_hours_output
+                
                 FROM (SELECT * FROM `tb_floor`) AS A
                 
                 LEFT JOIN
@@ -1953,13 +1955,12 @@ class Dashboard_model extends CI_Model {
                 ON A.id=C.floor_id
                 
                 LEFT JOIN
-                (SELECT finishing_floor_id, COUNT(pc_tracking_no) as finishing_normal_hours_output
-                FROM `vt_few_days_po_pcs` WHERE finishing_floor_id !=0
-                AND DATE_FORMAT(packing_date_time, '%Y-%m-%d') = '$date' 
-                AND TIME_FORMAT(packing_date_time, '%H:%i:%s') BETWEEN '$starting_time' AND '$ending_time'
-                GROUP BY DATE_FORMAT(packing_date_time, '%Y-%m-%d'), finishing_floor_id) as D
-                ON A.id=D.finishing_floor_id
-                                
+                (SELECT floor_id, SUM(qty) as finishing_extra_hours_output
+                FROM `tb_today_finishing_output_qty` WHERE `date` = '$date' 
+                AND end_time > '$ending_time'
+                GROUP BY `date`, floor_id) as D
+                ON A.id=D.floor_id
+                                          
 				ORDER BY A.id";
 
         $query = $this->db->query($sql)->result_array();

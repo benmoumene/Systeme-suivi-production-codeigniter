@@ -279,24 +279,27 @@
 
         foreach ($finishing_prod as $f){
 
-            $over_time_finish_qty = $f['total_finishing_output'] - $f['finishing_normal_hours_output'];
-
             ?>
             <tr>
-                <td align="center"><?php echo $f['floor_name'];?></td>
-                <td align="center"><?php echo $f['target'];?></td>
-                <td align="center"><?php echo $f['finishing_normal_hours_output'];?></td>
-                <td align="center"><?php echo $over_time_finish_qty;?></td>
-                <td align="center"><?php echo $f['sum_manual_qty'];?></td>
-                <td align="center"><?php echo $f['total_finishing_output'];?></td>
+                <td class="center"><?php echo $f['floor_name'];?></td>
+                <td class="center"><?php echo $f['target'];?></td>
+                <td class="center"><?php echo $f['sum_normal_qty'];?></td>
+                <td class="center"><?php echo $f['finishing_extra_hours_output'];?></td>
+                <td class="center"><?php echo $f['sum_manual_qty'];?></td>
+                <td class="center">
+                    <a target="_blank" class="btn btn-warning" href="<?php echo base_url();?>dashboard/getDailyPackingReportDetail/<?php echo $search_date;?>/<?php echo $floor_name;?>/<?php echo $finishing_floor_id;?>">
+                        <?php echo $f['total_finishing_output'];?>
+                    </a>
+                </td>
             </tr>
+
             <?php
             $data_f = array(
 
                 'floor_id' => ($f['finishing_floor_id'] != '' ? $f['finishing_floor_id'] : 0),
                 'target' => ($f['target'] != '' ? $f['target'] : 0),
-                'normal_output' => ($f['finishing_normal_hours_output'] != 0 ? $f['finishing_normal_hours_output'] : 0),
-                'eot_output' => ($over_time_finish_qty != '' ? $over_time_finish_qty : 0),
+                'normal_output' => ($f['sum_normal_qty'] != 0 ? $f['sum_normal_qty'] : 0),
+                'eot_output' => ($f['finishing_extra_hours_output'] != '' ? $f['finishing_extra_hours_output'] : 0),
                 'manual_qty' => ($f['sum_manual_qty'] != '' ? $f['sum_manual_qty'] : 0),
                 'output' => ($f['total_finishing_output'] != '' ? $f['total_finishing_output'] : 0),
                 'date' => $previous_date
