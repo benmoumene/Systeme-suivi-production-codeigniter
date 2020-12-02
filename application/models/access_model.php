@@ -6339,6 +6339,29 @@ class Access_model extends CI_Model {
         return $query;
     }
 
+    public function getUserList($where){
+        $sql="SELECT t1.*, t2.floor_code, t3.floor_code AS finishing_floor_code, t4.line_code
+
+                FROM `tb_user` AS t1
+                
+                LEFT JOIN
+                tb_floor AS t2
+                ON t1.floor_id=t2.id
+                
+                LEFT JOIN
+                tb_floor AS t3
+                ON t1.finishing_floor_id=t3.id
+                
+                LEFT JOIN
+                tb_line AS t4
+                ON t1.line_id=t4.id
+                
+                WHERE 1 $where";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
     public function getMachineMaintenanceReport($where){
         $sql="SELECT t1.*, t3.machine_name, t4.machine_model, t5.line_code
             FROM 

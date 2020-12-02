@@ -209,6 +209,15 @@
             <?php
             if($access_points == 1000){
             ?>
+                <li> <a href="javascript:void(0);"> <i class="fa fa-cog"></i> Config <span class="plus"><i class="fa fa-plus"></i></span></a>
+                    <ul>
+                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/userList"><i class="fa fa-circle"></i> Users </a></li>
+                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/change_line"><i class="fa fa-circle"></i> Lines </a></li>
+                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/change_bundle_planned_line"><i class="fa fa-circle"></i> Floors </a></li>
+                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/change_bundle_planned_line"><i class="fa fa-circle"></i> Hours </a></li>
+                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/change_bundle_planned_line"><i class="fa fa-circle"></i> Defect Codes </a></li>
+                    </ul>
+                </li>
                 <li> <a href="javascript:void(0);"> <i class="fa fa-exchange"></i> Change <span class="plus"><i class="fa fa-plus"></i></span></a>
                     <ul>
                         <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/changeExfactory"><i class="fa fa-circle"></i> Change ExFacDate </a></li>
@@ -397,7 +406,9 @@
                 // access_point = 2 = begining_of_line
                 ?>
                 <!--            <li> <a href="--><?php //echo base_url();?><!--access/care_label_end_line"><i class="fa fa-circle"></i> End-Line QC</a></li>-->
-                <li> <a href="<?php echo base_url();?>access/care_label_washing"><i class="fa fa-circle"></i> Wash Return</a></li>
+                <li> <a href="<?php echo base_url();?>access/wash"><i class="fa fa-cog"></i> Wash Control </a></li>
+                <li><a href="<?php echo base_url(); ?>access/care_label_going_wash"><i class="fa fa-arrow-up"></i> Wash Send </a></li>
+                <li> <a href="<?php echo base_url();?>access/care_label_washing"><i class="fa fa-arrow-down"></i> Wash Receive</a></li>
                 <?php
             }
 
@@ -436,22 +447,23 @@
             <?php
             }
 
-            if($access_points == 10) { ?>
-                <li><a href="<?php echo base_url(); ?>access/care_label_going_wash"><i class="fa fa-circle"></i> Wash Going </a></li>
+//            if($access_points == 10) {
+            ?>
+<!--                <li><a href="--><?php //echo base_url(); ?><!--access/care_label_going_wash"><i class="fa fa-circle"></i> Wash Going </a></li>-->
 
                 <?php
-            }
+//            }
 
-            if($access_points == 100){
+//            if($access_points == 100){
                 // access_point = 2 = begining_of_line
                 ?>
                 <!--            <li> <a href="--><?php //echo base_url();?><!--access/care_label_end_line"><i class="fa fa-circle"></i> End-Line QC</a></li>-->
-                <li> <a href="<?php echo base_url();?>access/wash"><i class="fa fa-circle"></i> Wash Control </a></li>
+<!--                <li> <a href="--><?php //echo base_url();?><!--access/wash"><i class="fa fa-circle"></i> Wash Control </a></li>-->
 <!--                <li> <a href="--><?php //echo base_url();?><!--access/sms_file_upload"><i class="fa fa-circle"></i> SMS File Upload </a></li>-->
 <!--                <li> <a href="--><?php //echo base_url();?><!--access/sms_file_upload_test"><i class="fa fa-circle"></i> Manual File Upload </a></li>-->
 
                 <?php
-            }
+//            }
 
             if($access_points == 400){
                 // access_point = 2 = begining_of_line

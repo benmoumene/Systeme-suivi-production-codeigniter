@@ -2436,6 +2436,31 @@ class Access extends CI_Controller {
         echo $maincontent = $this->load->view('filter_machine_list', $data);
     }
 
+    public function userList(){
+        $data['title']='User List';
+
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['user_list'] = $this->access_model->getUserList();
+
+            $data['maincontent'] = $this->load->view('user_list', $data, true);
+            $this->load->view('master', $data);
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
     public function care_label_end_line_new(){
         $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
         
@@ -5169,6 +5194,41 @@ class Access extends CI_Controller {
         $data['line_running_pos'] = $this->access_model->getLineWiseRunningPOs($where);
 
         echo $maincontent = $this->load->view('line_running_po_list', $data);
+    }
+
+    public function printQRCodes($codes_string){
+        $data['title'] = 'Print QR Code';
+        $data['user_codes'] = explode(',', $codes_string);
+
+        if(sizeof($data['user_codes']) > 0){
+
+            foreach ($data['user_codes'] AS $code){
+
+                $get_data['input_ticket_no'] = $code;
+
+                $this->load->library('ciqrcode');
+                $qr_image=$code.'.png';
+                $params['data'] = $code;
+                $params['level'] = 'H';
+                $params['size'] = 8;
+                $params['savename'] =FCPATH."uploads/qr_image/".$qr_image;
+
+
+                if($this->ciqrcode->generate($params))
+                {
+                    $data['img_url']=$qr_image;
+                }
+            }
+
+        }
+
+        $data['maincontent'] = $this->load->view('generated_qr_code_print_list', $data);
+    }
+
+    public function getUserInfo($user_name){
+
+        return $this->access_model->selectTableDataRowQuery("*", 'tb_user', " AND user_name='$user_name'");
+
     }
 
     public function allowDenyLinePoOutput(){
