@@ -25,10 +25,12 @@
                 <?php
 
                 $balance = 0;
+                $total_balance = 0;
 
                 foreach ($prod_summary as $v){
 
                     $balance = $v['count_end_line_qc_pass'] - ($v['count_carton_pass'] + $v['total_wh_qa']);
+                    $total_balance += $balance;
 
                 ?>
                         <tr>
@@ -70,6 +72,12 @@
                     }
                 ?>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="12" class="text-right">TOTAL BALANCE</th>
+                        <th><?php echo $total_balance;?></th>
+                    </tr>
+                </tfoot>
             </table>
 
         </div>

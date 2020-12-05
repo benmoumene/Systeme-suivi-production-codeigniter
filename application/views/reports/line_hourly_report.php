@@ -362,6 +362,144 @@
             <?php } ?>
             </tfoot>
 </table>
+<br />
+<table id="" border="1" width="100%" style="border: 1px solid black;">
+    <thead>
+    <tr style="background-color: #f7ffb0;">
+        <th align="center" colspan="3" style="font-size: 20px; font-weight: 900;">FINISHING</th>
+
+        <th align="center" colspan="10" style="font-size: 20px; font-weight: 900;">HOURS</th>
+        <th align="center" rowspan="2" style="font-size: 20px; font-weight: 900; width: 40px;">Total</th>
+        <th align="center" rowspan="2" style="font-size: 20px; font-weight: 900; width: 40px;">BLNC</th>
+    </tr>
+    <tr style="background-color: #f7ffb0;">
+        <th align="center" rowspan="2" style="font-size: 20px; font-weight: 900; width: 40px;">Floor</th>
+        <th align="center" rowspan="2" style="font-size: 20px; font-weight: 900; width: 50px;">TAR.</th>
+        <th align="center" rowspan="2" style="font-size: 20px; font-weight: 900; width: 60px;">Per/Hr</th>
+
+        <th align="center" style="font-size: 20px; font-weight: 900;">1</th>
+        <th align="center" style="font-size: 20px; font-weight: 900;">2</th>
+        <th align="center" style="font-size: 20px; font-weight: 900;">3</th>
+        <th align="center" style="font-size: 20px; font-weight: 900;">4</th>
+        <th align="center" style="font-size: 20px; font-weight: 900;">5</th>
+        <th align="center" style="font-size: 20px; font-weight: 900;">6</th>
+        <th align="center" style="font-size: 20px; font-weight: 900;">7</th>
+        <th align="center" style="font-size: 20px; font-weight: 900;">8</th>
+        <th align="center" style="font-size: 20px; font-weight: 900;">9</th>
+        <th align="center" style="font-size: 20px; font-weight: 900;">10</th>
+
+    </tr>
+    </thead>
+    <tbody>
+
+    <?php
+
+    $grand_total_finishing_target = 0;
+    $grand_total_finishing_target_per_hour = 0;
+
+    $res_hour = $this->method_call->getHoursByTimeRange();
+    $hour = $res_hour[0]['hour'];
+
+    foreach ($floors AS $k => $floor){
+
+        $floor_id = $floor['id'];
+
+        $floor_info = $this->method_call->getFloorTargetInfo($floor_id);
+
+        $floor_target_hour = $floor_info[0]['target_hour'];
+        $floor_target_per_hour = round($floor_info[0]['target']/$floor_target_hour);
+        ?>
+        <tr>
+            <td align="center"><?php echo $floor['floor_name']; ?></td>
+            <td align="center"><?php echo $floor_info[0]['target'];?></td>
+            <td align="center"><?php echo round($floor_target_per_hour).' / '.$floor_target_hour;?></td>
+
+            <?php
+            $total_finishing_output = 0;
+            $total_finishing_output_balance = 0;
+
+            foreach ($hours as $h){
+                $finishing_report = $this->method_call->getFinishingHourlyReport($floor_id, $h['start_time'], $h['end_time']);
+
+                foreach ($finishing_report AS $fr){
+                    ?>
+
+                    <td align="center" title="<?php echo $h['start_time'].' - '.$h['end_time'];?>"
+                        <?php
+                        if($fr['qty'] > 0){
+
+                            if($floor_target_per_hour > $fr['qty']){?>
+                                style="background-color: rgba(255,117,111,0.8);"
+                            <?php }else{ ?>
+                                style="background-color: rgba(164,255,130,0.8);"
+                            <?php }
+                        }else { ?>
+                            style="background-color: #FFFFFF;"
+                            <?php
+                        }?>>
+                        <?php
+                        $total_finishing_output += $fr['qty'];
+
+                        $blnc = ($floor_target_per_hour - $fr['qty']);
+                        $balance = round($blnc * (-1), 2);
+                        echo $fr['qty'].'('.$balance.')';
+                        ?>
+                    </td>
+
+                    <?php
+                }
+            }
+            $total_finishing_output_balance = $total_finishing_output - $floor_info[0]['target'];
+
+            ?>
+            <td align="center"><?php echo $total_finishing_output;?></td>
+            <td align="center"><?php echo $total_finishing_output_balance;?></td>
+        </tr>
+
+        <?php
+        $grand_total_finishing_target += $floor_info[0]['target'];
+        $grand_total_finishing_target_per_hour += $floor_target_per_hour;
+
+    }
+
+    ?>
+
+    </tbody>
+
+    <tfoot>
+        <tr>
+            <th align="center" style="font-size: 20px; font-weight: 900;">TOTAL</th>
+            <th align="center" style="font-size: 20px; font-weight: 900;"><?php echo $grand_total_finishing_target;?></th>
+            <th align="center" style="font-size: 20px; font-weight: 900;"><?php echo $grand_total_finishing_target_per_hour;?></th>
+            <?php
+
+            $floor_grand_total_finishing_output = 0;
+            $floor_grand_total_finishing_balance = 0;
+
+            foreach ($hours as $h_2){
+                $floor_finishing_total_output = 0;
+
+                $floor_finishing_hour_summary = $this->method_call->getHourlyFloorFinishingSummaryReport($h_2['start_time'], $h_2['end_time']);
+
+                foreach ($floor_finishing_hour_summary as $fhs){
+                    $floor_finishing_total_output += $fhs['finishing_qty'];
+                }
+
+                $floor_grand_total_finishing_output += $floor_finishing_total_output;
+                ?>
+                <th class="center" style="font-size: 20px; font-weight: 900;"><?php echo $floor_finishing_total_output;?></th>
+                <?php
+
+            }
+
+            $floor_grand_total_finishing_balance = $grand_total_finishing_target - $floor_grand_total_finishing_output;
+            ?>
+            <th align="center" style="font-size: 20px; font-weight: 900;"><?php echo $floor_grand_total_finishing_output;?></th>
+            <th align="center" style="font-size: 20px; font-weight: 900;"><?php echo $floor_grand_total_finishing_balance;?></th>
+        </tr>
+    </tfoot>
+
+</table>
 
 <!-- The Modal -->
 <div id="myModal" class="modal">

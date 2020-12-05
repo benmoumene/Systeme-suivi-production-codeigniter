@@ -5707,6 +5707,21 @@ class Dashboard extends CI_Controller {
         return $this->access_model->getLineOutputHourlyReport($select_fields, $where);
     }
 
+    public function getFinishingHourlyReport($floor_id, $start_time, $end_time){
+
+        $where = '';
+
+        if($floor_id != ''){
+            $where .= " AND floor_id=$floor_id";
+        }
+
+        if($start_time != '' && $end_time != ''){
+            $where .= " AND start_time='$start_time' AND end_time='$end_time'";
+        }
+
+        return $this->access_model->selectTableDataRowQuery('*', 'tb_today_finishing_output_qty', $where);
+    }
+
     public function getHourlySummaryReport($start_time, $end_time){
 
         $select_fields = '';
@@ -5723,6 +5738,10 @@ class Dashboard extends CI_Controller {
 
     public function getHourlyFloorSummaryReport($start_time, $end_time, $floor_id){
         return $this->access_model->getFloorLineOutputHourlyReport($start_time, $end_time, $floor_id);
+    }
+
+    public function getHourlyFloorFinishingSummaryReport($start_time, $end_time){
+        return $this->access_model->selectTableDataRowQuery('SUM(qty) AS finishing_qty', 'tb_today_finishing_output_qty', " AND start_time='$start_time' AND end_time='$end_time'");
     }
 
     public function getFloorSummaryReport($floor_id){
@@ -6212,6 +6231,17 @@ class Dashboard extends CI_Controller {
     public function getLineTargetInfo($line_id){
 
         return $this->access_model->getLineTargetViewTable($line_id);
+
+    }
+
+    public function getFloorTargetInfo($floor_id){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $time=$datex->format('H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        return $this->access_model->selectTableDataRowQuery('*', 'finishing_daily_target', " AND floor_id=$floor_id AND date='$date'");
 
     }
 

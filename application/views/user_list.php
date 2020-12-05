@@ -11,13 +11,36 @@
     </div>
 </div>
 <div class="container clear_both padding_fix">
+    <div class="row">
+        <div class="col-md-12">
+            <div style="padding-top:10px">
+                <h4 style="color:red">
+                    <?php
+                    $exc = $this->session->userdata('exception');
+                    if (isset($exc)) {
+                        echo $exc;
+                        $this->session->unset_userdata('exception');
+                    } ?>
+                </h4>
+
+                <h4 style="color:green">
+                    <?php
+                    $msg = $this->session->userdata('message');
+                    if (isset($msg)) {
+                        echo $msg;
+                        $this->session->unset_userdata('message');
+                    }
+                    ?>
+                </h4>
+            </div>
+        </div><!--/block-web-->
+    </div>
+
     <!--\\\\\\\ container  start \\\\\\-->
     <div class="row">
         <div class="col-md-12">
             <div class="block-web">
-                <div class="header">
-                    <div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a> <a class="refresh" href="#"><i class="fa fa-repeat"></i></a> <a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
-                </div>
+
                 <div class="col-md-1">
                     <span class="btn btn-primary" title="PRINT QR CODE" onclick="printQRCodes()"> <i class="fa fa-print"></i> PRINT</span>
                 </div>
@@ -43,7 +66,7 @@
                                     <th class="center hidden-phone">FINISHING FLOOR</th>
                                     <th class="center hidden-phone">LINE</th>
                                     <th class="center hidden-phone">STATUS</th>
-                                    <th class="center hidden-phone">BUUYERS</th>
+                                    <th class="center hidden-phone">BRANDS</th>
                                     <th class="center hidden-phone">ACTION</th>
                                 </tr>
                             </thead>
@@ -115,7 +138,7 @@
                                     <td class="center hidden-phone"><?php echo ($u['status'] == 1 ? 'ACTIVE' : 'INACTIVE');?></td>
                                     <td class="center hidden-phone"><?php echo $u['buyer_condition'];?></td>
                                     <td class="center hidden-phone">
-                                        <a href="" class="btn btn-warning" title="EDIT"><i class="fa fa-pencil"></i></a>
+                                        <a href="<?php echo base_url()?>access/editUserInfo/<?php echo $u['id'];?>" class="btn btn-warning" title="EDIT"><i class="fa fa-pencil"></i></a>
                                     </td>
                                 </tr>
                             <?php } ?>

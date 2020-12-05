@@ -2461,6 +2461,73 @@ class Access extends CI_Controller {
         }
     }
 
+    public function editUserInfo($user_id){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $data['title'] = 'Edit User';
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['floors'] = $this->access_model->getFloors();
+            $data['lines'] = $this->access_model->getLines();
+            $data['brands'] = $this->access_model->getAllBrands();
+            $data['user_info'] = $this->access_model->getUserList(" AND t1.id=$user_id");
+
+            $data['maincontent'] = $this->load->view('edit_user_info', $data, true);
+            $this->load->view('master', $data);
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
+    public function checkUserAvailability(){
+        $user_name = $this->input->post('user_name');
+
+        $result = $this->access_model->selectTableDataRowQuery('*', 'tb_user', " AND user_name='$user_name'");
+
+        if(sizeof($result) > 0){
+            echo 'available';
+        }else{
+            echo 'unavailable ';
+        }
+    }
+
+    public function updateUserInfo(){
+        $user_id = $this->input->post('user_id');
+
+        $data['user_name'] = $this->input->post('user_name');
+        $data['user_description'] = $this->input->post('user_description');
+        $data['access_points'] = $this->input->post('access_points');
+        $data['floor_id'] = $this->input->post('floor_id');
+        $data['finishing_floor_id'] = $this->input->post('finishing_floor_id');
+        $data['line_id'] = $this->input->post('line_id');
+        $data['status'] = $this->input->post('status');
+
+        $buyer_condition_array = $this->input->post('buyer_condition');
+
+        if ($buyer_condition_array == true){
+            if(sizeof($buyer_condition_array) > 0){
+                $data['buyer_condition'] = "'" . implode ( "','", $buyer_condition_array ) . "'";
+            }
+        }else{
+            $data['buyer_condition'] = "";
+        }
+
+        $this->access_model->updateTbl('tb_user', $user_id, $data);
+
+        $data_s['message'] = $data['user_name']." is Successfully Updated!";
+        $this->session->set_userdata($data_s);
+        redirect('access/userList');
+    }
+
     public function care_label_end_line_new(){
         $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
         
