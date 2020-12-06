@@ -191,7 +191,7 @@ $buyer_condition_array = explode(',', $buyer_condition);
             </div>
         </div>
 
-<!--    </form>-->
+    </form>
 
 </div>
 

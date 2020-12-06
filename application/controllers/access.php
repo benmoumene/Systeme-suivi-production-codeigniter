@@ -2488,6 +2488,262 @@ class Access extends CI_Controller {
         }
     }
 
+    public function getFloors(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $data['title'] = 'Floors';
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['floors'] = $this->access_model->selectTableDataRowQuery("*", 'tb_floor', '');
+
+            $data['maincontent'] = $this->load->view('floors', $data, true);
+            $this->load->view('master', $data);
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
+    public function getLines(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $data['title'] = 'Lines';
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['lines'] = $this->access_model->getLineWiseInfo();
+
+            $data['maincontent'] = $this->load->view('lines', $data, true);
+            $this->load->view('master', $data);
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
+    public function editLineInfo($line_id){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $data['title'] = 'Edit Line';
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['floors'] = $this->access_model->selectTableDataRowQuery("*", 'tb_floor', '');
+            $data['line_info'] = $this->access_model->selectTableDataRowQuery("*", "tb_line", " AND id=$line_id");
+
+            $data['maincontent'] = $this->load->view('edit_line_info', $data, true);
+            $this->load->view('master', $data);
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
+    public function updateLineInfo(){
+        $line_id = $this->input->post('line_id');
+
+        $data['line_name'] = $this->input->post('line_name');
+        $data['line_code'] = $this->input->post('line_code');
+        $data['line_description'] = $this->input->post('line_description');
+        $data['floor'] = $this->input->post('floor_id');
+        $data['finishing_floor_id'] = $this->input->post('finishing_floor_id');
+        $data['status'] = $this->input->post('status');
+
+        $this->access_model->updateTbl('tb_line', $line_id, $data);
+
+        $data_s['message'] = $data['line_name']." is Successfully Updated!";
+        $this->session->set_userdata($data_s);
+        redirect('access/getLines');
+    }
+
+    public function getHours(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $data['title'] = 'Hours';
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['hours'] = $this->access_model->selectTableDataRowQuery("*", 'tb_hours', '');
+
+            $data['maincontent'] = $this->load->view('hours', $data, true);
+            $this->load->view('master', $data);
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
+    public function editFloorInfo($floor_id){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $data['title'] = 'Edit Floor';
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['floor_info'] = $this->access_model->selectTableDataRowQuery("*", "tb_floor", " AND id=$floor_id");
+
+            $data['maincontent'] = $this->load->view('edit_floor_info', $data, true);
+            $this->load->view('master', $data);
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
+    public function updateFloorInfo(){
+        $floor_id = $this->input->post('floor_id');
+
+        $data['floor_name'] = $this->input->post('floor_name');
+        $data['floor_code'] = $this->input->post('floor_code');
+        $data['floor_description'] = $this->input->post('floor_description');
+        $data['is_finishing_floor'] = $this->input->post('is_finishing_floor');
+        $data['status'] = $this->input->post('status');
+
+        $this->access_model->updateTbl('tb_floor', $floor_id, $data);
+
+        $data_s['message'] = $data['floor_name']." is Successfully Updated!";
+        $this->session->set_userdata($data_s);
+        redirect('access/getFloors');
+    }
+
+    public function editHourInfo($hour_id){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $data['title'] = 'Edit Hour';
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['hour_info'] = $this->access_model->selectTableDataRowQuery("*", "tb_hours", " AND id=$hour_id");
+
+            $data['maincontent'] = $this->load->view('edit_hour_info', $data, true);
+            $this->load->view('master', $data);
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
+    public function updateHourInfo(){
+        $hour_id = $this->input->post('hour_id');
+
+        $data['hour'] = $this->input->post('hour');
+        $data['start_time'] = $this->input->post('start_time');
+        $data['end_time'] = $this->input->post('end_time');
+
+        $this->access_model->updateTbl('tb_hours', $hour_id, $data);
+
+        $data_s['message'] = "HOUR: ".$data['hour']." is Successfully Updated!";
+        $this->session->set_userdata($data_s);
+        redirect('access/getHours');
+    }
+
+    public function editSegmentInfo($segment_id){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $data['title'] = 'Edit Segment';
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['segment_info'] = $this->access_model->selectTableDataRowQuery("*", "tb_segment", " AND id=$segment_id");
+
+            $data['maincontent'] = $this->load->view('edit_segment_info', $data, true);
+            $this->load->view('master', $data);
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
+    public function updateSegmentInfo(){
+        $segment_id = $this->input->post('segment_id');
+
+        $data['start_time'] = $this->input->post('start_time');
+        $data['end_time'] = $this->input->post('end_time');
+        $data['name'] = $this->input->post('name');
+        $data['description'] = $this->input->post('description');
+        $data['status'] = $this->input->post('status');
+
+        $this->access_model->updateTbl('tb_segment', $segment_id, $data);
+
+        $data_s['message'] = $data['name']." is Successfully Updated!";
+        $this->session->set_userdata($data_s);
+        redirect('access/getSegments');
+    }
+
+    public function getSegments(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $data['title'] = 'Segments';
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['segments'] = $this->access_model->getSegmentList();
+
+            $data['maincontent'] = $this->load->view('segments', $data, true);
+            $this->load->view('master', $data);
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
     public function checkUserAvailability(){
         $user_name = $this->input->post('user_name');
 

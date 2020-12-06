@@ -212,9 +212,10 @@
                 <li> <a href="javascript:void(0);"> <i class="fa fa-cog"></i> Config <span class="plus"><i class="fa fa-plus"></i></span></a>
                     <ul>
                         <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/userList"><i class="fa fa-circle"></i> Users </a></li>
-                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/change_line"><i class="fa fa-circle"></i> Lines </a></li>
-                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/change_bundle_planned_line"><i class="fa fa-circle"></i> Floors </a></li>
-                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/change_bundle_planned_line"><i class="fa fa-circle"></i> Hours </a></li>
+                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/getLines"><i class="fa fa-circle"></i> Lines </a></li>
+                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/getFloors"><i class="fa fa-circle"></i> Floors </a></li>
+                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/getHours"><i class="fa fa-circle"></i> Hours </a></li>
+                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/getSegments"><i class="fa fa-circle"></i> Segments </a></li>
                         <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/change_bundle_planned_line"><i class="fa fa-circle"></i> Defect Codes </a></li>
                     </ul>
                 </li>

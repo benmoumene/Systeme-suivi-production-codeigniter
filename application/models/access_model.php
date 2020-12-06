@@ -459,6 +459,27 @@ class Access_model extends CI_Model {
         return $query;
     }
 
+    public function getLineWiseInfo($where){
+        $sql = "SELECT t1.*, t2.floor_name, t3.floor_name as finishing_floor_name
+                FROM 
+                (SELECT * FROM `tb_line`) AS t1
+                
+                LEFT JOIN
+                tb_floor AS t2
+                ON t1.floor=t2.id
+                
+                LEFT JOIN
+                tb_floor AS t3
+                ON t1.finishing_floor_id=t3.id
+                
+                WHERE 1 $where
+                
+                ORDER BY (t1.line_code * 1)";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
     public function remainQtyStatus($where){
         $sql = "SELECT A.*, B.line_name FROM `tb_care_labels` as A
                 LEFT JOIN 

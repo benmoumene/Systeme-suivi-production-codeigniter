@@ -370,6 +370,7 @@
 
         <th align="center" colspan="10" style="font-size: 20px; font-weight: 900;">HOURS</th>
         <th align="center" rowspan="2" style="font-size: 20px; font-weight: 900; width: 40px;">Total</th>
+        <th align="center" rowspan="2" style="font-size: 20px; font-weight: 900; width: 40px;">AVG</th>
         <th align="center" rowspan="2" style="font-size: 20px; font-weight: 900; width: 40px;">BLNC</th>
     </tr>
     <tr style="background-color: #f7ffb0;">
@@ -402,6 +403,8 @@
 
     foreach ($floors AS $k => $floor){
 
+        if($floor['is_finishing_floor'] == 1){
+
         $floor_id = $floor['id'];
 
         $floor_info = $this->method_call->getFloorTargetInfo($floor_id);
@@ -417,6 +420,8 @@
             <?php
             $total_finishing_output = 0;
             $total_finishing_output_balance = 0;
+
+            $count_hour = 0;
 
             foreach ($hours as $h){
                 $finishing_report = $this->method_call->getFinishingHourlyReport($floor_id, $h['start_time'], $h['end_time']);
@@ -442,6 +447,11 @@
 
                         $blnc = ($floor_target_per_hour - $fr['qty']);
                         $balance = round($blnc * (-1), 2);
+
+                        if($fr['qty'] > 0){
+                            $count_hour++;
+                        }
+
                         echo $fr['qty'].'('.$balance.')';
                         ?>
                     </td>
@@ -451,15 +461,17 @@
             }
             $total_finishing_output_balance = $total_finishing_output - $floor_info[0]['target'];
 
+            $count_hour = ($count_hour - 1) + $min_to_hour;
             ?>
             <td align="center"><?php echo $total_finishing_output;?></td>
+            <td align="center" title="<?php echo $count_hour;?>"><?php echo round($total_finishing_output/$count_hour, 2);?></td>
             <td align="center"><?php echo $total_finishing_output_balance;?></td>
         </tr>
 
         <?php
         $grand_total_finishing_target += $floor_info[0]['target'];
         $grand_total_finishing_target_per_hour += $floor_target_per_hour;
-
+        }
     }
 
     ?>
@@ -476,6 +488,8 @@
             $floor_grand_total_finishing_output = 0;
             $floor_grand_total_finishing_balance = 0;
 
+            $grand_count_hour = 0;
+
             foreach ($hours as $h_2){
                 $floor_finishing_total_output = 0;
 
@@ -486,6 +500,10 @@
                 }
 
                 $floor_grand_total_finishing_output += $floor_finishing_total_output;
+
+                if($floor_finishing_total_output > 0){
+                    $grand_count_hour++;
+                }
                 ?>
                 <th class="center" style="font-size: 20px; font-weight: 900;"><?php echo $floor_finishing_total_output;?></th>
                 <?php
@@ -493,8 +511,11 @@
             }
 
             $floor_grand_total_finishing_balance = $grand_total_finishing_target - $floor_grand_total_finishing_output;
+
+            $grand_count_hour = ($grand_count_hour - 1) + $min_to_hour;
             ?>
             <th align="center" style="font-size: 20px; font-weight: 900;"><?php echo $floor_grand_total_finishing_output;?></th>
+            <th align="center" title="<?php echo $grand_count_hour;?>"><?php echo round($floor_grand_total_finishing_output/$grand_count_hour, 2);?></th>
             <th align="center" style="font-size: 20px; font-weight: 900;"><?php echo $floor_grand_total_finishing_balance;?></th>
         </tr>
     </tfoot>
