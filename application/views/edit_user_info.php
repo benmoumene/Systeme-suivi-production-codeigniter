@@ -203,20 +203,29 @@ $buyer_condition_array = explode(',', $buyer_condition);
         var user_name=$("#user_name").val();
 
         if(user_name != ''){
-            $.ajax({
-                url:"<?php echo base_url('access/checkUserAvailability')?>",
-                type:"post",
-                dataType:'html',
-                data:{user_name: user_name},
-                success:function (data) {
 
-                    if(data == 'available'){
-                        alert('User Name is already available!');
-                        location.reload();
+            var user_name_last_char = user_name.charAt(user_name.length-1);
+
+            if(user_name_last_char == '.'){
+                $.ajax({
+                    url:"<?php echo base_url('access/checkUserAvailability')?>",
+                    type:"post",
+                    dataType:'html',
+                    data:{user_name: user_name},
+                    success:function (data) {
+
+                        if(data == 'available'){
+                            alert('User Name is already available!');
+                            location.reload();
+                        }
+
                     }
+                });
+            }else{
+                alert('Last Character has to be DOT(.) !');
+                location.reload();
+            }
 
-                }
-            });
         }else{
             alert('User name cannot be blank!');
         }

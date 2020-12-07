@@ -36,6 +36,80 @@
         </div><!--/block-web-->
     </div>
 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="login_code" id="login_code" placeholder="Login Code" />
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <select class="form-control" id="user_type" name="user_type">
+                        <option value="">Select User Type</option>
+                        <option value="1000">Administrator</option>
+                        <option value="0">Cutting</option>
+                        <option value="1">Cutting Scan</option>
+                        <option value="2">Line Input</option>
+                        <option value="3">Mid Line QC</option>
+                        <option value="4">End Line QC</option>
+                        <option value="5">Finishing</option>
+                        <option value="6">Washing</option>
+                        <option value="7">Packing</option>
+                        <option value="8">Collar-Cuff</option>
+                        <option value="9">Carton</option>
+                        <option value="200">OPR</option>
+                        <option value="300">QA</option>
+                        <option value="400">SD</option>
+                        <option value="500">Production Admin</option>
+                        <option value="600">Maintenance Admin</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <select class="form-control" id="floor_id" name="floor_id">
+                        <option value="">Select Floor</option>
+
+                        <?php foreach ($floors AS $f){ ?>
+                            <option value="<?php echo $f['id'];?>"><?php echo $f['floor_name'];?></option>
+                        <?php } ?>
+
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <select class="form-control" id="finishing_floor_id" name="finishing_floor_id">
+                        <option value="">Select Finishing Floor</option>
+
+                        <?php foreach ($finishing_floors AS $ff){ ?>
+                            <option value="<?php echo $ff['id'];?>"><?php echo $ff['floor_name'];?></option>
+                        <?php } ?>
+
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <select class="form-control" id="line_id" name="line_id">
+                        <option value="">Select Line</option>
+
+                        <?php foreach ($lines AS $l){ ?>
+                            <option value="<?php echo $l['id'];?>"><?php echo $l['line_name'];?></option>
+                        <?php } ?>
+
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <span class="btn btn-primary" onclick="getFilteredUserList();">SEARCH</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!--\\\\\\\ container  start \\\\\\-->
     <div class="row">
         <div class="col-md-12">
@@ -45,7 +119,7 @@
                     <span class="btn btn-primary" title="PRINT QR CODE" onclick="printQRCodes()"> <i class="fa fa-print"></i> PRINT</span>
                 </div>
                 <div class="col-md-1">
-                    <span class="btn btn-success" title="ADD USER"> <i class="fa fa-plus"></i> USER</span>
+                    <a href="<?php echo base_url();?>access/addNewUser" class="btn btn-success" title="ADD USER"> <i class="fa fa-plus"></i> USER</a>
                 </div>
                 <br />
                 <br />
@@ -70,7 +144,7 @@
                                     <th class="center hidden-phone">ACTION</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="tbody_id">
                             <?php
                             $sl=1;
                             foreach($user_list AS $u){ ?>
@@ -176,5 +250,27 @@
         }else{
             alert('Nothing selected to print!');
         }
+    }
+    
+    function getFilteredUserList() {
+        var login_code = $("#login_code").val();
+        var user_type = $("#user_type").val();
+        var floor_id = $("#floor_id").val();
+        var finishing_floor_id = $("#finishing_floor_id").val();
+        var line_id = $("#line_id").val();
+
+        $("#tbody_id").empty();
+
+        $.ajax({
+            url:"<?php echo base_url('access/getFilteredUserList')?>",
+            type:"post",
+            dataType:'html',
+            data:{login_code: login_code, user_type: user_type, floor_id: floor_id, finishing_floor_id: finishing_floor_id, line_id: line_id},
+            success:function (data) {
+
+                $("#tbody_id").append(data);
+
+            }
+        });
     }
 </script>

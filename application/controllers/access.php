@@ -438,13 +438,21 @@ class Access extends CI_Controller {
         $data['user_name'] = $this->session->userdata('user_name');
         $data['user_description'] = $this->session->userdata('user_description');
         $data['access_points'] = $this->session->userdata('access_points');
+        $buyer_condition = $this->session->userdata('buyer_condition');
 
         $cur_url = __METHOD__;
 
         $res = $this->checkAuthorization($data['access_points'], $cur_url);
 
         if(sizeof($res) > 0) {
-            $data['brands'] = $this->access_model->getAllBrands();
+
+            $where = '';
+
+            if($buyer_condition != ''){
+                $where .= " AND brand IN ($buyer_condition)";
+            }
+
+            $data['brands'] = $this->access_model->getAllBrands($where);
 
             $data['maincontent'] = $this->load->view('packing_list', $data, true);
             $this->load->view('master', $data);
@@ -2436,6 +2444,103 @@ class Access extends CI_Controller {
         echo $maincontent = $this->load->view('filter_machine_list', $data);
     }
 
+    public function getDefectCodes(){
+        $data['title']='Defect Codes';
+
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['defect_codes'] = $this->access_model->getAllTbl('tb_defect_types');
+
+            $data['maincontent'] = $this->load->view('defect_codes', $data, true);
+            $this->load->view('master', $data);
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
+    public function addNewDefectCode(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $data['title'] = 'New Defect Code';
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['maincontent'] = $this->load->view('add_new_defect_code', $data, true);
+            $this->load->view('master', $data);
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
+    public function saveNewDefectCode(){
+        $data['defect_code'] = $this->input->post('defect_code');
+        $data['defect_name'] = $this->input->post('defect_code_name');
+        $data['defect_description'] = $this->input->post('defect_code_description');
+
+        $this->access_model->insertingData('tb_defect_types', $data);
+
+        $data_s['message'] = $data['defect_code']." is Successfully Created!";
+        $this->session->set_userdata($data_s);
+        redirect('access/getDefectCodes');
+    }
+
+    public function editDefectCode($defect_id){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $data['title'] = 'Edit Defect Code';
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['defect_code_info'] = $this->access_model->selectTableDataRowQuery("*", "tb_defect_types", " AND id=$defect_id");
+
+            $data['maincontent'] = $this->load->view('edit_defect_code', $data, true);
+            $this->load->view('master', $data);
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
+    public function updateDefectCode(){
+        $defect_code_id = $this->input->post('defect_code_id');
+
+        $data['defect_code'] = $this->input->post('defect_code');
+        $data['defect_name'] = $this->input->post('defect_code_name');
+        $data['defect_description'] = $this->input->post('defect_code_description');
+
+        $this->access_model->updateTbl('tb_defect_types', $defect_code_id, $data);
+
+        $data_s['message'] = $data['defect_code']." is Successfully Updated!";
+        $this->session->set_userdata($data_s);
+        redirect('access/getDefectCodes');
+    }
+
     public function userList(){
         $data['title']='User List';
 
@@ -2452,6 +2557,9 @@ class Access extends CI_Controller {
         $res = $this->checkAuthorization($data['access_points'], $cur_url);
 
         if(sizeof($res) > 0) {
+            $data['finishing_floors'] = $this->access_model->selectTableDataRowQuery("*", "tb_floor", " AND is_finishing_floor=1");
+            $data['floors'] = $this->access_model->getFloors();
+            $data['lines'] = $this->access_model->getLines();
             $data['user_list'] = $this->access_model->getUserList();
 
             $data['maincontent'] = $this->load->view('user_list', $data, true);
@@ -2459,6 +2567,164 @@ class Access extends CI_Controller {
         }else{
             echo $this->load->view('404');
         }
+    }
+
+    public function addNewFloor(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $data['title'] = 'New Floor';
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['maincontent'] = $this->load->view('add_new_floor', $data, true);
+            $this->load->view('master', $data);
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
+    public function saveNewFloor(){
+        $data['floor_name'] = $this->input->post('floor_name');
+        $data['floor_code'] = $this->input->post('floor_code');
+        $data['floor_description'] = $this->input->post('floor_description');
+        $data['is_finishing_floor'] = $this->input->post('is_finishing_floor');
+        $data['status'] = $this->input->post('status');
+
+        $this->access_model->insertingData('tb_floor', $data);
+
+        $data_s['message'] = $data['floor_name']." is Successfully Saved!";
+        $this->session->set_userdata($data_s);
+        redirect('access/getFloors');
+    }
+
+    public function addNewLine(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $data['title'] = 'New Line';
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['floors'] = $this->access_model->selectTableDataRowQuery("*", 'tb_floor', '');
+            $data['line_info'] = $this->access_model->selectTableDataRowQuery("*", "tb_line", "");
+
+            $data['maincontent'] = $this->load->view('add_new_line', $data, true);
+            $this->load->view('master', $data);
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
+    public function addNewUser(){
+        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $date_time=$datex->format('Y-m-d H:i:s');
+        $date=$datex->format('Y-m-d');
+
+        $data['title'] = 'New User';
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['maincontent'] = $this->load->view('add_new_user', $data, true);
+            $this->load->view('master', $data);
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
+    public function saveNewLineInfo(){
+        $data['line_name'] = $this->input->post('line_name');
+        $data['line_code'] = $this->input->post('line_code');
+        $data['line_description'] = $this->input->post('line_description');
+        $data['floor'] = $this->input->post('floor_id');
+        $data['finishing_floor_id'] = $this->input->post('finishing_floor_id');
+        $data['status'] = $this->input->post('status');
+
+        $this->access_model->insertingData('tb_line', $data);
+
+        $data_s['message'] = $data['line_name']." is Successfully Saved!";
+        $this->session->set_userdata($data_s);
+        redirect('access/getLines');
+    }
+
+    public function saveNewUser(){
+        $data['user_name'] = $this->input->post('user_name');
+        $data['user_description'] = $this->input->post('user_description');
+        $data['access_points'] = $this->input->post('access_points');
+        $data['floor_id'] = $this->input->post('floor_id');
+        $data['finishing_floor_id'] = $this->input->post('finishing_floor_id');
+        $data['line_id'] = $this->input->post('line_id');
+        $data['status'] = $this->input->post('status');
+
+        $buyer_condition_array = $this->input->post('buyer_condition');
+
+        if ($buyer_condition_array == true){
+            if(sizeof($buyer_condition_array) > 0){
+                $data['buyer_condition'] = "'" . implode ( "','", $buyer_condition_array ) . "'";
+            }
+        }else{
+            $data['buyer_condition'] = "";
+        }
+
+        $this->access_model->insertingData('tb_user', $data);
+
+        $data_s['message'] = $data['user_name']." is Successfully Created!";
+        $this->session->set_userdata($data_s);
+        redirect('access/userList');
+    }
+
+    public function getFilteredUserList(){
+        $login_code = $this->input->post('login_code');
+        $user_type = $this->input->post('user_type');
+        $floor_id = $this->input->post('floor_id');
+        $finishing_floor_id = $this->input->post('finishing_floor_id');
+        $line_id = $this->input->post('line_id');
+
+        $where='';
+
+        if($login_code != ''){
+            $where .= " AND t1.user_name='$login_code'";
+        }
+
+        if($user_type != ''){
+            $where .= " AND t1.access_points='$user_type'";
+        }
+
+        if($floor_id != ''){
+            $where .= " AND t1.floor_id='$floor_id'";
+        }
+
+        if($finishing_floor_id != ''){
+            $where .= " AND t1.finishing_floor_id='$finishing_floor_id'";
+        }
+
+        if($line_id != ''){
+            $where .= " AND t1.line_id='$line_id'";
+        }
+
+        $data['user_list'] = $this->access_model->getUserList($where);
+
+        $data['maincontent'] = $this->load->view('filtered_user_list', $data);
     }
 
     public function editUserInfo($user_id){
@@ -2756,6 +3022,18 @@ class Access extends CI_Controller {
         }
     }
 
+    public function checkDefectCodeAvailability(){
+        $defect_code = $this->input->post('defect_code');
+
+        $result = $this->access_model->selectTableDataRowQuery('*', 'tb_defect_types', " AND defect_code='$defect_code'");
+
+        if(sizeof($result) > 0){
+            echo 'available';
+        }else{
+            echo 'unavailable ';
+        }
+    }
+
     public function updateUserInfo(){
         $user_id = $this->input->post('user_id');
 
@@ -2839,11 +3117,15 @@ class Access extends CI_Controller {
 
                     $hours = $this->access_model->getHours();
 
+                    $last_segment = $this->access_model->getSegmentList(" AND id=4");
+                    $last_segment_start_time = $last_segment[0]['start_time'];
+                    $last_segment_end_time = $last_segment[0]['end_time'];
+
                     $h_data = array(
                         'id' => 11,
                         'hour' => 11,
-                        'start_time' => "19:00:00",
-                        'end_time' => "23:59:59",
+                        'start_time' => "$last_segment_start_time",
+                        'end_time' => "$last_segment_end_time",
                         'u_id' => 0
                     );
 
@@ -2884,11 +3166,15 @@ class Access extends CI_Controller {
 
                     $hours = $this->access_model->getHours();
 
+                    $last_segment = $this->access_model->getSegmentList(" AND id=4");
+                    $last_segment_start_time = $last_segment[0]['start_time'];
+                    $last_segment_end_time = $last_segment[0]['end_time'];
+
                     $h_data = array(
                         'id' => 11,
                         'hour' => 11,
-                        'start_time' => "19:00:00",
-                        'end_time' => "23:59:59",
+                        'start_time' => "$last_segment_start_time",
+                        'end_time' => "$last_segment_end_time",
                         'u_id' => 0
                     );
 
@@ -4066,11 +4352,15 @@ class Access extends CI_Controller {
 
             $hours = $this->access_model->getHours();
 
+            $last_segment = $this->access_model->getSegmentList(" AND id=4");
+            $last_segment_start_time = $last_segment[0]['start_time'];
+            $last_segment_end_time = $last_segment[0]['end_time'];
+
             $h_data = array(
                 'id' => 11,
                 'hour' => 11,
-                'start_time' => "19:00:00",
-                'end_time' => "23:59:59",
+                'start_time' => "$last_segment_start_time",
+                'end_time' => "$last_segment_end_time",
                 'u_id' => 0
             );
 
@@ -5519,6 +5809,35 @@ class Access extends CI_Controller {
         echo $maincontent = $this->load->view('line_running_po_list', $data);
     }
 
+    public function printDefectQRCodes($codes_string){
+        $data['title'] = 'Print QR Code';
+        $data['defect_codes'] = explode(',', $codes_string);
+
+        if(sizeof($data['defect_codes']) > 0){
+
+            foreach ($data['defect_codes'] AS $code){
+
+                $get_data['input_ticket_no'] = $code;
+
+                $this->load->library('ciqrcode');
+                $qr_image=$code.'.png';
+                $params['data'] = $code;
+                $params['level'] = 'H';
+                $params['size'] = 8;
+                $params['savename'] =FCPATH."uploads/qr_image/".$qr_image;
+
+
+                if($this->ciqrcode->generate($params))
+                {
+                    $data['img_url']=$qr_image;
+                }
+            }
+
+        }
+
+        $data['maincontent'] = $this->load->view('generated_defect_qr_code_print_list', $data);
+    }
+
     public function printQRCodes($codes_string){
         $data['title'] = 'Print QR Code';
         $data['user_codes'] = explode(',', $codes_string);
@@ -5546,6 +5865,12 @@ class Access extends CI_Controller {
         }
 
         $data['maincontent'] = $this->load->view('generated_qr_code_print_list', $data);
+    }
+
+    public function getDefectCodeInfo($defect_code){
+
+        return $this->access_model->selectTableDataRowQuery("*", 'tb_defect_types', " AND defect_code='$defect_code'");
+
     }
 
     public function getUserInfo($user_name){

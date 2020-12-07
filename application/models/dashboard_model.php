@@ -1489,7 +1489,7 @@ class Dashboard_model extends CI_Model {
                 COUNT(pc_tracking_no) as packing_qty
                 FROM `tb_care_labels`
                 WHERE DATE_FORMAT(packing_date_time, '%Y-%m-%d') = '$po_from_date'
-                AND finishing_floor_id=$floor_id
+                AND packing_status=1 AND finishing_floor_id=$floor_id
                 GROUP BY po_no, so_no, purchase_order, item, quality, color, finishing_floor_id) AS t1
                 LEFT JOIN
                 tb_production_summary AS t2

@@ -40,7 +40,12 @@
     <div class="row">
         <div class="col-md-12">
             <div class="block-web">
-
+                <div class="col-md-1">
+                    <a href="<?php echo base_url();?>access/addNewFloor" class="btn btn-success" title="ADD FLOOR"> <i class="fa fa-plus"></i> FLOOR</a>
+                </div>
+                <br />
+                <br />
+                <br />
                 <div class="porlets-content">
 
                     <div class="table-responsive">

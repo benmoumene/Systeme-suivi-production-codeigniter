@@ -1856,8 +1856,8 @@ class Access_model extends CI_Model {
         return $query;
     }
 
-    public function getAllBrands(){
-        $sql = "SELECT brand FROM `tb_po_detail` GROUP BY brand";
+    public function getAllBrands($where){
+        $sql = "SELECT brand FROM `tb_po_detail` WHERE 1 $where GROUP BY brand";
 
         $query = $this->db->query($sql)->result_array();
         return $query;

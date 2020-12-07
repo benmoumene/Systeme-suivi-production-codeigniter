@@ -1,12 +1,12 @@
 <div class="pull-left breadcrumb_admin clear_both">
     <div class="pull-left page_title theme_color">
-        <h1>Lines</h1>
-        <h2 class="">Lines...</h2>
+        <h1>Defect Codes</h1>
+        <h2 class="">Defect Codes...</h2>
     </div>
     <div class="pull-right">
         <ol class="breadcrumb">
             <li><a href="<?php echo base_url();?>">Home</a></li>
-            <li class="active">Lines</li>
+            <li class="active">Defect Codes</li>
         </ol>
     </div>
 </div>
@@ -40,8 +40,12 @@
     <div class="row">
         <div class="col-md-12">
             <div class="block-web">
+
                 <div class="col-md-1">
-                    <a href="<?php echo base_url();?>access/addNewLine" class="btn btn-success" title="ADD LINE"> <i class="fa fa-plus"></i> LINE</a>
+                    <span class="btn btn-primary" title="PRINT QR CODE" onclick="printQRCodes()"> <i class="fa fa-print"></i> PRINT</span>
+                </div>
+                <div class="col-md-1">
+                    <a href="<?php echo base_url();?>access/addNewDefectCode" class="btn btn-success" title="ADD DEFECT CODE"> <i class="fa fa-plus"></i> DEFECT CODE</a>
                 </div>
                 <br />
                 <br />
@@ -52,29 +56,28 @@
                         <table class="display table table-bordered table-striped" id="">
                             <thead>
                                 <tr>
-                                    <th class="center hidden-phone">ID</th>
-                                    <th class="center hidden-phone">LINE NAME</th>
-                                    <th class="center hidden-phone">LINE CODE</th>
+                                    <th class="center hidden-phone">
+                                        <input type="checkbox" class="select_all" id="checkAll" name="select_all" />
+                                    </th>
+                                    <th class="center hidden-phone">DEFECT CODE</th>
+                                    <th class="center hidden-phone">DEFECT NAME</th>
                                     <th class="center hidden-phone">DESCRIPTION</th>
-                                    <th class="center hidden-phone">FLOOR</th>
-                                    <th class="center hidden-phone">FINISHING FLOOR</th>
-                                    <th class="center hidden-phone">STATUS</th>
                                     <th class="center hidden-phone">ACTION</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="tbody_id">
                             <?php
-                            foreach($lines AS $l){ ?>
+                            $sl=1;
+                            foreach($defect_codes AS $d){ ?>
                                 <tr>
-                                    <td class="center hidden-phone"><?php echo $l['id'];?></td>
-                                    <td class="center hidden-phone"><?php echo $l['line_name'];?></td>
-                                    <td class="center hidden-phone"><?php echo $l['line_code'];?></td>
-                                    <td class="center hidden-phone"><?php echo $l['line_description'];?></td>
-                                    <td class="center hidden-phone"><?php echo $l['floor_name'];?></td>
-                                    <td class="center hidden-phone"><?php echo $l['finishing_floor_name'];?></td>
-                                    <td class="center hidden-phone"><?php echo $l['status'] == 1 ? 'Active' : 'Inactive';?></td>
                                     <td class="center hidden-phone">
-                                        <a href="<?php echo base_url()?>access/editLineInfo/<?php echo $l['id'];?>" class="btn btn-warning" title="EDIT"><i class="fa fa-pencil"></i></a>
+                                        <input class="checkItem" type="checkbox" name="checkItem[]" id="checkItem" value="<?php echo $d['defect_code']; ?>" />
+                                    </td>
+                                    <td class="center hidden-phone"><?php echo $d['defect_code'];?></td>
+                                    <td class="center hidden-phone"><?php echo $d['defect_name'];?></td>
+                                    <td class="center hidden-phone"><?php echo $d['defect_description'];?></td>
+                                    <td class="center hidden-phone">
+                                        <a href="<?php echo base_url()?>access/editDefectCode/<?php echo $d['id'];?>" class="btn btn-warning" title="EDIT"><i class="fa fa-pencil"></i></a>
                                     </td>
                                 </tr>
                             <?php } ?>
@@ -96,21 +99,43 @@
     });
 
     function printQRCodes() {
-        var user_codes = [];
+        var defect_codes = [];
 
         $('input.checkItem:checkbox:checked').each(function () {
             var sThisVal = $(this).val();
 
-            user_codes.push(sThisVal);
+            defect_codes.push(sThisVal);
         });
 
-        if(user_codes.length > 0){
+        if(defect_codes.length > 0){
 
-            window.open("<?php echo base_url();?>access/printQRCodes/"+user_codes, "_blank");
+            window.open("<?php echo base_url();?>access/printDefectQRCodes/"+defect_codes, "_blank");
 //            window.open("<?php //echo site_url('access/printQRCodes');?>///"+user_codes, "_blank");
 
         }else{
             alert('Nothing selected to print!');
         }
+    }
+    
+    function getFilteredUserList() {
+        var login_code = $("#login_code").val();
+        var user_type = $("#user_type").val();
+        var floor_id = $("#floor_id").val();
+        var finishing_floor_id = $("#finishing_floor_id").val();
+        var line_id = $("#line_id").val();
+
+        $("#tbody_id").empty();
+
+        $.ajax({
+            url:"<?php echo base_url('access/getFilteredUserList')?>",
+            type:"post",
+            dataType:'html',
+            data:{login_code: login_code, user_type: user_type, floor_id: floor_id, finishing_floor_id: finishing_floor_id, line_id: line_id},
+            success:function (data) {
+
+                $("#tbody_id").append(data);
+
+            }
+        });
     }
 </script>
