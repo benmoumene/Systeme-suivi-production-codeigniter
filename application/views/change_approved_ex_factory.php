@@ -104,6 +104,12 @@
                                         </td>
                                     </tr>
 
+                                    <tr>
+                                        <td class="center">Remarks </td>
+                                        <td class="center">
+                                            <input type="text" class="form-control" id="remarks" name="remarks" autocomplete="off" />
+                                        </td>
+                                    </tr>
 
                                     <tr>
                                         <td class="center"></td>

@@ -1693,7 +1693,7 @@ class Dashboard_model extends CI_Model {
 
     public function getTodayLineProductionSummaryReport($date, $floor_id){
         $sql = "SELECT A.line_id, A.line_name, A.line_code, J.floor_name, K.target, 
-                K.remarks, B.total_line_output, B.total_manual_output, B.efficiency, B.wip, B.dhu_sum,
+                K.remarks, B.total_line_output, B.total_manual_output, B.efficiency, B.wip, B.dhu,
                 B.work_hour_1, B.work_hour_2, B.work_hour_3, B.work_hour_4
                 
                 FROM 
@@ -1703,7 +1703,7 @@ class Dashboard_model extends CI_Model {
                 
                 LEFT JOIN
                 (SELECT line_id, `date`, SUM(qty) as total_line_output, SUM(manual_qty) AS total_manual_output, 
-                efficiency, wip, SUM(dhu) AS dhu_sum, work_hour_1, work_hour_2, work_hour_3, work_hour_4
+                efficiency, wip, dhu, work_hour_1, work_hour_2, work_hour_3, work_hour_4
                 FROM `tb_today_line_output_qty` WHERE line_id !=0
                 AND `date`='$date'
                 GROUP BY `date`, line_id) as B
@@ -2928,7 +2928,7 @@ class Dashboard_model extends CI_Model {
               t3.count_washing_qty AS count_wash_send, t3.count_washing_pass, t3.total_wh_qa, t4.so_fail_count
               FROM
               (Select so_no, purchase_order, item, quality, color, brand, style_name, SUM(quantity) as total_order_qty, 
-              ex_factory_date, approved_ex_factory_date, aql_plan_date, aql_action_date, aql_status, status 
+              ex_factory_date, approved_ex_factory_date, aql_plan_date, aql_action_date, aql_status, status, remarks 
               FROM tb_po_detail
               WHERE 1 $where
               GROUP BY so_no) as t2
@@ -3583,7 +3583,7 @@ class Dashboard_model extends CI_Model {
                 
                 FROM 
                 (SELECT so_no, po_no, brand, purchase_order, item, quality, color, style_no, style_name, 
-                ex_factory_date, approved_ex_factory_date, crd_date, SUM(quantity) AS total_order_qty, wash_gmt, po_type, status
+                ex_factory_date, approved_ex_factory_date, crd_date, SUM(quantity) AS total_order_qty, wash_gmt, po_type, status, remarks
                 FROM tb_po_detail 
                 WHERE 1 $where
                 GROUP BY so_no) AS t1

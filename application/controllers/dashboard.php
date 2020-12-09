@@ -168,7 +168,7 @@ class Dashboard extends CI_Controller {
                 $object->getActiveSheet()->setCellValueByColumnAndRow(21, $excel_row, $v["count_carton_pass"]);
                 $object->getActiveSheet()->setCellValueByColumnAndRow(22, $excel_row, ($carton_balance_qty > 0 ? $carton_balance_qty : 0));
                 $object->getActiveSheet()->setCellValueByColumnAndRow(23, $excel_row, $total_others);
-                $object->getActiveSheet()->setCellValueByColumnAndRow(24, $excel_row, $v["status"]);
+                $object->getActiveSheet()->setCellValueByColumnAndRow(24, $excel_row, $v["remarks"]);
                 $excel_row++;
 
             }
@@ -769,6 +769,7 @@ class Dashboard extends CI_Controller {
                 $idata['balance'] = ($balance != NULL ? $balance : 0);
                 $idata['max_carton_date_time'] = (($v['max_carton_date_time'] != NULL || $v['max_carton_date_time'] != '') ? $v['max_carton_date_time'] : '0000-00-00 00:00:00');
                 $idata['po_type'] = ($v['po_type'] != NULL ? $v['po_type'] : '');
+                $idata['remarks'] = ($v['remarks'] != NULL ? $v['remarks'] : '');
 
 //                if($balance > 0){
 //                    $res_status = $this->dashboard_model->deleteProductionSo($idata['po_no'], $idata['so_no'], $idata['purchase_order'], $idata['item'], $idata['quality'], $idata['color']);

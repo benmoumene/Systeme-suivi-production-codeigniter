@@ -155,11 +155,12 @@
                 </td>
                 <td class="center">
                     <?php
-                    if($v['status'] == 'CLOSE') {
-                        echo $v['status'];
-                    }else{
-                        echo '';
-                    }
+//                    if($v['status'] == 'CLOSE') {
+//                        echo $v['status'];
+//                    }else{
+//                        echo '';
+//                    }
+                    echo $v['remarks'];
                     ?>
                 </td>
                 <td class="center" title="<?php echo $v['aql_action_date'];?>"><?php echo $v['aql_plan_date'];?></td>

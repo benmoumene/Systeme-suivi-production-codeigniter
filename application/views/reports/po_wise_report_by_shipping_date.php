@@ -216,11 +216,12 @@ foreach ($dates as $dt){
             </td>
             <td class="center">
                 <?php
-                if($v['status'] == 'CLOSE') {
-                    echo $v['status'];
-                }else{
-                    echo '';
-                }
+//                if($v['status'] == 'CLOSE') {
+//                    echo $v['status'];
+//                }else{
+//                    echo '';
+//                }
+                echo $v['remarks'];
                 ?>
             </td>
         </tr>

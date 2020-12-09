@@ -1761,6 +1761,7 @@ class Access extends CI_Controller {
         $day=$date[1];
 
         $data['approved_ex_factory_date']=$year.'-'.$month.'-'.$day;
+        $data['remarks']=$this->input->post('remarks');
 
         $this->access_model->updateTblNew('tb_po_detail', 'so_no', $so_no, $data);
         $data['message']='Approved Ex-Factory Updated Successfully!';

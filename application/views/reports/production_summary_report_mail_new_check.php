@@ -228,14 +228,14 @@
     <table width="100%">
         <thead>
         <tr style="background-color: #5d6155; color: #FFFFFF;">
-            <th colspan="5" class="center"><h2>Finishing Report</h2></th>
+            <th colspan="3" class="center"><h2>Finishing Report</h2></th>
         </tr>
         <tr style="background-color: #f7ffb0;">
             <th align="center">Floor</th>
             <th align="center">Target</th>
-            <th align="center">Plan Hour Output</th>
-            <th align="center">Extra Output</th>
-            <th align="center">Total</th>
+<!--            <th align="center">Plan Hour Output</th>-->
+<!--            <th align="center">Extra Output</th>-->
+            <th align="center">Output</th>
         </tr>
         </thead>
         <tbody>
@@ -250,8 +250,8 @@
             <tr>
                 <td align="center"><?php echo $f['floor_id'];?></td>
                 <td align="center"><?php echo $f['target'];?></td>
-                <td align="center"><?php echo $f['normal_output'];?></td>
-                <td align="center"><?php echo $f['eot_output'];?></td>
+<!--                <td align="center">--><?php //echo $f['normal_output'];?><!--</td>-->
+<!--                <td align="center">--><?php //echo $f['eot_output'];?><!--</td>-->
                 <td align="center"><?php echo $f['output'];?></td>
             </tr>
             <?php

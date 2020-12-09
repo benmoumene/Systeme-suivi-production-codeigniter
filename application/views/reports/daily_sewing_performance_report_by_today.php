@@ -152,16 +152,16 @@ foreach ($floors as $v_f){
             </td>
             <td class="center" id="myBtn" onclick="getDhuReport(<?php echo $line_id;?>);" style="cursor: pointer;">
                 <?php
-                $dhu_sum = ($v['dhu_sum'] != '' ? $v['dhu_sum'] : 0);
+//                $dhu_sum = ($v['dhu_sum'] != '' ? $v['dhu_sum'] : 0);
                 $work_hour_1 = ($v['work_hour_1'] != '' ? $v['work_hour_1'] : 0);
                 $work_hour_2 = ($v['work_hour_2'] != '' ? $v['work_hour_2'] : 0);
                 $work_hour_3 = ($v['work_hour_3'] != '' ? $v['work_hour_3'] : 0);
                 $work_hour_4 = ($v['work_hour_4'] != '' ? $v['work_hour_4'] : 0);
 
                 $total_wh = $work_hour_1+$work_hour_2+$work_hour_3+$work_hour_4;
-                $average_dhu = round($dhu_sum/$total_wh, 2);
+//                $average_dhu = round($dhu_sum/$total_wh, 2);
 
-                echo $average_dhu;
+                echo $v['dhu'];
                 ?>
             </td>
             <td class="center"><?php echo $v['remarks']; ?></td>
