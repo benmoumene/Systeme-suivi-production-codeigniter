@@ -80,6 +80,7 @@
                             <option value="400">SD</option>
                             <option value="500">Production Admin</option>
                             <option value="600">Maintenance Admin</option>
+                            <option value="700">Store</option>
                         </select>
                         <span style="font-size: 11px;">* USER TYPE</span>
                     </div>
@@ -105,7 +106,7 @@
                     <div class="form-group">
                         <select class="form-control" id="finishing_floor_id" name="finishing_floor_id">
                             <option value="">Select Finishing Floor...</option>
-                            <?php foreach ($floors as $fn){ ?>
+                            <?php foreach ($finishing_floors as $fn){ ?>
                                 <option value="<?php echo $fn['id'];?>"><?php echo $fn['floor_name'];?></option>
                             <?php } ?>
                         </select>

@@ -106,6 +106,7 @@ $buyer_condition_array = explode(',', $buyer_condition);
                                 <option value="400" <?php echo ($access_points == 400 ? "selected='selected'" : '');?>>SD</option>
                                 <option value="500" <?php echo ($access_points == 500 ? "selected='selected'" : '');?>>Production Admin</option>
                                 <option value="600" <?php echo ($access_points == 600 ? "selected='selected'" : '');?>>Maintenance Admin</option>
+                                <option value="700" <?php echo ($access_points == 700 ? "selected='selected'" : '');?>>Store</option>
                             </select>
                             <span style="font-size: 11px;">* USER TYPE</span>
                         </div>
@@ -131,7 +132,7 @@ $buyer_condition_array = explode(',', $buyer_condition);
                         <div class="form-group">
                             <select class="form-control" id="finishing_floor_id" name="finishing_floor_id">
                                 <option value="">Select Finishing Floor...</option>
-                                <?php foreach ($floors as $fn){ ?>
+                                <?php foreach ($finishing_floors as $fn){ ?>
                                     <option value="<?php echo $fn['id'];?>" <?php echo ($finishing_floor_id == $fn['id'] ? "selected='selected'" : '');?>><?php echo $fn['floor_name'];?></option>
                                 <?php } ?>
                             </select>

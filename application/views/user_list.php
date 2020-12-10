@@ -63,6 +63,7 @@
                         <option value="400">SD</option>
                         <option value="500">Production Admin</option>
                         <option value="600">Maintenance Admin</option>
+                        <option value="700">Store</option>
                     </select>
                 </div>
             </div>
@@ -203,6 +204,9 @@
                                             }
                                             if($u['access_points'] == 600){
                                                 echo 'MAINTENANCE ADMIN';
+                                            }
+                                            if($u['access_points'] == 700){
+                                                echo 'STORE';
                                             }
                                         ?>
                                     </td>

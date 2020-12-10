@@ -44,7 +44,7 @@ foreach ($dates as $dt){
 <table class="display table table-bordered table-striped" id="" border="1">
     <thead>
     <tr>
-        <th class="hidden-phone center" colspan="31"><h3>Ship Date: <?php echo $dt['approved_ex_factory_date'];?></h3></th>
+        <th class="hidden-phone center" colspan="32"><h3>Ship Date: <?php echo $dt['approved_ex_factory_date'];?></h3></th>
     </tr>
     <tr>
         <th class="hidden-phone center">SO</th>
@@ -80,6 +80,7 @@ foreach ($dates as $dt){
         <th class="hidden-phone center">Plan Final Audit Date</th>
         <th class="hidden-phone center">Cargo Handover Date</th>
         <th class="hidden-phone center">Remarks</th>
+        <th class="hidden-phone center">Adjustment(%)</th>
     </tr>
     </thead>
     <tbody>
@@ -224,6 +225,11 @@ foreach ($dates as $dt){
                 echo $v['remarks'];
                 ?>
             </td>
+            <td class="center">
+                <?php
+                    echo round(($v['count_manually_adjusted_qty']/$v['total_cut_input_qty']) * 100, 2);
+                ?>
+            </td>
         </tr>
     <?php
     }
@@ -249,6 +255,7 @@ foreach ($dates as $dt){
         <td class="center"><h4><b><?php echo ($total_wh_qty + $total_other_qty);?></b></h4></td>
         <!--        <td class="center"><h4><b>--><?php //echo $total_other_qty;?><!--</b></h4></td>-->
         <td class="center"><h4><b><?php echo $total_balance_qty;?></b></h4></td>
+        <td class="center"></td>
         <td class="center"></td>
         <td class="center"></td>
         <td class="center"></td>

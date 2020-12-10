@@ -3577,8 +3577,8 @@ class Dashboard_model extends CI_Model {
 
         $sql = "SELECT t1.*, t2.total_cut_qty, t2.total_cut_qty, t2.total_cut_input_qty, 
                 t2.count_input_qty_line, t2.count_mid_line_qc_pass, t2.count_end_line_qc_pass,
-                t2.count_washing_qty, t2.count_washing_pass, t2.count_packing_pass, 
-                t2.count_carton_pass, t2.total_wh_qa, t2.count_manual_close_qty, t2.count_cut_package_ready_qty, 
+                t2.count_washing_qty, t2.count_washing_pass, t2.count_packing_pass, t2.count_carton_pass, 
+                t2.total_wh_qa, t2.count_manual_close_qty, t2.count_cut_package_ready_qty, t2.count_manually_adjusted_qty,
                 t3.responsible_line, t4.collar_bndl_qty, t5.cuff_bndl_qty, t6.planned_lines, t7.max_carton_date_time
                 
                 FROM 
@@ -3593,7 +3593,8 @@ class Dashboard_model extends CI_Model {
                 COUNT(line_id) AS count_input_qty_line, COUNT(mid_line_qc_date_time) AS count_mid_line_qc_pass, COUNT(end_line_qc_date_time) AS count_end_line_qc_pass,
                 COUNT(is_going_wash) AS count_washing_qty, COUNT(washing_status) AS count_washing_pass, COUNT(packing_status) AS count_packing_pass, 
                 COUNT(carton_status) AS count_carton_pass, COUNT(warehouse_qa_type) AS total_wh_qa, COUNT(manually_closed) AS count_manual_close_qty,
-                COUNT(is_package_ready) AS count_cut_package_ready_qty
+                COUNT(is_package_ready) AS count_cut_package_ready_qty,
+                COUNT(is_manually_adjusted) AS count_manually_adjusted_qty
                 FROM 
                 (SELECT so_no,
                  CASE WHEN id > 0 THEN id END id,
@@ -3607,7 +3608,8 @@ class Dashboard_model extends CI_Model {
                  CASE WHEN carton_status = 1 THEN carton_status END carton_status,
                  CASE WHEN warehouse_qa_type != 0 THEN warehouse_qa_type END warehouse_qa_type,
                  CASE WHEN manually_closed = 1 THEN manually_closed END manually_closed,
-                 CASE WHEN is_package_ready = 1 THEN is_package_ready END is_package_ready
+                 CASE WHEN is_package_ready = 1 THEN is_package_ready END is_package_ready,
+                 CASE WHEN is_manually_adjusted = 1 THEN is_manually_adjusted END is_manually_adjusted
                  
                 FROM tb_care_labels) tb_care_labels 
                 GROUP BY so_no) AS t2

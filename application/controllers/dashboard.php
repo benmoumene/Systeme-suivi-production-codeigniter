@@ -765,6 +765,7 @@ class Dashboard extends CI_Controller {
                 $idata['count_packing_pass'] = ($v['count_packing_pass'] != NULL ? $v['count_packing_pass'] : 0);
                 $idata['count_carton_pass'] = ($v['count_carton_pass'] != NULL ? $v['count_carton_pass'] : 0);
                 $idata['count_manual_close_qty'] = ($v['count_manual_close_qty'] != NULL ? $v['count_manual_close_qty'] : 0);
+                $idata['count_manually_adjusted_qty'] = ($v['count_manually_adjusted_qty'] != NULL ? $v['count_manually_adjusted_qty'] : 0);
                 $idata['total_wh_qa'] = ($v['total_wh_qa'] != NULL ? $v['total_wh_qa'] : 0);
                 $idata['balance'] = ($balance != NULL ? $balance : 0);
                 $idata['max_carton_date_time'] = (($v['max_carton_date_time'] != NULL || $v['max_carton_date_time'] != '') ? $v['max_carton_date_time'] : '0000-00-00 00:00:00');

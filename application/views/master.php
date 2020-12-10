@@ -521,6 +521,12 @@
                 <li><a href="<?php echo base_url();?>access/getMachineBrands"><i class="fa fa-check-square"></i> Machine Brands </a></li>
                 <li><a href="<?php echo base_url();?>access/getMachineLocations"><i class="fa fa-map-marker"></i> Locations </a></li>
 
+            <?php }
+
+            if($access_points == 700){ ?>
+
+                <li><a href="<?php echo base_url();?>access/getFabricCodes"><i class="fa fa-bars"></i> Fabric Codes </a></li>
+
             <?php } ?>
 
             <li> <a href="<?php echo base_url(); ?>access/logout"><i class="fa fa-power-off"></i> Logout</a> </li>

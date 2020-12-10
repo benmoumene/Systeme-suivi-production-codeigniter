@@ -38,6 +38,29 @@ class Access_model extends CI_Model {
         return $query;
     }
 
+    public function checkStoreFabricLengthAvailability($where)
+    {
+        $sql = "SELECT t1.*, IFNULL(t2.total_inhouse_length, 0) AS total_inhouse_length, 
+                IFNULL(t3.total_cutting_assignment_length, 0) AS total_cutting_assignment_length
+                FROM 
+                `tb_fabric_code` AS t1
+                
+                LEFT JOIN
+                (SELECT fabric_id, SUM(inhouse_length) AS total_inhouse_length 
+                FROM `tb_fabric_inhouse_log` GROUP BY fabric_id) AS t2
+                ON t1.id=t2.fabric_id
+                
+                LEFT JOIN
+                (SELECT fabric_id, SUM(cutting_assignment_length) AS total_cutting_assignment_length
+                FROM `tb_fabric_assignment_to_cutting` GROUP BY fabric_id) AS t3
+                ON t1.id=t3.fabric_id
+                
+                WHERE 1 $where";
+
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
     public function getSegmentList($where)
     {
         $sql = "SELECT *
