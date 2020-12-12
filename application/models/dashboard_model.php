@@ -4245,7 +4245,7 @@ class Dashboard_model extends CI_Model {
                  FROM `tb_po_detail`
                  WHERE 1
                  $where
-                 GROUP BY ex_factory_date";
+                 GROUP BY approved_ex_factory_date";
 
         $query = $this->db->query($sql)->result_array();
         return $query;

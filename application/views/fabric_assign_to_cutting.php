@@ -53,7 +53,7 @@
 
                 <div class="col-md-2">
                     <div class="form-group">
-                        <input type="number" id="cutting_assignment_length" name="cutting_assignment_length" min="0" required="required" autocomplete="off" onblur="checkLengthValidity();" />
+                        <input type="text" id="cutting_assignment_length" name="cutting_assignment_length" min="0" required="required" autocomplete="off" onblur="checkLengthValidity();" />
                         <p style="font-size: 11px;">* Fabric Length (m)</p>
                     </div>
                 </div>
@@ -111,8 +111,13 @@
     function checkLengthValidity() {
         var fabric_id = $("#fabric_id").val();
 
-        var cutting_assignment_length = $("#cutting_assignment_length").val();
-        cutting_assignment_length = (cutting_assignment_length < 0 ? '' : cutting_assignment_length);
+        var cutting_assignment_length = parseFloat($("#cutting_assignment_length").val());
+
+        if(isNaN(cutting_assignment_length) == false){
+            cutting_assignment_length = (cutting_assignment_length < 0 ? '' : cutting_assignment_length);
+        }else{
+            cutting_assignment_length = '';
+        }
 
         if(cutting_assignment_length != ''){
 

@@ -57,7 +57,6 @@
                                     <th class="center hidden-phone">FABRIC CODE</th>
                                     <th class="center hidden-phone">STORE BALANCE (m)</th>
                                     <th class="center hidden-phone">CUTTING BALANCE (m)</th>
-                                    <th class="center hidden-phone">TOTAL BALANCE (m)</th>
                                     <th class="center hidden-phone">ACTION</th>
                                 </tr>
                             </thead>
@@ -71,8 +70,7 @@
                                     </td>
                                     <td class="center hidden-phone"><?php echo $fb['fabric_code'];?></td>
                                     <td class="center hidden-phone"><?php echo $fb['total_inhouse_length']-$fb['total_cutting_assignment_length'];?></td>
-                                    <td class="center hidden-phone"><?php echo '';?></td>
-                                    <td class="center hidden-phone"><?php echo '';?></td>
+                                    <td class="center hidden-phone"><?php echo $fb['total_cutting_assignment_length']-$fb['total_fabric_usage_length'];?></td>
                                     <td class="center hidden-phone">
                                         <a href="<?php echo base_url()?>access/fabricInhouse/<?php echo $fb['id'];?>" class="btn btn-success" title="Fabric Inhouse"><i class="fa fa-plus-square"></i></a>
                                         <a href="<?php echo base_url()?>access/fabricAssignToCutting/<?php echo $fb['id'];?>" class="btn btn-danger" title="Fabric Assign to Cutting"><i class="fa fa-minus-square"></i></a>

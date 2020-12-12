@@ -7844,6 +7844,7 @@ class Access extends CI_Controller {
         $get_data['sap_no'] = $this->access_model->getSapPoNo();
         $get_data['tables'] = $this->access_model->getTables();
         $get_data['cut_no'] = $this->access_model->getCutNoList();
+        $get_data['fabric_codes'] = $this->access_model->selectTableDataRowQuery("*", "tb_fabric_code", "");
 
         $data['maincontent'] = $this->load->view('cutting', $get_data, true);
         $this->load->view('master', $data);
@@ -7907,6 +7908,8 @@ class Access extends CI_Controller {
         $po_type = $this->input->post('po_type');
         $style_type = $this->input->post('style_type');
         $per_bundle_qty = $this->input->post('per_bundle_qty');
+//        $fabric_id = $this->input->post('fabric_id');
+//        $fabric_length = $this->input->post('fabric_length');
 
         $size_field = "size";
         $qty_field = "qty";
@@ -8124,6 +8127,22 @@ class Access extends CI_Controller {
                         }
                     }
                 }
+
+//                Fabric Usage Summary Start
+
+//                $res_fabric_cut = $this->access_model->selectTableDataRowQuery("*", "tb_fabric_usage_detail", " AND group_so='$sap_no' AND cut_no='$cut_no'");
+//
+//                if(sizeof($res_fabric_cut) == 0){
+//                    $data_fabric['fabric_id'] = $fabric_id;
+//                    $data_fabric['group_so'] = $sap_no;
+//                    $data_fabric['cut_no'] = $cut_no;
+//                    $data_fabric['usage_length'] = $fabric_length;
+//                    $data_fabric['usage_date'] = $date;
+//
+//                    $this->access_model->insertingData('tb_fabric_usage_detail', $data_fabric);
+//                }
+
+//                Fabric Usage Summary End
 
                 echo $cut_tracking_no.'.';
 //            }

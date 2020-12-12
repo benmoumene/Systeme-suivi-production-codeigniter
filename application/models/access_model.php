@@ -41,7 +41,9 @@ class Access_model extends CI_Model {
     public function checkStoreFabricLengthAvailability($where)
     {
         $sql = "SELECT t1.*, IFNULL(t2.total_inhouse_length, 0) AS total_inhouse_length, 
-                IFNULL(t3.total_cutting_assignment_length, 0) AS total_cutting_assignment_length
+                IFNULL(t3.total_cutting_assignment_length, 0) AS total_cutting_assignment_length,
+                IFNULL(t4.total_fabric_usage_length, 0) AS total_fabric_usage_length
+                
                 FROM 
                 `tb_fabric_code` AS t1
                 
@@ -54,6 +56,11 @@ class Access_model extends CI_Model {
                 (SELECT fabric_id, SUM(cutting_assignment_length) AS total_cutting_assignment_length
                 FROM `tb_fabric_assignment_to_cutting` GROUP BY fabric_id) AS t3
                 ON t1.id=t3.fabric_id
+                
+                LEFT JOIN
+                (SELECT fabric_id, SUM(usage_length) AS total_fabric_usage_length 
+                FROM `tb_fabric_usage_detail` GROUP BY fabric_id) AS t4
+                ON t1.id=t4.fabric_id
                 
                 WHERE 1 $where";
 

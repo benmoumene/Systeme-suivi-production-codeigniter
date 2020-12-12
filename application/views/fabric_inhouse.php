@@ -53,7 +53,7 @@
 
                 <div class="col-md-2">
                     <div class="form-group">
-                        <input type="number" id="inhouse_length" name="inhouse_length" min="0" required="required" autocomplete="off" onblur="checkLengthValidity();" />
+                        <input type="text" id="inhouse_length" name="inhouse_length" min="0" required="required" autocomplete="off" onblur="checkLengthValidity();" />
                         <p style="font-size: 11px;">* Fabric Length (m)</p>
                     </div>
                 </div>
@@ -109,10 +109,16 @@
     }
     
     function checkLengthValidity() {
-        var inhouse_length = $("#inhouse_length").val();
-        inhouse_length = (inhouse_length < 0 ? '' : inhouse_length);
+        var inhouse_length = parseFloat($("#inhouse_length").val());
+
+        if(isNaN(inhouse_length) == false){
+            inhouse_length = (inhouse_length < 0 ? '' : inhouse_length);
+        }else{
+            inhouse_length = '';
+        }
 
         $("#inhouse_length").val(inhouse_length);
+
     }
 
 </script>

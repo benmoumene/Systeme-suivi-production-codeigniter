@@ -56,7 +56,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <div class="form-group">
                                     <input type="text" readonly required class="form-control" id="brand" name="brand">
                                     <span style="font-size: 11px;">* Brand </span>
@@ -84,18 +84,12 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <div class="form-group">
                                     <input type="text" readonly required class="form-control" id="color" name="color" value="<?php echo $po_item[0]['color'];?>">
                                     <span style="font-size: 11px;">* Color </span>
                                 </div>
                             </div>
-
-                        </div>
-                    </div><!--/form-group-->
-
-                    <div class="row">
-                        <div class="form-group">
 
                             <div class="col-md-2">
                                 <div class="form-group">
@@ -108,6 +102,12 @@
                                     <span style="font-size: 11px;">* PO Type</span>
                                 </div>
                             </div>
+
+                        </div>
+                    </div><!--/form-group-->
+
+                    <div class="row">
+                        <div class="form-group">
 
                             <div class="col-md-2">
                                 <div class="form-group">
@@ -133,10 +133,10 @@
 <!--                                </div>-->
 <!--                            </div>-->
 
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <div class="form-group">
                                     <select required class="form-control select" id="cut_no" name="cut_no" onchange="getCutInfo();">
-                                        <option value="">Select Cut No...</option>
+                                        <option value="">Cut No</option>
                                         <?php
                                             foreach ($cut_no as $v_c){
                                         ?>
@@ -149,7 +149,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <div class="form-group">
                                     <input type="text" required class="form-control" id="layer" name="layer">
                                     <span style="font-size: 11px;">* Layer </span>
@@ -178,6 +178,29 @@
                                 <div class="form-group">
                                     <input type="number" required class="form-control" id="per_bundle_qty" name="per_bundle_qty" value="10">
                                     <span style="font-size: 11px;">* Per Bundle Qty </span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <select required class="form-control select" id="fabric_code" name="fabric_code" onchange="resetFabricLength();">
+                                        <option value="">Fabric Code</option>
+                                        <?php
+                                        foreach ($fabric_codes as $f_c){
+                                            ?>
+                                            <option value="<?php echo $f_c['id'];?>"><?php echo $f_c['fabric_code'];?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+                                    <span style="font-size: 11px;">* Fabric Code</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <input type="text" required class="form-control" id="fabric_length" name="fabric_length" onchange="getCuttingFabricLengthAvailability();" />
+                                    <span style="font-size: 11px;">* Fabric Length </span>
                                 </div>
                             </div>
 
@@ -249,6 +272,59 @@
         $("#message").empty();
     });
 
+    function resetFabricLength() {
+        var fabric_code = $("#fabric_code").val();
+
+        if(fabric_code != ''){
+            $("#fabric_length").val('');
+        }else{
+            alert('Please Select Fabric Code!');
+            $("#fabric_length").val('');
+        }
+    }
+
+    function getCuttingFabricLengthAvailability() {
+        var fabric_code = $("#fabric_code").val();
+        var fabric_length = parseFloat($("#fabric_length").val());
+
+        if(isNaN(fabric_length) == false){
+            fabric_length = (fabric_length < 0 ? '' : fabric_length);
+        }else{
+            fabric_length = '';
+        }
+
+        if(fabric_length != ''){
+
+            if(fabric_code != ''){
+
+                $.ajax({
+                    url:"<?php echo base_url('access/checkStoreFabricLengthAvailability')?>",
+                    type:"post",
+                    dataType:'json',
+                    data:{fabric_id: fabric_code},
+                    success:function (data) {
+
+                        var fabric_cutting_balance = data[0].total_cutting_assignment_length - data[0].total_fabric_usage_length;
+
+                        if(fabric_cutting_balance < fabric_length){
+                            alert('Cutting Fabric Length Available: '+fabric_cutting_balance+'(m)');
+                            $("#fabric_length").val('');
+                        }
+
+                    }
+                });
+
+            }else{
+                alert('Please Select Fabric Code!');
+                $("#fabric_length").val('');
+            }
+
+        }else{
+            $("#fabric_length").val(fabric_length);
+        }
+
+    }
+    
     function getCutInfo() {
         var cut_no = $("#cut_no").val();
         var sap_no = $("#sap_no").val();
@@ -301,6 +377,8 @@
         var color = $("#color").val();
         var style_type = $("#style_type").val();
         var per_bundle_qty = $("#per_bundle_qty").val();
+        var fabric_code = $("#fabric_code").val();
+        var fabric_length = $("#fabric_length").val();
 
         var so_no = $("#so_no").val();
         var exfacdate = $("#exfacdate").val();
@@ -323,6 +401,7 @@
         var lays = [];
 //        var ex_factory_date = [];
 
+//        if(count_rows != '' && count_rows != 0 && count_rows != undefined && layer != '' && layer != 0 && layer != undefined && style_type != '' && style_type != 0 && style_type != undefined && cut_no != '' && cut_no != 0 && cut_no != undefined && po_type != '' && po_type != undefined && purchase_order_item != '' && purchase_order_item != 0 && purchase_order_item != undefined && per_bundle_qty != '' && per_bundle_qty != 0 && per_bundle_qty != undefined && fabric_code != '' && fabric_code != 0 && fabric_code != undefined && fabric_length != '' && fabric_length != 0 && fabric_length != undefined){
         if(count_rows != '' && count_rows != 0 && count_rows != undefined && layer != '' && layer != 0 && layer != undefined && style_type != '' && style_type != 0 && style_type != undefined && cut_no != '' && cut_no != 0 && cut_no != undefined && po_type != '' && po_type != undefined && purchase_order_item != '' && purchase_order_item != 0 && purchase_order_item != undefined && per_bundle_qty != '' && per_bundle_qty != 0 && per_bundle_qty != undefined){
             for(var i=0; i < count_rows; i++){
                 var ratio = $("#ratio"+i).val();
@@ -363,7 +442,7 @@
                 $.ajax({
                     url: "<?php echo base_url();?>access/saveBundleCutNew/",
                     type: "POST",
-                    data: {sap_no: sap_no, so_no: so_no, ex_factory_date: exfacdate, cut_no: cut_no, brand: brand, style_no: style_no, style_name: style_name, color: color, quality: quality, po_type: po_type, style_type: style_type, actual_cut_qty: actual_cut_qty, planned_cut_qty: planned_cut_qty, size: sizes, qty: qty, item: item_no, purchase_order: po, lay: lays, per_bundle_qty: per_bundle_qty},
+                    data: {sap_no: sap_no, so_no: so_no, ex_factory_date: exfacdate, cut_no: cut_no, brand: brand, style_no: style_no, style_name: style_name, color: color, quality: quality, po_type: po_type, style_type: style_type, actual_cut_qty: actual_cut_qty, planned_cut_qty: planned_cut_qty, size: sizes, qty: qty, item: item_no, purchase_order: po, lay: lays, per_bundle_qty: per_bundle_qty, fabric_id: fabric_code, fabric_length: fabric_length},
                     dataType: "html",
                     success: function (data) {
                         $("#set_form").empty();
@@ -371,11 +450,6 @@
                         $("#cut_no").trigger("change");
 
                         $("#loader").css("display", "none");
-
-//                        window.open("<?php //echo base_url();?>//bcps/generated_care_label_printing_pre.php?cut_tracking_no="+data, '_blank');
-//                        window.open("<?php //echo base_url();?>//bcps/generated_bundle_tag_cc.php?cc=1&cut_tracking_no="+data, '_blank');
-//                        window.open("<?php //echo base_url();?>//bcps/generated_bundle_tag_cc.php?cc=2&cut_tracking_no="+data, '_blank');
-//                        var win = window.open("<?php //echo base_url();?>//bcps/generated_bundle_tag_bdy.php?cut_tracking_no="+data, '_blank');
 
                         window.open("<?php echo base_url();?>access/printCareLabels/"+sap_no+"/"+so_no+"/"+data, '_blank');
                         window.open("<?php echo base_url();?>access/printBundleTicketCC/"+sap_no+"/"+so_no+"/"+data+"/1", '_blank');
