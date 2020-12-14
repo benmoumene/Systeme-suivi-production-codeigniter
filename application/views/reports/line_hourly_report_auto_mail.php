@@ -137,7 +137,7 @@
             $line_rep = $this->method_call->getLineInfo($line_id);
             $dhu_summary = $this->method_call->getLineDHUSummary($line_id);
 
-            $dhu_sum = ($dhu_summary[0]['dhu_sum'] != '' ? $dhu_summary[0]['dhu_sum'] : 0);
+            $dhu_sum = ($dhu_summary[0]['dhu'] != '' ? $dhu_summary[0]['dhu'] : 0);
             $brand = $dhu_summary[0]['brand'];
 
             $work_hour_1 = ($dhu_summary[0]['work_hour_1'] != '' ? $dhu_summary[0]['work_hour_1'] : 0);
@@ -147,7 +147,8 @@
 
             $total_wh = $work_hour_1+$work_hour_2+$work_hour_3+$work_hour_4;
 
-            $average_dhu = round($dhu_sum/$hour, 2);
+//            $average_dhu = round($dhu_sum/$hour, 2);
+            $average_dhu = $dhu_sum;
 
             $line_target_hour = $line_info[0]['target_hour'];
             $line_target_per_hour = round($line_info[0]['target']/$line_target_hour);
