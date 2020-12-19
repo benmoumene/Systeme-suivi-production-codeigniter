@@ -2,7 +2,7 @@
     <table class="table table-bordered table-striped" id="" border="1">
         <thead>
         <tr>
-            <th class="hidden-phone center" colspan="28"><h3>Ship Date: <?php echo $ex_factory_date;?></h3></th>
+            <th class="hidden-phone center" colspan="29"><h3>Ship Date: <?php echo $ex_factory_date;?></h3></th>
         </tr>
         <tr>
             <th class="hidden-phone center">SO</th>
@@ -40,6 +40,7 @@
             <th class="hidden-phone center" title="Remarks">Remarks</th>
             <th class="hidden-phone center" title="AQL Plan Date">AQL Plan</th>
             <th class="hidden-phone center" title="Remarks">AQL</th>
+            <th class="hidden-phone center" title="Adjustment(%)">Adjustment(%)</th>
         </tr>
         </thead>
         <tbody>
@@ -189,6 +190,11 @@
                     }
                     ?>
                 </td>
+                <td class="center">
+                    <?php
+                    echo round(($v['count_manually_adjusted_qty']/$v['total_cut_input_qty']) * 100, 2);
+                    ?>
+                </td>
             </tr>
             <?php
         }
@@ -214,7 +220,7 @@
                 <td class="center"><h4><b><?php echo $total_carton_balance_qty;?></b></h4></td>
                 <td class="center"><h4><b><?php echo $total_wh_qty;?></b></h4></td>
                 <td class="center"><h4><b><?php echo $total_balance_qty;?></b></h4></td>
-                <td class="center" colspan="3"></td>
+                <td class="center" colspan="4"></td>
             </tr>
         </tfoot>
     </table>
