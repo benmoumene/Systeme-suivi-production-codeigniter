@@ -6433,7 +6433,7 @@ class Access extends CI_Controller {
             if ($manually_closed == 1){
                 echo 'closed';
             }else{
-                if(($id == 0) && ($sent_to_production == 1)){
+                if(($id == 0) && ($sent_to_production == 1) && ($package_sent_to_production == 1)){
                     $this->access_model->inputToLine($carelabel_tracking_no, $line_id, $finishing_floor_id, 2, 1, $date_time);
 
                     echo 'successfully inputed';
@@ -6456,6 +6456,9 @@ class Access extends CI_Controller {
                 if (($id != $line_id)){
                     if($sent_to_production == 0){
                         echo 'cutting process not finished';
+                    }
+                    if($package_sent_to_production == 0){
+                        echo 'input man scan incomplete';
                     }
                     if($id != 0){
                         $line_info = $this->access_model->getLineInfo($id);

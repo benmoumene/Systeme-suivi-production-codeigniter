@@ -247,6 +247,9 @@
                         if(data_1 == 'cutting process not finished'){
                             $("#e_message").text(cl_no+" Cutting Process Not Finished!");
                         }
+                        if(data_1 == 'input man scan incomplete'){
+                            $("#e_message").text(cl_no+" Input-Man Scan Incomplete!");
+                        }
 //                        if(data == 'previous process wip'){
 //                            $("#e_message").text(cl_no+" Previous Process Not Finished!");
 //                        }
