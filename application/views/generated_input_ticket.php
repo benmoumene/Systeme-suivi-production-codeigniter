@@ -31,7 +31,9 @@
             <p style="margin-bottom: -5px; font-size: 12px;">Color: <?php echo $po_cut_summary[0]['color'];?></p>
             <p style="margin-bottom: -5px; font-size: 12px;">Style No:<?php echo $po_cut_summary[0]['style_no'];?></p>
             <p style="margin-bottom: -5px; font-size: 12px;">Style: <?php echo $po_cut_summary[0]['style_name'];?></p>
-            <p style="margin-bottom: -0px; font-size: 12px;">Ready Qty: <?php echo $po_cut_summary[0]['total_cut_qty'];?></p>
+            <p style="margin-bottom: -0px; font-size: 12px;">Cut Qty: <?php echo ($po_cut_summary[0]['total_cut_qty'] != '' ? $po_cut_summary[0]['total_cut_qty'] : 0);?></p>
+            <p style="margin-bottom: -0px; font-size: 12px;">Prev. Input Qty: <?php echo ($po_cut_summary[0]['package_sent_to_production_qty'] != '' ? $po_cut_summary[0]['package_sent_to_production_qty'] : 0);?></p>
+            <p style="margin-bottom: -0px; font-size: 12px;">Ready Qty: <?php echo $po_cut_summary[0]['total_cut_ready_qty'];?></p>
             <p style="margin-bottom: -0px; font-size: 12px;">Order Qty: <?php echo $po_cut_summary[0]['total_order_qty'];?></p>
             <p style="margin-bottom: -0px; font-size: 12px;">ExFac: <?php echo $po_cut_summary[0]['ex_factory_date'];?></p>
 

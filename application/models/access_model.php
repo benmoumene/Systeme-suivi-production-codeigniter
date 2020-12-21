@@ -2475,19 +2475,32 @@ class Access_model extends CI_Model {
     }
 
     public function getPoCutSummaryInfo($po_no, $cut_no){
-        $sql = "SELECT t1.*, t2.total_order_qty FROM 
+        $sql = "SELECT t1.*, t2.total_order_qty, t3.package_sent_to_production_qty, t4.total_cut_qty 
+                FROM 
                 (SELECT po_no, so_no, brand, quality, color, style_no, cut_no, 
-                style_name, ex_factory_date, SUM(cut_qty) AS total_cut_qty 
-                FROM `tb_cut_summary` AS t1
-                WHERE t1.po_no='$po_no' AND t1.cut_no='$cut_no' 
-                AND t1.package_sent_to_production=0
-                AND t1.is_package_ready=1
+                style_name, ex_factory_date, SUM(cut_qty) AS total_cut_ready_qty 
+                FROM `tb_cut_summary`
+                WHERE po_no='$po_no' AND cut_no='$cut_no' 
+                AND package_sent_to_production=0
+                AND is_package_ready=1
                 GROUP BY po_no) AS t1
                 LEFT JOIN 
                 (SELECT po_no, SUM(quantity) AS total_order_qty 
                 FROM tb_po_detail 
                 GROUP BY po_no) AS t2
-                ON t1.po_no=t2.po_no";
+                ON t1.po_no=t2.po_no
+                LEFT JOIN 
+                (SELECT po_no, cut_no, SUM(cut_qty) AS package_sent_to_production_qty
+                FROM tb_cut_summary 
+                WHERE po_no='$po_no' AND cut_no='$cut_no' AND package_sent_to_production=1
+                GROUP BY po_no, cut_no) AS t3
+                ON t1.po_no=t3.po_no AND t1.cut_no=t3.cut_no
+                LEFT JOIN 
+                (SELECT po_no, cut_no, SUM(cut_qty) AS total_cut_qty
+                FROM tb_cut_summary 
+                WHERE po_no='$po_no' AND cut_no='$cut_no'
+                GROUP BY po_no, cut_no) AS t4
+                ON t1.po_no=t4.po_no AND t1.cut_no=t4.cut_no";
 
         $query = $this->db->query($sql)->result_array();
         return $query;

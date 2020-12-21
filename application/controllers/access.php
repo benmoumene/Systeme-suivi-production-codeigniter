@@ -8357,7 +8357,13 @@ class Access extends CI_Controller {
         if(sizeof($res) > 0){
             $this->printInputTicket($po_no, $cut_no);
         }else{
-            echo '<h1>Package Not Ready!</h1>';
+            $where .= " AND package_sent_to_production=1";
+
+            $res_1 = $this->access_model->selectTableDataRowQuery("SUM(cut_qty) AS package_sent_to_production_qty", "tb_cut_summary", $where);
+            $package_sent_to_production_qty = ($res_1[0]['package_sent_to_production_qty'] != '' ? $res_1[0]['package_sent_to_production_qty'] : 0);
+
+            echo '<h1>Package Quantity Not Ready!</h1>';
+            echo '<h2>Total Package Sent to Production: '.$package_sent_to_production_qty.'</h2>';
         }
     }
 
