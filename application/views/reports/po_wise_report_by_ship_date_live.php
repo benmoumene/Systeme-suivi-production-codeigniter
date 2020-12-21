@@ -2,7 +2,7 @@
     <table class="table table-bordered table-striped" id="" border="1">
         <thead>
         <tr>
-            <th class="hidden-phone center" colspan="29"><h3>Ship Date: <?php echo $ex_factory_date;?></h3></th>
+            <th class="hidden-phone center" colspan="30"><h3>Ship Date: <?php echo $ex_factory_date;?></h3></th>
         </tr>
         <tr>
             <th class="hidden-phone center">SO</th>
@@ -37,6 +37,7 @@
 
             <!--        <th class="hidden-phone center">Ex-Fac Date</th>-->
 <!--            <th class="hidden-phone center">Closing Date</th>-->
+            <th class="hidden-phone center" title="Remarks">Status</th>
             <th class="hidden-phone center" title="Remarks">Remarks</th>
             <th class="hidden-phone center" title="AQL Plan Date">AQL Plan</th>
             <th class="hidden-phone center" title="Remarks">AQL</th>
@@ -156,6 +157,11 @@
                 </td>
                 <td class="center">
                     <?php
+                        echo $v['status'];
+                    ?>
+                </td>
+                <td class="center">
+                    <?php
 //                    if($v['status'] == 'CLOSE') {
 //                        echo $v['status'];
 //                    }else{
@@ -220,7 +226,7 @@
                 <td class="center"><h4><b><?php echo $total_carton_balance_qty;?></b></h4></td>
                 <td class="center"><h4><b><?php echo $total_wh_qty;?></b></h4></td>
                 <td class="center"><h4><b><?php echo $total_balance_qty;?></b></h4></td>
-                <td class="center" colspan="4"></td>
+                <td class="center" colspan="5"></td>
             </tr>
         </tfoot>
     </table>
