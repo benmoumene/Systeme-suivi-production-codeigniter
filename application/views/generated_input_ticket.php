@@ -27,10 +27,8 @@
             <p style="margin-bottom: -5px; font-size: 12px;"><?php echo $po_cut_summary[0]['po_no'];?></b></p>
             <p style="margin-bottom: -0px; font-size: 12px;">Cut No: <?php echo $po_cut_summary[0]['cut_no'];?></p>
             <p style="margin-bottom: -5px; font-size: 12px;">Brand: <?php echo $po_cut_summary[0]['brand'];?></b></p>
-            <p style="margin-bottom: -5px; font-size: 12px;">Quality: <?php echo $po_cut_summary[0]['quality'];?></p>
-            <p style="margin-bottom: -5px; font-size: 12px;">Color: <?php echo $po_cut_summary[0]['color'];?></p>
-            <p style="margin-bottom: -5px; font-size: 12px;">Style No:<?php echo $po_cut_summary[0]['style_no'];?></p>
-            <p style="margin-bottom: -5px; font-size: 12px;">Style: <?php echo $po_cut_summary[0]['style_name'];?></p>
+            <p style="margin-bottom: -5px; font-size: 12px;">Quality: <?php echo $po_cut_summary[0]['quality'].'~'.$po_cut_summary[0]['color'];?></p>
+            <p style="margin-bottom: -5px; font-size: 12px;">Style No:<?php echo $po_cut_summary[0]['style_no'].'~'.$po_cut_summary[0]['style_name'];?></p>
             <p style="margin-bottom: -0px; font-size: 12px;">Cut Qty: <?php echo ($po_cut_summary[0]['total_cut_qty'] != '' ? $po_cut_summary[0]['total_cut_qty'] : 0);?></p>
             <p style="margin-bottom: -0px; font-size: 12px;">Prev. Input Qty: <?php echo ($po_cut_summary[0]['package_sent_to_production_qty'] != '' ? $po_cut_summary[0]['package_sent_to_production_qty'] : 0);?></p>
             <p style="margin-bottom: -0px; font-size: 12px;">Ready Qty: <?php echo $po_cut_summary[0]['total_cut_ready_qty'];?></p>

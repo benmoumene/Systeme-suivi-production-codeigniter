@@ -1121,27 +1121,29 @@ class Dashboard extends CI_Controller {
         fclose ($excel_handler);
 
         if(file_exists('uploads/mail_attachment/last_day_prod.xls') == 1) {
-            $config = Array(
-                'protocol' => 'smtp',
-                'smtp_host' => 'webmail.viyellatexgroup.com',
-                'smtp_port' => 25,
-                'smtp_user' => '', // change it to yours
-                'smtp_pass' => '', // change it to yours
-                'mailtype' => 'html',
-                'charset' => 'utf-8',
-                'wordwrap' => TRUE
-            );
 
-//            $config = Array(
-//                'protocol' => 'smtp',
-//                'smtp_host' => 'ssl://smtp.gmail.com',
-//                'smtp_port' => 465,
-//                'smtp_user' => 'ecofab.pts@gmail.com', // change it to yours
-//                'smtp_pass' => 'EcofabPTS@123', // change it to yours
-//                'mailtype' => 'html',
-//                'charset' => 'utf-8',
-//                'wordwrap' => TRUE
-//            );
+            $res = $this->access_model->selectTableDataRowQuery("*", "tb_email_config", " AND email_type=0");
+
+            $protocol = $res[0]['protocol'];
+            $smtp_host = $res[0]['smtp_host'];
+            $smtp_port = $res[0]['smtp_port'];
+            $smtp_user = $res[0]['smtp_user'];
+            $smtp_pass = $res[0]['smtp_pass'];
+            $mailtype = $res[0]['mailtype'];
+            $charset = $res[0]['charset'];
+            $wordwrap = $res[0]['wordwrap'];
+            $from_mail_address = $res[0]['from_mail_address'];
+
+            $config = Array(
+                'protocol' => $protocol,
+                'smtp_host' => $smtp_host,
+                'smtp_port' => $smtp_port,
+                'smtp_user' => $smtp_user, // change it to yours
+                'smtp_pass' => $smtp_pass, // change it to yours
+                'mailtype' => $mailtype,
+                'charset' => $charset,
+                'wordwrap' => $wordwrap
+            );
 
             $content_data = '';
             $content_data .= 'Dear Concern,' . '<br />';
@@ -1152,7 +1154,7 @@ class Dashboard extends CI_Controller {
 
             $this->load->library('email', $config);
             $this->email->set_newline("\r\n");
-            $this->email->from('pts@interfabshirt.com'); // change it to yours
+            $this->email->from($from_mail_address); // change it to yours
 //            $this->email->from('ecofab.pts@gmail.com'); // change it to yours
             $this->email->to('shehab.ahameed@interfabshirt.com, monirul.islam@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, ecofab.ie@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, tanvir.sarkar@interfabshirt.com'); // change it to yours
             $this->email->cc('nipun.sarker@interfabshirt.com, hasib.hossain@interfabshirt.com, sahil.islam@interfabshirt.com, fahim.ashab@interfabshirt.com');// change it to yours
@@ -1215,153 +1217,28 @@ class Dashboard extends CI_Controller {
 
     public function mailAttachmentOlympLocalMail()
     {
-//        $data['title']='Production Summary Report HB';
-
-        // Start XML file, create parent node
-//        $dom = new DOMDocument("1.0");
-//        $node = $dom->createElement("markers");
-//        $parnode = $dom->appendChild($node);
-//
-//        $where = '';
-//        $where .= " AND t1.brand in ('BBD', 'BBS', 'BGM', 'BMA', 'BMC', 'BMS', 'BOM', 'HUGO', 'HUM')";
-//
-//        $prod_summary = $this->dashboard_model->getProductionSummaryReport($where);
-//
-////        $content_data = $this->load->view('reports/report_file_export', $data);
-//
-//        $new_row_tbl = '';
-//        $new_row = '';
-//        $new_row_head = '';
-//        $purchase_order_item = '';
-//        $exfac_style = '';
-//        $wash_gmt_style = '';
-//        $cur_date = date('Y-m-d');
-//        $cut_balance_qty = 0;
-//
-//        $new_row_head .= '<tr>
-//                        <th class="">PO</th>
-//                        <th class="">ITEM</th>
-//                        <th class="">Planned Line</th>
-//                        <th class="">Lines</th>
-//                        <th class="">Brand</span></th>
-//                        <th class="">STYLE</th>
-//                        <th class="">QLTY-CLR</th>
-//                        <th class="">ORDER</th>
-//                        <th class="">ExFac</th>
-//                        <th class="">CUT</th>
-//                        <th class="">CUT BLNC</th>
-//                        <th class="">CUT PASS</th>
-//                        <th class="">BUNDLE</th>
-//                        <th class="">IDENTITY</th>
-//                        <th class="">INPUT</th>
-//                        <th class="">Collar</th>
-//                        <th class="">Cuff</th>
-//                        <th class="">MID PASS</th>
-//                        <th class="">END PASS</th>
-//                        <th class="">WASH</th>
-//                        <th class="">PACK</th>
-//                        <th class="">CARTON</th>
-//                        <th class="">WAREHOUSE BUYER</th>
-//                        <th class="">WAREHOUSE FACTORY</th>
-//                        <th class="">WAREHOUSE SAMPLE</th>
-//                        <th class="">WAREHOUSE TRASH</th>
-//                        <th class="">OTHER PURPOSE</th>
-//                        <th class="">BALANCE</th>
-//                    </tr>';
-//
-//        $today = date('Y-m-d');
-//        $till_date = date("Y-m-d", strtotime("+ 30 days"));
-//
-//        foreach ($prod_summary as $k => $v){
-//            $total_finishing_wh_qa = $v['count_carton_pass'] + $v['count_wh_prod_sample'] + $v['count_wh_factory'] + $v['count_wh_buyer'] + $v['count_wh_trash'] + $v['count_other_purpose'];
-//            $total_wh_qa = $v['count_wh_prod_sample'] + $v['count_wh_factory'] + $v['count_wh_buyer'] + $v['count_wh_trash'];
-//
-////            if((($v['total_cut_qty'] - $total_finishing_wh_qa) != 0) && ($v['responsible_line'] != '')){
-//            if(($today <= $v['ex_factory_date']) || ($till_date <= $v['ex_factory_date']) || (($v['total_cut_qty'] - $total_finishing_wh_qa) != 0)){
-//                $ship_date = $v['ex_factory_date'];
-//
-//                if($v['item'] == ''){
-//                    $item = 'NA';
-//                }else{
-//                    $item = $v['item'];
-//                }
-//
-//
-//                if($v['item'] != ''){
-//                    $purchase_order_item = $v['purchase_order'].'_'.$v['item'];
-//                }else{
-//                    $purchase_order_item = $v['purchase_order'];
-//                }
-//
-//
-//
-//                if($cur_date > $ship_date){ $exfac_style .= 'style="background-color: #ff481f; color: #fff;"'; }
-//                if($v['wash_gmt'] == 1){ $wash_gmt_style .= 'style="background-color: #faff88;"'; }
-//                $cut_balance_qty = $v['total_cut_qty']-$v['total_cut_input_qty'];
-//                $total_po_item_balance = $v['total_cut_qty'] - $total_finishing_wh_qa;
-//
-//                $new_row .= '<tr>
-//								<td>'.$v["purchase_order"].'</td>
-//                                <td>'.$v["item"].'</td>
-//                                <td>'.$v["planned_lines"].'</td>
-//                                <td>'.$v["responsible_line"].'</td>
-//                                <td>'.$v["brand"].'</td>
-//                                <td>'.$v["style_no"].'-'.$v["style_name"].'</td>
-//                                <td>'.$v["quality"].'_'.$v["color"].'</td>
-//                                <td>'.$v["total_order_qty"].'</td>
-//                                <td>'.$v["ex_factory_date"].'</td>
-//                                <td>'.$v["total_cut_qty"].'</td>
-//                                <td>'.$cut_balance_qty.'</td>
-//                                <td>'.$v["total_cut_input_qty"].'</td>
-//                                <td><span style="color: #ffffff;">'."'".'</span>'.$v["bundle_start"].'-'.$v["bundle_end"].'</td>
-//                                <td>'.$v["min_care_label"].'-'.$v["max_care_label"].'</td>
-//
-//                                <td>'.$v["count_input_qty_line"].'</td>
-//
-//                                <td>'.$v["collar_bndl_qty"].'</td>
-//                                <td>'.$v["cuff_bndl_qty"].'</td>
-//                                <td>'.$v["count_mid_line_qc_pass"].'</td>
-//                                <td>'.$v["count_end_line_qc_pass"].'</td>
-//                                <td>'.$v["count_washing_pass"].'</td>
-//                                <td>'.$v["count_packing_pass"].'</td>
-//                                <td>'.$v["count_carton_pass"].'</td>
-//                                <td>'.$v['count_wh_buyer'].'</td>
-//                                <td>'.$v['count_wh_factory'].'</td>
-//                                <td>'.$v['count_wh_prod_sample'].'</td>
-//                                <td>'.$v['count_wh_trash'].'</td>
-//                                <td>'.$v['count_other_purpose'].'</td>
-//                                <td>'.$total_po_item_balance.'</td></tr>';
-//            }
-//        }
-//
-////        echo '<pre>';
-////        print_r($new_row);
-////        echo '</pre>';
-////        die();
-//
-////        if($new_row != ''){
-//
-////            echo $content_data;
-//
-////        echo file_exists('uploads/mail_attachment/hb_running_po.xlsx');
-////        die();
-//
-//        $new_row_tbl .= '<table border="1"><thead>'.$new_row_head.'</thead><tbody>'.$new_row.'</tbody></table>';
-//
-//        $excel_handler = fopen ('uploads/mail_attachment/hb_running_po.xls','w') or die("Unable to open file!");
-//        fwrite ($excel_handler, $new_row_tbl);
-//        fclose ($excel_handler);
-
         if(file_exists('uploads/mail_attachment/olymp_running_po.xlsx') == 1) {
+            $res = $this->access_model->selectTableDataRowQuery("*", "tb_email_config", " AND email_type=0");
+
+            $protocol = $res[0]['protocol'];
+            $smtp_host = $res[0]['smtp_host'];
+            $smtp_port = $res[0]['smtp_port'];
+            $smtp_user = $res[0]['smtp_user'];
+            $smtp_pass = $res[0]['smtp_pass'];
+            $mailtype = $res[0]['mailtype'];
+            $charset = $res[0]['charset'];
+            $wordwrap = $res[0]['wordwrap'];
+            $from_mail_address = $res[0]['from_mail_address'];
+
             $config = Array(
-                'protocol' => 'smtp',
-                'smtp_host' => 'webmail.viyellatexgroup.com',
-                'smtp_port' => 25,
-                'smtp_user' => '', // change it to yours
-                'smtp_pass' => '', // change it to yours
-                'mailtype' => 'html',
-                'charset' => 'utf-8',
-                'wordwrap' => TRUE
+                'protocol' => $protocol,
+                'smtp_host' => $smtp_host,
+                'smtp_port' => $smtp_port,
+                'smtp_user' => $smtp_user, // change it to yours
+                'smtp_pass' => $smtp_pass, // change it to yours
+                'mailtype' => $mailtype,
+                'charset' => $charset,
+                'wordwrap' => $wordwrap
             );
 
             $content_data = '';
@@ -1373,7 +1250,7 @@ class Dashboard extends CI_Controller {
 
             $this->load->library('email', $config);
             $this->email->set_newline("\r\n");
-            $this->email->from('pts@interfabshirt.com'); // change it to yours
+            $this->email->from($from_mail_address); // change it to yours
             $this->email->to('Silke.Wippert@olymp.com'); // change it to yours
             $this->email->cc('ahasan-interfab@viyellatexgroup.com, abdullah.khan@viyellatexgroup.com, moazzem.huq@interfabshirt.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, nipunsarker56@gmail.com, shafayet.chowdhury@interfabshirt.com, shehab.ahameed@interfabshirt.com, hasib.hossain@interfabshirt.com, sahil.islam@interfabshirt.com, fahim.ashab@interfabshirt.com');// change it to yours
 //            $this->email->to('nipun.sarker@interfabshirt.com'); // change it to yours
@@ -1397,165 +1274,30 @@ class Dashboard extends CI_Controller {
 
     public function mailAttachmentOlymp()
     {
-//        $data['title']='Production Summary Report HB';
-//
-//        // Start XML file, create parent node
-//        $dom = new DOMDocument("1.0");
-//        $node = $dom->createElement("markers");
-//        $parnode = $dom->appendChild($node);
-//
-//        $where = '';
-//        $where .= " AND t1.brand in ('BBD', 'BBS', 'BGM', 'BMA', 'BMC', 'BMS', 'BOM', 'HUGO', 'HUM')";
-//
-//        $prod_summary = $this->dashboard_model->getProductionSummaryReport($where);
-//
-////        $content_data = $this->load->view('reports/report_file_export', $data);
-//
-//        $new_row_tbl = '';
-//        $new_row = '';
-//        $new_row_head = '';
-//        $purchase_order_item = '';
-//        $exfac_style = '';
-//        $wash_gmt_style = '';
-//        $cur_date = date('Y-m-d');
-//        $cut_balance_qty = 0;
-//
-//        $new_row_head .= '<tr>
-//                        <th class="">PO</th>
-//                        <th class="">ITEM</th>
-//                        <th class="">Planned Line</th>
-//                        <th class="">Lines</th>
-//                        <th class="">Brand</span></th>
-//                        <th class="">STYLE</th>
-//                        <th class="">QLTY-CLR</th>
-//                        <th class="">ORDER</th>
-//                        <th class="">ExFac</th>
-//                        <th class="">CUT</th>
-//                        <th class="">CUT BLNC</th>
-//                        <th class="">CUT PASS</th>
-//                        <th class="">BUNDLE</th>
-//                        <th class="">IDENTITY</th>
-//                        <th class="">INPUT</th>
-//                        <th class="">Collar</th>
-//                        <th class="">Cuff</th>
-//                        <th class="">MID PASS</th>
-//                        <th class="">END PASS</th>
-//                        <th class="">WASH</th>
-//                        <th class="">PACK</th>
-//                        <th class="">CARTON</th>
-//                        <th class="">WAREHOUSE BUYER</th>
-//                        <th class="">WAREHOUSE FACTORY</th>
-//                        <th class="">WAREHOUSE SAMPLE</th>
-//                        <th class="">WAREHOUSE TRASH</th>
-//                        <th class="">OTHER PURPOSE</th>
-//                        <th class="">BALANCE</th>
-//                    </tr>';
-//
-//        $today = date('Y-m-d');
-//        $till_date = date("Y-m-d", strtotime("+ 30 days"));
-//
-//        foreach ($prod_summary as $k => $v){
-//            $total_finishing_wh_qa = $v['count_carton_pass'] + $v['count_wh_prod_sample'] + $v['count_wh_factory'] + $v['count_wh_buyer'] + $v['count_wh_trash'];
-//            $total_wh_qa = $v['count_wh_prod_sample'] + $v['count_wh_factory'] + $v['count_wh_buyer'] + $v['count_wh_trash'];
-//
-////            if((($v['total_cut_qty'] - $total_finishing_wh_qa) != 0) && ($v['responsible_line'] != '')){
-//            if(($today <= $v['ex_factory_date']) || ($till_date <= $v['ex_factory_date']) || (($v['total_cut_qty'] - $total_finishing_wh_qa) != 0)){
-//                $ship_date = $v['ex_factory_date'];
-//
-//                if($v['item'] == ''){
-//                    $item = 'NA';
-//                }else{
-//                    $item = $v['item'];
-//                }
-//
-//
-//                if($v['item'] != ''){
-//                    $purchase_order_item = $v['purchase_order'].'_'.$v['item'];
-//                }else{
-//                    $purchase_order_item = $v['purchase_order'];
-//                }
-//
-//
-//
-//                if($cur_date > $ship_date){ $exfac_style .= 'style="background-color: #ff481f; color: #fff;"'; }
-//                if($v['wash_gmt'] == 1){ $wash_gmt_style .= 'style="background-color: #faff88;"'; }
-//                $cut_balance_qty = $v['total_cut_qty']-$v['total_cut_input_qty'];
-//                $total_po_item_balance = $v['total_cut_qty'] - $total_finishing_wh_qa;
-//
-//                $new_row .= '<tr>
-//								<td>'.$v["purchase_order"].'</td>
-//                                <td>'.$v["item"].'</td>
-//                                <td>'.$v["planned_lines"].'</td>
-//                                <td>'.$v["responsible_line"].'</td>
-//                                <td>'.$v["brand"].'</td>
-//                                <td>'.$v["style_no"].'-'.$v["style_name"].'</td>
-//                                <td>'.$v["quality"].'_'.$v["color"].'</td>
-//                                <td>'.$v["total_order_qty"].'</td>
-//                                <td>'.$v["ex_factory_date"].'</td>
-//                                <td>'.$v["total_cut_qty"].'</td>
-//                                <td>'.$cut_balance_qty.'</td>
-//                                <td>'.$v["total_cut_input_qty"].'</td>
-//                                <td><span style="color: #ffffff;">'."'".'</span>'.$v["bundle_start"].'-'.$v["bundle_end"].'</td>
-//                                <td>'.$v["min_care_label"].'-'.$v["max_care_label"].'</td>
-//
-//                                <td>'.$v["count_input_qty_line"].'</td>
-//
-//                                <td>'.$v["collar_bndl_qty"].'</td>
-//                                <td>'.$v["cuff_bndl_qty"].'</td>
-//                                <td>'.$v["count_mid_line_qc_pass"].'</td>
-//                                <td>'.$v["count_end_line_qc_pass"].'</td>
-//                                <td>'.$v["count_washing_pass"].'</td>
-//                                <td>'.$v["count_packing_pass"].'</td>
-//                                <td>'.$v["count_carton_pass"].'</td>
-//                                <td>'.$v['count_wh_buyer'].'</td>
-//                                <td>'.$v['count_wh_factory'].'</td>
-//                                <td>'.$v['count_wh_prod_sample'].'</td>
-//                                <td>'.$v['count_wh_trash'].'</td>
-//                                <td>'.$v['count_other_purpose'].'</td>
-//                                <td>'.$total_po_item_balance.'</td></tr>';
-//            }
-//        }
-//
-////        echo '<pre>';
-////        print_r($new_row);
-////        echo '</pre>';
-////        die();
-//
-////        if($new_row != ''){
-//
-////            echo $content_data;
-//
-////        echo file_exists('uploads/mail_attachment/hb_running_po.xlsx');
-////        die();
-//
-//        $new_row_tbl .= '<table border="1"><thead>'.$new_row_head.'</thead><tbody>'.$new_row.'</tbody></table>';
-//
-//        $excel_handler = fopen ('uploads/mail_attachment/hb_running_po.xls','w') or die("Unable to open file!");
-//        fwrite ($excel_handler, $new_row_tbl);
-//        fclose ($excel_handler);
-
         if(file_exists('uploads/mail_attachment/olymp_running_po.xlsx') == 1){
-            $config = Array(
-                'protocol' => 'smtp',
-                'smtp_host' => 'localhost',
-                'smtp_port' => 25,
-                'smtp_user' => '', // change it to yours
-                'smtp_pass' => '', // change it to yours
-                'mailtype' => 'html',
-                'charset' => 'utf-8',
-                'wordwrap' => TRUE
-            );
 
-//            $config = Array(
-//                'protocol' => 'smtp',
-//                'smtp_host' => 'ssl://smtp.gmail.com',
-//                'smtp_port' => 465,
-//                'smtp_user' => 'ecofab.pts@gmail.com', // change it to yours
-//                'smtp_pass' => 'EcofabPTS@123', // change it to yours
-//                'mailtype' => 'html',
-//                'charset' => 'utf-8',
-//                'wordwrap' => TRUE
-//            );
+            $res = $this->access_model->selectTableDataRowQuery("*", "tb_email_config", " AND email_type=1");
+
+            $protocol = $res[0]['protocol'];
+            $smtp_host = $res[0]['smtp_host'];
+            $smtp_port = $res[0]['smtp_port'];
+            $smtp_user = $res[0]['smtp_user'];
+            $smtp_pass = $res[0]['smtp_pass'];
+            $mailtype = $res[0]['mailtype'];
+            $charset = $res[0]['charset'];
+            $wordwrap = $res[0]['wordwrap'];
+            $from_mail_address = $res[0]['from_mail_address'];
+
+            $config = Array(
+                'protocol' => $protocol,
+                'smtp_host' => $smtp_host,
+                'smtp_port' => $smtp_port,
+                'smtp_user' => $smtp_user, // change it to yours
+                'smtp_pass' => $smtp_pass, // change it to yours
+                'mailtype' => $mailtype,
+                'charset' => $charset,
+                'wordwrap' => $wordwrap
+            );
 
             $content_data = '';
             $content_data .= 'Dear Sir/Madam,'.'<br />';
@@ -1566,12 +1308,12 @@ class Dashboard extends CI_Controller {
 
             $this->load->library('email', $config);
             $this->email->set_newline("\r\n");
-            $this->email->from('pts@interfabshirt.com'); // change it to yours
-//            $this->email->from('ecofab.pts@gmail.com'); // change it to yours
+//            $this->email->from('pts@interfabshirt.com'); // change it to yours
+            $this->email->from($from_mail_address); // change it to yours
 //            $this->email->to('nipunsarker56@gmail.com, nipun.sarker@interfabshirt.com');// change it to yours
             $this->email->to('Silke.Wippert@olymp.com');// change it to yours
-            $this->email->cc('ahasan-interfab@viyellatexgroup.com, abdullah.khan@viyellatexgroup.com, moazzem.huq@interfabshirt.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, nipunsarker56@gmail.com, shafayet.chowdhury@interfabshirt.com, shehab.ahameed@interfabshirt.com, hasib.hossain@interfabshirt.com, sahil.islam@interfabshirt.com, fahim.ashab@interfabshirt.com');// change it to yours
-            $this->email->cc('nipun.sarker@interfabshirt.com');// change it to yours
+            $this->email->cc('ahasan-interfab@viyellatexgroup.com, abdullah.khan@viyellatexgroup.com, moazzem.huq@interfabshirt.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, hasnain.mehedi@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, nipunsarker56@gmail.com, shafayet.chowdhury@interfabshirt.com, shehab.ahameed@interfabshirt.com, hasib.hossain@interfabshirt.com, sahil.islam@interfabshirt.com');// change it to yours
+//            $this->email->cc('nipun.sarker@interfabshirt.com');// change it to yours
             $this->email->subject('Olymp PTS Report (Auto-Mail)');
             $this->email->message("$content_data");
             $this->email->attach("uploads/mail_attachment/olymp_running_po.xlsx");
@@ -1784,153 +1526,29 @@ class Dashboard extends CI_Controller {
 
     public function mailAttachmentHBLocalMail()
     {
-//        $data['title']='Production Summary Report HB';
-
-        // Start XML file, create parent node
-//        $dom = new DOMDocument("1.0");
-//        $node = $dom->createElement("markers");
-//        $parnode = $dom->appendChild($node);
-//
-//        $where = '';
-//        $where .= " AND t1.brand in ('BBD', 'BBS', 'BGM', 'BMA', 'BMC', 'BMS', 'BOM', 'HUGO', 'HUM')";
-//
-//        $prod_summary = $this->dashboard_model->getProductionSummaryReport($where);
-//
-////        $content_data = $this->load->view('reports/report_file_export', $data);
-//
-//        $new_row_tbl = '';
-//        $new_row = '';
-//        $new_row_head = '';
-//        $purchase_order_item = '';
-//        $exfac_style = '';
-//        $wash_gmt_style = '';
-//        $cur_date = date('Y-m-d');
-//        $cut_balance_qty = 0;
-//
-//        $new_row_head .= '<tr>
-//                        <th class="">PO</th>
-//                        <th class="">ITEM</th>
-//                        <th class="">Planned Line</th>
-//                        <th class="">Lines</th>
-//                        <th class="">Brand</span></th>
-//                        <th class="">STYLE</th>
-//                        <th class="">QLTY-CLR</th>
-//                        <th class="">ORDER</th>
-//                        <th class="">ExFac</th>
-//                        <th class="">CUT</th>
-//                        <th class="">CUT BLNC</th>
-//                        <th class="">CUT PASS</th>
-//                        <th class="">BUNDLE</th>
-//                        <th class="">IDENTITY</th>
-//                        <th class="">INPUT</th>
-//                        <th class="">Collar</th>
-//                        <th class="">Cuff</th>
-//                        <th class="">MID PASS</th>
-//                        <th class="">END PASS</th>
-//                        <th class="">WASH</th>
-//                        <th class="">PACK</th>
-//                        <th class="">CARTON</th>
-//                        <th class="">WAREHOUSE BUYER</th>
-//                        <th class="">WAREHOUSE FACTORY</th>
-//                        <th class="">WAREHOUSE SAMPLE</th>
-//                        <th class="">WAREHOUSE TRASH</th>
-//                        <th class="">OTHER PURPOSE</th>
-//                        <th class="">BALANCE</th>
-//                    </tr>';
-//
-//        $today = date('Y-m-d');
-//        $till_date = date("Y-m-d", strtotime("+ 30 days"));
-//
-//        foreach ($prod_summary as $k => $v){
-//            $total_finishing_wh_qa = $v['count_carton_pass'] + $v['count_wh_prod_sample'] + $v['count_wh_factory'] + $v['count_wh_buyer'] + $v['count_wh_trash'] + $v['count_other_purpose'];
-//            $total_wh_qa = $v['count_wh_prod_sample'] + $v['count_wh_factory'] + $v['count_wh_buyer'] + $v['count_wh_trash'];
-//
-////            if((($v['total_cut_qty'] - $total_finishing_wh_qa) != 0) && ($v['responsible_line'] != '')){
-//            if(($today <= $v['ex_factory_date']) || ($till_date <= $v['ex_factory_date']) || (($v['total_cut_qty'] - $total_finishing_wh_qa) != 0)){
-//                $ship_date = $v['ex_factory_date'];
-//
-//                if($v['item'] == ''){
-//                    $item = 'NA';
-//                }else{
-//                    $item = $v['item'];
-//                }
-//
-//
-//                if($v['item'] != ''){
-//                    $purchase_order_item = $v['purchase_order'].'_'.$v['item'];
-//                }else{
-//                    $purchase_order_item = $v['purchase_order'];
-//                }
-//
-//
-//
-//                if($cur_date > $ship_date){ $exfac_style .= 'style="background-color: #ff481f; color: #fff;"'; }
-//                if($v['wash_gmt'] == 1){ $wash_gmt_style .= 'style="background-color: #faff88;"'; }
-//                $cut_balance_qty = $v['total_cut_qty']-$v['total_cut_input_qty'];
-//                $total_po_item_balance = $v['total_cut_qty'] - $total_finishing_wh_qa;
-//
-//                $new_row .= '<tr>
-//								<td>'.$v["purchase_order"].'</td>
-//                                <td>'.$v["item"].'</td>
-//                                <td>'.$v["planned_lines"].'</td>
-//                                <td>'.$v["responsible_line"].'</td>
-//                                <td>'.$v["brand"].'</td>
-//                                <td>'.$v["style_no"].'-'.$v["style_name"].'</td>
-//                                <td>'.$v["quality"].'_'.$v["color"].'</td>
-//                                <td>'.$v["total_order_qty"].'</td>
-//                                <td>'.$v["ex_factory_date"].'</td>
-//                                <td>'.$v["total_cut_qty"].'</td>
-//                                <td>'.$cut_balance_qty.'</td>
-//                                <td>'.$v["total_cut_input_qty"].'</td>
-//                                <td><span style="color: #ffffff;">'."'".'</span>'.$v["bundle_start"].'-'.$v["bundle_end"].'</td>
-//                                <td>'.$v["min_care_label"].'-'.$v["max_care_label"].'</td>
-//
-//                                <td>'.$v["count_input_qty_line"].'</td>
-//
-//                                <td>'.$v["collar_bndl_qty"].'</td>
-//                                <td>'.$v["cuff_bndl_qty"].'</td>
-//                                <td>'.$v["count_mid_line_qc_pass"].'</td>
-//                                <td>'.$v["count_end_line_qc_pass"].'</td>
-//                                <td>'.$v["count_washing_pass"].'</td>
-//                                <td>'.$v["count_packing_pass"].'</td>
-//                                <td>'.$v["count_carton_pass"].'</td>
-//                                <td>'.$v['count_wh_buyer'].'</td>
-//                                <td>'.$v['count_wh_factory'].'</td>
-//                                <td>'.$v['count_wh_prod_sample'].'</td>
-//                                <td>'.$v['count_wh_trash'].'</td>
-//                                <td>'.$v['count_other_purpose'].'</td>
-//                                <td>'.$total_po_item_balance.'</td></tr>';
-//            }
-//        }
-//
-////        echo '<pre>';
-////        print_r($new_row);
-////        echo '</pre>';
-////        die();
-//
-////        if($new_row != ''){
-//
-////            echo $content_data;
-//
-////        echo file_exists('uploads/mail_attachment/hb_running_po.xlsx');
-////        die();
-//
-//        $new_row_tbl .= '<table border="1"><thead>'.$new_row_head.'</thead><tbody>'.$new_row.'</tbody></table>';
-//
-//        $excel_handler = fopen ('uploads/mail_attachment/hb_running_po.xls','w') or die("Unable to open file!");
-//        fwrite ($excel_handler, $new_row_tbl);
-//        fclose ($excel_handler);
-
         if(file_exists('uploads/mail_attachment/hb_running_po.xlsx') == 1) {
+
+            $res = $this->access_model->selectTableDataRowQuery("*", "tb_email_config", " AND email_type=0");
+
+            $protocol = $res[0]['protocol'];
+            $smtp_host = $res[0]['smtp_host'];
+            $smtp_port = $res[0]['smtp_port'];
+            $smtp_user = $res[0]['smtp_user'];
+            $smtp_pass = $res[0]['smtp_pass'];
+            $mailtype = $res[0]['mailtype'];
+            $charset = $res[0]['charset'];
+            $wordwrap = $res[0]['wordwrap'];
+            $from_mail_address = $res[0]['from_mail_address'];
+
             $config = Array(
-                'protocol' => 'smtp',
-                'smtp_host' => 'webmail.viyellatexgroup.com',
-                'smtp_port' => 25,
-                'smtp_user' => '', // change it to yours
-                'smtp_pass' => '', // change it to yours
-                'mailtype' => 'html',
-                'charset' => 'utf-8',
-                'wordwrap' => TRUE
+                'protocol' => $protocol,
+                'smtp_host' => $smtp_host,
+                'smtp_port' => $smtp_port,
+                'smtp_user' => $smtp_user, // change it to yours
+                'smtp_pass' => $smtp_pass, // change it to yours
+                'mailtype' => $mailtype,
+                'charset' => $charset,
+                'wordwrap' => $wordwrap
             );
 
             $content_data = '';
@@ -1942,10 +1560,10 @@ class Dashboard extends CI_Controller {
 
             $this->load->library('email', $config);
             $this->email->set_newline("\r\n");
-            $this->email->from('pts@interfabshirt.com'); // change it to yours
+            $this->email->from($from_mail_address); // change it to yours
 //            $this->email->to('nipun.sarker@interfabshirt.com');// change it to yours
 //            $this->email->to('Heinrich_Vinke@hugoboss.com');// change it to yours
-            $this->email->to('ahasan-interfab@viyellatexgroup.com, abdullah.khan@viyellatexgroup.com, moazzem.huq@interfabshirt.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shefat.hossain@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, nipunsarker56@gmail.com, shafayet.chowdhury@interfabshirt.com, maksudul.hasan@interfabshirt.com, shehab.ahameed@interfabshirt.com');// change it to yours
+            $this->email->to('ahasan-interfab@viyellatexgroup.com, abdullah.khan@viyellatexgroup.com, moazzem.huq@interfabshirt.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, hasnain.mehedi@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, nipunsarker56@gmail.com, shafayet.chowdhury@interfabshirt.com, maksudul.hasan@interfabshirt.com');// change it to yours
             $this->email->subject('PTS Report (Auto-Mail)');
             $this->email->message("$content_data");
             $this->email->attach("uploads/mail_attachment/hb_running_po.xlsx");
@@ -1966,164 +1584,29 @@ class Dashboard extends CI_Controller {
 
     public function mailAttachmentHB()
     {
-//        $data['title']='Production Summary Report HB';
-//
-//        // Start XML file, create parent node
-//        $dom = new DOMDocument("1.0");
-//        $node = $dom->createElement("markers");
-//        $parnode = $dom->appendChild($node);
-//
-//        $where = '';
-//        $where .= " AND t1.brand in ('BBD', 'BBS', 'BGM', 'BMA', 'BMC', 'BMS', 'BOM', 'HUGO', 'HUM')";
-//
-//        $prod_summary = $this->dashboard_model->getProductionSummaryReport($where);
-//
-////        $content_data = $this->load->view('reports/report_file_export', $data);
-//
-//        $new_row_tbl = '';
-//        $new_row = '';
-//        $new_row_head = '';
-//        $purchase_order_item = '';
-//        $exfac_style = '';
-//        $wash_gmt_style = '';
-//        $cur_date = date('Y-m-d');
-//        $cut_balance_qty = 0;
-//
-//        $new_row_head .= '<tr>
-//                        <th class="">PO</th>
-//                        <th class="">ITEM</th>
-//                        <th class="">Planned Line</th>
-//                        <th class="">Lines</th>
-//                        <th class="">Brand</span></th>
-//                        <th class="">STYLE</th>
-//                        <th class="">QLTY-CLR</th>
-//                        <th class="">ORDER</th>
-//                        <th class="">ExFac</th>
-//                        <th class="">CUT</th>
-//                        <th class="">CUT BLNC</th>
-//                        <th class="">CUT PASS</th>
-//                        <th class="">BUNDLE</th>
-//                        <th class="">IDENTITY</th>
-//                        <th class="">INPUT</th>
-//                        <th class="">Collar</th>
-//                        <th class="">Cuff</th>
-//                        <th class="">MID PASS</th>
-//                        <th class="">END PASS</th>
-//                        <th class="">WASH</th>
-//                        <th class="">PACK</th>
-//                        <th class="">CARTON</th>
-//                        <th class="">WAREHOUSE BUYER</th>
-//                        <th class="">WAREHOUSE FACTORY</th>
-//                        <th class="">WAREHOUSE SAMPLE</th>
-//                        <th class="">WAREHOUSE TRASH</th>
-//                        <th class="">OTHER PURPOSE</th>
-//                        <th class="">BALANCE</th>
-//                    </tr>';
-//
-//        $today = date('Y-m-d');
-//        $till_date = date("Y-m-d", strtotime("+ 30 days"));
-//
-//        foreach ($prod_summary as $k => $v){
-//            $total_finishing_wh_qa = $v['count_carton_pass'] + $v['count_wh_prod_sample'] + $v['count_wh_factory'] + $v['count_wh_buyer'] + $v['count_wh_trash'];
-//            $total_wh_qa = $v['count_wh_prod_sample'] + $v['count_wh_factory'] + $v['count_wh_buyer'] + $v['count_wh_trash'];
-//
-////            if((($v['total_cut_qty'] - $total_finishing_wh_qa) != 0) && ($v['responsible_line'] != '')){
-//            if(($today <= $v['ex_factory_date']) || ($till_date <= $v['ex_factory_date']) || (($v['total_cut_qty'] - $total_finishing_wh_qa) != 0)){
-//                $ship_date = $v['ex_factory_date'];
-//
-//                if($v['item'] == ''){
-//                    $item = 'NA';
-//                }else{
-//                    $item = $v['item'];
-//                }
-//
-//
-//                if($v['item'] != ''){
-//                    $purchase_order_item = $v['purchase_order'].'_'.$v['item'];
-//                }else{
-//                    $purchase_order_item = $v['purchase_order'];
-//                }
-//
-//
-//
-//                if($cur_date > $ship_date){ $exfac_style .= 'style="background-color: #ff481f; color: #fff;"'; }
-//                if($v['wash_gmt'] == 1){ $wash_gmt_style .= 'style="background-color: #faff88;"'; }
-//                $cut_balance_qty = $v['total_cut_qty']-$v['total_cut_input_qty'];
-//                $total_po_item_balance = $v['total_cut_qty'] - $total_finishing_wh_qa;
-//
-//                $new_row .= '<tr>
-//								<td>'.$v["purchase_order"].'</td>
-//                                <td>'.$v["item"].'</td>
-//                                <td>'.$v["planned_lines"].'</td>
-//                                <td>'.$v["responsible_line"].'</td>
-//                                <td>'.$v["brand"].'</td>
-//                                <td>'.$v["style_no"].'-'.$v["style_name"].'</td>
-//                                <td>'.$v["quality"].'_'.$v["color"].'</td>
-//                                <td>'.$v["total_order_qty"].'</td>
-//                                <td>'.$v["ex_factory_date"].'</td>
-//                                <td>'.$v["total_cut_qty"].'</td>
-//                                <td>'.$cut_balance_qty.'</td>
-//                                <td>'.$v["total_cut_input_qty"].'</td>
-//                                <td><span style="color: #ffffff;">'."'".'</span>'.$v["bundle_start"].'-'.$v["bundle_end"].'</td>
-//                                <td>'.$v["min_care_label"].'-'.$v["max_care_label"].'</td>
-//
-//                                <td>'.$v["count_input_qty_line"].'</td>
-//
-//                                <td>'.$v["collar_bndl_qty"].'</td>
-//                                <td>'.$v["cuff_bndl_qty"].'</td>
-//                                <td>'.$v["count_mid_line_qc_pass"].'</td>
-//                                <td>'.$v["count_end_line_qc_pass"].'</td>
-//                                <td>'.$v["count_washing_pass"].'</td>
-//                                <td>'.$v["count_packing_pass"].'</td>
-//                                <td>'.$v["count_carton_pass"].'</td>
-//                                <td>'.$v['count_wh_buyer'].'</td>
-//                                <td>'.$v['count_wh_factory'].'</td>
-//                                <td>'.$v['count_wh_prod_sample'].'</td>
-//                                <td>'.$v['count_wh_trash'].'</td>
-//                                <td>'.$v['count_other_purpose'].'</td>
-//                                <td>'.$total_po_item_balance.'</td></tr>';
-//            }
-//        }
-//
-////        echo '<pre>';
-////        print_r($new_row);
-////        echo '</pre>';
-////        die();
-//
-////        if($new_row != ''){
-//
-////            echo $content_data;
-//
-////        echo file_exists('uploads/mail_attachment/hb_running_po.xlsx');
-////        die();
-//
-//        $new_row_tbl .= '<table border="1"><thead>'.$new_row_head.'</thead><tbody>'.$new_row.'</tbody></table>';
-//
-//        $excel_handler = fopen ('uploads/mail_attachment/hb_running_po.xls','w') or die("Unable to open file!");
-//        fwrite ($excel_handler, $new_row_tbl);
-//        fclose ($excel_handler);
-
         if(file_exists('uploads/mail_attachment/hb_running_po.xlsx') == 1){
-//            $config = Array(
-//                'protocol' => 'smtp',
-//                'smtp_host' => 'localhost',
-//                'smtp_port' => 25,
-//                'smtp_user' => '', // change it to yours
-//                'smtp_pass' => '', // change it to yours
-//                'mailtype' => 'html',
-//                'charset' => 'utf-8',
-//                'wordwrap' => TRUE
-//            );
+
+            $res = $this->access_model->selectTableDataRowQuery("*", "tb_email_config", " AND email_type=1");
+
+            $protocol = $res[0]['protocol'];
+            $smtp_host = $res[0]['smtp_host'];
+            $smtp_port = $res[0]['smtp_port'];
+            $smtp_user = $res[0]['smtp_user'];
+            $smtp_pass = $res[0]['smtp_pass'];
+            $mailtype = $res[0]['mailtype'];
+            $charset = $res[0]['charset'];
+            $wordwrap = $res[0]['wordwrap'];
+            $from_mail_address = $res[0]['from_mail_address'];
 
             $config = Array(
-                'protocol' => 'smtp',
-                'smtp_host' => 'ssl://smtp.gmail.com',
-                'smtp_port' => 465,
-                'smtp_user' => 'ecofab.pts@gmail.com', // change it to yours
-                'smtp_pass' => 'EcofabPTS@123', // change it to yours
-                'mailtype' => 'html',
-                'charset' => 'utf-8',
-                'wordwrap' => TRUE
+                'protocol' => $protocol,
+                'smtp_host' => $smtp_host,
+                'smtp_port' => $smtp_port,
+                'smtp_user' => $smtp_user, // change it to yours
+                'smtp_pass' => $smtp_pass, // change it to yours
+                'mailtype' => $mailtype,
+                'charset' => $charset,
+                'wordwrap' => $wordwrap
             );
 
             $content_data = '';
@@ -2136,12 +1619,13 @@ class Dashboard extends CI_Controller {
             $this->load->library('email', $config);
             $this->email->set_newline("\r\n");
 //            $this->email->from('pts@interfabshirt.com'); // change it to yours
-            $this->email->from('ecofab.pts@gmail.com'); // change it to yours
+            $this->email->from($from_mail_address); // change it to yours
 //            $this->email->from('ecofab.pts@interfabshirt.com'); // change it to yours
 //            $this->email->to('nipunsarker56@gmail.com, nipun.sarker@interfabshirt.com');// change it to yours
 //            $this->email->to('Heinrich_Vinke@hugoboss.com');// change it to yours
 //            $this->email->cc('ahasan-interfab@viyellatexgroup.com, abdullah.khan@viyellatexgroup.com, moazzem.huq@interfabshirt.com, yaman.hasanat@viyellatexgroup.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, faijul.haque@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shefat.hossain@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, nipunsarker56@gmail.com, shafayet.chowdhury@interfabshirt.com, maksudul.hasan@interfabshirt.com, shehab.ahameed@interfabshirt.com');// change it to yours
-            $this->email->to('Galya_Milcheva@hugoboss.com, Diego_Quadrelli@hugoboss.com, nipun.sarker@interfabshirt.com, maksudul.hasan@interfabshirt.com, nipunsarker56@gmail.com, ecofab.itsupport@interfabshirt.com');// change it to yours
+            $this->email->to('Galya_Milcheva@hugoboss.com, Diego_Quadrelli@hugoboss.com, maksudul.hasan@interfabshirt.com, ecofab.itsupport@interfabshirt.com');// change it to yours
+            $this->email->cc('ahasan-interfab@viyellatexgroup.com, abdullah.khan@viyellatexgroup.com, moazzem.huq@interfabshirt.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, hasnain.mehedi@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, nipunsarker56@gmail.com, shafayet.chowdhury@interfabshirt.com, maksudul.hasan@interfabshirt.com');// change it to yours
             $this->email->subject('PTS Report (Auto-Mail)');
             $this->email->message("$content_data");
             $this->email->attach("uploads/mail_attachment/hb_running_po.xlsx");
@@ -2476,15 +1960,27 @@ class Dashboard extends CI_Controller {
             $new_row_tbl = '';
             $new_row_tbl .= "$mail_content";
 
+            $res = $this->access_model->selectTableDataRowQuery("*", "tb_email_config", " AND email_type=$email_config_type");
+
+            $protocol = $res[0]['protocol'];
+            $smtp_host = $res[0]['smtp_host'];
+            $smtp_port = $res[0]['smtp_port'];
+            $smtp_user = $res[0]['smtp_user'];
+            $smtp_pass = $res[0]['smtp_pass'];
+            $mailtype = $res[0]['mailtype'];
+            $charset = $res[0]['charset'];
+            $wordwrap = $res[0]['wordwrap'];
+            $from_mail_address = $res[0]['from_mail_address'];
+
             $config = Array(
-                'protocol' => 'smtp',
-                'smtp_host' => 'webmail.viyellatexgroup.com',
-                'smtp_port' => 25,
-                'smtp_user' => '', // change it to yours
-                'smtp_pass' => '', // change it to yours
-                'mailtype' => 'html',
-                'charset' => 'utf-8',
-                'wordwrap' => TRUE
+                'protocol' => $protocol,
+                'smtp_host' => $smtp_host,
+                'smtp_port' => $smtp_port,
+                'smtp_user' => $smtp_user, // change it to yours
+                'smtp_pass' => $smtp_pass, // change it to yours
+                'mailtype' => $mailtype,
+                'charset' => $charset,
+                'wordwrap' => $wordwrap
             );
 
 //            $from_email = "noreply@interfabshirt.com";
@@ -2494,7 +1990,7 @@ class Dashboard extends CI_Controller {
 
             $this->load->library('email', $config);
             $this->email->set_newline("\r\n");
-            $this->email->from('pts@interfabshirt.com'); // change it to yours
+            $this->email->from($from_mail_address); // change it to yours
 //            $this->email->to('nipun.sarker@interfabshirt.com');// change it to yours
             $this->email->to('ahasan-interfab@viyellatexgroup.com');// change it to yours
             $this->email->cc('abdullah.khan@viyellatexgroup.com, yaman.hasanat@viyellatexgroup.com, moazzem.huq@interfabshirt.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, mahesh.hewage@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shefat.hossain@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, shehab.ahameed@interfabshirt.com, maksudul.hasan@interfabshirt.com, tanzir.hassan@interfabshirt.com');// change it to yours
@@ -2582,20 +2078,32 @@ class Dashboard extends CI_Controller {
             $new_row_tbl = '';
             $new_row_tbl .= "$mail_content";
 
+            $res = $this->access_model->selectTableDataRowQuery("*", "tb_email_config", " AND email_type=$email_config_type");
+
+            $protocol = $res[0]['protocol'];
+            $smtp_host = $res[0]['smtp_host'];
+            $smtp_port = $res[0]['smtp_port'];
+            $smtp_user = $res[0]['smtp_user'];
+            $smtp_pass = $res[0]['smtp_pass'];
+            $mailtype = $res[0]['mailtype'];
+            $charset = $res[0]['charset'];
+            $wordwrap = $res[0]['wordwrap'];
+            $from_mail_address = $res[0]['from_mail_address'];
+
             $config = Array(
-                'protocol' => 'smtp',
-                'smtp_host' => 'ssl://smtp.gmail.com',
-                'smtp_port' => 465,
-                'smtp_user' => 'ecofab.pts@gmail.com', // change it to yours
-                'smtp_pass' => 'EcofabPTS@123', // change it to yours
-                'mailtype' => 'html',
-                'charset' => 'utf-8',
-                'wordwrap' => TRUE
+                'protocol' => $protocol,
+                'smtp_host' => $smtp_host,
+                'smtp_port' => $smtp_port,
+                'smtp_user' => $smtp_user, // change it to yours
+                'smtp_pass' => $smtp_pass, // change it to yours
+                'mailtype' => $mailtype,
+                'charset' => $charset,
+                'wordwrap' => $wordwrap
             );
 
             $this->load->library('email', $config);
             $this->email->set_newline("\r\n");
-            $this->email->from('ecofab.pts@gmail.com'); // change it to yours
+            $this->email->from($from_mail_address); // change it to yours
             $this->email->to('Silke.Wippert@olymp.com'); // change it to yours
             $this->email->cc('nipun.sarker@interfabshirt.com');// change it to yours
 //            $this->email->to('ahasan-interfab@viyellatexgroup.com');// change it to yours
@@ -4239,21 +3747,32 @@ class Dashboard extends CI_Controller {
 
                 $mail_content = $this->load->view('reports/line_hourly_report_auto_mail', $data, true);
 
+                $res = $this->access_model->selectTableDataRowQuery("*", "tb_email_config", " AND email_type=0");
+
+                $protocol = $res[0]['protocol'];
+                $smtp_host = $res[0]['smtp_host'];
+                $smtp_port = $res[0]['smtp_port'];
+                $smtp_user = $res[0]['smtp_user'];
+                $smtp_pass = $res[0]['smtp_pass'];
+                $mailtype = $res[0]['mailtype'];
+                $charset = $res[0]['charset'];
+                $wordwrap = $res[0]['wordwrap'];
+                $from_mail_address = $res[0]['from_mail_address'];
 
                 $config = Array(
-                    'protocol' => 'smtp',
-                    'smtp_host' => 'webmail.viyellatexgroup.com',
-                    'smtp_port' => 25,
-                    'smtp_user' => '', // change it to yours
-                    'smtp_pass' => '', // change it to yours
-                    'mailtype' => 'html',
-                    'charset' => 'utf-8',
-                    'wordwrap' => TRUE
+                    'protocol' => $protocol,
+                    'smtp_host' => $smtp_host,
+                    'smtp_port' => $smtp_port,
+                    'smtp_user' => $smtp_user, // change it to yours
+                    'smtp_pass' => $smtp_pass, // change it to yours
+                    'mailtype' => $mailtype,
+                    'charset' => $charset,
+                    'wordwrap' => $wordwrap
                 );
 
                 $this->load->library('email', $config);
                 $this->email->set_newline("\r\n");
-                $this->email->from('pts@interfabshirt.com'); // change it to yours
+                $this->email->from($from_mail_address); // change it to yours
                 $this->email->to('abdullah.khan@viyellatexgroup.com, moazzem.huq@interfabshirt.com, nesar.ahmed@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com'); // change it to yours
     //            $this->email->cc('nipun.sarker@interfabshirt.com');// change it to yours
     //            $this->email->to('nipun.sarker@interfabshirt.com'); // change it to yours

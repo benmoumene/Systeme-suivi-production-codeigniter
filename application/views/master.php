@@ -217,6 +217,7 @@
                         <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/getHours"><i class="fa fa-circle"></i> Hours </a></li>
                         <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/getSegments"><i class="fa fa-circle"></i> Segments </a></li>
                         <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/getDefectCodes"><i class="fa fa-circle"></i> Defect Codes </a></li>
+                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/emailConfiguration"><i class="fa fa-circle"></i> Email Config </a></li>
                     </ul>
                 </li>
                 <li> <a href="javascript:void(0);"> <i class="fa fa-exchange"></i> Change <span class="plus"><i class="fa fa-plus"></i></span></a>

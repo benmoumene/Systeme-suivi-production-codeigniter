@@ -198,6 +198,7 @@ $cl_ending = $packing_order_size[0]['cl_ending'];
                 ?></p>
 <!--            <p style="margin-bottom: -5px; font-size: 10.5px;"><b>SAP_Cut_PO_Item_S-Grp_B</b></p>-->
 
+            <p style="margin-bottom: -5px; font-size: 12px;"><?php echo $po_no;?></b></p>
             <p style="margin-bottom: -5px; font-size: 10.5px;"><?php if(isset($bundle_tracking_no)){  echo $bundle_tracking_no; } ?></p>
             <p style="margin-bottom: -5px;">PO: <?php echo $purchase_order.'-'.$item;?></p>
             <p style="margin-bottom: -5px;">Brand: <?php echo $brand.' / <b>Order: '.$total_order_qty;?></b></p>

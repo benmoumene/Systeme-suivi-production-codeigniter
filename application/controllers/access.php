@@ -1892,6 +1892,7 @@ class Access extends CI_Controller {
         $data_1['color'] = $this->input->post('color');
         $data_1['style_no'] = $this->input->post('style_no');
         $data_1['style_name'] = $this->input->post('style_name');
+        $data_1['po_type'] = $this->input->post('po_type');
         $ex_factory_dt_1 = $this->input->post('ex_fac_date');
         $ex_factory_date_1 = explode('-', $ex_factory_dt_1);
         $ex_year_1=$ex_factory_date_1[2];
@@ -1921,6 +1922,7 @@ class Access extends CI_Controller {
         $data_2['color'] = $this->input->post('color');
         $data_2['style_no'] = $this->input->post('style_no');
         $data_2['style_name'] = $this->input->post('style_name');
+        $data_2['po_type'] = $this->input->post('po_type');
         $ex_factory_dt_2 = $this->input->post('ex_fac_date');
         $ex_factory_date_2 = explode('-', $ex_factory_dt_2);
         $ex_year_2=$ex_factory_date_2[2];
@@ -1936,6 +1938,7 @@ class Access extends CI_Controller {
         $data_3['color'] = $this->input->post('color');
         $data_3['style_no'] = $this->input->post('style_no');
         $data_3['style_name'] = $this->input->post('style_name');
+        $data_3['po_type'] = $this->input->post('po_type');
         $ex_factory_dt_3 = $this->input->post('ex_fac_date');
         $ex_factory_date_3 = explode('-', $ex_factory_dt_3);
         $ex_year_3=$ex_factory_date_3[2];
@@ -10404,6 +10407,104 @@ class Access extends CI_Controller {
         $data['message'] = "AQL Saved Successfully!";
         $this->session->set_userdata($data);
         redirect('access/aqlList');
+    }
+
+    public function emailConfiguration(){
+        $data['title'] = 'Email Configuration';
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['maincontent'] = $this->load->view('email_configuration', $data, true);
+            $this->load->view('master', $data);
+
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
+    public function getEmailConfigDetail(){
+        $email_type = $this->input->post('email_type');
+
+        $res = $this->access_model->selectTableDataRowQuery("*", "tb_email_config", " AND email_type=$email_type");
+
+        echo json_encode($res);
+    }
+
+    public function saveEmailConfiguration(){
+        $email_type = $this->input->post('email_type');
+
+        $data['protocol'] = $this->input->post('protocol');
+        $data['smtp_host'] = $this->input->post('smtp_host');
+        $data['smtp_port'] = $this->input->post('smtp_port');
+        $data['smtp_user'] = $this->input->post('smtp_user');
+        $data['smtp_pass'] = $this->input->post('smtp_pass');
+        $data['mailtype'] = $this->input->post('mailtype');
+        $data['charset'] = $this->input->post('charset');
+        $data['wordwrap'] = $this->input->post('wordwrap');
+
+        $this->access_model->updateTblNew('tb_email_config', 'email_type', $email_type, $data);
+
+        $data['message'] = "Email Configuration Successful!";
+        $this->session->set_userdata($data);
+        redirect('access/emailConfiguration');
+    }
+
+    public function checkEmailConfiguration($email_config_type, $to_mail_address){
+        $res = $this->access_model->selectTableDataRowQuery("*", "tb_email_config", " AND email_type=$email_config_type");
+
+        $protocol = $res[0]['protocol'];
+        $smtp_host = $res[0]['smtp_host'];
+        $smtp_port = $res[0]['smtp_port'];
+        $smtp_user = $res[0]['smtp_user'];
+        $smtp_pass = $res[0]['smtp_pass'];
+        $mailtype = $res[0]['mailtype'];
+        $charset = $res[0]['charset'];
+        $wordwrap = $res[0]['wordwrap'];
+        $from_mail_address = $res[0]['from_mail_address'];
+
+        $config = Array(
+            'protocol' => $protocol,
+            'smtp_host' => $smtp_host,
+            'smtp_port' => $smtp_port,
+            'smtp_user' => $smtp_user, // change it to yours
+            'smtp_pass' => $smtp_pass, // change it to yours
+            'mailtype' => $mailtype,
+            'charset' => $charset,
+            'wordwrap' => $wordwrap
+        );
+
+        $content_data = '';
+        $content_data .= 'Dear Sir,'.'<br />';
+        $content_data .= 'This is a test Mail from PTS Email Config Module.'.'<br />'.'<br />'.'<br />';
+        $content_data .= 'Best Regards'.'<br />';
+        $content_data .= 'Ecofab Ltd'.'<br />';
+        //$content_data .= 'VIYELLATEX Group, BANGLADESH';
+
+        $this->load->library('email', $config);
+        $this->email->set_newline("\r\n");
+        $this->email->from($from_mail_address); // change it to yours
+        $this->email->to($to_mail_address);// change it to yours
+        $this->email->subject('PTS Email Config - Test Mail');
+        $this->email->message("$content_data");
+        if($this->email->send())
+        {
+
+            echo  "<script type='text/javascript'>";
+            echo "window.open('', '_self', ''); window.close();";
+            echo "</script>";
+
+        }
+        else
+        {
+            show_error($this->email->print_debugger());
+        }
+
     }
 
     public function package_send_to_sew()

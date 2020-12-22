@@ -109,8 +109,15 @@
                                             <td class="center">
                                                 <input type="text" name="color" id="color">
                                             </td>
-                                            <td class="center"></td>
-                                            <td class="center"></td>
+                                            <td class="center">Type</td>
+                                            <td class="center">
+                                                <select id="po_type" class="form-control" name="po_type">
+                                                    <option value="">Select SO No</option>
+                                                    <option value="0">Bulk</option>
+                                                    <option value="1">Size Set</option>
+                                                    <option value="2">Sample</option>
+                                                </select>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td class="center">Style No</td>
@@ -222,6 +229,7 @@
         $("#ex_fac_date").val('');
         $("#app_ex_fac_date").val('');
         $("#crd_date").val('');
+        $("#po_type").val('');
 
         $("#size_qty").empty();
         $("#total_qty").empty();
@@ -250,6 +258,7 @@
                 var color = data[0].color;
                 var style_no = data[0].style_no;
                 var style_name = data[0].style_name;
+                var po_type = data[0].po_type;
 
                 var ex_factory_dt = data[0].ex_factory_date;
                 var ex_factory_dt_split = ex_factory_dt.split("-");
@@ -282,6 +291,7 @@
                 $("#ex_fac_date").val(ex_factory_date);
                 $("#app_ex_fac_date").val(app_ex_factory_date);
                 $("#crd_date").val(crd_date);
+                $("#po_type").val( po_type );
 
                 $("#total_qty").append(total_order_qty);
             }
