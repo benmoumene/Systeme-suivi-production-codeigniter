@@ -1012,34 +1012,43 @@ class Dashboard extends CI_Controller {
         return $line_output;
     }
 
-    public function mailLastDayProduction()
+    public function mailLastDayProduction($id)
     {
-        $data['title']='Auto Mail Last Day Production';
+        $res = $this->dashboard_model->selectTableDataRowQuery("*", "tb_auto_emails", " AND id=$id");
 
-        $previous_date = date('Y-m-d',strtotime("-1 days"));
+        $status = $res[0]['status'];
+        $email_type = $res[0]['email_type'];
+        $to_mail_address = $res[0]['to_mail_address'];
+        $cc_mail_address = $res[0]['cc_mail_address'];
+        $date_condition_plus_minus = $res[0]['date_condition_plus_minus'];
+
+        if($status == 1){
+            $data['title']='Auto Mail Last Day Production';
+
+            $previous_date = date('Y-m-d',strtotime("$date_condition_plus_minus"));
 
 //         Start XML file, create parent node
-        $dom = new DOMDocument("1.0");
-        $node = $dom->createElement("markers");
-        $parnode = $dom->appendChild($node);
+            $dom = new DOMDocument("1.0");
+            $node = $dom->createElement("markers");
+            $parnode = $dom->appendChild($node);
 
-        $where = '';
+            $where = '';
 //        $where .= " AND brand IN ('OLYMP')";
 
-        $prod_summary = $this->dashboard_model->getLastDayProduction($where, $previous_date);
+            $prod_summary = $this->dashboard_model->getLastDayProduction($where, $previous_date);
 
 //        $content_data = $this->load->view('reports/report_file_export', $data);
 
-        $new_row_tbl = '';
-        $new_row = '';
-        $new_row_head = '';
-        $purchase_order_item = '';
-        $exfac_style = '';
-        $wash_gmt_style = '';
-        $cur_date = date('Y-m-d');
-        $cut_balance_qty = 0;
+            $new_row_tbl = '';
+            $new_row = '';
+            $new_row_head = '';
+            $purchase_order_item = '';
+            $exfac_style = '';
+            $wash_gmt_style = '';
+            $cur_date = date('Y-m-d');
+            $cut_balance_qty = 0;
 
-        $new_row_head .= '<tr>
+            $new_row_head .= '<tr>
                         <th class="">Brand</th>
                         <th class="">SO</th>
                         <th class="">PO Type</th>
@@ -1059,28 +1068,28 @@ class Dashboard extends CI_Controller {
                         <th class="">Remarks</th>
                     </tr>';
 
-        $today = date('Y-m-d');
-        $till_date = date("Y-m-d", strtotime("+ 30 days"));
+            $today = date('Y-m-d');
+            $till_date = date("Y-m-d", strtotime("+ 30 days"));
 
-        foreach ($prod_summary as $k => $v){
+            foreach ($prod_summary as $k => $v){
 
-            if($v["line_output_qty"] != '' || $v["cut_pass_qty"] != '' || $v["packing_qty"] != '' || $v["carton_qty"] != '' || $v["line_mid_pass_qty"] != ''){
+                if($v["line_output_qty"] != '' || $v["cut_pass_qty"] != '' || $v["packing_qty"] != '' || $v["carton_qty"] != '' || $v["line_mid_pass_qty"] != ''){
 
-                $po_type='';
+                    $po_type='';
 
-                if($v["po_type"] == 0){
-                    $po_type = 'BULK';
-                }
+                    if($v["po_type"] == 0){
+                        $po_type = 'BULK';
+                    }
 
-                if($v["po_type"] == 1){
-                    $po_type = 'SIZE SET';
-                }
+                    if($v["po_type"] == 1){
+                        $po_type = 'SIZE SET';
+                    }
 
-                if($v["po_type"] == 2){
-                    $po_type = 'SAMPLE';
-                }
+                    if($v["po_type"] == 2){
+                        $po_type = 'SAMPLE';
+                    }
 
-                $new_row .= '<tr>
+                    $new_row .= '<tr>
 								<td>'.$v["brand"].'</td>
 								<td>'.$v["so_no"].'</td>
 								<td>'.$po_type.'</td>
@@ -1099,8 +1108,8 @@ class Dashboard extends CI_Controller {
                                 <td>'.$v["carton_qty"].'</td>
                                 <td>'.$v["status"].'</td>
                               </tr>';
+                }
             }
-        }
 
 //        echo '<pre>';
 //        print_r($new_row);
@@ -1114,65 +1123,72 @@ class Dashboard extends CI_Controller {
 //        echo file_exists('uploads/mail_attachment/hb_running_po.xlsx');
 //        die();
 
-        $new_row_tbl .= '<table border="1"><thead>'.$new_row_head.'</thead><tbody>'.$new_row.'</tbody></table>';
+            $new_row_tbl .= '<table border="1"><thead>'.$new_row_head.'</thead><tbody>'.$new_row.'</tbody></table>';
 
-        $excel_handler = fopen ('uploads/mail_attachment/last_day_prod.xls','w') or die("Unable to open file!");
-        fwrite ($excel_handler, $new_row_tbl);
-        fclose ($excel_handler);
+            $excel_handler = fopen ('uploads/mail_attachment/last_day_prod.xls','w') or die("Unable to open file!");
+            fwrite ($excel_handler, $new_row_tbl);
+            fclose ($excel_handler);
 
-        if(file_exists('uploads/mail_attachment/last_day_prod.xls') == 1) {
+            if(file_exists('uploads/mail_attachment/last_day_prod.xls') == 1) {
 
-            $res = $this->access_model->selectTableDataRowQuery("*", "tb_email_config", " AND email_type=0");
+                $res = $this->access_model->selectTableDataRowQuery("*", "tb_email_config", " AND email_type=$email_type");
 
-            $protocol = $res[0]['protocol'];
-            $smtp_host = $res[0]['smtp_host'];
-            $smtp_port = $res[0]['smtp_port'];
-            $smtp_user = $res[0]['smtp_user'];
-            $smtp_pass = $res[0]['smtp_pass'];
-            $mailtype = $res[0]['mailtype'];
-            $charset = $res[0]['charset'];
-            $wordwrap = $res[0]['wordwrap'];
-            $from_mail_address = $res[0]['from_mail_address'];
+                $protocol = $res[0]['protocol'];
+                $smtp_host = $res[0]['smtp_host'];
+                $smtp_port = $res[0]['smtp_port'];
+                $smtp_user = $res[0]['smtp_user'];
+                $smtp_pass = $res[0]['smtp_pass'];
+                $mailtype = $res[0]['mailtype'];
+                $charset = $res[0]['charset'];
+                $wordwrap = $res[0]['wordwrap'];
+                $from_mail_address = $res[0]['from_mail_address'];
 
-            $config = Array(
-                'protocol' => $protocol,
-                'smtp_host' => $smtp_host,
-                'smtp_port' => $smtp_port,
-                'smtp_user' => $smtp_user, // change it to yours
-                'smtp_pass' => $smtp_pass, // change it to yours
-                'mailtype' => $mailtype,
-                'charset' => $charset,
-                'wordwrap' => $wordwrap
-            );
+                $config = Array(
+                    'protocol' => $protocol,
+                    'smtp_host' => $smtp_host,
+                    'smtp_port' => $smtp_port,
+                    'smtp_user' => $smtp_user, // change it to yours
+                    'smtp_pass' => $smtp_pass, // change it to yours
+                    'mailtype' => $mailtype,
+                    'charset' => $charset,
+                    'wordwrap' => $wordwrap
+                );
 
-            $content_data = '';
-            $content_data .= 'Dear Concern,' . '<br />';
-            $content_data .= 'Please find the Last Day Production from attached file.' . '<br />' . '<br />' . '<br />';
-            $content_data .= 'Best Regards' . '<br />';
-            $content_data .= 'Ecofab Ltd' . '<br />';
-            //$content_data .= 'VIYELLATEX Group, BANGLADESH';
+                $content_data = '';
+                $content_data .= 'Dear Concern,' . '<br />';
+                $content_data .= 'Please find the Last Day Production from attached file.' . '<br />' . '<br />' . '<br />';
+                $content_data .= 'Best Regards' . '<br />';
+                $content_data .= 'Ecofab Ltd' . '<br />';
+                //$content_data .= 'VIYELLATEX Group, BANGLADESH';
 
-            $this->load->library('email', $config);
-            $this->email->set_newline("\r\n");
-            $this->email->from($from_mail_address); // change it to yours
+                $this->load->library('email', $config);
+                $this->email->set_newline("\r\n");
+                $this->email->from($from_mail_address); // change it to yours
 //            $this->email->from('ecofab.pts@gmail.com'); // change it to yours
-            $this->email->to('shehab.ahameed@interfabshirt.com, monirul.islam@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, ecofab.ie@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, tanvir.sarkar@interfabshirt.com'); // change it to yours
-            $this->email->cc('nipun.sarker@interfabshirt.com, hasib.hossain@interfabshirt.com, sahil.islam@interfabshirt.com, fahim.ashab@interfabshirt.com');// change it to yours
+                $this->email->to($to_mail_address); // change it to yours
+                $this->email->cc($cc_mail_address);// change it to yours
 //            $this->email->to('nipun.sarker@interfabshirt.com'); // change it to yours
-            $this->email->subject("Production: $previous_date (Auto-Mail)");
-            $this->email->message("$content_data");
-            $this->email->attach("uploads/mail_attachment/last_day_prod.xls");
-            if ($this->email->send()) {
+                $this->email->subject("Production: $previous_date (Auto-Mail)");
+                $this->email->message("$content_data");
+                $this->email->attach("uploads/mail_attachment/last_day_prod.xls");
+                if ($this->email->send()) {
+                    echo 'Mail Successfully Sent!';
+                    echo  "<script type='text/javascript'>";
+                    echo "window.open('', '_self', ''); window.close();";
+                    echo "</script>";
 
-                echo  "<script type='text/javascript'>";
-                echo "window.open('', '_self', ''); window.close();";
-                echo "</script>";
-
-            } else {
-                show_error($this->email->print_debugger());
+                } else {
+                    show_error($this->email->print_debugger());
+                }
+            }else{
+                echo 'File is not exist!';
             }
         }else{
-            echo 'File is not exist!';
+            echo 'Auto Mail is Inactive!';
+
+            echo  "<script type='text/javascript'>";
+            echo "window.open('', '_self', ''); window.close();";
+            echo "</script>";
         }
 
     }
@@ -1272,65 +1288,81 @@ class Dashboard extends CI_Controller {
 
     }
 
-    public function mailAttachmentOlymp()
+    public function mailAttachmentOlymp($id)
     {
-        if(file_exists('uploads/mail_attachment/olymp_running_po.xlsx') == 1){
+        $res = $this->dashboard_model->selectTableDataRowQuery("*", "tb_auto_emails", " AND id=$id");
 
-            $res = $this->access_model->selectTableDataRowQuery("*", "tb_email_config", " AND email_type=1");
+        $status = $res[0]['status'];
+        $email_type = $res[0]['email_type'];
+        $to_mail_address = $res[0]['to_mail_address'];
+        $cc_mail_address = $res[0]['cc_mail_address'];
+        $date_condition_plus_minus = $res[0]['date_condition_plus_minus'];
 
-            $protocol = $res[0]['protocol'];
-            $smtp_host = $res[0]['smtp_host'];
-            $smtp_port = $res[0]['smtp_port'];
-            $smtp_user = $res[0]['smtp_user'];
-            $smtp_pass = $res[0]['smtp_pass'];
-            $mailtype = $res[0]['mailtype'];
-            $charset = $res[0]['charset'];
-            $wordwrap = $res[0]['wordwrap'];
-            $from_mail_address = $res[0]['from_mail_address'];
+        if($status == 1){
+            if(file_exists('uploads/mail_attachment/olymp_running_po.xlsx') == 1){
 
-            $config = Array(
-                'protocol' => $protocol,
-                'smtp_host' => $smtp_host,
-                'smtp_port' => $smtp_port,
-                'smtp_user' => $smtp_user, // change it to yours
-                'smtp_pass' => $smtp_pass, // change it to yours
-                'mailtype' => $mailtype,
-                'charset' => $charset,
-                'wordwrap' => $wordwrap
-            );
+                $res = $this->access_model->selectTableDataRowQuery("*", "tb_email_config", " AND email_type=$email_type");
 
-            $content_data = '';
-            $content_data .= 'Dear Sir/Madam,'.'<br />';
-            $content_data .= 'Please find the running PO-ITEM from attached file.'.'<br />'.'<br />'.'<br />';
-            $content_data .= 'Best Regards'.'<br />';
-            $content_data .= 'Ecofab Ltd'.'<br />';
-            //$content_data .= 'VIYELLATEX Group, BANGLADESH';
+                $protocol = $res[0]['protocol'];
+                $smtp_host = $res[0]['smtp_host'];
+                $smtp_port = $res[0]['smtp_port'];
+                $smtp_user = $res[0]['smtp_user'];
+                $smtp_pass = $res[0]['smtp_pass'];
+                $mailtype = $res[0]['mailtype'];
+                $charset = $res[0]['charset'];
+                $wordwrap = $res[0]['wordwrap'];
+                $from_mail_address = $res[0]['from_mail_address'];
 
-            $this->load->library('email', $config);
-            $this->email->set_newline("\r\n");
+                $config = Array(
+                    'protocol' => $protocol,
+                    'smtp_host' => $smtp_host,
+                    'smtp_port' => $smtp_port,
+                    'smtp_user' => $smtp_user, // change it to yours
+                    'smtp_pass' => $smtp_pass, // change it to yours
+                    'mailtype' => $mailtype,
+                    'charset' => $charset,
+                    'wordwrap' => $wordwrap
+                );
+
+                $content_data = '';
+                $content_data .= 'Dear Sir/Madam,'.'<br />';
+                $content_data .= 'Please find the running PO-ITEM from attached file.'.'<br />'.'<br />'.'<br />';
+                $content_data .= 'Best Regards'.'<br />';
+                $content_data .= 'Ecofab Ltd'.'<br />';
+                //$content_data .= 'VIYELLATEX Group, BANGLADESH';
+
+                $this->load->library('email', $config);
+                $this->email->set_newline("\r\n");
 //            $this->email->from('pts@interfabshirt.com'); // change it to yours
-            $this->email->from($from_mail_address); // change it to yours
+                $this->email->from($from_mail_address); // change it to yours
 //            $this->email->to('nipunsarker56@gmail.com, nipun.sarker@interfabshirt.com');// change it to yours
-            $this->email->to('Silke.Wippert@olymp.com');// change it to yours
-            $this->email->cc('ahasan-interfab@viyellatexgroup.com, abdullah.khan@viyellatexgroup.com, moazzem.huq@interfabshirt.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, hasnain.mehedi@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, nipunsarker56@gmail.com, shafayet.chowdhury@interfabshirt.com, shehab.ahameed@interfabshirt.com, hasib.hossain@interfabshirt.com, sahil.islam@interfabshirt.com');// change it to yours
+                $this->email->to($to_mail_address);// change it to yours
+                $this->email->cc($cc_mail_address);// change it to yours
 //            $this->email->cc('nipun.sarker@interfabshirt.com');// change it to yours
-            $this->email->subject('Olymp PTS Report (Auto-Mail)');
-            $this->email->message("$content_data");
-            $this->email->attach("uploads/mail_attachment/olymp_running_po.xlsx");
-            if($this->email->send())
-            {
+                $this->email->subject('Olymp PTS Report (Auto-Mail)');
+                $this->email->message("$content_data");
+                $this->email->attach("uploads/mail_attachment/olymp_running_po.xlsx");
+                if($this->email->send())
+                {
 
-                echo  "<script type='text/javascript'>";
-                echo "window.open('', '_self', ''); window.close();";
-                echo "</script>";
+                    echo  "<script type='text/javascript'>";
+                    echo "window.open('', '_self', ''); window.close();";
+                    echo "</script>";
 
-            }
-            else
-            {
-                show_error($this->email->print_debugger());
+                }
+                else
+                {
+                    show_error($this->email->print_debugger());
+                }
+            }else{
+                echo 'File is not exist!';
             }
         }else{
-            echo 'File is not exist!';
+            echo 'Auto Mail is Inactive!';
+
+            echo  "<script type='text/javascript'>";
+            echo "window.open('', '_self', ''); window.close();";
+            echo "</script>";
         }
 
     }
@@ -1582,67 +1614,85 @@ class Dashboard extends CI_Controller {
 
     }
 
-    public function mailAttachmentHB()
+    public function mailAttachmentHB($id)
     {
-        if(file_exists('uploads/mail_attachment/hb_running_po.xlsx') == 1){
+        $res = $this->dashboard_model->selectTableDataRowQuery("*", "tb_auto_emails", " AND id=$id");
 
-            $res = $this->access_model->selectTableDataRowQuery("*", "tb_email_config", " AND email_type=1");
+        $status = $res[0]['status'];
+        $email_type = $res[0]['email_type'];
+        $to_mail_address = $res[0]['to_mail_address'];
+        $cc_mail_address = $res[0]['cc_mail_address'];
+        $date_condition_plus_minus = $res[0]['date_condition_plus_minus'];
 
-            $protocol = $res[0]['protocol'];
-            $smtp_host = $res[0]['smtp_host'];
-            $smtp_port = $res[0]['smtp_port'];
-            $smtp_user = $res[0]['smtp_user'];
-            $smtp_pass = $res[0]['smtp_pass'];
-            $mailtype = $res[0]['mailtype'];
-            $charset = $res[0]['charset'];
-            $wordwrap = $res[0]['wordwrap'];
-            $from_mail_address = $res[0]['from_mail_address'];
+        if($status == 1){
+            if(file_exists('uploads/mail_attachment/hb_running_po.xlsx') == 1){
 
-            $config = Array(
-                'protocol' => $protocol,
-                'smtp_host' => $smtp_host,
-                'smtp_port' => $smtp_port,
-                'smtp_user' => $smtp_user, // change it to yours
-                'smtp_pass' => $smtp_pass, // change it to yours
-                'mailtype' => $mailtype,
-                'charset' => $charset,
-                'wordwrap' => $wordwrap
-            );
+                $res = $this->access_model->selectTableDataRowQuery("*", "tb_email_config", " AND email_type=$email_type");
 
-            $content_data = '';
-            $content_data .= 'Dear Sir,'.'<br />';
-            $content_data .= 'Please find the running PO-ITEM from attached file.'.'<br />'.'<br />'.'<br />';
-            $content_data .= 'Best Regards'.'<br />';
-            $content_data .= 'Ecofab Ltd'.'<br />';
-            //$content_data .= 'VIYELLATEX Group, BANGLADESH';
+                $protocol = $res[0]['protocol'];
+                $smtp_host = $res[0]['smtp_host'];
+                $smtp_port = $res[0]['smtp_port'];
+                $smtp_user = $res[0]['smtp_user'];
+                $smtp_pass = $res[0]['smtp_pass'];
+                $mailtype = $res[0]['mailtype'];
+                $charset = $res[0]['charset'];
+                $wordwrap = $res[0]['wordwrap'];
+                $from_mail_address = $res[0]['from_mail_address'];
 
-            $this->load->library('email', $config);
-            $this->email->set_newline("\r\n");
+                $config = Array(
+                    'protocol' => $protocol,
+                    'smtp_host' => $smtp_host,
+                    'smtp_port' => $smtp_port,
+                    'smtp_user' => $smtp_user, // change it to yours
+                    'smtp_pass' => $smtp_pass, // change it to yours
+                    'mailtype' => $mailtype,
+                    'charset' => $charset,
+                    'wordwrap' => $wordwrap
+                );
+
+                $content_data = '';
+                $content_data .= 'Dear Sir,'.'<br />';
+                $content_data .= 'Please find the running PO-ITEM from attached file.'.'<br />'.'<br />'.'<br />';
+                $content_data .= 'Best Regards'.'<br />';
+                $content_data .= 'Ecofab Ltd'.'<br />';
+                //$content_data .= 'VIYELLATEX Group, BANGLADESH';
+
+                $this->load->library('email', $config);
+                $this->email->set_newline("\r\n");
 //            $this->email->from('pts@interfabshirt.com'); // change it to yours
-            $this->email->from($from_mail_address); // change it to yours
+                $this->email->from($from_mail_address); // change it to yours
 //            $this->email->from('ecofab.pts@interfabshirt.com'); // change it to yours
 //            $this->email->to('nipunsarker56@gmail.com, nipun.sarker@interfabshirt.com');// change it to yours
 //            $this->email->to('Heinrich_Vinke@hugoboss.com');// change it to yours
 //            $this->email->cc('ahasan-interfab@viyellatexgroup.com, abdullah.khan@viyellatexgroup.com, moazzem.huq@interfabshirt.com, yaman.hasanat@viyellatexgroup.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, faijul.haque@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shefat.hossain@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, nipunsarker56@gmail.com, shafayet.chowdhury@interfabshirt.com, maksudul.hasan@interfabshirt.com, shehab.ahameed@interfabshirt.com');// change it to yours
-            $this->email->to('Galya_Milcheva@hugoboss.com, Diego_Quadrelli@hugoboss.com, maksudul.hasan@interfabshirt.com, ecofab.itsupport@interfabshirt.com');// change it to yours
-            $this->email->cc('ahasan-interfab@viyellatexgroup.com, abdullah.khan@viyellatexgroup.com, moazzem.huq@interfabshirt.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, hasnain.mehedi@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, nipunsarker56@gmail.com, shafayet.chowdhury@interfabshirt.com, maksudul.hasan@interfabshirt.com');// change it to yours
-            $this->email->subject('PTS Report (Auto-Mail)');
-            $this->email->message("$content_data");
-            $this->email->attach("uploads/mail_attachment/hb_running_po.xlsx");
-            if($this->email->send())
-            {
+                $this->email->to($to_mail_address);// change it to yours
+                $this->email->cc($cc_mail_address);// change it to yours
+                $this->email->subject('PTS Report (Auto-Mail)');
+                $this->email->message("$content_data");
+                $this->email->attach("uploads/mail_attachment/hb_running_po.xlsx");
+                if($this->email->send())
+                {
 
-                echo  "<script type='text/javascript'>";
-                echo "window.open('', '_self', ''); window.close();";
-                echo "</script>";
+                    echo  "<script type='text/javascript'>";
+                    echo "window.open('', '_self', ''); window.close();";
+                    echo "</script>";
 
-            }
-            else
-            {
-                show_error($this->email->print_debugger());
+                }
+                else
+                {
+                    show_error($this->email->print_debugger());
+                }
+            }else{
+                echo 'File is not exist!';
             }
         }else{
-            echo 'File is not exist!';
+
+            echo 'Auto Mail is Inactive!';
+
+            echo  "<script type='text/javascript'>";
+            echo "window.open('', '_self', ''); window.close();";
+            echo "</script>";
+
         }
 
     }
@@ -1849,106 +1899,115 @@ class Dashboard extends CI_Controller {
         }
     }
 
-    public function production_summary_report_mail_new()
+    public function production_summary_report_mail_new($id)
     {
-        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+        $res = $this->dashboard_model->selectTableDataRowQuery("*", "tb_auto_emails", " AND id=$id");
 
-        $date_time=$datex->format('Y-m-d H:i:s');
-        $date=$datex->format('Y-m-d');
+        $status = $res[0]['status'];
+        $email_type = $res[0]['email_type'];
+        $to_mail_address = $res[0]['to_mail_address'];
+        $cc_mail_address = $res[0]['cc_mail_address'];
+        $date_condition_plus_minus = $res[0]['date_condition_plus_minus'];
 
-        $previous_date = date( "Y-m-d", strtotime( $date . "-1 day"));
+        if($status == 1){
+            $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+
+            $date_time=$datex->format('Y-m-d H:i:s');
+            $date=$datex->format('Y-m-d');
+
+            $previous_date = date( "Y-m-d", strtotime( $date . "$date_condition_plus_minus"));
 //        $previous_date = "2019-10-08";
-        $data['previous_date'] = $previous_date;
-        $data['line_report']=$this->dashboard_model->getLineReport($previous_date, '');
+            $data['previous_date'] = $previous_date;
+            $data['line_report']=$this->dashboard_model->getLineReport($previous_date, '');
 
-        $cutting_prod=$this->dashboard_model->getCuttingReport($previous_date);
+            $cutting_prod=$this->dashboard_model->getCuttingReport($previous_date);
 
-        if(sizeof($cutting_prod) > 0){
-            $data['cutting_prod'] = $cutting_prod;
-        }else{
+            if(sizeof($cutting_prod) > 0){
+                $data['cutting_prod'] = $cutting_prod;
+            }else{
 
-            $this->lastDayCuttingReportBackup($previous_date);
+                $this->lastDayCuttingReportBackup($previous_date);
 
-            $cutting_prod = $this->dashboard_model->getCuttingReport($previous_date);
+                $cutting_prod = $this->dashboard_model->getCuttingReport($previous_date);
 
-            $data['cutting_prod'] = $cutting_prod;
+                $data['cutting_prod'] = $cutting_prod;
 
-        }
-
-        $finishing_prod = $this->dashboard_model->getFinishingReport($previous_date);
-
-        if(sizeof($finishing_prod)){
-            $data['finishing_report'] = $finishing_prod;
-        }else{
-            $this->lastDayFinishingReportBackup($previous_date);
+            }
 
             $finishing_prod = $this->dashboard_model->getFinishingReport($previous_date);
 
-            $data['finishing_report'] = $finishing_prod;
-        }
+            if(sizeof($finishing_prod)){
+                $data['finishing_report'] = $finishing_prod;
+            }else{
+                $this->lastDayFinishingReportBackup($previous_date);
+
+                $finishing_prod = $this->dashboard_model->getFinishingReport($previous_date);
+
+                $data['finishing_report'] = $finishing_prod;
+            }
 
 
 
-        /* Total Efficiency Calculation Start */
-        $floor_eff_sum=0;
-        $floor_count=0;
+            /* Total Efficiency Calculation Start */
+            $floor_eff_sum=0;
+            $floor_count=0;
 
-        $floor_efficiency_array = array();
+            $floor_efficiency_array = array();
 
-        $floors = $this->access_model->getFloors();
+            $floors = $this->access_model->getFloors();
 
 //        $floor_count = sizeof($floors);
 
-        foreach ($floors as $vf){
-            $floor_id = $vf['id'];
+            foreach ($floors as $vf){
+                $floor_id = $vf['id'];
 
-            $floor_sum_efficiency = 0;
-            $floor_efficiency = 0;
-            $line_count = 0;
+                $floor_sum_efficiency = 0;
+                $floor_efficiency = 0;
+                $line_count = 0;
 
-            $where = '';
-            $where .= " AND floor=$floor_id";
+                $where = '';
+                $where .= " AND floor=$floor_id";
 //
-            $lines = $this->dashboard_model->getAllLinesByCondition($where);
+                $lines = $this->dashboard_model->getAllLinesByCondition($where);
 
 //            $line_count = sizeof($lines);
 
-            foreach ($lines as $vl){
+                foreach ($lines as $vl){
 
-                $where_1 = '';
+                    $where_1 = '';
 
-                $line_id = $vl['id'];
-                $where_1 .= " AND line_id=$line_id";
+                    $line_id = $vl['id'];
+                    $where_1 .= " AND line_id=$line_id";
 
-                $line_output_report = $this->dashboard_model->getLineReport($previous_date, $where_1);
+                    $line_output_report = $this->dashboard_model->getLineReport($previous_date, $where_1);
 
-                if($line_output_report[0]['efficiency'] > 0){
-                    $floor_sum_efficiency += $line_output_report[0]['efficiency'];
+                    if($line_output_report[0]['efficiency'] > 0){
+                        $floor_sum_efficiency += $line_output_report[0]['efficiency'];
 
-                    $line_count++;
+                        $line_count++;
+                    }
+
+                    $floor_efficiency = round($floor_sum_efficiency/$line_count, 2);
                 }
 
-                $floor_efficiency = round($floor_sum_efficiency/$line_count, 2);
+                array_push($floor_efficiency_array, $floor_efficiency);
             }
 
-            array_push($floor_efficiency_array, $floor_efficiency);
-        }
+            foreach ($floor_efficiency_array as $ve){
+                if($ve > 0){
+                    $floor_eff_sum += $ve;
 
-        foreach ($floor_efficiency_array as $ve){
-            if($ve > 0){
-                $floor_eff_sum += $ve;
-
-                $floor_count++;
+                    $floor_count++;
+                }
             }
-        }
 
-        $floor_line_efficiency = round($floor_eff_sum/$floor_count, 2);
+            $floor_line_efficiency = round($floor_eff_sum/$floor_count, 2);
 
-        $data['total_line_efficiency']=$floor_line_efficiency;
+            $data['total_line_efficiency']=$floor_line_efficiency;
 
-        /* Total Efficiency Calculation End */
+            /* Total Efficiency Calculation End */
 
-        $mail_content = $this->load->view('reports/production_summary_report_mail_new_check', $data, true);
+            $mail_content = $this->load->view('reports/production_summary_report_mail_new_check', $data, true);
 
 
 //        echo '<pre>';
@@ -1956,175 +2015,199 @@ class Dashboard extends CI_Controller {
 //        echo '</pre>';
 //        die();
 
-        if($floor_line_efficiency > 0){
-            $new_row_tbl = '';
-            $new_row_tbl .= "$mail_content";
+            if($floor_line_efficiency > 0){
+                $new_row_tbl = '';
+                $new_row_tbl .= "$mail_content";
 
-            $res = $this->access_model->selectTableDataRowQuery("*", "tb_email_config", " AND email_type=$email_config_type");
+                $res = $this->access_model->selectTableDataRowQuery("*", "tb_email_config", " AND email_type=$email_type");
 
-            $protocol = $res[0]['protocol'];
-            $smtp_host = $res[0]['smtp_host'];
-            $smtp_port = $res[0]['smtp_port'];
-            $smtp_user = $res[0]['smtp_user'];
-            $smtp_pass = $res[0]['smtp_pass'];
-            $mailtype = $res[0]['mailtype'];
-            $charset = $res[0]['charset'];
-            $wordwrap = $res[0]['wordwrap'];
-            $from_mail_address = $res[0]['from_mail_address'];
+                $protocol = $res[0]['protocol'];
+                $smtp_host = $res[0]['smtp_host'];
+                $smtp_port = $res[0]['smtp_port'];
+                $smtp_user = $res[0]['smtp_user'];
+                $smtp_pass = $res[0]['smtp_pass'];
+                $mailtype = $res[0]['mailtype'];
+                $charset = $res[0]['charset'];
+                $wordwrap = $res[0]['wordwrap'];
+                $from_mail_address = $res[0]['from_mail_address'];
 
-            $config = Array(
-                'protocol' => $protocol,
-                'smtp_host' => $smtp_host,
-                'smtp_port' => $smtp_port,
-                'smtp_user' => $smtp_user, // change it to yours
-                'smtp_pass' => $smtp_pass, // change it to yours
-                'mailtype' => $mailtype,
-                'charset' => $charset,
-                'wordwrap' => $wordwrap
-            );
+                $config = Array(
+                    'protocol' => $protocol,
+                    'smtp_host' => $smtp_host,
+                    'smtp_port' => $smtp_port,
+                    'smtp_user' => $smtp_user, // change it to yours
+                    'smtp_pass' => $smtp_pass, // change it to yours
+                    'mailtype' => $mailtype,
+                    'charset' => $charset,
+                    'wordwrap' => $wordwrap
+                );
 
 //            $from_email = "noreply@interfabshirt.com";
 ////            $from_email = "kabir14235@gmail.com";
 //            $to_email = $this->input->post('email');
 //            $this->load->library('email', $config);
 
-            $this->load->library('email', $config);
-            $this->email->set_newline("\r\n");
-            $this->email->from($from_mail_address); // change it to yours
+                $this->load->library('email', $config);
+                $this->email->set_newline("\r\n");
+                $this->email->from($from_mail_address); // change it to yours
 //            $this->email->to('nipun.sarker@interfabshirt.com');// change it to yours
-            $this->email->to('ahasan-interfab@viyellatexgroup.com');// change it to yours
-            $this->email->cc('abdullah.khan@viyellatexgroup.com, yaman.hasanat@viyellatexgroup.com, moazzem.huq@interfabshirt.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, mahesh.hewage@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shefat.hossain@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, shehab.ahameed@interfabshirt.com, maksudul.hasan@interfabshirt.com, tanzir.hassan@interfabshirt.com');// change it to yours
-            $this->email->subject('PTS Summary Report (Auto-Mail)');
-            $this->email->message("$new_row_tbl");
-            if($this->email->send())
-            {
-                echo "Mail Sent";
+                $this->email->to($to_mail_address);// change it to yours
+                $this->email->cc($cc_mail_address);// change it to yours
+                $this->email->subject('PTS Summary Report (Auto-Mail)');
+                $this->email->message("$new_row_tbl");
+                if($this->email->send())
+                {
+                    echo "Mail Sent";
+                }
+                else
+                {
+                    show_error($this->email->print_debugger());
+                }
+            }else{
+                echo 'No Output Found!';
             }
-            else
-            {
-                show_error($this->email->print_debugger());
-            }
+
+            echo  "<script type='text/javascript'>";
+            echo "window.open('', '_self', ''); window.close();";
+            echo "</script>";
         }else{
-            echo 'No Output Found!';
+            echo 'Auto Mail is Inactive!';
+
+            echo  "<script type='text/javascript'>";
+            echo "window.open('', '_self', ''); window.close();";
+            echo "</script>";
         }
 
-        echo  "<script type='text/javascript'>";
-        echo "window.open('', '_self', ''); window.close();";
-        echo "</script>";
     }
 
-    public function second_floor_production_summary_report_mail_new()
+    public function second_floor_production_summary_report_mail_new($id)
     {
-        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
-        
-        $date_time=$datex->format('Y-m-d H:i:s');
-        $date=$datex->format('Y-m-d');
+        $res = $this->dashboard_model->selectTableDataRowQuery("*", "tb_auto_emails", " AND id=$id");
 
-        $previous_date = date( "Y-m-d", strtotime( $date . "-1 day"));
+        $status = $res[0]['status'];
+        $email_type = $res[0]['email_type'];
+        $to_mail_address = $res[0]['to_mail_address'];
+        $cc_mail_address = $res[0]['cc_mail_address'];
+        $date_condition_plus_minus = $res[0]['date_condition_plus_minus'];
+
+        if($status == 1){
+            $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+
+            $date_time=$datex->format('Y-m-d H:i:s');
+            $date=$datex->format('Y-m-d');
+
+            $previous_date = date( "Y-m-d", strtotime( $date . "$date_condition_plus_minus"));
 //        $previous_date = date('Y-m-d');
 //        $previous_date = '2019-10-26';
-        $data['previous_date'] = $previous_date;
+            $data['previous_date'] = $previous_date;
 
-        $condition = '';
-        $condition .= " AND floor in (2)";
+            $condition = '';
+            $condition .= " AND floor in (2)";
 
-        $condition2 = '';
-        $condition2 .= " AND floor_id in (2)";
+            $condition2 = '';
+            $condition2 .= " AND floor_id in (2)";
 
-
-        $cutting_prod = $this->dashboard_model->getCuttingReport($previous_date);
-
-        if(sizeof($cutting_prod) > 0){
-            $data['cutting_prod'] = $cutting_prod;
-        }else{
-
-            $this->lastDayCuttingReportBackup($previous_date);
 
             $cutting_prod = $this->dashboard_model->getCuttingReport($previous_date);
 
-            $data['cutting_prod'] = $cutting_prod;
+            if(sizeof($cutting_prod) > 0){
+                $data['cutting_prod'] = $cutting_prod;
+            }else{
 
-        }
+                $this->lastDayCuttingReportBackup($previous_date);
 
-        $data['line_prod'] = $this->dashboard_model->getSecondFloorLineProductionSummary($previous_date, $condition);
+                $cutting_prod = $this->dashboard_model->getCuttingReport($previous_date);
 
-        $finishing_prod = $this->dashboard_model->getSecondFloorFinishingProductionSummary($previous_date,  $condition2);
+                $data['cutting_prod'] = $cutting_prod;
 
-        if(sizeof($finishing_prod)){
-            $data['finishing_prod'] = $finishing_prod;
-        }else{
-            $this->lastDayFinishingReportBackup($previous_date);
+            }
+
+            $data['line_prod'] = $this->dashboard_model->getSecondFloorLineProductionSummary($previous_date, $condition);
 
             $finishing_prod = $this->dashboard_model->getSecondFloorFinishingProductionSummary($previous_date,  $condition2);
 
-            $data['finishing_prod'] = $finishing_prod;
-        }
+            if(sizeof($finishing_prod)){
+                $data['finishing_prod'] = $finishing_prod;
+            }else{
+                $this->lastDayFinishingReportBackup($previous_date);
 
-        $mail_content = $this->load->view('reports/second_floor_production_summary_report_mail_body', $data, true);
+                $finishing_prod = $this->dashboard_model->getSecondFloorFinishingProductionSummary($previous_date,  $condition2);
+
+                $data['finishing_prod'] = $finishing_prod;
+            }
+
+            $mail_content = $this->load->view('reports/second_floor_production_summary_report_mail_body', $data, true);
 
 
-        $count_finishing_output=0;
-        $count_line_output=0;
+            $count_finishing_output=0;
+            $count_line_output=0;
 
-        foreach ($data['line_prod'] as $v_1){
-            $count_line_output += $v_1['output'];
-        }
+            foreach ($data['line_prod'] as $v_1){
+                $count_line_output += $v_1['output'];
+            }
 
-        foreach ($data['finishing_prod'] as $v_2){
-            $count_finishing_output += $v_2['output'];
-        }
+            foreach ($data['finishing_prod'] as $v_2){
+                $count_finishing_output += $v_2['output'];
+            }
 
-        if( $count_line_output != 0){
-            $new_row_tbl = '';
-            $new_row_tbl .= "$mail_content";
+            if( $count_line_output != 0){
+                $new_row_tbl = '';
+                $new_row_tbl .= "$mail_content";
 
-            $res = $this->access_model->selectTableDataRowQuery("*", "tb_email_config", " AND email_type=$email_config_type");
+                $res = $this->access_model->selectTableDataRowQuery("*", "tb_email_config", " AND email_type=$email_type");
 
-            $protocol = $res[0]['protocol'];
-            $smtp_host = $res[0]['smtp_host'];
-            $smtp_port = $res[0]['smtp_port'];
-            $smtp_user = $res[0]['smtp_user'];
-            $smtp_pass = $res[0]['smtp_pass'];
-            $mailtype = $res[0]['mailtype'];
-            $charset = $res[0]['charset'];
-            $wordwrap = $res[0]['wordwrap'];
-            $from_mail_address = $res[0]['from_mail_address'];
+                $protocol = $res[0]['protocol'];
+                $smtp_host = $res[0]['smtp_host'];
+                $smtp_port = $res[0]['smtp_port'];
+                $smtp_user = $res[0]['smtp_user'];
+                $smtp_pass = $res[0]['smtp_pass'];
+                $mailtype = $res[0]['mailtype'];
+                $charset = $res[0]['charset'];
+                $wordwrap = $res[0]['wordwrap'];
+                $from_mail_address = $res[0]['from_mail_address'];
 
-            $config = Array(
-                'protocol' => $protocol,
-                'smtp_host' => $smtp_host,
-                'smtp_port' => $smtp_port,
-                'smtp_user' => $smtp_user, // change it to yours
-                'smtp_pass' => $smtp_pass, // change it to yours
-                'mailtype' => $mailtype,
-                'charset' => $charset,
-                'wordwrap' => $wordwrap
-            );
+                $config = Array(
+                    'protocol' => $protocol,
+                    'smtp_host' => $smtp_host,
+                    'smtp_port' => $smtp_port,
+                    'smtp_user' => $smtp_user, // change it to yours
+                    'smtp_pass' => $smtp_pass, // change it to yours
+                    'mailtype' => $mailtype,
+                    'charset' => $charset,
+                    'wordwrap' => $wordwrap
+                );
 
-            $this->load->library('email', $config);
-            $this->email->set_newline("\r\n");
-            $this->email->from($from_mail_address); // change it to yours
-            $this->email->to('Silke.Wippert@olymp.com'); // change it to yours
-            $this->email->cc('nipun.sarker@interfabshirt.com');// change it to yours
+                $this->load->library('email', $config);
+                $this->email->set_newline("\r\n");
+                $this->email->from($from_mail_address); // change it to yours
+                $this->email->to($to_mail_address); // change it to yours
+                $this->email->cc($cc_mail_address);// change it to yours
 //            $this->email->to('ahasan-interfab@viyellatexgroup.com');// change it to yours
 //            $this->email->cc('abdullah.khan@viyellatexgroup.com, yaman.hasanat@viyellatexgroup.com, moazzem.huq@interfabshirt.com, ali.hossain@interfabshirt.com, nesar.ahmed@interfabshirt.com, arif.abdulla@interfabshirt.com, monirul.islam@interfabshirt.com, ecofab.ie@interfabshirt.com, mehedi.hassan@interfabshirt.com, hasnain.mehedi@interfabshirt.com, faijul.haque@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shefat.hossain@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com, qa.audit@interfabshirt.com, mostafa.shak@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, shehab.ahameed@interfabshirt.com, sahil.islam@interfabshirt.com, maksudul.hasan@interfabshirt.com');// change it to yours
-            $this->email->subject('Second Floor PTS Summary Report (Auto-Mail)');
-            $this->email->message("$new_row_tbl");
-            if($this->email->send())
-            {
-                echo "Mail Sent";
+                $this->email->subject('Second Floor PTS Summary Report (Auto-Mail)');
+                $this->email->message("$new_row_tbl");
+                if($this->email->send())
+                {
+                    echo "Mail Sent";
+                }
+                else
+                {
+                    show_error($this->email->print_debugger());
+                }
+            }else{
+                echo 'No Output Found!';
             }
-            else
-            {
-                show_error($this->email->print_debugger());
-            }
-        }else{
-            echo 'No Output Found!';
-        }
 
-        echo  "<script type='text/javascript'>";
-        echo "window.open('', '_self', ''); window.close();";
-        echo "</script>";
+            echo  "<script type='text/javascript'>";
+            echo "window.open('', '_self', ''); window.close();";
+            echo "</script>";
+        }else{
+            echo 'Auto Mail is Inactive!';
+
+            echo  "<script type='text/javascript'>";
+            echo "window.open('', '_self', ''); window.close();";
+            echo "</script>";
+        }
 
     }
 
@@ -3692,106 +3775,125 @@ class Dashboard extends CI_Controller {
 //        $this->load->view('reports/master', $data);
     }
 
-    public function lineHourlyReportAutoMail(){
-        $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
-        $date_time=$datex->format('Y-m-d H:i:s');
-        $time=$datex->format('H:i:s');
-        $hour=$datex->format('H');
-        $min=$datex->format('i');
-        $date=$datex->format('Y-m-d');
+    public function lineHourlyReportAutoMail($id){
+        $res = $this->dashboard_model->selectTableDataRowQuery("*", "tb_auto_emails", " AND id=$id");
 
-        $last_hour = ($hour-1).':00:00';
+        $status = $res[0]['status'];
+        $email_type = $res[0]['email_type'];
+        $to_mail_address = $res[0]['to_mail_address'];
+        $cc_mail_address = $res[0]['cc_mail_address'];
+        $date_condition_plus_minus = $res[0]['date_condition_plus_minus'];
 
-        $where = '';
-        $select_fields = " date, start_time, end_time, SUM(qty) as total_hour_output_qty ";
+        if($status){
+            $datex = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+            $date_time=$datex->format('Y-m-d H:i:s');
+            $time=$datex->format('H:i:s');
+            $hour=$datex->format('H');
+            $min=$datex->format('i');
+            $date=$datex->format('Y-m-d');
 
-        if($last_hour != ''){
-            $where .= " AND '$last_hour' BETWEEN start_time AND end_time";
-        }
+            $last_hour = ($hour-1).':00:00';
 
-        if($date != ''){
-            $where .= " AND `date`='$date'";
-        }
+            $where = '';
+            $select_fields = " date, start_time, end_time, SUM(qty) as total_hour_output_qty ";
 
-        $res = $this->access_model->getLineOutputHourlyReport($select_fields, $where);
-
-        $total_hour_output_qty = $res[0]['total_hour_output_qty'];
-
-        if($time <= '20:00:00'){
-            if($total_hour_output_qty > 0){
-                $data['min_to_hour']=round($min / 60, 2);
-                $data['time']=$time;
-
-                $segments = $this->access_model->getSegments($time);
-
-                $segment_id=$segments[0]['id'];
-                $data['segment_id']=$segment_id;
-
-                $data['title'] = 'Today Line Hourly Report';
-                $data['user_name'] = $this->session->userdata('user_name');
-                $data['access_points'] = $this->session->userdata('access_points');
-
-                $data['hours'] = $this->access_model->getHours();
-                $data['lines'] = $this->access_model->getLines();
-                $data['floors'] = $this->access_model->getFloors();
-
-                $where = '';
-                if($time != ''){
-                    $where .= " AND '$time' between start_time AND end_time";
-                }
-
-                $present_hour_to_second = round($min / 60, 2);
-
-                $present_hour = $this->access_model->getHours($where);
-                $data['working_hour'] = ($present_hour[0]['hour'] - 1) + $present_hour_to_second;
-
-                $mail_content = $this->load->view('reports/line_hourly_report_auto_mail', $data, true);
-
-                $res = $this->access_model->selectTableDataRowQuery("*", "tb_email_config", " AND email_type=0");
-
-                $protocol = $res[0]['protocol'];
-                $smtp_host = $res[0]['smtp_host'];
-                $smtp_port = $res[0]['smtp_port'];
-                $smtp_user = $res[0]['smtp_user'];
-                $smtp_pass = $res[0]['smtp_pass'];
-                $mailtype = $res[0]['mailtype'];
-                $charset = $res[0]['charset'];
-                $wordwrap = $res[0]['wordwrap'];
-                $from_mail_address = $res[0]['from_mail_address'];
-
-                $config = Array(
-                    'protocol' => $protocol,
-                    'smtp_host' => $smtp_host,
-                    'smtp_port' => $smtp_port,
-                    'smtp_user' => $smtp_user, // change it to yours
-                    'smtp_pass' => $smtp_pass, // change it to yours
-                    'mailtype' => $mailtype,
-                    'charset' => $charset,
-                    'wordwrap' => $wordwrap
-                );
-
-                $this->load->library('email', $config);
-                $this->email->set_newline("\r\n");
-                $this->email->from($from_mail_address); // change it to yours
-                $this->email->to('abdullah.khan@viyellatexgroup.com, moazzem.huq@interfabshirt.com, nesar.ahmed@interfabshirt.com, shafayet.chowdhury@interfabshirt.com, nipun.sarker@interfabshirt.com, ecofab.itsupport@interfabshirt.com'); // change it to yours
-    //            $this->email->cc('nipun.sarker@interfabshirt.com');// change it to yours
-    //            $this->email->to('nipun.sarker@interfabshirt.com'); // change it to yours
-                $this->email->subject('ECOFAB Hourly Production Report');
-                $this->email->message("$mail_content");
-                if ($this->email->send()) {
-
-                    echo  "Mail Sent!";
-
-                } else {
-                    show_error($this->email->print_debugger());
-                }
-
+            if($last_hour != ''){
+                $where .= " AND '$last_hour' BETWEEN start_time AND end_time";
             }
+
+            if($date != ''){
+                $where .= " AND `date`='$date'";
+            }
+
+            $res = $this->access_model->getLineOutputHourlyReport($select_fields, $where);
+
+            $total_hour_output_qty = $res[0]['total_hour_output_qty'];
+
+            if($time <= '20:00:00'){
+                if($total_hour_output_qty > 0){
+                    $data['min_to_hour']=round($min / 60, 2);
+                    $data['time']=$time;
+
+                    $segments = $this->access_model->getSegments($time);
+
+                    $segment_id=$segments[0]['id'];
+                    $data['segment_id']=$segment_id;
+
+                    $data['title'] = 'Today Line Hourly Report';
+                    $data['user_name'] = $this->session->userdata('user_name');
+                    $data['access_points'] = $this->session->userdata('access_points');
+
+                    $data['hours'] = $this->access_model->getHours();
+                    $data['lines'] = $this->access_model->getLines();
+                    $data['floors'] = $this->access_model->getFloors();
+
+                    $where = '';
+                    if($time != ''){
+                        $where .= " AND '$time' between start_time AND end_time";
+                    }
+
+                    $present_hour_to_second = round($min / 60, 2);
+
+                    $present_hour = $this->access_model->getHours($where);
+                    $data['working_hour'] = ($present_hour[0]['hour'] - 1) + $present_hour_to_second;
+
+                    $mail_content = $this->load->view('reports/line_hourly_report_auto_mail', $data, true);
+
+                    $res = $this->access_model->selectTableDataRowQuery("*", "tb_email_config", " AND email_type=$email_type");
+
+                    $protocol = $res[0]['protocol'];
+                    $smtp_host = $res[0]['smtp_host'];
+                    $smtp_port = $res[0]['smtp_port'];
+                    $smtp_user = $res[0]['smtp_user'];
+                    $smtp_pass = $res[0]['smtp_pass'];
+                    $mailtype = $res[0]['mailtype'];
+                    $charset = $res[0]['charset'];
+                    $wordwrap = $res[0]['wordwrap'];
+                    $from_mail_address = $res[0]['from_mail_address'];
+
+                    $config = Array(
+                        'protocol' => $protocol,
+                        'smtp_host' => $smtp_host,
+                        'smtp_port' => $smtp_port,
+                        'smtp_user' => $smtp_user, // change it to yours
+                        'smtp_pass' => $smtp_pass, // change it to yours
+                        'mailtype' => $mailtype,
+                        'charset' => $charset,
+                        'wordwrap' => $wordwrap
+                    );
+
+                    $this->load->library('email', $config);
+                    $this->email->set_newline("\r\n");
+                    $this->email->from($from_mail_address); // change it to yours
+                    $this->email->to($to_mail_address); // change it to yours
+                    $this->email->cc($cc_mail_address);// change it to yours
+                    //            $this->email->to('nipun.sarker@interfabshirt.com'); // change it to yours
+                    $this->email->subject('ECOFAB Hourly Production Report');
+                    $this->email->message("$mail_content");
+                    if ($this->email->send()) {
+
+                        echo  "Mail Sent!";
+
+                    } else {
+                        show_error($this->email->print_debugger());
+                    }
+
+                }
+            }
+
+            echo 'Mail Successfully Sent!';
+
+            echo  "<script type='text/javascript'>";
+            echo "window.open('', '_self', ''); window.close();";
+            echo "</script>";
+        }else{
+            echo 'Auto Mail is Inactive!';
+
+            echo  "<script type='text/javascript'>";
+            echo "window.open('', '_self', ''); window.close();";
+            echo "</script>";
         }
 
-        echo  "<script type='text/javascript'>";
-        echo "window.open('', '_self', ''); window.close();";
-        echo "</script>";
     }
 
     public function getDetailsAqlreportToday($brand)

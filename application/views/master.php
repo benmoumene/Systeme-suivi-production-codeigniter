@@ -220,6 +220,12 @@
                         <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/emailConfiguration"><i class="fa fa-circle"></i> Email Config </a></li>
                     </ul>
                 </li>
+                <li> <a href="javascript:void(0);"> <i class="fa fa-envelope"></i> Emails <span class="plus"><i class="fa fa-plus"></i></span></a>
+                    <ul>
+<!--                        <li> <a style="margin-bottom: 1px;" href="--><?php //echo base_url();?><!--access/lastDayProductionMailConfig"><i class="fa fa-circle"></i> Last Day Production </a></li>-->
+                        <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/getAutoMailList"><i class="fa fa-circle"></i> Auto Mail List </a></li>
+                    </ul>
+                </li>
                 <li> <a href="javascript:void(0);"> <i class="fa fa-exchange"></i> Change <span class="plus"><i class="fa fa-plus"></i></span></a>
                     <ul>
                         <li> <a style="margin-bottom: 1px;" href="<?php echo base_url();?>access/changeExfactory"><i class="fa fa-circle"></i> Change ExFacDate </a></li>

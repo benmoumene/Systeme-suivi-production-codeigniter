@@ -112,7 +112,7 @@
                                             <td class="center">Type</td>
                                             <td class="center">
                                                 <select id="po_type" class="form-control" name="po_type">
-                                                    <option value="">Select SO No</option>
+                                                    <option value="">PO Type</option>
                                                     <option value="0">Bulk</option>
                                                     <option value="1">Size Set</option>
                                                     <option value="2">Sample</option>

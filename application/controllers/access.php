@@ -1769,6 +1769,96 @@ class Access extends CI_Controller {
         redirect('access/changeApprovedExfactory');
     }
 
+    public function getAutoMailList(){
+        $data['title'] = 'Auto Mail List';
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['res'] = $this->access_model->selectTableDataRowQuery("*", "tb_auto_emails", "");
+
+            $data['maincontent'] = $this->load->view('auto_mail_list', $data, true);
+            $this->load->view('master', $data);
+
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
+    public function editAutoMailConfig($id)
+    {
+
+        $data['user_name'] = $this->session->userdata('user_name');
+        $data['user_description'] = $this->session->userdata('user_description');
+        $data['access_points'] = $this->session->userdata('access_points');
+
+        $cur_url = __METHOD__;
+
+        $res = $this->checkAuthorization($data['access_points'], $cur_url);
+
+        if(sizeof($res) > 0) {
+            $data['res'] = $this->access_model->selectTableDataRowQuery("*", "tb_auto_emails", " AND id=$id");
+            $title = $data['res'][0]['description'];
+
+            $data['title'] = $title;
+
+            $data['maincontent'] = $this->load->view('auto_mail_config', $data, true);
+            $this->load->view('master', $data);
+
+        }else{
+            echo $this->load->view('404');
+        }
+    }
+
+    public function saveAutoMailConfig(){
+        $auto_mail_id = $this->input->post('auto_mail_id');
+
+        $data['email_type'] = $this->input->post('email_config_id');
+        $data['description'] = $this->input->post('description');
+        $data['date_condition_plus_minus'] = $this->input->post('date_condition_plus_minus');
+        $data['status'] = $this->input->post('status');
+        $data['to_mail_address'] = $this->input->post('to_mail_address');
+        $data['cc_mail_address'] = $this->input->post('cc_mail_address');
+
+        $this->access_model->updateTblNew('tb_auto_emails', 'id', $auto_mail_id, $data);
+
+        $data['message'] = "Successfully Updated!";
+        $this->session->set_userdata($data);
+        redirect('access/getAutoMailList');
+    }
+
+    public function forceAutoMailSending($id){
+
+        if($id == 1){
+            redirect("dashboard/mailLastDayProduction/$id");
+        }
+
+        if($id == 2){
+            redirect("dashboard/lineHourlyReportAutoMail/$id");
+        }
+
+        if($id == 3){
+            redirect("dashboard/production_summary_report_mail_new/$id");
+        }
+
+        if($id == 4){
+            redirect("dashboard/second_floor_production_summary_report_mail_new/$id");
+        }
+
+        if($id == 5){
+            redirect("dashboard/mailAttachmentHB/$id");
+        }
+
+        if($id == 6){
+            redirect("dashboard/mailAttachmentOlymp/$id");
+        }
+    }
+
     public function poSizeUpdate()
     {
         $data['title'] = 'PO Update';

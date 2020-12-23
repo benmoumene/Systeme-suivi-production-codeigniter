@@ -1,0 +1,19 @@
+<table border="1"><thead><tr>
+                        <th class="">Brand</th>
+                        <th class="">SO</th>
+                        <th class="">PO Type</th>
+                        <th class="">PO</th>
+                        <th class="">Item</th>
+                        <th class="">Quality</th>
+                        <th class="">Color</th>
+                        <th class="">Style</th>
+                        <th class="">Style Name</th>
+                        <th class="">Line</th>
+                        <th class="">Ex-Fac-Date</th>
+                        <th class="">Cut Pass</th>
+                        <th class="">Mid QC</th>
+                        <th class="">End QC</th>
+                        <th class="">Pack Qty</th>
+                        <th class="">Carton Qty</th>
+                        <th class="">Remarks</th>
+                    </tr></thead><tbody></tbody></table>
