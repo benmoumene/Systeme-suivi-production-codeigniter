@@ -81,7 +81,7 @@ class Dashboard extends CI_Controller {
 
         $object->setActiveSheetIndex(0);
 
-        $table_columns = array("PO", "PLAN LINE", "LINES", "BRAND", "ORDER", "EX-FAC", "APPROVED EX-FAC", "CUT", "CUT PASS", "CUT BLNC", "INPUT", "COLLAR", "COLLAR BLNC", "CUFF", "CUFF BLNC", "MID", "MID BLNC", "END", "END BLNC", "PACK", "PACK BLNC", "CARTON", "CARTON BLNC", "OTHERS", "REMARKS");
+        $table_columns = array("PO", "PLAN LINE", "LINES", "BRAND", "ORDER", "EX-FAC", "APPROVED EX-FAC", "CUT", "CUT PASS", "CUT BLNC", "INPUT", "COLLAR", "COLLAR BLNC", "CUFF", "CUFF BLNC", "MID", "MID BLNC", "END", "END BLNC", "PACK", "PACK BLNC", "CARTON", "CARTON BLNC", "ADJUSTMENT QTY", "OTHERS", "REMARKS");
 
         $column = 0;
 
@@ -167,8 +167,9 @@ class Dashboard extends CI_Controller {
                 $object->getActiveSheet()->setCellValueByColumnAndRow(20, $excel_row, ($pack_balance_qty > 0 ? $pack_balance_qty : 0));
                 $object->getActiveSheet()->setCellValueByColumnAndRow(21, $excel_row, $v["count_carton_pass"]);
                 $object->getActiveSheet()->setCellValueByColumnAndRow(22, $excel_row, ($carton_balance_qty > 0 ? $carton_balance_qty : 0));
-                $object->getActiveSheet()->setCellValueByColumnAndRow(23, $excel_row, $total_others);
-                $object->getActiveSheet()->setCellValueByColumnAndRow(24, $excel_row, $v["remarks"]);
+                $object->getActiveSheet()->setCellValueByColumnAndRow(23, $excel_row, $v["count_manually_adjusted_qty"]);
+                $object->getActiveSheet()->setCellValueByColumnAndRow(24, $excel_row, $total_others);
+                $object->getActiveSheet()->setCellValueByColumnAndRow(25, $excel_row, $v["remarks"]);
                 $excel_row++;
 
             }

@@ -1983,6 +1983,7 @@ class Access extends CI_Controller {
         $data_1['style_no'] = $this->input->post('style_no');
         $data_1['style_name'] = $this->input->post('style_name');
         $data_1['po_type'] = $this->input->post('po_type');
+        $data_1['brand'] = $this->input->post('brand');
         $ex_factory_dt_1 = $this->input->post('ex_fac_date');
         $ex_factory_date_1 = explode('-', $ex_factory_dt_1);
         $ex_year_1=$ex_factory_date_1[2];
@@ -2013,6 +2014,7 @@ class Access extends CI_Controller {
         $data_2['style_no'] = $this->input->post('style_no');
         $data_2['style_name'] = $this->input->post('style_name');
         $data_2['po_type'] = $this->input->post('po_type');
+        $data_2['brand'] = $this->input->post('brand');
         $ex_factory_dt_2 = $this->input->post('ex_fac_date');
         $ex_factory_date_2 = explode('-', $ex_factory_dt_2);
         $ex_year_2=$ex_factory_date_2[2];
@@ -2029,6 +2031,7 @@ class Access extends CI_Controller {
         $data_3['style_no'] = $this->input->post('style_no');
         $data_3['style_name'] = $this->input->post('style_name');
         $data_3['po_type'] = $this->input->post('po_type');
+        $data_3['brand'] = $this->input->post('brand');
         $ex_factory_dt_3 = $this->input->post('ex_fac_date');
         $ex_factory_date_3 = explode('-', $ex_factory_dt_3);
         $ex_year_3=$ex_factory_date_3[2];

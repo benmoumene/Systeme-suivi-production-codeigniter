@@ -67,7 +67,7 @@
                                                         $po_type='SAMPLE';
                                                     }
                                                     ?>
-                                                    <option value="<?php echo $v_s['so_no'];?>"><?php echo $v_s['so_no'].'~'.$v_s['purchase_order'].'~'.$v_s['item'].'~'.$v_s['quality'].'~'.$v_s['color'].'~'.$v_s['style_no'].'~'.$v_s['style_name'].'~'.$v_s['ex_factory_date'].'~'.$po_type;?></option>
+                                                    <option value="<?php echo $v_s['so_no'];?>"><?php echo $v_s['so_no'].'~'.$v_s['purchase_order'].'~'.$v_s['item'].'~'.$v_s['quality'].'~'.$v_s['color'].'~'.$v_s['style_no'].'~'.$v_s['style_name'].'~'.$v_s['approved_ex_factory_date'].'~'.$po_type;?></option>
                                                 <?php } ?>
                                             </select>
                                             <span id="" style="color: red;">SO~PO~ITEM~QUALITY~COLOR~StyleNo~StyleName~ExFacDate~TYPE</span>
@@ -88,7 +88,7 @@
                 </div>
                 <div id="row">
                     <div class="col-md-12">
-                        <div class="col-md-10">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <table class="display table table-bordered table-striped">
                                     <thead>
@@ -109,24 +109,28 @@
                                             <td class="center">
                                                 <input type="text" name="color" id="color">
                                             </td>
-                                            <td class="center">Type</td>
+                                            <td class="center">Brand</td>
                                             <td class="center">
-                                                <select id="po_type" class="form-control" name="po_type">
+                                                <input type="text" name="brand" id="brand">
+                                            </td>
+                                            <td class="center">Style No</td>
+                                            <td class="center">
+                                                <input type="text" name="style_no" id="style_no">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="center">Style Name</td>
+                                            <td class="center">
+                                                <input type="text" name="style_name" id="style_name">
+                                            </td>
+                                            <td class="center">PO Type</td>
+                                            <td class="center">
+                                                <select class="form-control" id="po_type" name="po_type">
                                                     <option value="">PO Type</option>
                                                     <option value="0">Bulk</option>
                                                     <option value="1">Size Set</option>
                                                     <option value="2">Sample</option>
                                                 </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="center">Style No</td>
-                                            <td class="center">
-                                                <input type="text" name="style_no" id="style_no">
-                                            </td>
-                                            <td class="center">Style Name</td>
-                                            <td class="center">
-                                                <input type="text" name="style_name" id="style_name">
                                             </td>
                                             <td class="center">Ex-Fac Date</td>
                                             <td class="center">
@@ -140,6 +144,8 @@
                                             <td class="center">
                                                 <input type="text" class="form-control-inline input-small default-date-picker" id="app_ex_fac_date" name="app_ex_fac_date" required autocomplete="off" />
                                             </td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                     </thead>
                                 </table>
@@ -149,7 +155,7 @@
                 </div>
                 <div id="row">
                     <div class="col-md-12">
-                        <div class="col-md-10">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <table class="display table table-bordered table-striped">
                                     <thead>
@@ -259,6 +265,7 @@
                 var style_no = data[0].style_no;
                 var style_name = data[0].style_name;
                 var po_type = data[0].po_type;
+                var brand = data[0].brand;
 
                 var ex_factory_dt = data[0].ex_factory_date;
                 var ex_factory_dt_split = ex_factory_dt.split("-");
@@ -292,6 +299,7 @@
                 $("#app_ex_fac_date").val(app_ex_factory_date);
                 $("#crd_date").val(crd_date);
                 $("#po_type").val( po_type );
+                $("#brand").val( brand );
 
                 $("#total_qty").append(total_order_qty);
             }
